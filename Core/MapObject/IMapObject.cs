@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core
+﻿namespace MifuminSoft.funyak.Core.MapObject
 {
     public interface IMapObject
     {
