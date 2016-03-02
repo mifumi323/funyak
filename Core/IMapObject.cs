@@ -1,6 +1,6 @@
 ﻿namespace MifuminSoft.funyak.Core
 {
-    public interface IGameObject
+    public interface IMapObject
     {
         double X { get; }
         double Y { get; }
