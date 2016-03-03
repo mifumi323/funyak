@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Map.cs" />
     <Compile Include="MapObject\IMapObject.cs" />
+    <Compile Include="MapObject\MainMapObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
