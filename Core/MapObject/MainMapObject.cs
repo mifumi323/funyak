@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MifuminSoft.funyak.Core.MapObject
+﻿namespace MifuminSoft.funyak.Core.MapObject
 {
     class MainMapObject : IMapObject
     {
