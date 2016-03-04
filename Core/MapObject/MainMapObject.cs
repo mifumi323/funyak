@@ -1,6 +1,6 @@
 ﻿namespace MifuminSoft.funyak.Core.MapObject
 {
-    class MainMapObject : IMapObject
+    public class MainMapObject : IMapObject
     {
         protected abstract class IState
         {
