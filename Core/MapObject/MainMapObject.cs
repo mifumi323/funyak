@@ -67,9 +67,11 @@
             get { return State.GetBottom(Y); }
         }
 
-        public MainMapObject()
+        public MainMapObject(double x, double y)
         {
             State = new FloatingState();
+            X = x;
+            Y = y;
         }
     }
 }
