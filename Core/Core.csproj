@@ -41,6 +41,7 @@
     <Compile Include="Input\IInput.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapObject\IMapObject.cs" />
+    <Compile Include="MapObject\LineMapObject.cs" />
     <Compile Include="MapObject\MainMapObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
