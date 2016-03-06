@@ -39,5 +39,10 @@ namespace MifuminSoft.funyak.Core
                 mapObject.UpdateSelf();
             }
         }
+
+        public IEnumerable<IMapObject> GetNeighborMapObjects(IBounds bounds)
+        {
+            return mapObjectCollection;
+        }
     }
 }
