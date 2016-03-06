@@ -37,6 +37,7 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IBounds.cs" />
     <Compile Include="Input\IInput.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapObject\IMapObject.cs" />

@@ -2,14 +2,10 @@
 
 namespace MifuminSoft.funyak.Core.MapObject
 {
-    public interface IMapObject
+    public interface IMapObject : IBounds
     {
         double X { get; }
         double Y { get; }
-        double Left { get; }
-        double Top { get; }
-        double Right { get; }
-        double Bottom { get; }
     }
 
     public interface IDynamicMapObject : IMapObject
