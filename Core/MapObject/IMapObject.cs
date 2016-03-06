@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.Core.MapObject
+﻿using System;
+
+namespace MifuminSoft.funyak.Core.MapObject
 {
     public interface IMapObject
     {
@@ -8,5 +10,10 @@
         double Top { get; }
         double Right { get; }
         double Bottom { get; }
+    }
+
+    public interface IDynamicMapObject : IMapObject
+    {
+        void UpdateSelf();
     }
 }

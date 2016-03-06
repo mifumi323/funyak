@@ -1,6 +1,8 @@
-﻿namespace MifuminSoft.funyak.Core.MapObject
+﻿using System;
+
+namespace MifuminSoft.funyak.Core.MapObject
 {
-    public class MainMapObject : IMapObject
+    public class MainMapObject : IDynamicMapObject
     {
         protected abstract class IState
         {
@@ -8,6 +10,10 @@
             public abstract double GetTop(double y);
             public abstract double GetRight(double x);
             public abstract double GetBottom(double y);
+
+            public virtual void UpdateSelf(MainMapObject main)
+            {
+            }
         }
 
         protected class FloatingState : IState
@@ -72,6 +78,11 @@
             State = new FloatingState();
             X = x;
             Y = y;
+        }
+
+        public void UpdateSelf()
+        {
+            State.UpdateSelf(this);
         }
     }
 }
