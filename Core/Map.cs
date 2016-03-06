@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.Core

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MifuminSoft.funyak.Core.MapObject
+﻿namespace MifuminSoft.funyak.Core.MapObject
 {
     public interface IMapObject : IBounds
     {
