@@ -22,5 +22,9 @@ namespace MifuminSoft.funyak.Core
         {
             mapObjectCollection.Add(mapObject);
         }
+
+        public void Update()
+        {
+        }
     }
 }
