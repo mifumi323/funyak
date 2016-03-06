@@ -10,4 +10,8 @@
     {
         void UpdateSelf();
     }
+
+    public interface IStaticMapObject : IMapObject
+    {
+    }
 }
