@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using MifuminSoft.funyak.Core;
 
 namespace MifuminSoft.funyak.View
@@ -10,6 +11,11 @@ namespace MifuminSoft.funyak.View
         public MapView(Map map)
         {
             Map = map;
+        }
+
+        public void Display(Graphics graphics)
+        {
+            graphics.Clear(Color.Black);
         }
 
         #region IDisposable Support
