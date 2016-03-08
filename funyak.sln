@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\Core
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsDesktopView", "WindowsDesktopView\WindowsDesktopView.csproj", "{57F0AF7E-1FDB-4202-AE9D-30546CE96106}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsDesktopTests", "WindowsDesktopTests\WindowsDesktopTests.csproj", "{EC049B63-820F-4F27-880E-78B36F894EF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{57F0AF7E-1FDB-4202-AE9D-30546CE96106}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F0AF7E-1FDB-4202-AE9D-30546CE96106}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F0AF7E-1FDB-4202-AE9D-30546CE96106}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC049B63-820F-4F27-880E-78B36F894EF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC049B63-820F-4F27-880E-78B36F894EF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC049B63-820F-4F27-880E-78B36F894EF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC049B63-820F-4F27-880E-78B36F894EF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
