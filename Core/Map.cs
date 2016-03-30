@@ -1,12 +1,27 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.Core
 {
+    public class MapObjectAddedEventArgs : EventArgs
+    {
+        public IMapObject MapObject { get; private set; }
+
+        public MapObjectAddedEventArgs(IMapObject mapObject)
+        {
+            MapObject = mapObject;
+        }
+    }
+
+    public delegate void MapObjectAddedHandler(object sender, MapObjectAddedEventArgs e);
+
     public class Map
     {
         public double Width { get; protected set; }
         public double Height { get; protected set; }
+
+        public event MapObjectAddedHandler MapObjectAdded;
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
@@ -24,6 +39,11 @@ namespace MifuminSoft.funyak.Core
         {
             mapObjectCollection.Add(mapObject);
             if (mapObject is IDynamicMapObject) dynamicMapObjectCollection.Add((IDynamicMapObject)mapObject);
+
+            if (MapObjectAdded != null)
+            {
+                MapObjectAdded(this, new MapObjectAddedEventArgs(mapObject));
+            }
         }
 
         public void Update()
