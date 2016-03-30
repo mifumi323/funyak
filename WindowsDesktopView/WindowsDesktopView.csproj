@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MapObjectView\IMapObjectView.cs" />
+    <Compile Include="MapObjectView\MainMapObjectView.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
