@@ -41,6 +41,8 @@ namespace MifuminSoft.funyak.Core
 
         public IEnumerable<IMapObject> GetNeighborMapObjects(IBounds bounds)
         {
+            if (bounds== null) return mapObjectCollection;
+            // TODO: 範囲内のマップオブジェクトだけ返す
             return mapObjectCollection;
         }
     }
