@@ -1,16 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using MifuminSoft.funyak.Core;
+using MifuminSoft.funyak.View.MapObjectView;
 
 namespace MifuminSoft.funyak.View
 {
     public class MapView : IDisposable
     {
         protected Map Map { get; private set; }
+        protected ICollection<IMapObjectView> MapObjectViewCollention { get; set; }
 
         public MapView(Map map)
         {
             Map = map;
+            Map.MapObjectAdded += Map_MapObjectAdded;
+        }
+
+        private void Map_MapObjectAdded(object sender, MapObjectAddedEventArgs e)
+        {
+            // TODO: MapObjectViewCollentionに追加
         }
 
         public void Display(Graphics graphics)
