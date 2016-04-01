@@ -10,6 +10,7 @@ namespace MifuminSoft.funyak.View
     {
         protected Map Map { get; private set; }
         protected ICollection<IMapObjectView> MapObjectViewCollention { get; private set; }
+        protected bool MapObjectViewCollentionDirty { get; private set; }
         protected MapObjectViewFactory MapObjectViewFactory { get; private set; }
 
         public MapView(Map map)
@@ -17,13 +18,20 @@ namespace MifuminSoft.funyak.View
             Map = map;
             Map.MapObjectAdded += Map_MapObjectAdded;
             MapObjectViewCollention = new List<IMapObjectView>();
+            MapObjectViewCollentionDirty = false;
             MapObjectViewFactory = new MapObjectViewFactory();
         }
 
         private void Map_MapObjectAdded(object sender, MapObjectAddedEventArgs e)
         {
             var mapObjectiew = MapObjectViewFactory.Create(e.MapObject);
-            if (mapObjectiew != null) MapObjectViewCollention.Add(mapObjectiew);
+            if (mapObjectiew != null) AddMapObjectView(mapObjectiew);
+        }
+
+        private void AddMapObjectView(IMapObjectView mapObjectiew)
+        {
+            MapObjectViewCollention.Add(mapObjectiew);
+            MapObjectViewCollentionDirty = true;
         }
 
         public void Display(Graphics graphics)
