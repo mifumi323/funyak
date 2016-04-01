@@ -9,7 +9,7 @@ namespace MifuminSoft.funyak.View
     public class MapView : IDisposable
     {
         protected Map Map { get; private set; }
-        protected ICollection<IMapObjectView> MapObjectViewCollention { get; private set; }
+        protected List<IMapObjectView> MapObjectViewCollention { get; private set; }
         protected bool MapObjectViewCollentionDirty { get; private set; }
         protected MapObjectViewFactory MapObjectViewFactory { get; private set; }
 
@@ -34,9 +34,22 @@ namespace MifuminSoft.funyak.View
             MapObjectViewCollentionDirty = true;
         }
 
+        private void CleanMapObjectViewCollention()
+        {
+            if (!MapObjectViewCollentionDirty) return;
+            MapObjectViewCollention.Sort(CompareMapObjectView);
+            MapObjectViewCollentionDirty = false;
+        }
+
+        private int CompareMapObjectView(IMapObjectView a, IMapObjectView b)
+        {
+            return a.Priority - b.Priority;
+        }
+
         public void Display(Graphics graphics)
         {
             graphics.Clear(Color.Black);
+            CleanMapObjectViewCollention();
         }
 
         #region IDisposable Support
