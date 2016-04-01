@@ -9,17 +9,21 @@ namespace MifuminSoft.funyak.View
     public class MapView : IDisposable
     {
         protected Map Map { get; private set; }
-        protected ICollection<IMapObjectView> MapObjectViewCollention { get; set; }
+        protected ICollection<IMapObjectView> MapObjectViewCollention { get; private set; }
+        protected MapObjectViewFactory MapObjectViewFactory { get; private set; }
 
         public MapView(Map map)
         {
             Map = map;
             Map.MapObjectAdded += Map_MapObjectAdded;
+            MapObjectViewCollention = new List<IMapObjectView>();
+            MapObjectViewFactory = new MapObjectViewFactory();
         }
 
         private void Map_MapObjectAdded(object sender, MapObjectAddedEventArgs e)
         {
-            // TODO: MapObjectViewCollentionに追加
+            var mapObjectiew = MapObjectViewFactory.Create(e.MapObject);
+            if (mapObjectiew != null) MapObjectViewCollention.Add(mapObjectiew);
         }
 
         public void Display(Graphics graphics)

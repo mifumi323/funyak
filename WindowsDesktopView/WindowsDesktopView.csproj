@@ -44,6 +44,7 @@
     <Compile Include="MapObjectView\IMapObjectView.cs" />
     <Compile Include="MapObjectView\LineMapObjectView.cs" />
     <Compile Include="MapObjectView\MainMapObjectView.cs" />
+    <Compile Include="MapObjectView\MapObjectViewFactory.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
