@@ -75,7 +75,8 @@ namespace MifuminSoft.funyak.View
             {
                 if (disposing)
                 {
-                    // TODO: マネージ状態を破棄します (マネージ オブジェクト)。
+                    // マネージ状態を破棄します (マネージ オブジェクト)。
+                    Map.MapObjectAdded -= Map_MapObjectAdded;
                 }
 
                 // TODO: アンマネージ リソース (アンマネージ オブジェクト) を解放し、下のファイナライザーをオーバーライドします。
