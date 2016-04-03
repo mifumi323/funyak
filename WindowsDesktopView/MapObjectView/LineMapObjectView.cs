@@ -15,7 +15,7 @@ namespace MifuminSoft.funyak.View.MapObjectView
 
         public void Display(Graphics graphics)
         {
-            // TODO: 線の表示処理
+            graphics.DrawLine(Pens.White, (float)MapObject.X1, (float)MapObject.Y1, (float)MapObject.X2, (float)MapObject.Y2);
         }
     }
 }
