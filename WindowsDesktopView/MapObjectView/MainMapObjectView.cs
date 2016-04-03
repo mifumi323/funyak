@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using ImageMagick;
 using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.View.MapObjectView
@@ -15,7 +16,13 @@ namespace MifuminSoft.funyak.View.MapObjectView
 
         public void Display(Graphics graphics)
         {
-            graphics.FillEllipse(Brushes.Yellow, (float)MapObject.Left, (float)MapObject.Top, (float)(MapObject.Right - MapObject.Left), (float)(MapObject.Bottom - MapObject.Top));
+            using (MagickImage image = new MagickImage("icon0.gif"))
+            {
+                using (var icon = image.ToBitmap())
+                {
+                    graphics.DrawImage(icon, (float)MapObject.Left, (float)MapObject.Top);
+                }
+            }
         }
     }
 }
