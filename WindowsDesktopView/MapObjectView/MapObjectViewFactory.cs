@@ -12,7 +12,7 @@ namespace MifuminSoft.funyak.View.MapObjectView
             }
             if (mapObject is LineMapObject)
             {
-                return new LineMapObjectView();
+                return new LineMapObjectView((LineMapObject)mapObject);
             }
             return null;
         }
