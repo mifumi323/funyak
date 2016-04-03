@@ -15,7 +15,7 @@ namespace MifuminSoft.funyak.View.MapObjectView
 
         public void Display(Graphics graphics)
         {
-            graphics.DrawEllipse(Pens.Yellow, (float)MapObject.Left, (float)MapObject.Top, (float)(MapObject.Right - MapObject.Left), (float)(MapObject.Bottom - MapObject.Top));
+            graphics.FillEllipse(Brushes.Yellow, (float)MapObject.Left, (float)MapObject.Top, (float)(MapObject.Right - MapObject.Left), (float)(MapObject.Bottom - MapObject.Top));
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using MifuminSoft.funyak.Core;
 using MifuminSoft.funyak.Core.MapObject;
@@ -26,6 +27,8 @@ namespace WindowsDesktopTests
             {
                 using (var graphics = Graphics.FromImage(img))
                 {
+                    graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                    graphics.SmoothingMode = SmoothingMode.HighQuality;
                     mapView.Display(graphics);
                 }
             }
