@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MifuminSoft.funyak.Core.MapObject;
+﻿using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.View.MapObjectView
 {
@@ -11,6 +6,10 @@ namespace MifuminSoft.funyak.View.MapObjectView
     {
         public IMapObjectView Create(IMapObject mapObject)
         {
+            if (mapObject is MainMapObject)
+            {
+                return new MainMapObjectView();
+            }
             return null;
         }
     }
