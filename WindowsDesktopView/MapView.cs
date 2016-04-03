@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using MifuminSoft.funyak.Core;
+using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View.MapObjectView;
 
 namespace MifuminSoft.funyak.View
@@ -20,11 +21,20 @@ namespace MifuminSoft.funyak.View
             MapObjectViewCollention = new List<IMapObjectView>();
             MapObjectViewCollentionDirty = false;
             MapObjectViewFactory = new MapObjectViewFactory();
+            foreach (var mapObject in Map.GetNeighborMapObjects(null))
+            {
+                AddMapObject(mapObject);
+            }
         }
 
         private void Map_MapObjectAdded(object sender, MapObjectAddedEventArgs e)
         {
-            var mapObjectiew = MapObjectViewFactory.Create(e.MapObject);
+            AddMapObject(e.MapObject);
+        }
+
+        private void AddMapObject(IMapObject mapObject)
+        {
+            var mapObjectiew = MapObjectViewFactory.Create(mapObject);
             if (mapObjectiew != null) AddMapObjectView(mapObjectiew);
         }
 
