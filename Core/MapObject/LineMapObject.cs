@@ -12,10 +12,10 @@ namespace MifuminSoft.funyak.Core.MapObject
             Y2 = y2;
         }
 
-        public double X1 { get; set; }
-        public double Y1 { get; set; }
-        public double X2 { get; set; }
-        public double Y2 { get; set; }
+        public double X1 { get; protected set; }
+        public double Y1 { get; protected set; }
+        public double X2 { get; protected set; }
+        public double Y2 { get; protected set; }
 
         public double X { get { return (X1 + X2) / 2; } }
         public double Y { get { return (Y1 + Y2) / 2; } }
