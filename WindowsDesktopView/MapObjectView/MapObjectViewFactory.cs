@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.View.MapObjectView
         {
             if (mapObject is MainMapObject)
             {
-                return new MainMapObjectView();
+                return new MainMapObjectView((MainMapObject)mapObject);
             }
             if (mapObject is LineMapObject)
             {
