@@ -50,6 +50,10 @@ namespace MifuminSoft.funyak.View
         {
             graphics.Clear(Color.Black);
             CleanMapObjectViewCollention();
+            foreach (var mapObjectView in MapObjectViewCollention)
+            {
+                mapObjectView.Display(graphics);
+            }
         }
 
         #region IDisposable Support
