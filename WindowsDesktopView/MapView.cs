@@ -21,7 +21,7 @@ namespace MifuminSoft.funyak.View
             MapObjectViewCollention = new List<IMapObjectView>();
             MapObjectViewCollentionDirty = false;
             MapObjectViewFactory = new MapObjectViewFactory();
-            foreach (var mapObject in Map.GetNeighborMapObjects(null))
+            foreach (var mapObject in Map.GetMapObjects())
             {
                 AddMapObject(mapObject);
             }
