@@ -1,6 +1,6 @@
 ﻿namespace WindowsDesktopTests
 {
-    partial class FormMain
+    partial class FormLineCharaTest
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormMain";
-            this.Text = "WindowsDesktopテスト";
+            this.Text = "線とキャラが出るだけのテスト";
             this.Shown += new System.EventHandler(this.FormMain_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

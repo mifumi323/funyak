@@ -8,9 +8,9 @@ using MifuminSoft.funyak.View;
 
 namespace WindowsDesktopTests
 {
-    public partial class FormMain : Form
+    public partial class FormLineCharaTest : Form
     {
-        public FormMain()
+        public FormLineCharaTest()
         {
             InitializeComponent();
         }
