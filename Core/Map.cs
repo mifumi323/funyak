@@ -40,10 +40,7 @@ namespace MifuminSoft.funyak.Core
             mapObjectCollection.Add(mapObject);
             if (mapObject is IDynamicMapObject) dynamicMapObjectCollection.Add((IDynamicMapObject)mapObject);
 
-            if (MapObjectAdded != null)
-            {
-                MapObjectAdded(this, new MapObjectAddedEventArgs(mapObject));
-            }
+            MapObjectAdded?.Invoke(this, new MapObjectAddedEventArgs(mapObject));
         }
 
         public void Update()
