@@ -4,6 +4,12 @@ namespace MifuminSoft.funyak.View.Resource
 {
     public class ImageResource : IDisposable
     {
+        public bool IsUserResource { get; private set; }
+
+        public ImageResource(bool isUserResource)
+        {
+            IsUserResource = isUserResource;
+        }
 
         #region IDisposable Support
         private bool disposedValue = false; // 重複する呼び出しを検出するには
