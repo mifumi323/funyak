@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MifuminSoft.funyak.View.Resource
 {
     public class ResourceManager : IDisposable
     {
+        public Dictionary<string, ImageResource> Images { get; protected set; } = new Dictionary<string, ImageResource>();
+        public Dictionary<string, AudioResource> Audios { get; protected set; } = new Dictionary<string, AudioResource>();
 
         #region IDisposable Support
         private bool disposedValue = false; // 重複する呼び出しを検出するには
