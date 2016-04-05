@@ -7,5 +7,7 @@
 
 現在、以下のライブラリを使用している。
 
-Magick.NET
+## Magick.NET
 Copyright 2013-2016 Dirk Lemstra <https://magick.codeplex.com/>
+
+詳しくはCopyright-Magick.NET.txtを参照。
