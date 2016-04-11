@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.Core.MapObject
+﻿using System;
+
+namespace MifuminSoft.funyak.Core.MapObject
 {
     public interface IMapObject : IBounds
     {
@@ -9,6 +11,7 @@
     public interface IDynamicMapObject : IMapObject
     {
         void UpdateSelf();
+        Action CheckCollision();
     }
 
     public interface IStaticMapObject : IMapObject
