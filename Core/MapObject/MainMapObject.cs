@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.Core.MapObject
+﻿using System;
+
+namespace MifuminSoft.funyak.Core.MapObject
 {
     public class MainMapObject : IDynamicMapObject
     {
@@ -81,6 +83,11 @@
         public void UpdateSelf()
         {
             State.UpdateSelf(this);
+        }
+
+        public Action CheckCollision()
+        {
+            return null;
         }
     }
 }
