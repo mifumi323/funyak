@@ -21,6 +21,10 @@ namespace WindowsDesktopTests
         {
             listBox1.Items.AddRange(new object[] {
                 new {
+                    Name = "グラフィックのテスト",
+                    Type = typeof(FormGraphicsTest),
+                },
+                new {
                     Name = "線とキャラを表示するだけのテスト",
                     Type = typeof(FormLineCharaTest),
                 },
