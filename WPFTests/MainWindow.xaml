@@ -9,5 +9,6 @@
     <Grid>
         <Canvas x:Name="canvas"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Panel.ZIndex="1" VerticalAlignment="Bottom" Click="button_Click"/>
     </Grid>
 </Window>
