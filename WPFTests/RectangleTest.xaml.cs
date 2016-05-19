@@ -31,7 +31,7 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            using (MagickImage image = new MagickImage("Ice.bmp"))
+            using (MagickImage image = new MagickImage("Assets/Ice.bmp"))
             {
                 imageMap = image.ToBitmapSource();
                 imageMap.Freeze();
