@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTests"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+        Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Canvas x:Name="canvas"/>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
-        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Panel.ZIndex="1" VerticalAlignment="Bottom" Click="button_Click"/>
+        <ComboBox x:Name="comboBox" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="comboBox_SelectionChanged"/>
+        <Frame x:Name="frame" Margin="0,22,0,0"/>
     </Grid>
 </Window>
