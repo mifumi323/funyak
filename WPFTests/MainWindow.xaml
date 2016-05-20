@@ -7,7 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ComboBox x:Name="comboBox" VerticalAlignment="Top" DisplayMemberPath="Name" SelectionChanged="comboBox_SelectionChanged"/>
-        <Frame x:Name="frame" Margin="0,22,0,0"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="comboBox" DisplayMemberPath="Name" SelectionChanged="comboBox_SelectionChanged" Grid.Row="0"/>
+        <Frame x:Name="frame" Grid.Row="1"/>
     </Grid>
 </Window>
