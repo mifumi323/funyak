@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsDesktopTests", "Wind
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFTests", "WPFTests\WPFTests.csproj", "{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFView", "WPFView\WPFView.csproj", "{B855F852-EE65-4DA5-821F-26D5E69FE1AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
