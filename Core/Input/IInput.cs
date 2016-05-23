@@ -5,21 +5,21 @@
         double X { get; }
         double Y { get; }
 
-        bool IsPressed(int key);
-        bool IsPushed(int key);
-        bool IsReleased(int key);
+        bool IsPressed(Keys key);
+        bool IsPushed(Keys key);
+        bool IsReleased(Keys key);
 
-        bool Update();
+        void Update();
     }
 
     public enum Keys : int
     {
-        Left = 1,
-        Up = 2,
-        Right = 3,
-        Down = 4,
-        Jump = 5,
-        Attack = 6,
-        Smile = 7,
+        Left = 0,
+        Up = 1,
+        Right = 2,
+        Down = 3,
+        Jump = 4,
+        Attack = 5,
+        Smile = 6,
     }
 }
