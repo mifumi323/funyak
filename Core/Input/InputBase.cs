@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MifuminSoft.funyak.Core.Input
 {
@@ -78,7 +74,7 @@ namespace MifuminSoft.funyak.Core.Input
                 case Keys.Up:
                 case Keys.Right:
                 case Keys.Down:
-                    throw new ArgumentOutOfRangeException(nameof(key));
+                    throw new ArgumentOutOfRangeException(nameof(key), key, "上下左右の入力はSetDirectionメソッドを使用してください。");
                 default:
                     keys[(int)key] = pressed;
                     break;
