@@ -11,4 +11,15 @@
 
         bool Update();
     }
+
+    public enum Keys : int
+    {
+        Left = 1,
+        Up = 2,
+        Right = 3,
+        Down = 4,
+        Jump = 5,
+        Attack = 6,
+        Smile = 7,
+    }
 }
