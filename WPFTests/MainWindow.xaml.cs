@@ -14,6 +14,10 @@ namespace WPFTests
             InitializeComponent();
             comboBox.ItemsSource = new object[] {
                 new {
+                    Name = "キー入力のテスト",
+                    Type = typeof(KeyInputTest),
+                },
+                new {
                     Name = "グラフィックのテスト",
                     Type = typeof(RectangleTest),
                 },

@@ -60,9 +60,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="KeyInputTest.xaml.cs">
+      <DependentUpon>KeyInputTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="KeyInputTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

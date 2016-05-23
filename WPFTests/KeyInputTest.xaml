@@ -1,0 +1,39 @@
+﻿<Page x:Class="WPFTests.KeyInputTest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFTests"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="KeyInputTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid Focusable="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Ellipse Stroke="Black" Margin="5" Width="100" Height="100"/>
+        <Ellipse x:Name="direction" HorizontalAlignment="Center" Height="4" Margin="0,0,0,0" Fill="Red" Stroke="Red" VerticalAlignment="Center" Width="4"/>
+        <TextBox Grid.Row="1" Width="100"/>
+        <Grid x:Name="keyTable" Grid.Column="1" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextWrapping="Wrap" Text="キー" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="押した" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="2" TextWrapping="Wrap" Text="押してる" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="3" TextWrapping="Wrap" Text="離した" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Page>
