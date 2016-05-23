@@ -64,6 +64,8 @@ namespace MifuminSoft.funyak.Core.Input
             keys[(int)Keys.Up] = (y <= -0.5);
             keys[(int)Keys.Right] = (x >= 0.5);
             keys[(int)Keys.Down] = (y >= 0.5);
+            this.x = x;
+            this.y = y;
         }
 
         protected void SetKey(Keys key, bool pressed)
