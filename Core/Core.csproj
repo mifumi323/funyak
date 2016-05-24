@@ -40,6 +40,7 @@
     <Compile Include="IBounds.cs" />
     <Compile Include="Input\IInput.cs" />
     <Compile Include="Input\InputBase.cs" />
+    <Compile Include="Input\NullInput.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapObject\IMapObject.cs" />
     <Compile Include="MapObject\LineMapObject.cs" />
