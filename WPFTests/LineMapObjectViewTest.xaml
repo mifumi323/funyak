@@ -1,0 +1,17 @@
+﻿<Page x:Class="WPFTests.LineMapObjectViewTest"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPFTests"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="LineMapObjectViewTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+
+    <Grid>
+        <Canvas x:Name="canvas">
+        </Canvas>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
+        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Panel.ZIndex="1" VerticalAlignment="Bottom" Click="button_Click"/>
+    </Grid>
+</Page>
