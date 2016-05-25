@@ -11,7 +11,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ComboBox x:Name="comboBox" DisplayMemberPath="Name" SelectionChanged="comboBox_SelectionChanged" Grid.Row="0"/>
+        <ComboBox x:Name="comboBox" DisplayMemberPath="Name" SelectionChanged="comboBox_SelectionChanged" Grid.Row="0" Focusable="False"/>
         <Frame x:Name="frame" Grid.Row="1" NavigationUIVisibility="Hidden"/>
     </Grid>
 </Window>
