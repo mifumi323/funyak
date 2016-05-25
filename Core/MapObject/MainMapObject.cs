@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Core.Input;
 
 namespace MifuminSoft.funyak.Core.MapObject
 {
@@ -41,6 +42,8 @@ namespace MifuminSoft.funyak.Core.MapObject
 
         protected IState State { get; private set; }
 
+        public IInput Input { get; set; }
+
         public double X
         {
             get;
@@ -76,6 +79,7 @@ namespace MifuminSoft.funyak.Core.MapObject
         public MainMapObject(double x, double y)
         {
             State = new FloatingState();
+            Input = new NullInput();
             X = x;
             Y = y;
         }
