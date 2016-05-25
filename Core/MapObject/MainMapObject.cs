@@ -47,13 +47,13 @@ namespace MifuminSoft.funyak.Core.MapObject
         public double X
         {
             get;
-            protected set;
+            set;
         }
 
         public double Y
         {
             get;
-            protected set;
+            set;
         }
 
         public double Left
