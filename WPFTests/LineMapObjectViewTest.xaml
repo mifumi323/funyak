@@ -9,9 +9,9 @@
       Title="LineMapObjectViewTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
-        <Canvas x:Name="canvas">
+        <Canvas x:Name="canvas" ClipToBounds="True">
         </Canvas>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
         <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Panel.ZIndex="1" VerticalAlignment="Bottom" Click="button_Click"/>
     </Grid>
 </Page>

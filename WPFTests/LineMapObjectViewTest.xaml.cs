@@ -19,7 +19,8 @@ namespace WPFTests
         FpsCounter counter = new FpsCounter();
         Map map;
         MapView mapView;
-        LineMapObject line;
+        LineMapObject line, batten1, batten2;
+        Point target;
 
         public LineMapObjectViewTest()
         {
@@ -27,10 +28,16 @@ namespace WPFTests
             map = new Map(200, 200);
             line = new LineMapObject(50, 100, 150, 150);
             map.AddMapObject(line);
+            batten1 = new LineMapObject(-10, -10, 10, 10);
+            map.AddMapObject(batten1);
+            batten2 = new LineMapObject(-10, 10, 10, -10);
+            map.AddMapObject(batten2);
             mapView = new MapView(map)
             {
                 Canvas = canvas,
+                FocusTo = batten2,
             };
+            target = new Point(100, 100);
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -76,6 +83,14 @@ namespace WPFTests
         private void CompositionTarget_Rendering(object sender, object e)
         {
             counter.Step();
+            batten1.X1 = target.X - 10;
+            batten1.Y1 = target.Y - 10;
+            batten1.X2 = target.X + 10;
+            batten1.Y2 = target.Y + 10;
+            batten2.X1 = target.X - 10;
+            batten2.Y1 = target.Y + 10;
+            batten2.X2 = target.X + 10;
+            batten2.Y2 = target.Y - 10;
             mapView.Update(1);
             textBlock.Text = "FPS：" + counter.Fps.ToString("0.00");
         }

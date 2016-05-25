@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using MifuminSoft.funyak.Core;
 using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View.MapObject;
@@ -34,7 +35,15 @@ namespace MifuminSoft.funyak.View
             }
         }
 
+        /// <summary>
+        /// 注視対象のマップオブジェクト
+        /// </summary>
         public IMapObject FocusTo { get; set; }
+
+        /// <summary>
+        /// 注視点が注視対象の座標からどの程度ずれるか
+        /// </summary>
+        public Point FocusOffset { get; set; }
 
         public MapView(Map map)
         {
@@ -68,10 +77,23 @@ namespace MifuminSoft.funyak.View
 
         public void Update(double scale)
         {
+            if (canvas == null) return;
+            if (!(scale > 0))
+            {
+                throw new ArgumentOutOfRangeException(nameof(scale), scale, nameof(scale) + "には正の数を指定する必要がありますが、" + scale + "が指定されました。");
+            }
+
             // 表示領域を計算
             // TODO: 本当の表示領域を計算
-            var offset = new Point(0, 0);
-            var area = new Rect(0, 0, Map.Width, Map.Height);
+            double focusX = (FocusTo != null ? FocusTo.X : 0) + (FocusOffset != null ? FocusOffset.X : 0);
+            double focusY = (FocusTo != null ? FocusTo.Y : 0) + (FocusOffset != null ? FocusOffset.Y : 0);
+            double width = Math.Min(canvas.ActualWidth / scale, Map.Width);
+            double height = Math.Min(canvas.ActualHeight / scale, Map.Height);
+            double actualWidth = width * scale;
+            double actualHeight = height * scale;
+
+            var offset = new Point((canvas.ActualWidth - actualWidth) * 0.5, (canvas.ActualHeight - actualHeight) * 0.5);
+            var area = new Rect(Math.Max(0, focusX - width * 0.5), Math.Max(0, focusY - height * 0.5), width, height);
 
             // マップオブジェクトの状態を更新
             foreach (var mapObjectView in MapObjectViewCollection)
