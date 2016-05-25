@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.Core.MapObject;
 
@@ -47,6 +48,7 @@ namespace MifuminSoft.funyak.View.MapObject
             if (line == null)
             {
                 line = new Line();
+                line.Stroke = new SolidColorBrush(Colors.Black);
             }
             line.X1 = (MapObject.X1 - area.X) * scale + offset.X;
             line.Y1 = (MapObject.Y1 - area.Y) * scale + offset.Y;

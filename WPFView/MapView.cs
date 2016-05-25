@@ -18,7 +18,7 @@ namespace MifuminSoft.funyak.View
         protected bool MapObjectViewCollentionDirty { get; private set; }
         protected MapObjectViewFactory MapObjectViewFactory { get; private set; }
         private Canvas canvas = null;
-        protected Canvas Canvas
+        public Canvas Canvas
         {
             get
             {
@@ -66,7 +66,7 @@ namespace MifuminSoft.funyak.View
             MapObjectViewCollentionDirty = true;
         }
 
-        void Update(double scale)
+        public void Update(double scale)
         {
             // 表示領域を計算
             // TODO: 本当の表示領域を計算
