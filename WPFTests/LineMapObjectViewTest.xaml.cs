@@ -5,8 +5,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using MifuminSoft.funyak.Core;
+using MifuminSoft.funyak.Core.Input;
 using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View;
+using MifuminSoft.funyak.View.Input;
 using MifuminSoft.funyak.View.Utility;
 
 namespace WPFTests
@@ -19,15 +21,28 @@ namespace WPFTests
         FpsCounter counter = new FpsCounter();
         Map map;
         MapView mapView;
-        LineMapObject line, batten1, batten2;
+        LineMapObject[] lines;
+        LineMapObject batten1, batten2;
         Point target;
+        IInput input;
 
         public LineMapObjectViewTest()
         {
             InitializeComponent();
-            map = new Map(200, 200);
-            line = new LineMapObject(50, 100, 150, 150);
-            map.AddMapObject(line);
+            map = new Map(500, 500);
+            map.BackgroundColor = "LightGreen";
+            lines = new[] {
+                new LineMapObject(0, 0, 50, 500),
+                new LineMapObject(0, 500, 500, 450),
+                new LineMapObject(500, 500, 450, 0),
+                new LineMapObject(500, 0, 0, 50),
+                new LineMapObject(200, 250, 300, 250),
+                new LineMapObject(250, 200, 250, 300),
+            };
+            foreach (var line in lines)
+            {
+                map.AddMapObject(line);
+            }
             batten1 = new LineMapObject(-10, -10, 10, 10);
             map.AddMapObject(batten1);
             batten2 = new LineMapObject(-10, 10, 10, -10);
@@ -38,6 +53,7 @@ namespace WPFTests
                 FocusTo = batten2,
             };
             target = new Point(100, 100);
+            input = new KeyInput();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -83,6 +99,9 @@ namespace WPFTests
         private void CompositionTarget_Rendering(object sender, object e)
         {
             counter.Step();
+            input.Update();
+            target.X += input.X;
+            target.Y += input.Y;
             batten1.X1 = target.X - 10;
             batten1.Y1 = target.Y - 10;
             batten1.X2 = target.X + 10;
@@ -91,7 +110,7 @@ namespace WPFTests
             batten2.Y1 = target.Y + 10;
             batten2.X2 = target.X + 10;
             batten2.Y2 = target.Y - 10;
-            mapView.Update(1);
+            mapView.Update(100);
             textBlock.Text = "FPS：" + counter.Fps.ToString("0.00");
         }
     }

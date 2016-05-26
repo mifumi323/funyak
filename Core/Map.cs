@@ -20,6 +20,7 @@ namespace MifuminSoft.funyak.Core
     {
         public double Width { get; protected set; }
         public double Height { get; protected set; }
+        public string BackgroundColor { get; set; }
 
         public event MapObjectAddedHandler MapObjectAdded;
 
@@ -30,6 +31,7 @@ namespace MifuminSoft.funyak.Core
         {
             Width = width;
             Height = height;
+            BackgroundColor = null;
 
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();

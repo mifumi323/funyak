@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using MifuminSoft.funyak.Core;
 using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View.MapObject;
@@ -34,6 +35,8 @@ namespace MifuminSoft.funyak.View
                 }
             }
         }
+        private Rectangle background;
+        private string backgroundColor;
 
         /// <summary>
         /// 注視対象のマップオブジェクト
@@ -93,6 +96,35 @@ namespace MifuminSoft.funyak.View
 
             var offset = new Point((canvas.ActualWidth - actualWidth) * 0.5, (canvas.ActualHeight - actualHeight) * 0.5);
             var area = new Rect(Math.Min(Math.Max(0, focusX - width * 0.5), Map.Width - width), Math.Min(Math.Max(0, focusY - height * 0.5), Map.Height - height), width, height);
+            var actualArea = new Rect(offset.X, offset.Y, actualWidth, actualHeight);
+
+            // 背景の設定
+            canvas.Clip = new RectangleGeometry(actualArea);
+            if (backgroundColor != Map.BackgroundColor)
+            {
+                backgroundColor = Map.BackgroundColor;
+                if (background == null)
+                {
+                    background = new Rectangle();
+                    canvas.Children.Add(background);
+                    Panel.SetZIndex(background, int.MinValue);
+                }
+                try
+                {
+                    background.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(backgroundColor));
+                }
+                catch
+                {
+                    background.Fill = null;
+                }
+            }
+            if (background != null)
+            {
+                background.Width = actualWidth;
+                background.Height = actualHeight;
+                Canvas.SetLeft(background, offset.X);
+                Canvas.SetTop(background, offset.Y);
+            }
 
             // マップオブジェクトの状態を更新
             foreach (var mapObjectView in MapObjectViewCollection)
