@@ -9,9 +9,19 @@
       Title="LineMapObjectViewTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
-        <Canvas x:Name="canvas" ClipToBounds="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="3">
         </Canvas>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Right" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Panel.ZIndex="1" Background="Black" Foreground="White" FontWeight="Bold"/>
-        <Button x:Name="button" Content="Save" HorizontalAlignment="Left" Panel.ZIndex="1" VerticalAlignment="Bottom" Click="button_Click"/>
+        <Slider x:Name="slider" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" Grid.Column="1"/>
+        <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Grid.Column="1" Grid.Row="1"/>
+        <Button x:Name="button" Content="Save" Click="button_Click" Grid.Column="1" Grid.Row="2"/>
     </Grid>
 </Page>

@@ -10,6 +10,7 @@ using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View;
 using MifuminSoft.funyak.View.Input;
 using MifuminSoft.funyak.View.Utility;
+using System.Text;
 
 namespace WPFTests
 {
@@ -110,8 +111,13 @@ namespace WPFTests
             batten2.Y1 = target.Y + 10;
             batten2.X2 = target.X + 10;
             batten2.Y2 = target.Y - 10;
-            mapView.Update(100);
-            textBlock.Text = "FPS：" + counter.Fps.ToString("0.00");
+            mapView.Update(slider.Value);
+            var children = new StringBuilder();
+            foreach (var child in canvas.Children)
+            {
+                children.AppendLine(child.ToString());
+            }
+            textBox.Text = string.Format("拡大率：{0}\nFPS：{1:0.00}\n表示オブジェクト：\n{2}", slider.Value, counter.Fps, children);
         }
     }
 }
