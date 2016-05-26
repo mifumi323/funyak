@@ -84,7 +84,6 @@ namespace MifuminSoft.funyak.View
             }
 
             // 表示領域を計算
-            // TODO: 本当の表示領域を計算
             double focusX = (FocusTo != null ? FocusTo.X : 0) + (FocusOffset != null ? FocusOffset.X : 0);
             double focusY = (FocusTo != null ? FocusTo.Y : 0) + (FocusOffset != null ? FocusOffset.Y : 0);
             double width = Math.Min(canvas.ActualWidth / scale, Map.Width);
@@ -93,7 +92,7 @@ namespace MifuminSoft.funyak.View
             double actualHeight = height * scale;
 
             var offset = new Point((canvas.ActualWidth - actualWidth) * 0.5, (canvas.ActualHeight - actualHeight) * 0.5);
-            var area = new Rect(Math.Max(0, focusX - width * 0.5), Math.Max(0, focusY - height * 0.5), width, height);
+            var area = new Rect(Math.Min(Math.Max(0, focusX - width * 0.5), Map.Width - width), Math.Min(Math.Max(0, focusY - height * 0.5), Map.Height - height), width, height);
 
             // マップオブジェクトの状態を更新
             foreach (var mapObjectView in MapObjectViewCollection)
