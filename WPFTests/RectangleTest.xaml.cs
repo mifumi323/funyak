@@ -20,6 +20,7 @@ namespace WPFTests
         Rectangle[,] rectMap = new Rectangle[vw, vh];
         Rectangle rectMain = null;
         BitmapSource imageMap = null;
+        BitmapSource imageMain = null;
         FpsCounter counter = new FpsCounter();
 
         double vx = 0, vy = 0, vr = 0, vs = 1;
@@ -31,20 +32,27 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            using (MagickImage image = new MagickImage("Assets/Ice.bmp"))
+            using (MagickImage miMap = new MagickImage("Assets/Ice.bmp"))
             {
-                imageMap = image.ToBitmapSource();
+                imageMap = miMap.ToBitmapSource();
                 imageMap.Freeze();
+            }
+            using (MagickImage miMain = new MagickImage("Assets/main.png"))
+            {
+                imageMain = miMain.ToBitmapSource();
+                imageMain.Freeze();
             }
             var random = new Random();
             for (int x = 0; x < vw; x++)
             {
                 for (int y = 0; y < vh; y++)
                 {
-                    var brush = new ImageBrush(imageMap);
-                    brush.TileMode = TileMode.None;
-                    brush.Stretch = Stretch.Fill;
-                    brush.Viewbox = new Rect(random.Next(5) * 0.2, 0, 0.2, 1);
+                    var brush = new ImageBrush(imageMap)
+                    {
+                        TileMode = TileMode.None,
+                        Stretch = Stretch.Fill,
+                        Viewbox = new Rect(random.Next(5) * 0.2, 0, 0.2, 1),
+                    };
                     rectMap[x, y] = new Rectangle()
                     {
                         Width = 32 * vs,
@@ -56,9 +64,14 @@ namespace WPFTests
             }
             rectMain = new Rectangle()
             {
-                Width = 32 * vs,
-                Height = 32 * vs,
-                Fill = new SolidColorBrush(Color.FromRgb(255, 255, 255)),
+                Width = 40 * vs,
+                Height = 40 * vs,
+                Fill = new ImageBrush(imageMain)
+                {
+                    TileMode = TileMode.None,
+                    Stretch = Stretch.Fill,
+                    Viewbox = new Rect(0 / 512.0, 40 / 512.0, 40 / 512.0, 40 / 512.0)
+                },
             };
             canvas.Children.Add(rectMain);
             CompositionTarget.Rendering += CompositionTarget_Rendering;
@@ -109,8 +122,8 @@ namespace WPFTests
                     Canvas.SetTop(rectMap[x, y], (y * 32 - vy) * vs);
                 }
             }
-            Canvas.SetLeft(rectMain, (vw * 16 - 16 - (vw - 1) * 16 * Math.Cos(vr) - vx) * vs);
-            Canvas.SetTop(rectMain, (vh * 16 - 16 - (vh - 1) * 16 * Math.Sin(vr) - vy) * vs);
+            Canvas.SetLeft(rectMain, (vw * 16 - 20 - (vw - 1) * 16 * Math.Cos(vr) - vx) * vs);
+            Canvas.SetTop(rectMain, (vh * 16 - 20 - (vh - 1) * 16 * Math.Sin(vr) - vy) * vs);
             vr += 0.01;
             counter.Step();
             textBlock.Text = "FPS：" + counter.Fps.ToString("0.00");
