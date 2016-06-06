@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MifuminSoft.funyak.View.Resource
 {
     public class ImageResource : IDisposable
     {
         public bool IsUserResource { get; private set; }
+
+        public Dictionary<string, ImageChipInfo> Chip { get; set; }
 
         public ImageResource(bool isUserResource)
         {

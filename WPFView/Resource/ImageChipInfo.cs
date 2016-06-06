@@ -3,7 +3,7 @@
     /// <summary>
     /// 画像チップ情報
     /// </summary>
-    public struct ImageChipInfo
+    public class ImageChipInfo
     {
         /// <summary>
         /// 元画像から切り抜く範囲の左端のX座標(画像全体の左上を原点とする)
