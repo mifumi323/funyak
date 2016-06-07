@@ -8,7 +8,7 @@ using ImageMagick;
 
 namespace MifuminSoft.funyak.View.Resource
 {
-    class BitmapImageResource : ImageResource
+    public class BitmapImageResource : ImageResource
     {
         BitmapSource bitmapSource = null;
         Dictionary<string, Brush> knownBrush = new Dictionary<string, Brush>();
