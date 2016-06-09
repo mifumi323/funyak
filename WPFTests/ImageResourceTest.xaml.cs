@@ -100,19 +100,9 @@ namespace WPFTests
             if (listBox.SelectedItem == null) return;
             var selected = (KeyValuePair<string, ImageChipInfo>)listBox.SelectedItem;
             var key = selected.Key;
-            var info = selected.Value;
-            var brush = resource.GetBrush(key);
             var scale = sliderScale.Value;
             var angle = sliderRotate.Value;
-            target.Fill = brush;
-            target.Width = info.DestinationWidth * scale;
-            target.Height = info.DestinationHeight * scale;
-            target.RenderTransformOrigin = new Point(
-                (info.SourceOriginX - info.SourceLeft) / info.SourceWidth,
-                (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
-            target.RenderTransform = new RotateTransform(angle);
-            Canvas.SetLeft(target, point.X - info.DestinationWidth * scale * (info.SourceOriginX - info.SourceLeft) / info.SourceWidth);
-            Canvas.SetTop(target, point.Y - info.DestinationHeight * scale * (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+            resource.SetToRectangle(target, key, point.X, point.Y, scale, angle);
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

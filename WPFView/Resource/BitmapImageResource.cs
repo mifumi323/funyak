@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using ImageMagick;
 
 namespace MifuminSoft.funyak.View.Resource
@@ -47,6 +49,21 @@ namespace MifuminSoft.funyak.View.Resource
             brush.Freeze();
             knownBrush[key] = brush;
             return brush;
+        }
+
+        public override void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, double angle)
+        {
+            if (!Chip.ContainsKey(key)) throw new ArgumentOutOfRangeException(nameof(key));
+            var info = Chip[key];
+            rectangle.Fill = GetBrush(key);
+            rectangle.Width = info.DestinationWidth * scale;
+            rectangle.Height = info.DestinationHeight * scale;
+            rectangle.RenderTransformOrigin = new Point(
+                (info.SourceOriginX - info.SourceLeft) / info.SourceWidth,
+                (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+            rectangle.RenderTransform = new RotateTransform(angle);
+            Canvas.SetLeft(rectangle, x - info.DestinationWidth * scale * (info.SourceOriginX - info.SourceLeft) / info.SourceWidth);
+            Canvas.SetTop(rectangle, y - info.DestinationHeight * scale * (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
         }
     }
 }
