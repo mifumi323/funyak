@@ -20,13 +20,13 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5">
-            <Rectangle x:Name="target"></Rectangle>
+        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="canvas_MouseDown">
+            <Rectangle x:Name="target"/>
         </Canvas>
-        <ListBox x:Name="listBox" Grid.Column="1" DisplayMemberPath="Key"/>
+        <ListBox x:Name="listBox" Grid.Column="1" DisplayMemberPath="Key" SelectionChanged="listBox_SelectionChanged"/>
         <Label x:Name="labelScale" Content="{Binding Value, ElementName=sliderScale}" ContentStringFormat="{}倍率：{0:0.0}倍" Grid.Column="1" Grid.Row="1"/>
-        <Slider x:Name="sliderScale" Grid.Column="1" Grid.Row="2" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="sliderScale" Grid.Column="1" Grid.Row="2" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
         <Label x:Name="labelRotate" Content="{Binding Value, ElementName=sliderRotate}" ContentStringFormat="{}回転：{0}度" Grid.Column="1" Grid.Row="3"/>
-        <Slider x:Name="sliderRotate" Grid.Column="1" Grid.Row="4" Minimum="-180" Maximum="180" TickFrequency="1" Value="0" LargeChange="15" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="sliderRotate" Grid.Column="1" Grid.Row="4" Minimum="-180" Maximum="180" TickFrequency="1" Value="0" LargeChange="15" IsSnapToTickEnabled="True" ValueChanged="slider_ValueChanged"/>
     </Grid>
 </Page>

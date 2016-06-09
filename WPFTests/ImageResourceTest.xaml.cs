@@ -23,6 +23,7 @@ namespace WPFTests
     public partial class ImageResourceTest : Page
     {
         BitmapImageResource resource;
+        Point point = new Point(0, 0);
 
         public ImageResourceTest()
         {
@@ -31,6 +32,8 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            point.X = canvas.ActualWidth / 2;
+            point.Y = canvas.ActualHeight / 2;
             using (var stream = new FileStream(@"Assets\main.png", FileMode.Open))
             {
                 resource = new BitmapImageResource(stream, null, true)
@@ -51,16 +54,89 @@ namespace WPFTests
                                 DestinationHeight = 40,
                             }
                         },
+                        {
+                            "JumpF",
+                            new ImageChipInfo()
+                            {
+                                SourceLeft = 360,
+                                SourceTop = 0,
+                                SourceWidth = 40,
+                                SourceHeight = 40,
+                                SourceOriginX = 380,
+                                SourceOriginY = 20,
+                                DestinationWidth = 40,
+                                DestinationHeight = 40,
+                            }
+                        },
+                        {
+                            "FallF",
+                            new ImageChipInfo()
+                            {
+                                SourceLeft = 0,
+                                SourceTop = 40,
+                                SourceWidth = 40,
+                                SourceHeight = 40,
+                                SourceOriginX = 20,
+                                SourceOriginY = 60,
+                                DestinationWidth = 40,
+                                DestinationHeight = 40,
+                            }
+                        },
+                        {
+                            "SitF",
+                            new ImageChipInfo()
+                            {
+                                SourceLeft = 40,
+                                SourceTop = 40,
+                                SourceWidth = 40,
+                                SourceHeight = 40,
+                                SourceOriginX = 60,
+                                SourceOriginY = 60,
+                                DestinationWidth = 40,
+                                DestinationHeight = 40,
+                            }
+                        },
                     },
                 };
             }
             listBox.ItemsSource = resource.Chip;
-            Update();
+            listBox.SelectedItem = resource.Chip.First();
         }
 
         private void Update()
         {
-            // TODO: 表示更新する
+            if (listBox.SelectedItem == null) return;
+            var selected = (KeyValuePair<string, ImageChipInfo>)listBox.SelectedItem;
+            var key = selected.Key;
+            var info = selected.Value;
+            var brush = resource.GetBrush(key);
+            var scale = sliderScale.Value;
+            var angle = sliderRotate.Value;
+            target.Fill = brush;
+            target.Width = info.DestinationWidth * scale;
+            target.Height = info.DestinationHeight * scale;
+            target.RenderTransformOrigin = new Point(
+                (info.SourceOriginX - info.SourceLeft) / info.SourceWidth,
+                (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+            target.RenderTransform = new RotateTransform(angle);
+            Canvas.SetLeft(target, point.X - info.DestinationWidth * scale * (info.SourceOriginX - info.SourceLeft) / info.SourceWidth);
+            Canvas.SetTop(target, point.Y - info.DestinationHeight * scale * (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+        }
+
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            Update();
+        }
+
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Update();
+        }
+
+        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            point = e.GetPosition(canvas);
+            Update();
         }
     }
 }
