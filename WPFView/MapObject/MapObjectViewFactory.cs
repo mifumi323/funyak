@@ -10,6 +10,10 @@ namespace MifuminSoft.funyak.View.MapObject
             {
                 return new LineMapObjectView((LineMapObject)mapObject);
             }
+            if (mapObject is MainMapObject)
+            {
+                return new MainMapObjectView((MainMapObject)mapObject);
+            }
             return null;
         }
     }

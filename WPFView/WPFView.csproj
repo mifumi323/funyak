@@ -51,6 +51,7 @@
     <Compile Include="Input\KeyInput.cs" />
     <Compile Include="MapObject\IMapObjectView.cs" />
     <Compile Include="MapObject\LineMapObjectView.cs" />
+    <Compile Include="MapObject\MainMapObjectView.cs" />
     <Compile Include="MapObject\MapObjectViewFactory.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
