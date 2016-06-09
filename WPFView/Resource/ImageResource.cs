@@ -16,8 +16,18 @@ namespace MifuminSoft.funyak.View.Resource
             IsUserResource = isUserResource;
         }
 
+        public void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale)
+        {
+            SetToRectangle(rectangle, key, x, y, scale, Transform.Identity);
+        }
+
+        public void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, double angle)
+        {
+            SetToRectangle(rectangle, key, x, y, scale, new RotateTransform(angle));
+        }
+
         public abstract Brush GetBrush(string key);
-        public abstract void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, double angle);
+        public abstract void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, Transform transform);
         public abstract void Dispose();
     }
 }

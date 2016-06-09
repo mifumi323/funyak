@@ -51,7 +51,7 @@ namespace MifuminSoft.funyak.View.Resource
             return brush;
         }
 
-        public override void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, double angle)
+        public override void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, Transform transform)
         {
             if (!Chip.ContainsKey(key)) throw new ArgumentOutOfRangeException(nameof(key));
             var info = Chip[key];
@@ -61,7 +61,7 @@ namespace MifuminSoft.funyak.View.Resource
             rectangle.RenderTransformOrigin = new Point(
                 (info.SourceOriginX - info.SourceLeft) / info.SourceWidth,
                 (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
-            rectangle.RenderTransform = new RotateTransform(angle);
+            rectangle.RenderTransform = transform;
             Canvas.SetLeft(rectangle, x - info.DestinationWidth * scale * (info.SourceOriginX - info.SourceLeft) / info.SourceWidth);
             Canvas.SetTop(rectangle, y - info.DestinationHeight * scale * (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
         }
