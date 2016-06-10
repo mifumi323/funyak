@@ -1,0 +1,44 @@
+﻿using System.Windows;
+
+namespace MifuminSoft.funyak.View.MapObject
+{
+    public sealed class MapObjectViewUpdateArgs
+    {
+        /// <summary>
+        /// 表示領域での位置オフセット量
+        /// </summary>
+        public Point Offset { get; private set; }
+
+        /// <summary>
+        /// 拡大率
+        /// </summary>
+        public double Scale { get; private set; }
+
+        /// <summary>
+        /// マップ領域での表示範囲
+        /// </summary>
+        public Rect Area { get; private set; }
+
+        public MapObjectViewUpdateArgs(Point offset, double scale, Rect area)
+        {
+            Offset = offset;
+            Scale = scale;
+            Area = area;
+        }
+
+        public double TranslateX(double x)
+        {
+            return (x - Area.X) * Scale + Offset.X;
+        }
+
+        public double TranslateY(double y)
+        {
+            return (y - Area.Y) * Scale + Offset.Y;
+        }
+
+        public Point Translate(Point point)
+        {
+            return new Point(TranslateX(point.X), TranslateY(point.Y));
+        }
+    }
+}

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -127,9 +124,10 @@ namespace MifuminSoft.funyak.View
             }
 
             // マップオブジェクトの状態を更新
+            var args = new MapObjectViewUpdateArgs(offset, scale, area);
             foreach (var mapObjectView in MapObjectViewCollection)
             {
-                mapObjectView.Update(offset, scale, area);
+                mapObjectView.Update(args);
             }
         }
 

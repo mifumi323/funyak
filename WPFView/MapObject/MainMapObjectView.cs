@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View.Resource;
@@ -39,7 +37,7 @@ namespace MifuminSoft.funyak.View.MapObject
             MapObject = mapObject;
         }
 
-        public void Update(Point offset, double scale, Rect area)
+        public void Update(MapObjectViewUpdateArgs args)
         {
             if (ImageResource == null) return;
             if (rectangle == null)
@@ -47,7 +45,7 @@ namespace MifuminSoft.funyak.View.MapObject
                 rectangle = new Rectangle();
             }
             AddToCanvas();
-            ImageResource.SetToRectangle(rectangle, "FallF", (MapObject.X - area.X) * scale + offset.X, (MapObject.Y - area.Y) * scale + offset.Y, scale);
+            ImageResource.SetToRectangle(rectangle, "FallF", args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale);
         }
 
         private void AddToCanvas()

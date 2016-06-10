@@ -54,6 +54,7 @@
     <Compile Include="MapObject\MainMapObjectView.cs" />
     <Compile Include="MapObject\MapObjectViewFactory.cs" />
     <Compile Include="MapView.cs" />
+    <Compile Include="MapObject\MapObjectViewUpdateArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\AudioResource.cs" />
     <Compile Include="Resource\BitmapImageResource.cs" />

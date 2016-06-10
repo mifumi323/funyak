@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -38,9 +37,9 @@ namespace MifuminSoft.funyak.View.MapObject
             MapObject = mapObject;
         }
 
-        public void Update(Point offset, double scale, Rect area)
+        public void Update(MapObjectViewUpdateArgs args)
         {
-            if (!area.IntersectsWith(new Rect(MapObject.Left, MapObject.Top, MapObject.Right - MapObject.Left, MapObject.Bottom - MapObject.Top)))
+            if (!args.Area.IntersectsWith(new Rect(MapObject.Left, MapObject.Top, MapObject.Right - MapObject.Left, MapObject.Bottom - MapObject.Top)))
             {
                 RemoveFromCanvas();
                 return;
@@ -50,11 +49,11 @@ namespace MifuminSoft.funyak.View.MapObject
                 line = new Line();
                 line.Stroke = new SolidColorBrush(Colors.Black);
             }
-            line.X1 = (MapObject.X1 - area.X) * scale + offset.X;
-            line.Y1 = (MapObject.Y1 - area.Y) * scale + offset.Y;
-            line.X2 = (MapObject.X2 - area.X) * scale + offset.X;
-            line.Y2 = (MapObject.Y2 - area.Y) * scale + offset.Y;
-            line.StrokeThickness = scale;
+            line.X1 = args.TranslateX(MapObject.X1);
+            line.Y1 = args.TranslateY(MapObject.Y1);
+            line.X2 = args.TranslateX(MapObject.X2);
+            line.Y2 = args.TranslateY(MapObject.Y2);
+            line.StrokeThickness = args.Scale;
             AddToCanvas();
         }
 
