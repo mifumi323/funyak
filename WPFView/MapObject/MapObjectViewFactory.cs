@@ -1,9 +1,13 @@
-﻿using MifuminSoft.funyak.Core.MapObject;
+﻿using System;
+using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.View.Resource;
 
 namespace MifuminSoft.funyak.View.MapObject
 {
     public class MapObjectViewFactory
     {
+        public Func<int, ImageResource> MainMapObjectResourceSelector { get; set; }
+
         public IMapObjectView Create(IMapObject mapObject)
         {
             if (mapObject is LineMapObject)
@@ -12,7 +16,10 @@ namespace MifuminSoft.funyak.View.MapObject
             }
             if (mapObject is MainMapObject)
             {
-                return new MainMapObjectView((MainMapObject)mapObject);
+                return new MainMapObjectView((MainMapObject)mapObject)
+                {
+                    ImageResource = MainMapObjectResourceSelector?.Invoke(((MainMapObject)mapObject).Appearance),
+                };
             }
             return null;
         }

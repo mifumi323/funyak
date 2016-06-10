@@ -41,8 +41,28 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public void Update(Point offset, double scale, Rect area)
         {
-            // TODO: 描画
-            throw new NotImplementedException();
+            if (ImageResource == null) return;
+            if (rectangle == null)
+            {
+                rectangle = new Rectangle();
+            }
+            AddToCanvas();
+            ImageResource.SetToRectangle(rectangle, "FallF", offset.X + MapObject.X, offset.Y + MapObject.Y, scale);
+        }
+
+        private void AddToCanvas()
+        {
+            if (registered || rectangle == null || canvas == null) return;
+            canvas.Children.Add(rectangle);
+            Panel.SetZIndex(rectangle, 0);
+            registered = true;
+        }
+
+        private void RemoveFromCanvas()
+        {
+            if (!registered || rectangle == null || canvas == null) return;
+            canvas.Children.Remove(rectangle);
+            registered = false;
         }
     }
 }

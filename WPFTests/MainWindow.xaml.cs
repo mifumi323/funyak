@@ -14,6 +14,10 @@ namespace WPFTests
             InitializeComponent();
             comboBox.ItemsSource = new object[] {
                 new {
+                    Name = "MainMapObject",
+                    Type = typeof(MainMapObjectViewTest),
+                },
+                new {
                     Name = "画像チップ表示",
                     Type = typeof(ImageResourceTest),
                 },

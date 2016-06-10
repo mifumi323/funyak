@@ -76,6 +76,8 @@ namespace MifuminSoft.funyak.Core.MapObject
             get { return State.GetBottom(Y); }
         }
 
+        public int Appearance { get; set; }
+
         public MainMapObject(double x, double y)
         {
             State = new FloatingState();

@@ -48,13 +48,13 @@ namespace MifuminSoft.funyak.View
         /// </summary>
         public Point FocusOffset { get; set; }
 
-        public MapView(Map map)
+        public MapView(Map map, MapObjectViewFactory mapObjectViewFactory = null)
         {
             Map = map;
             Map.MapObjectAdded += Map_MapObjectAdded;
             MapObjectViewCollection = new List<IMapObjectView>();
             MapObjectViewCollentionDirty = false;
-            MapObjectViewFactory = new MapObjectViewFactory();
+            MapObjectViewFactory = mapObjectViewFactory != null ? mapObjectViewFactory : new MapObjectViewFactory();
             foreach (var mapObject in Map.GetMapObjects())
             {
                 AddMapObject(mapObject);

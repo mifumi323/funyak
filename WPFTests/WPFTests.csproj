@@ -87,6 +87,9 @@
     <Compile Include="LineMapObjectViewTest.xaml.cs">
       <DependentUpon>LineMapObjectViewTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainMapObjectViewTest.xaml.cs">
+      <DependentUpon>MainMapObjectViewTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LineMapObjectViewTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainMapObjectViewTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
