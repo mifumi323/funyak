@@ -37,16 +37,9 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IBounds.cs" />
-    <Compile Include="Input\IInput.cs" />
-    <Compile Include="Input\InputBase.cs" />
-    <Compile Include="Input\NullInput.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="MapObject\IMapObject.cs" />
-    <Compile Include="MapObject\LineMapObject.cs" />
-    <Compile Include="MapObject\MainMapObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <Import Project="..\CoreCode\CoreCode.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
