@@ -53,6 +53,7 @@ namespace WPFTests
                         Stretch = Stretch.Fill,
                         Viewbox = new Rect(random.Next(5) * 0.2, 0, 0.2, 1),
                     };
+                    brush.Freeze();
                     rectMap[x, y] = new Rectangle()
                     {
                         Width = 32 * vs,
