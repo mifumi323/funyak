@@ -3,84 +3,78 @@ using MifuminSoft.funyak.Core.Input;
 
 namespace MifuminSoft.funyak.Core.MapObject
 {
+    public enum State
+    {
+        Standing,
+        Floating,
+    }
+
     public class MainMapObject : IDynamicMapObject
     {
-        protected abstract class IState
-        {
-            public abstract double GetLeft(double x);
-            public abstract double GetTop(double y);
-            public abstract double GetRight(double x);
-            public abstract double GetBottom(double y);
+        /// <summary>
+        /// 浮遊モードであるか否か
+        /// </summary>
+        public bool Floating { get; set; }
 
-            public virtual void UpdateSelf(MainMapObject main)
-            {
-            }
-        }
+        /// <summary>
+        /// 状態
+        /// </summary>
+        public State State { get; set; }
 
-        protected class FloatingState : IState
-        {
-            public override double GetLeft(double x)
-            {
-                return x - 14;
-            }
-
-            public override double GetTop(double y)
-            {
-                return y - 14;
-            }
-
-            public override double GetRight(double x)
-            {
-                return x + 14;
-            }
-
-            public override double GetBottom(double y)
-            {
-                return y + 14;
-            }
-        }
-
-        protected IState State { get; private set; }
-
+        /// <summary>
+        /// 入力
+        /// </summary>
         public IInput Input { get; set; }
 
-        public double X
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// X座標
+        /// </summary>
+        public double X { get; set; }
 
-        public double Y
-        {
-            get;
-            set;
-        }
+        /// <summary>
+        /// Y座標
+        /// </summary>
+        public double Y { get; set; }
 
         public double Left
         {
-            get { return State.GetLeft(X); }
+            get
+            {
+                return X - 14.0;
+            }
         }
 
         public double Top
         {
-            get { return State.GetTop(Y); }
+            get
+            {
+                return Y - 14.0;
+            }
         }
 
         public double Right
         {
-            get { return State.GetRight(X); }
+            get
+            {
+                return X + 14.0;
+            }
         }
 
         public double Bottom
         {
-            get { return State.GetBottom(Y); }
+            get
+            {
+                return Y + 14.0;
+            }
         }
 
         public int Appearance { get; set; }
 
         public MainMapObject(double x, double y)
         {
-            State = new FloatingState();
+            State = State.Floating;
+            Floating = true;
+
             Input = new NullInput();
             X = x;
             Y = y;
@@ -88,7 +82,7 @@ namespace MifuminSoft.funyak.Core.MapObject
 
         public void UpdateSelf()
         {
-            State.UpdateSelf(this);
+            // TODO: 動こうぜ
         }
 
         public Action CheckCollision()
