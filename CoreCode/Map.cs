@@ -14,15 +14,13 @@ namespace MifuminSoft.funyak.Core
         }
     }
 
-    public delegate void MapObjectAddedHandler(object sender, MapObjectAddedEventArgs e);
-
     public class Map
     {
         public double Width { get; protected set; }
         public double Height { get; protected set; }
         public string BackgroundColor { get; set; }
 
-        public event MapObjectAddedHandler MapObjectAdded;
+        public event EventHandler<MapObjectAddedEventArgs> MapObjectAdded;
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
@@ -40,7 +38,8 @@ namespace MifuminSoft.funyak.Core
         public void AddMapObject(IMapObject mapObject)
         {
             mapObjectCollection.Add(mapObject);
-            if (mapObject is IDynamicMapObject) dynamicMapObjectCollection.Add((IDynamicMapObject)mapObject);
+            var dynamicMapObject = mapObject as IDynamicMapObject;
+            if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
 
             MapObjectAdded?.Invoke(this, new MapObjectAddedEventArgs(mapObject));
         }
