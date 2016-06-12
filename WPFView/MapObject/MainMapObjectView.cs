@@ -45,7 +45,7 @@ namespace MifuminSoft.funyak.View.MapObject
                 rectangle = new Rectangle();
             }
             AddToCanvas();
-            ImageResource.SetToRectangle(rectangle, "FallF", args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale);
+            ImageResource.SetToRectangle(rectangle, "FallF", args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
         }
 
         private void AddToCanvas()

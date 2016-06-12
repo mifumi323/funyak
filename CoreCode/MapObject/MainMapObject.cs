@@ -17,6 +17,8 @@ namespace MifuminSoft.funyak.Core.MapObject
     /// </summary>
     public class MainMapObject : IDynamicMapObject
     {
+        #region 主人公の状態
+
         /// <summary>
         /// 浮遊モードであるか否か
         /// </summary>
@@ -26,6 +28,10 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// 状態
         /// </summary>
         public MainMapObjectState State { get; set; }
+
+        #endregion
+
+        #region 主人公の位置
 
         /// <summary>
         /// 入力
@@ -41,6 +47,46 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// Y座標
         /// </summary>
         public double Y { get; set; }
+
+        /// <summary>
+        /// 速度のX成分
+        /// </summary>
+        public double VelocityX { get; set; }
+
+        /// <summary>
+        /// 速度のY成分
+        /// </summary>
+        public double VelocityY { get; set; }
+
+        /// <summary>
+        /// 角度
+        /// </summary>
+        public double Angle { get; set; }
+
+        /// <summary>
+        /// 角速度
+        /// </summary>
+        public double AngularVelocity { get; set; }
+
+        /// <summary>
+        /// 前フレームのX座標
+        /// </summary>
+        public double PreviousX { get; set; }
+
+        /// <summary>
+        /// 前フレームのY座標
+        /// </summary>
+        public double PreviousY { get; set; }
+
+        /// <summary>
+        /// 前フレームの速度のX成分
+        /// </summary>
+        public double PreviousVelocityX { get; set; }
+
+        /// <summary>
+        /// 前フレームの速度のY成分
+        /// </summary>
+        public double PreviousVelocityY { get; set; }
 
         public double Left
         {
@@ -74,10 +120,36 @@ namespace MifuminSoft.funyak.Core.MapObject
             }
         }
 
+        #endregion
+
+        #region パラメータ
+
         /// <summary>
         /// 外見を示す値
         /// </summary>
         public int Appearance { get; set; }
+
+        /// <summary>
+        /// 浮遊加速度
+        /// </summary>
+        public double FloatingAccel { get; set; } = 0.16;
+
+        /// <summary>
+        /// 浮遊摩擦係数
+        /// </summary>
+        public double FloatingFriction { get; set; } = 0.0173;
+
+        /// <summary>
+        /// 回転加速度
+        /// </summary>
+        public double AngularAccel { get; set; } = 0.234375;
+
+        /// <summary>
+        /// 回転摩擦係数
+        /// </summary>
+        public double AngularFriction { get; set; } = 0.00667;
+
+        #endregion
 
         /// <summary>
         /// 場所を指定して主人公のマップオブジェクトを初期化します。
@@ -92,11 +164,56 @@ namespace MifuminSoft.funyak.Core.MapObject
             Input = new NullInput();
             X = x;
             Y = y;
+            VelocityX = 0;
+            VelocityY = 0;
         }
 
         public void UpdateSelf()
         {
-            // TODO: 動こうぜ
+            // 角度の処理
+            if (Floating)
+            {
+                var adx = X - PreviousX;
+                var ady = Y - PreviousY;
+                var addx = VelocityX - PreviousVelocityX;
+                var addy = VelocityY - PreviousVelocityY;
+                AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
+                Angle += AngularVelocity;
+                if (Angle > 180) Angle -= 360;
+                if (Angle < -180) Angle += 360;
+            }
+            else
+            {
+                AngularVelocity = 0;
+                Angle = 0;
+            }
+            PreviousX = X;
+            PreviousY = Y;
+            PreviousVelocityX = VelocityX;
+            PreviousVelocityY = VelocityY;
+
+            // 動作本体
+            if (Floating)
+            {
+                switch (State)
+                {
+                    case MainMapObjectState.Floating:
+                        double accelX = Input.X * FloatingAccel;
+                        double accelY = Input.Y * FloatingAccel;
+                        double frictionX = VelocityX * FloatingFriction;
+                        double frictionY = VelocityY * FloatingFriction;
+                        VelocityX += accelX - frictionX;
+                        VelocityY += accelY - frictionY;
+                        X += VelocityX;
+                        Y += VelocityY;
+                        break;
+                    default:
+                        throw new Exception("MainMapObjectのStateがおかしいぞ。");
+                }
+            }
+            else
+            {
+            }
         }
 
         public Action CheckCollision()

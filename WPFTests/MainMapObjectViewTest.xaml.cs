@@ -112,7 +112,11 @@ namespace WPFTests
             {
                 map.AddMapObject(line);
             }
-            main = new MainMapObject(250, 250);
+            input = new KeyInput();
+            main = new MainMapObject(250, 250)
+            {
+                Input = input,
+            };
             map.AddMapObject(main);
             mapView = new MapView(map, new MapObjectViewFactory()
             {
@@ -122,7 +126,6 @@ namespace WPFTests
                 Canvas = canvas,
                 FocusTo = main,
             };
-            input = new KeyInput();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -135,7 +138,7 @@ namespace WPFTests
             CompositionTarget.Rendering += CompositionTarget_Rendering;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog()
             {
@@ -169,15 +172,32 @@ namespace WPFTests
         {
             counter.Step();
             input.Update();
-            main.X += input.X;
-            main.Y += input.Y;
+            map.Update();
             mapView.Update(slider.Value);
-            var children = new StringBuilder();
+            var message = new StringBuilder();
+            message.AppendLine("拡大率：" + slider.Value);
+            message.AppendLine("FPS：" + counter.Fps);
+            message.AppendLine("X：" + main.X);
+            message.AppendLine("Y：" + main.Y);
+            message.AppendLine("Y：" + main.Y);
+            message.AppendLine("速度X：" + main.VelocityX);
+            message.AppendLine("速度Y：" + main.VelocityY);
+            message.AppendLine("角度：" + main.Angle);
+            message.AppendLine("角速度：" + main.AngularVelocity);
+            message.AppendLine("表示オブジェクト：");
             foreach (var child in canvas.Children)
             {
-                children.AppendLine(child.ToString());
+                message.AppendLine(child.ToString());
             }
-            textBox.Text = string.Format("拡大率：{0}\nFPS：{1:0.00}\n表示オブジェクト：\n{2}", slider.Value, counter.Fps, children);
+            textBox.Text = message.ToString();
+        }
+
+        private void buttonReset_Click(object sender, RoutedEventArgs e)
+        {
+            main.X = 250;
+            main.Y = 250;
+            main.VelocityX = 0;
+            main.VelocityY = 0;
         }
     }
 }
