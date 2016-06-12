@@ -3,12 +3,18 @@ using MifuminSoft.funyak.Core.Input;
 
 namespace MifuminSoft.funyak.Core.MapObject
 {
-    public enum State
+    /// <summary>
+    /// 主人公のマップオブジェクトの状態
+    /// </summary>
+    public enum MainMapObjectState
     {
         Standing,
         Floating,
     }
 
+    /// <summary>
+    /// 主人公のマップオブジェクト
+    /// </summary>
     public class MainMapObject : IDynamicMapObject
     {
         /// <summary>
@@ -19,7 +25,7 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// <summary>
         /// 状態
         /// </summary>
-        public State State { get; set; }
+        public MainMapObjectState State { get; set; }
 
         /// <summary>
         /// 入力
@@ -68,11 +74,19 @@ namespace MifuminSoft.funyak.Core.MapObject
             }
         }
 
+        /// <summary>
+        /// 外見を示す値
+        /// </summary>
         public int Appearance { get; set; }
 
+        /// <summary>
+        /// 場所を指定して主人公のマップオブジェクトを初期化します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
         public MainMapObject(double x, double y)
         {
-            State = State.Floating;
+            State = MainMapObjectState.Floating;
             Floating = true;
 
             Input = new NullInput();

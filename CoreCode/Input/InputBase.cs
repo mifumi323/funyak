@@ -2,6 +2,10 @@
 
 namespace MifuminSoft.funyak.Core.Input
 {
+    /// <summary>
+    /// ゲーム内の入力の共通化可能な機能を提供します。
+    /// UpdateImplを実装してください。
+    /// </summary>
     public abstract class InputBase : IInput
     {
         private double x, y;
@@ -50,8 +54,17 @@ namespace MifuminSoft.funyak.Core.Input
             UpdateImpl();
         }
 
+        /// <summary>
+        /// 実際の入力の更新処理を実装します。
+        /// SetDirectionメソッド及びSetKeyメソッドを呼び出して入力を更新してください。
+        /// </summary>
         protected abstract void UpdateImpl();
 
+        /// <summary>
+        /// 方向の入力状態を設定します。
+        /// </summary>
+        /// <param name="x">方向入力のX成分</param>
+        /// <param name="y">方向入力のY成分</param>
         protected void SetDirection(double x, double y)
         {
             if (x * x + y * y > 1)
@@ -68,6 +81,11 @@ namespace MifuminSoft.funyak.Core.Input
             this.y = y;
         }
 
+        /// <summary>
+        /// 方向入力以外の押しボタン式のキーの入力状態を設定します。
+        /// </summary>
+        /// <param name="key">方向以外のキーの種類</param>
+        /// <param name="pressed">現在のフレームにおいて押されているか否か</param>
         protected void SetKey(Keys key, bool pressed)
         {
             switch (key)

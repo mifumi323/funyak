@@ -4,8 +4,14 @@ using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.Core
 {
+    /// <summary>
+    /// マップにマップオブジェクトが追加されたときに通知するイベントの引数を格納します。
+    /// </summary>
     public class MapObjectAddedEventArgs : EventArgs
     {
+        /// <summary>
+        /// 追加されたマップオブジェクト
+        /// </summary>
         public IMapObject MapObject { get; private set; }
 
         public MapObjectAddedEventArgs(IMapObject mapObject)
@@ -14,17 +20,39 @@ namespace MifuminSoft.funyak.Core
         }
     }
 
+    /// <summary>
+    /// ゲームのマップ
+    /// </summary>
     public class Map
     {
+        /// <summary>
+        /// マップの幅(マップ空間内のピクセル単位)
+        /// </summary>
         public double Width { get; protected set; }
+
+        /// <summary>
+        /// マップの高さ(マップ空間内のピクセル単位)
+        /// </summary>
         public double Height { get; protected set; }
+
+        /// <summary>
+        /// 背景色(未指定または無効な色の場合透明)
+        /// </summary>
         public string BackgroundColor { get; set; }
 
+        /// <summary>
+        /// マップオブジェクトが追加されたときに発生します。
+        /// </summary>
         public event EventHandler<MapObjectAddedEventArgs> MapObjectAdded;
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
 
+        /// <summary>
+        /// ゲームのマップを初期化します。
+        /// </summary>
+        /// <param name="width">マップの幅(マップ空間内のピクセル単位)</param>
+        /// <param name="height">マップの高さ(マップ空間内のピクセル単位)</param>
         public Map(double width, double height)
         {
             Width = width;
@@ -35,6 +63,10 @@ namespace MifuminSoft.funyak.Core
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
         }
 
+        /// <summary>
+        /// マップオブジェクトを追加します。
+        /// </summary>
+        /// <param name="mapObject">追加するマップオブジェクト</param>
         public void AddMapObject(IMapObject mapObject)
         {
             mapObjectCollection.Add(mapObject);
@@ -44,11 +76,17 @@ namespace MifuminSoft.funyak.Core
             MapObjectAdded?.Invoke(this, new MapObjectAddedEventArgs(mapObject));
         }
 
+        /// <summary>
+        /// マップの状態を更新します。
+        /// </summary>
         public void Update()
         {
             UpdateMapObjects();
         }
 
+        /// <summary>
+        /// マップオブジェクトの状態を更新します。
+        /// </summary>
         private void UpdateMapObjects()
         {
             foreach (var mapObject in dynamicMapObjectCollection)
@@ -58,7 +96,7 @@ namespace MifuminSoft.funyak.Core
         }
 
         /// <summary>
-        /// 登録されているマップオブジェクトを取得
+        /// 登録されているマップオブジェクトを取得します。
         /// </summary>
         /// <param name="bounds">
         /// マップオブジェクトの存在範囲
