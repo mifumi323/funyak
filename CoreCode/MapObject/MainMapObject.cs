@@ -170,50 +170,69 @@ namespace MifuminSoft.funyak.Core.MapObject
 
         public void UpdateSelf()
         {
-            // 角度の処理
             if (Floating)
             {
-                var adx = X - PreviousX;
-                var ady = Y - PreviousY;
-                var addx = VelocityX - PreviousVelocityX;
-                var addy = VelocityY - PreviousVelocityY;
-                AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
-                Angle += AngularVelocity;
-                if (Angle > 180) Angle -= 360;
-                if (Angle < -180) Angle += 360;
+                UpdateSelfFloating();
             }
             else
             {
-                AngularVelocity = 0;
-                Angle = 0;
+                UpdateSelfNormal();
             }
+        }
+
+        /// <summary>
+        /// 浮遊状態の状態更新
+        /// </summary>
+        private void UpdateSelfFloating()
+        {
+            // 角度の処理
+            var adx = X - PreviousX;
+            var ady = Y - PreviousY;
+            var addx = VelocityX - PreviousVelocityX;
+            var addy = VelocityY - PreviousVelocityY;
+            AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
+            Angle += AngularVelocity;
+            if (Angle > 180) Angle -= 360;
+            if (Angle < -180) Angle += 360;
+
+            // 変化前の値を保持
             PreviousX = X;
             PreviousY = Y;
             PreviousVelocityX = VelocityX;
             PreviousVelocityY = VelocityY;
 
             // 動作本体
-            if (Floating)
+            switch (State)
             {
-                switch (State)
-                {
-                    case MainMapObjectState.Floating:
-                        double accelX = Input.X * FloatingAccel;
-                        double accelY = Input.Y * FloatingAccel;
-                        double frictionX = VelocityX * FloatingFriction;
-                        double frictionY = VelocityY * FloatingFriction;
-                        VelocityX += accelX - frictionX;
-                        VelocityY += accelY - frictionY;
-                        X += VelocityX;
-                        Y += VelocityY;
-                        break;
-                    default:
-                        throw new Exception("MainMapObjectのStateがおかしいぞ。");
-                }
+                case MainMapObjectState.Floating:
+                    double accelX = Input.X * FloatingAccel;
+                    double accelY = Input.Y * FloatingAccel;
+                    double frictionX = VelocityX * FloatingFriction;
+                    double frictionY = VelocityY * FloatingFriction;
+                    VelocityX += accelX - frictionX;
+                    VelocityY += accelY - frictionY;
+                    X += VelocityX;
+                    Y += VelocityY;
+                    break;
+                default:
+                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
-            else
-            {
-            }
+        }
+
+        /// <summary>
+        /// 通常状態の状態更新
+        /// </summary>
+        private void UpdateSelfNormal()
+        {
+            // 角度の処理
+            AngularVelocity = 0;
+            Angle = 0;
+
+            // 変化前の値を保持
+            PreviousX = X;
+            PreviousY = Y;
+            PreviousVelocityX = VelocityX;
+            PreviousVelocityY = VelocityY;
         }
 
         public Action CheckCollision()
