@@ -179,7 +179,6 @@ namespace WPFTests
             message.AppendLine("FPS：" + counter.Fps);
             message.AppendLine("X：" + main.X);
             message.AppendLine("Y：" + main.Y);
-            message.AppendLine("Y：" + main.Y);
             message.AppendLine("速度X：" + main.VelocityX);
             message.AppendLine("速度Y：" + main.VelocityY);
             message.AppendLine("角度：" + main.Angle);
