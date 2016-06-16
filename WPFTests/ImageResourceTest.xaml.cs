@@ -14,7 +14,7 @@ namespace WPFTests
     /// </summary>
     public partial class ImageResourceTest : Page
     {
-        BitmapImageResource resource;
+        ImageResource resource;
         Point point = new Point(0, 0);
 
         public ImageResourceTest()
@@ -26,71 +26,68 @@ namespace WPFTests
         {
             point.X = Math.Round(canvas.ActualWidth / 2);
             point.Y = Math.Round(canvas.ActualHeight / 2);
-            using (var stream = new FileStream(@"Assets\main.png", FileMode.Open))
+
+            resource = ImageResourceReader.Read(@"Assets\main.png");
+            resource.Chip = new Dictionary<string, ImageChipInfo>()
             {
-                resource = new BitmapImageResource(stream, null, true)
                 {
-                    Chip = new Dictionary<string, ImageChipInfo>()
+                    "StandF",
+                    new ImageChipInfo()
                     {
-                        {
-                            "StandF",
-                            new ImageChipInfo()
-                            {
-                                SourceLeft = 0,
-                                SourceTop = 0,
-                                SourceWidth = 40,
-                                SourceHeight = 40,
-                                SourceOriginX = 20,
-                                SourceOriginY = 20,
-                                DestinationWidth = 40,
-                                DestinationHeight = 40,
-                            }
-                        },
-                        {
-                            "JumpF",
-                            new ImageChipInfo()
-                            {
-                                SourceLeft = 360,
-                                SourceTop = 0,
-                                SourceWidth = 40,
-                                SourceHeight = 40,
-                                SourceOriginX = 380,
-                                SourceOriginY = 20,
-                                DestinationWidth = 40,
-                                DestinationHeight = 40,
-                            }
-                        },
-                        {
-                            "FallF",
-                            new ImageChipInfo()
-                            {
-                                SourceLeft = 0,
-                                SourceTop = 40,
-                                SourceWidth = 40,
-                                SourceHeight = 40,
-                                SourceOriginX = 20,
-                                SourceOriginY = 60,
-                                DestinationWidth = 40,
-                                DestinationHeight = 40,
-                            }
-                        },
-                        {
-                            "SitF",
-                            new ImageChipInfo()
-                            {
-                                SourceLeft = 40,
-                                SourceTop = 40,
-                                SourceWidth = 40,
-                                SourceHeight = 40,
-                                SourceOriginX = 60,
-                                SourceOriginY = 60,
-                                DestinationWidth = 40,
-                                DestinationHeight = 40,
-                            }
-                        },
-                    },
-                };
-            }
+                        SourceLeft = 0,
+                        SourceTop = 0,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 20,
+                        SourceOriginY = 20,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+                {
+                    "JumpF",
+                    new ImageChipInfo()
+                    {
+                        SourceLeft = 360,
+                        SourceTop = 0,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 380,
+                        SourceOriginY = 20,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+                {
+                    "FallF",
+                    new ImageChipInfo()
+                    {
+                        SourceLeft = 0,
+                        SourceTop = 40,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 20,
+                        SourceOriginY = 60,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+                {
+                    "SitF",
+                    new ImageChipInfo()
+                    {
+                        SourceLeft = 40,
+                        SourceTop = 40,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 60,
+                        SourceOriginY = 60,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+            };
+
             listBox.ItemsSource = resource.Chip;
             listBox.SelectedItem = resource.Chip.First();
         }
