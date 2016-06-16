@@ -64,6 +64,7 @@
     <Compile Include="Resource\BitmapImageResource.cs" />
     <Compile Include="Resource\ImageChipInfo.cs" />
     <Compile Include="Resource\ImageResource.cs" />
+    <Compile Include="Resource\ImageResourceFileInfo.cs" />
     <Compile Include="Resource\ImageResourceReader.cs" />
     <Compile Include="Resource\ResourceManager.cs" />
   </ItemGroup>
