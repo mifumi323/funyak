@@ -15,7 +15,7 @@ namespace MifuminSoft.funyak.View.Resource
         BitmapSource bitmapSource = null;
         Dictionary<string, Brush> knownBrush = new Dictionary<string, Brush>();
 
-        public BitmapImageResource(Stream bitmapStream, Stream infoStream, bool isUserResource) : base(isUserResource)
+        public BitmapImageResource(Stream bitmapStream, Stream infoStream)
         {
             using (var mi = new MagickImage(bitmapStream))
             {
@@ -23,11 +23,6 @@ namespace MifuminSoft.funyak.View.Resource
                 bitmapSource.Freeze();
             }
             // TODO: infoStreamから画像チップ情報とか読み込めたらいいな
-        }
-
-        public override void Dispose()
-        {
-            throw new NotImplementedException();
         }
 
         public override Brush GetBrush(string key)
