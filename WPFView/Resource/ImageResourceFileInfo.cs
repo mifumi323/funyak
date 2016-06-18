@@ -10,5 +10,8 @@ namespace MifuminSoft.funyak.View.Resource
 
         [JsonProperty("chip")]
         public Dictionary<string, ImageChipInfo> Chip { get; set; }
+
+        [JsonProperty("data")]
+        public Dictionary<string, ImageChipInfo> Metadata { get; set; }
     }
 }

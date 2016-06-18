@@ -7,6 +7,7 @@ namespace MifuminSoft.funyak.View.Resource
     public abstract class ImageResource
     {
         public Dictionary<string, ImageChipInfo> Chip { get; set; }
+        public Dictionary<string, ImageChipInfo> Metadata { get; set; }
 
         public void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale)
         {
