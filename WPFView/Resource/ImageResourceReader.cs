@@ -18,8 +18,7 @@ namespace MifuminSoft.funyak.View.Resource
                 var jsonfile = filename + ".json";
                 var jsondata = File.ReadAllText(jsonfile);
                 var info = JsonConvert.DeserializeObject<ImageResourceFileInfo>(jsondata);
-                resource.Chip = info.Chip;
-                resource.Metadata = info.Metadata;
+                info.SetToImageResource(resource);
             }
             catch (Exception e) { }
             return resource;

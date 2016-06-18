@@ -13,5 +13,19 @@ namespace MifuminSoft.funyak.View.Resource
 
         [JsonProperty("data")]
         public Dictionary<string, ImageChipInfo> Metadata { get; set; }
+
+        public void SetToImageResource(ImageResource imageResource)
+        {
+            imageResource.Chip = Chip;
+            imageResource.Metadata = Metadata;
+        }
+
+        public static ImageResourceFileInfo FromImageResource(ImageResource imageResource)
+        {
+            var irfi = new ImageResourceFileInfo();
+            irfi.Chip = imageResource.Chip;
+            irfi.Metadata = imageResource.Metadata;
+            return irfi;
+        }
     }
 }
