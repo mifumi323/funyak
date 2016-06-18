@@ -11,7 +11,7 @@ namespace MifuminSoft.funyak.View.Resource
             ImageResource resource = null;
             using (var fileStream = File.OpenRead(filename))
             {
-                resource = new BitmapImageResource(fileStream, null);
+                resource = new BitmapImageResource(fileStream);
             }
             try
             {
