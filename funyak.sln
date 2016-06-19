@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfView", "WPFView\WpfView.
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CoreCode", "CoreCode\CoreCode.shproj", "{2EBECBE0-70CF-4ED6-B35F-4759D4C1801C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfUI", "WpfUI\WpfUI.csproj", "{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CoreCode\CoreCode.projitems*{2ebecbe0-70cf-4ed6-b35f-4759d4c1801c}*SharedItemsImports = 13
@@ -39,6 +41,10 @@ Global
 		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B855F852-EE65-4DA5-821F-26D5E69FE1AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
