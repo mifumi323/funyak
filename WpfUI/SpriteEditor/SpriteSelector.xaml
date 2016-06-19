@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Canvas x:Name="canvas" ClipToBounds="True" Width="{Binding Width, ElementName=background}" Height="{Binding Height, ElementName=background}">
+        <Canvas x:Name="canvas" ClipToBounds="True" Width="{Binding Width, ElementName=background}" Height="{Binding Height, ElementName=background}" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Rectangle x:Name="background"/>
         </Canvas>
     </ScrollViewer>

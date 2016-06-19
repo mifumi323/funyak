@@ -45,6 +45,34 @@ namespace WPFTests
                     }
                 },
                 {
+                    "StandL",
+                    new SpriteChipInfo()
+                    {
+                        SourceLeft = 0,
+                        SourceTop = 120,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 20,
+                        SourceOriginY = 140,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+                {
+                    "StandR",
+                    new SpriteChipInfo()
+                    {
+                        SourceLeft = 0,
+                        SourceTop = 240,
+                        SourceWidth = 40,
+                        SourceHeight = 40,
+                        SourceOriginX = 20,
+                        SourceOriginY = 260,
+                        DestinationWidth = 40,
+                        DestinationHeight = 40,
+                    }
+                },
+                {
                     "JumpF",
                     new SpriteChipInfo()
                     {
