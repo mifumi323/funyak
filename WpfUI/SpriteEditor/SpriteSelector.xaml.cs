@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.View.Resource;
@@ -72,9 +73,12 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
                     var rectangle = new Rectangle()
                     {
                         Stroke = new SolidColorBrush(chip == SelectedChip ? SelectedChipColor : ChipColor),
+                        Fill = new SolidColorBrush(Colors.Transparent),
                         Width = chip.SourceWidth,
                         Height = chip.SourceHeight,
+                        Tag = chip,
                     };
+                    rectangle.MouseDown += Chip_MouseDown;
                     canvas.Children.Add(rectangle);
                     Canvas.SetLeft(rectangle, chip.SourceLeft);
                     Canvas.SetTop(rectangle, chip.SourceTop);
@@ -85,6 +89,18 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             {
                 background.Fill = null;
             }
+        }
+
+        private void Chip_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SelectedChip = (sender as Rectangle)?.Tag as SpriteChipInfo;
+            e.Handled = true;
+        }
+
+        private void background_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SelectedChip = null;
+            e.Handled = true;
         }
 
         private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
