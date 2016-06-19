@@ -7,9 +7,9 @@
       xmlns:SpriteEditor="clr-namespace:MifuminSoft.funyak.UI.SpriteEditor;assembly=funyak.UI" x:Class="WPFTests.SpriteEditorTest"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="SpriteEditorTest">
+      Title="SpriteEditorTest" Loaded="Page_Loaded">
 
     <Grid>
-        <SpriteEditor:SpriteSelector/>
+        <SpriteEditor:SpriteSelector x:Name="spriteSelector"/>
     </Grid>
 </Page>

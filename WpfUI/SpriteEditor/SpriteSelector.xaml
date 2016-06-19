@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:MifuminSoft.funyak.UI.SpriteEditor"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Canvas x:Name="canvas" ClipToBounds="True">
-    </Canvas>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Canvas x:Name="canvas" ClipToBounds="True" Width="{Binding Width, ElementName=background}" Height="{Binding Height, ElementName=background}">
+            <Rectangle x:Name="background"/>
+        </Canvas>
+    </ScrollViewer>
 </UserControl>
