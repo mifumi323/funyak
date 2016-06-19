@@ -28,18 +28,18 @@ namespace WPFTests
         LineMapObject[] lines;
         MainMapObject main;
         IInput input;
-        ImageResource resource;
+        Sprite resource;
 
         public MainMapObjectViewTest()
         {
             InitializeComponent();
 
-            resource = ImageResourceReader.Read(@"Assets\main.png");
-            resource.Chip = new Dictionary<string, ImageChipInfo>()
+            resource = SpriteReader.Read(@"Assets\main.png");
+            resource.Chip = new Dictionary<string, SpriteChipInfo>()
             {
                 {
                     "StandF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 0,
                         SourceTop = 0,
@@ -53,7 +53,7 @@ namespace WPFTests
                 },
                 {
                     "JumpF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 360,
                         SourceTop = 0,
@@ -67,7 +67,7 @@ namespace WPFTests
                 },
                 {
                     "FallF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 0,
                         SourceTop = 40,
@@ -81,7 +81,7 @@ namespace WPFTests
                 },
                 {
                     "SitF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 40,
                         SourceTop = 40,

@@ -61,11 +61,11 @@
     <Compile Include="MapObject\MapObjectViewUpdateArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resource\AudioResource.cs" />
-    <Compile Include="Resource\BitmapImageResource.cs" />
-    <Compile Include="Resource\ImageChipInfo.cs" />
-    <Compile Include="Resource\ImageResource.cs" />
-    <Compile Include="Resource\ImageResourceFileInfo.cs" />
-    <Compile Include="Resource\ImageResourceReader.cs" />
+    <Compile Include="Resource\BitmapSprite.cs" />
+    <Compile Include="Resource\SpriteChipInfo.cs" />
+    <Compile Include="Resource\Sprite.cs" />
+    <Compile Include="Resource\SpriteFileInfo.cs" />
+    <Compile Include="Resource\SpriteReader.cs" />
     <Compile Include="Resource\ResourceManager.cs" />
   </ItemGroup>
   <ItemGroup>

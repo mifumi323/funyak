@@ -6,7 +6,7 @@ namespace MifuminSoft.funyak.View.MapObject
 {
     public class MapObjectViewFactory
     {
-        public Func<int, ImageResource> MainMapObjectResourceSelector { get; set; }
+        public Func<int, Sprite> MainMapObjectResourceSelector { get; set; }
 
         public IMapObjectView Create(IMapObject mapObject)
         {

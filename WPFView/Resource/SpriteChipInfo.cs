@@ -5,7 +5,7 @@ namespace MifuminSoft.funyak.View.Resource
     /// <summary>
     /// 画像チップ情報
     /// </summary>
-    public class ImageChipInfo
+    public class SpriteChipInfo
     {
         /// <summary>
         /// 元画像から切り抜く範囲の左端のX座標(画像全体の左上を原点とする)

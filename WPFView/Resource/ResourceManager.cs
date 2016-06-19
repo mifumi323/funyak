@@ -5,7 +5,7 @@ namespace MifuminSoft.funyak.View.Resource
 {
     public class ResourceManager : IDisposable
     {
-        public Dictionary<string, ImageResource> Images { get; protected set; } = new Dictionary<string, ImageResource>();
+        public Dictionary<string, Sprite> Images { get; protected set; } = new Dictionary<string, Sprite>();
         public Dictionary<string, AudioResource> Audios { get; protected set; } = new Dictionary<string, AudioResource>();
 
         #region IDisposable Support

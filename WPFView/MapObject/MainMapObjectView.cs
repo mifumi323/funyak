@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.View.MapObject
     class MainMapObjectView : IMapObjectView
     {
         public MainMapObject MapObject { get; protected set; }
-        public ImageResource ImageResource { get; set; }
+        public Sprite ImageResource { get; set; }
 
         private Canvas canvas = null;
         private Rectangle rectangle = null;

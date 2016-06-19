@@ -14,7 +14,7 @@ namespace WPFTests
     /// </summary>
     public partial class ImageResourceTest : Page
     {
-        ImageResource resource;
+        Sprite resource;
         Point point = new Point(0, 0);
 
         public ImageResourceTest()
@@ -27,12 +27,12 @@ namespace WPFTests
             point.X = Math.Round(canvas.ActualWidth / 2);
             point.Y = Math.Round(canvas.ActualHeight / 2);
 
-            resource = ImageResourceReader.Read(@"Assets\main.png");
-            resource.Chip = new Dictionary<string, ImageChipInfo>()
+            resource = SpriteReader.Read(@"Assets\main.png");
+            resource.Chip = new Dictionary<string, SpriteChipInfo>()
             {
                 {
                     "StandF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 0,
                         SourceTop = 0,
@@ -46,7 +46,7 @@ namespace WPFTests
                 },
                 {
                     "JumpF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 360,
                         SourceTop = 0,
@@ -60,7 +60,7 @@ namespace WPFTests
                 },
                 {
                     "FallF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 0,
                         SourceTop = 40,
@@ -74,7 +74,7 @@ namespace WPFTests
                 },
                 {
                     "SitF",
-                    new ImageChipInfo()
+                    new SpriteChipInfo()
                     {
                         SourceLeft = 40,
                         SourceTop = 40,
@@ -95,7 +95,7 @@ namespace WPFTests
         private void Update()
         {
             if (listBox.SelectedItem == null) return;
-            var selected = (KeyValuePair<string, ImageChipInfo>)listBox.SelectedItem;
+            var selected = (KeyValuePair<string, SpriteChipInfo>)listBox.SelectedItem;
             var key = selected.Key;
             var scale = sliderScale.Value;
             var angle = sliderRotate.Value;

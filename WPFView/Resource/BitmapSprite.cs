@@ -10,12 +10,12 @@ using ImageMagick;
 
 namespace MifuminSoft.funyak.View.Resource
 {
-    public class BitmapImageResource : ImageResource
+    public class BitmapSprite : Sprite
     {
         BitmapSource bitmapSource = null;
         Dictionary<string, Brush> knownBrush = new Dictionary<string, Brush>();
 
-        public BitmapImageResource(Stream bitmapStream)
+        public BitmapSprite(Stream bitmapStream)
         {
             using (var mi = new MagickImage(bitmapStream))
             {

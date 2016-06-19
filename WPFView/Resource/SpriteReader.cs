@@ -4,20 +4,20 @@ using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.View.Resource
 {
-    public static class ImageResourceReader
+    public static class SpriteReader
     {
-        public static ImageResource Read(string filename)
+        public static Sprite Read(string filename)
         {
-            ImageResource resource = null;
+            Sprite resource = null;
             using (var fileStream = File.OpenRead(filename))
             {
-                resource = new BitmapImageResource(fileStream);
+                resource = new BitmapSprite(fileStream);
             }
             try
             {
                 var jsonfile = filename + ".json";
                 var jsondata = File.ReadAllText(jsonfile);
-                var info = JsonConvert.DeserializeObject<ImageResourceFileInfo>(jsondata);
+                var info = JsonConvert.DeserializeObject<SpriteFileInfo>(jsondata);
                 info.SetToImageResource(resource);
             }
             catch (Exception e) { }
