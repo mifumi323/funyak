@@ -8,6 +8,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTests", "WPFTests\WpfTests.csproj", "{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515} = {26DF7145-C6C1-41B1-A8E7-8AE8303AC515}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfView", "WPFView\WpfView.csproj", "{B855F852-EE65-4DA5-821F-26D5E69FE1AA}"
 EndProject
