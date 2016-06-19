@@ -93,6 +93,9 @@
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SpriteEditorTest.xaml.cs">
+      <DependentUpon>SpriteEditorTest.xaml</DependentUpon>
+    </Compile>
     <Page Include="ImageMagickTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -127,6 +130,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RectangleTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SpriteEditorTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

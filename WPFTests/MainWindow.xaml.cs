@@ -14,6 +14,10 @@ namespace WPFTests
             InitializeComponent();
             comboBox.ItemsSource = new object[] {
                 new {
+                    Name = "SripteEditor",
+                    Type = typeof(SpriteEditorTest),
+                },
+                new {
                     Name = "MainMapObject",
                     Type = typeof(MainMapObjectViewTest),
                 },
