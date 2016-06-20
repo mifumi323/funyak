@@ -16,7 +16,12 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            spriteSelector.Source = SpriteReader.Read(@"Assets\main.png");
+            chipSelector.Source = SpriteReader.Read(@"Assets\main.png");
+        }
+
+        private void textBoxSource_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            chipSelector.Refresh();
         }
     }
 }
