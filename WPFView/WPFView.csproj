@@ -67,6 +67,7 @@
     <Compile Include="Resource\SpriteFileInfo.cs" />
     <Compile Include="Resource\SpriteReader.cs" />
     <Compile Include="Resource\ResourceManager.cs" />
+    <Compile Include="Resource\SpriteWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj">

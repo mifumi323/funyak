@@ -23,5 +23,10 @@ namespace WPFTests
         {
             chipSelector.Refresh();
         }
+
+        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        {
+            SpriteWriter.WriteFileInfo(chipSelector.Source, @"Assets\main.png");
+        }
     }
 }

@@ -45,5 +45,6 @@
         <TextBox x:Name="textBoxDestinationWidth" Grid.Column="2" Grid.Row="7" Text="{Binding SelectedItem.Value.DestinationWidth, ElementName=chipSelector, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Right"/>
         <Label x:Name="labelDestinationHeight" Content="DestinationHeight" Grid.Column="1" Grid.Row="8"/>
         <TextBox x:Name="textBoxDestinationHeight" Grid.Column="2" Grid.Row="8" Text="{Binding SelectedItem.Value.DestinationHeight, ElementName=chipSelector, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Right"/>
+        <Button x:Name="buttonSave" Content="Save" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" Click="buttonSave_Click"/>
     </Grid>
 </Page>
