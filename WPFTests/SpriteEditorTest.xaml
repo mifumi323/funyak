@@ -10,6 +10,11 @@
       Title="SpriteEditorTest" Loaded="Page_Loaded">
 
     <Grid>
-        <SpriteEditor:ChipSelector x:Name="spriteSelector"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding Source.Chip, ElementName=spriteSelector, Mode=TwoWay}" DisplayMemberPath="Key" SelectedItem="{Binding SelectedItem, ElementName=spriteSelector}"/>
+        <SpriteEditor:ChipSelector x:Name="spriteSelector" Grid.Row="1"/>
     </Grid>
 </Page>
