@@ -27,5 +27,10 @@ namespace MifuminSoft.funyak.View.Resource
             irfi.Metadata = imageResource.Metadata;
             return irfi;
         }
+
+        public static string ToSpriteInfoFileName(string imageFilename)
+        {
+            return imageFilename + ".json";
+        }
     }
 }

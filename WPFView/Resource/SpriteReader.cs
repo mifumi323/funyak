@@ -15,7 +15,7 @@ namespace MifuminSoft.funyak.View.Resource
             }
             try
             {
-                var jsonfile = filename + ".json";
+                var jsonfile = SpriteFileInfo.ToSpriteInfoFileName(filename);
                 var jsondata = File.ReadAllText(jsonfile);
                 var info = JsonConvert.DeserializeObject<SpriteFileInfo>(jsondata);
                 info.SetToImageResource(resource);
