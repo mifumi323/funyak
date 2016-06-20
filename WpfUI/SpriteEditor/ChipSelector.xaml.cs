@@ -10,7 +10,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
     /// <summary>
     /// Spriteを編集のため表示・選択します
     /// </summary>
-    public partial class SpriteSelector : UserControl
+    public partial class ChipSelector : UserControl
     {
         public Sprite Source
         {
@@ -20,7 +20,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register(nameof(Source), typeof(Sprite), typeof(SpriteSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
+            DependencyProperty.Register(nameof(Source), typeof(Sprite), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
 
 
         public SpriteChipInfo SelectedChip
@@ -31,7 +31,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedChipProperty =
-            DependencyProperty.Register(nameof(SelectedChip), typeof(SpriteChipInfo), typeof(SpriteSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
+            DependencyProperty.Register(nameof(SelectedChip), typeof(SpriteChipInfo), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
 
 
         public Color ChipColor
@@ -42,7 +42,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ChipColorProperty =
-            DependencyProperty.Register(nameof(ChipColor), typeof(Color), typeof(SpriteSelector), new PropertyMetadata(Colors.Black, new PropertyChangedCallback(OnSourceChanged)));
+            DependencyProperty.Register(nameof(ChipColor), typeof(Color), typeof(ChipSelector), new PropertyMetadata(Colors.Black, new PropertyChangedCallback(OnSourceChanged)));
 
 
         public Color SelectedChipColor
@@ -53,10 +53,10 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedChipColorProperty =
-            DependencyProperty.Register(nameof(SelectedChipColor), typeof(Color), typeof(SpriteSelector), new PropertyMetadata(Colors.Red, new PropertyChangedCallback(OnSourceChanged)));
+            DependencyProperty.Register(nameof(SelectedChipColor), typeof(Color), typeof(ChipSelector), new PropertyMetadata(Colors.Red, new PropertyChangedCallback(OnSourceChanged)));
 
 
-        public SpriteSelector()
+        public ChipSelector()
         {
             InitializeComponent();
         }
@@ -105,7 +105,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            (d as SpriteSelector)?.Refresh();
+            (d as ChipSelector)?.Refresh();
         }
     }
 }

@@ -10,6 +10,6 @@
       Title="SpriteEditorTest" Loaded="Page_Loaded">
 
     <Grid>
-        <SpriteEditor:SpriteSelector x:Name="spriteSelector"/>
+        <SpriteEditor:ChipSelector x:Name="spriteSelector"/>
     </Grid>
 </Page>
