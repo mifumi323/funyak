@@ -77,16 +77,23 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         {
             canvas.Children.RemoveRange(1, canvas.Children.Count - 1);
             var source = Source;
+            var selectedKey = SelectedKey;
+            var chipStroke = new SolidColorBrush(ChipColor);
+            var selectedChipStroke = new SolidColorBrush(SelectedChipColor);
+            var chipFill = new SolidColorBrush(Colors.Transparent);
+            var selectedChipFill = new SolidColorBrush(Colors.Transparent);
             if (source != null)
             {
                 source.SetToRectangle(background, "", 0, 0, 1.0);
                 foreach (var item in source.Chip)
                 {
+                    var key = item.Key;
                     var chip = item.Value;
+                    var selected = key == selectedKey;
                     var rectangle = new Rectangle()
                     {
-                        Stroke = new SolidColorBrush(chip == SelectedChip ? SelectedChipColor : ChipColor),
-                        Fill = new SolidColorBrush(Colors.Transparent),
+                        Stroke = selected ? selectedChipStroke : chipStroke,
+                        Fill = selected ? selectedChipFill : chipFill,
                         Width = chip.SourceWidth,
                         Height = chip.SourceHeight,
                         Tag = (KeyValuePair<string, SpriteChipInfo>?)item,
@@ -95,7 +102,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
                     canvas.Children.Add(rectangle);
                     Canvas.SetLeft(rectangle, chip.SourceLeft);
                     Canvas.SetTop(rectangle, chip.SourceTop);
-                    Panel.SetZIndex(rectangle, 1);
+                    Panel.SetZIndex(rectangle, selected ? 2 : 1);
                 }
             }
             else
