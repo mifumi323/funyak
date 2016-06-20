@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -23,15 +24,26 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             DependencyProperty.Register(nameof(Source), typeof(Sprite), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
 
 
-        public SpriteChipInfo SelectedChip
+        public KeyValuePair<string, SpriteChipInfo>? SelectedItem
         {
-            get { return (SpriteChipInfo)GetValue(SelectedChipProperty); }
-            set { SetValue(SelectedChipProperty, value); }
+            get { return (KeyValuePair<string, SpriteChipInfo>?)GetValue(SelectedItemProperty); }
+            set { SetValue(SelectedItemProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty SelectedChipProperty =
-            DependencyProperty.Register(nameof(SelectedChip), typeof(SpriteChipInfo), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
+        public static readonly DependencyProperty SelectedItemProperty =
+            DependencyProperty.Register(nameof(SelectedItem), typeof(KeyValuePair<string, SpriteChipInfo>?), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
+
+
+        public SpriteChipInfo SelectedChip
+        {
+            get { return SelectedItem?.Value; }
+        }
+
+        public string SelectedKey
+        {
+            get { return SelectedItem?.Key; }
+        }
 
 
         public Color ChipColor
@@ -68,15 +80,16 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             if (source != null)
             {
                 source.SetToRectangle(background, "", 0, 0, 1.0);
-                foreach (var chip in source.Chip.Values)
+                foreach (var item in source.Chip)
                 {
+                    var chip = item.Value;
                     var rectangle = new Rectangle()
                     {
                         Stroke = new SolidColorBrush(chip == SelectedChip ? SelectedChipColor : ChipColor),
                         Fill = new SolidColorBrush(Colors.Transparent),
                         Width = chip.SourceWidth,
                         Height = chip.SourceHeight,
-                        Tag = chip,
+                        Tag = (KeyValuePair<string, SpriteChipInfo>?)item,
                     };
                     rectangle.MouseDown += Chip_MouseDown;
                     canvas.Children.Add(rectangle);
@@ -93,13 +106,13 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         private void Chip_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SelectedChip = (sender as Rectangle)?.Tag as SpriteChipInfo;
+            SelectedItem = (sender as Rectangle)?.Tag as KeyValuePair<string, SpriteChipInfo>?;
             e.Handled = true;
         }
 
         private void background_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            SelectedChip = null;
+            SelectedItem = null;
             e.Handled = true;
         }
 
