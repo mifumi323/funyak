@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,7 +37,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             set { SetValue(SelectedItemProperty, value); }
         }
         public static readonly DependencyProperty SelectedItemProperty =
-            DependencyProperty.Register(nameof(SelectedItem), typeof(KeyValuePair<string, SpriteChipInfo>?), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
+            DependencyProperty.Register(nameof(SelectedItem), typeof(KeyValuePair<string, SpriteChipInfo>?), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectionChanged)));
 
         /// <summary>
         /// 選択中のチップを取得します
@@ -79,6 +80,11 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         }
         public static readonly DependencyProperty SelectedChipColorProperty =
             DependencyProperty.Register(nameof(SelectedChipColor), typeof(Color), typeof(ChipSelector), new PropertyMetadata(Colors.Red, new PropertyChangedCallback(OnSourceChanged)));
+
+        /// <summary>
+        /// 選択中の項目が別の項目に変化したときに発生します
+        /// </summary>
+        public event EventHandler SelectionChanged;
 
         public ChipSelector()
         {
@@ -141,6 +147,14 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             (d as ChipSelector)?.Refresh();
+        }
+
+        private static void OnSelectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var chipSelector = d as ChipSelector;
+            if (chipSelector == null) return;
+            chipSelector.Refresh();
+            chipSelector.SelectionChanged?.Invoke(chipSelector, EventArgs.Empty);
         }
     }
 }
