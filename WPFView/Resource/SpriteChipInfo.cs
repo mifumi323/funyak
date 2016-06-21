@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.ComponentModel;
+using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.View.Resource
 {
@@ -8,45 +9,110 @@ namespace MifuminSoft.funyak.View.Resource
     public class SpriteChipInfo
     {
         /// <summary>
-        /// 元画像から切り抜く範囲の左端のX座標(画像全体の左上を原点とする)
+        /// 元画像から切り抜く範囲の左端のX座標を取得または設定します。
+        /// 画像全体の左上を原点とします。
         /// </summary>
         [JsonProperty("sl")]
+        [DefaultValue(0.0)]
         public double SourceLeft { get; set; }
         /// <summary>
-        /// 元画像から切り抜く範囲の上端のY座標(画像全体の左上を原点とする)
+        /// 元画像から切り抜く範囲の上端のY座標を取得または設定します。
+        /// 画像全体の左上を原点とします。
         /// </summary>
         [JsonProperty("st")]
+        [DefaultValue(0.0)]
         public double SourceTop { get; set; }
         /// <summary>
-        /// 元画像から切り抜く範囲の幅
+        /// 元画像から切り抜く範囲の幅を取得または設定します。
         /// </summary>
         [JsonProperty("sw")]
+        [DefaultValue(0.0)]
         public double SourceWidth { get; set; }
         /// <summary>
-        /// 元画像から切り抜く範囲の高さ
+        /// 元画像から切り抜く範囲の高さを取得または設定します。
         /// </summary>
         [JsonProperty("sh")]
+        [DefaultValue(0.0)]
         public double SourceHeight { get; set; }
-        /// <summary>
-        /// 表示の中心となる点の元画像におけるX座標(画像全体の左上を原点とする)
-        /// </summary>
-        [JsonProperty("ox")]
-        public double SourceOriginX { get; set; }
-        /// <summary>
-        /// 表示の中心となる点の元画像におけるY座標(画像全体の左上を原点とする)
-        /// </summary>
-        [JsonProperty("oy")]
-        public double SourceOriginY { get; set; }
 
         /// <summary>
-        /// 表示先における画像チップの幅
+        /// 表示の中心となる点の元画像におけるX座標を取得または設定します。
+        /// 画像全体の左上を原点とします。
+        /// NaNの場合、切り抜き範囲の中央が使用されます。
+        /// </summary>
+        [JsonProperty("ox")]
+        [DefaultValue(double.NaN)]
+        public double SourceOriginX { get; set; } = double.NaN;
+        /// <summary>
+        /// 表示の中心となる点の元画像におけるY座標を取得または設定します。
+        /// 画像全体の左上を原点とします。
+        /// NaNの場合、切り抜き範囲の中央が使用されます。
+        /// </summary>
+        [JsonProperty("oy")]
+        [DefaultValue(double.NaN)]
+        public double SourceOriginY { get; set; } = double.NaN;
+
+        /// <summary>
+        /// 表示先における画像チップの幅を取得または設定します。
+        /// NaNの場合、切り抜き範囲の幅が使用されます。
         /// </summary>
         [JsonProperty("dw")]
-        public double DestinationWidth { get; set; }
+        [DefaultValue(double.NaN)]
+        public double DestinationWidth { get; set; } = double.NaN;
         /// <summary>
-        /// 表示先における画像チップの高さ
+        /// 表示先における画像チップの高さを取得または設定します。
+        /// NaNの場合、切り抜き範囲の高さが使用されます。
         /// </summary>
         [JsonProperty("dh")]
-        public double DestinationHeight { get; set; }
+        [DefaultValue(double.NaN)]
+        public double DestinationHeight { get; set; } = double.NaN;
+
+        /// <summary>
+        /// 表示の中心となる点の元画像におけるX座標の実際の値を取得します。
+        /// 画像全体の左上を原点とします。
+        /// </summary>
+        [JsonIgnore]
+        public double ActualSourceOriginX
+        {
+            get
+            {
+                return double.IsNaN(SourceOriginX) ? (SourceLeft + SourceWidth / 2) : SourceOriginX;
+            }
+        }
+        /// <summary>
+        /// 表示の中心となる点の元画像におけるY座標の実際の値を取得します。
+        /// 画像全体の左上を原点とします。
+        /// </summary>
+        [JsonIgnore]
+        public double ActualSourceOriginY
+        {
+            get
+            {
+                return double.IsNaN(SourceOriginY) ? (SourceTop + SourceHeight / 2) : SourceOriginY;
+            }
+        }
+
+        /// <summary>
+        /// 表示先における画像チップの幅の実際の値を取得します。
+        /// </summary>
+        [JsonIgnore]
+        public double ActualDestinationWidth
+        {
+            get
+            {
+                return double.IsNaN(DestinationWidth) ? SourceWidth : DestinationWidth;
+            }
+        }
+        /// <summary>
+        /// 表示先における画像チップの高さの実際の値を取得します。
+        /// </summary>
+        [JsonIgnore]
+        public double ActualDestinationHeight
+        {
+            get
+            {
+                return double.IsNaN(DestinationHeight) ? SourceHeight : DestinationHeight;
+            }
+        }
     }
 }

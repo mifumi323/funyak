@@ -9,7 +9,10 @@ namespace MifuminSoft.funyak.View.Resource
         {
             var jsonfile = SpriteFileInfo.ToSpriteInfoFileName(imageFilename);
             var info = SpriteFileInfo.FromImageResource(sprite);
-            var jsondata = JsonConvert.SerializeObject(info);
+            var jsondata = JsonConvert.SerializeObject(info, new JsonSerializerSettings()
+            {
+                DefaultValueHandling = DefaultValueHandling.Ignore,
+            });
             File.WriteAllText(jsonfile, jsondata);
         }
     }

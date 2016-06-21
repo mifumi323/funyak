@@ -63,15 +63,19 @@ namespace MifuminSoft.funyak.View.Resource
             {
                 throw new ArgumentOutOfRangeException(nameof(key));
             }
+            var sourceOriginX = info.ActualSourceOriginX;
+            var sourceOriginY = info.ActualSourceOriginY;
+            var destinationWidth = info.ActualDestinationWidth;
+            var destinationHeight = info.ActualDestinationHeight;
             rectangle.Fill = GetBrush(key);
-            rectangle.Width = info.DestinationWidth * scale;
-            rectangle.Height = info.DestinationHeight * scale;
+            rectangle.Width = destinationWidth * scale;
+            rectangle.Height = destinationHeight * scale;
             rectangle.RenderTransformOrigin = new Point(
-                (info.SourceOriginX - info.SourceLeft) / info.SourceWidth,
-                (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+                (sourceOriginX - info.SourceLeft) / info.SourceWidth,
+                (sourceOriginY - info.SourceTop) / info.SourceHeight);
             rectangle.RenderTransform = transform;
-            Canvas.SetLeft(rectangle, x - info.DestinationWidth * scale * (info.SourceOriginX - info.SourceLeft) / info.SourceWidth);
-            Canvas.SetTop(rectangle, y - info.DestinationHeight * scale * (info.SourceOriginY - info.SourceTop) / info.SourceHeight);
+            Canvas.SetLeft(rectangle, x - destinationWidth * scale * (sourceOriginX - info.SourceLeft) / info.SourceWidth);
+            Canvas.SetTop(rectangle, y - destinationHeight * scale * (sourceOriginY - info.SourceTop) / info.SourceHeight);
         }
 
         private SpriteChipInfo GetChipInfo(string key)
