@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -111,6 +112,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
                     var key = item.Key;
                     var chip = item.Value;
                     var selected = key == selectedKey;
+                    if (!(chip.SourceWidth > 0.0 && chip.SourceHeight > 0.0)) continue;
                     var rectangle = new Rectangle()
                     {
                         Stroke = selected ? selectedChipStroke : chipStroke,
@@ -130,6 +132,16 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             {
                 background.Fill = null;
             }
+        }
+
+        /// <summary>
+        /// 指定のキーを持つチップを選択します
+        /// </summary>
+        /// <param name="key">チップを指定するキー</param>
+        public void Select(string key)
+        {
+            if (!Source.Chip.ContainsKey(key)) throw new KeyNotFoundException();
+            SelectedItem = Source.Chip.Where(item => item.Key == key).First();
         }
 
         private void Chip_MouseDown(object sender, MouseButtonEventArgs e)
