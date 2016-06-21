@@ -36,5 +36,19 @@ namespace WPFTests
         {
             SpriteWriter.WriteFileInfo(chipSelector.Source, @"Assets\main.png");
         }
+
+        private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var oldKey = chipSelector.SelectedKey;
+            var newKey = textBoxName.Text;
+
+            if (string.IsNullOrWhiteSpace(newKey)) return;
+            if (newKey == oldKey) return;
+            if (chipSelector.Source.Chip.ContainsKey(newKey)) return;
+
+            chipSelector.Source.Chip[newKey] = chipSelector.SelectedChip;
+            chipSelector.Select(newKey);
+            chipSelector.Source.Chip.Remove(oldKey);
+        }
     }
 }

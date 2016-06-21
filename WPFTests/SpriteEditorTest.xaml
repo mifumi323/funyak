@@ -32,7 +32,7 @@
         <ComboBox x:Name="comboBox" ItemsSource="{Binding Source.Chip, ElementName=chipSelector, Mode=TwoWay}" DisplayMemberPath="Key" SelectedItem="{Binding SelectedItem, ElementName=chipSelector}"/>
         <SpriteEditor:ChipSelector x:Name="chipSelector" Grid.Row="1" Grid.RowSpan="11"/>
         <Label x:Name="labelName" Content="Name" Grid.Column="1"/>
-        <TextBox x:Name="textBoxName" Grid.Column="2" Text="{Binding SelectedItem.Key, ElementName=chipSelector, Mode=OneWay}"/>
+        <TextBox x:Name="textBoxName" Grid.Column="2" Text="{Binding SelectedItem.Key, ElementName=chipSelector, Mode=OneWay}" TextChanged="textBoxName_TextChanged"/>
         <Label x:Name="labelSourceLeft" Content="SourceLeft" Grid.Column="1" Grid.Row="1"/>
         <TextBox x:Name="textBoxSourceLeft" Grid.Column="2" Grid.Row="1" Text="{Binding SelectedItem.Value.SourceLeft, ElementName=chipSelector, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Right" TextChanged="textBoxSource_TextChanged"/>
         <Label x:Name="labelSourceTop" Content="SourceTop" Grid.Column="1" Grid.Row="2"/>
