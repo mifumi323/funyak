@@ -49,7 +49,7 @@
         <TextBox x:Name="textBoxDestinationWidth" Grid.Column="2" Grid.Row="7" Text="{Binding SelectedItem.Value.DestinationWidth, ElementName=chipSelector, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Right"/>
         <Label x:Name="labelDestinationHeight" Content="DestinationHeight" Grid.Column="1" Grid.Row="8"/>
         <TextBox x:Name="textBoxDestinationHeight" Grid.Column="2" Grid.Row="8" Text="{Binding SelectedItem.Value.DestinationHeight, ElementName=chipSelector, UpdateSourceTrigger=PropertyChanged}" TextAlignment="Right"/>
-        <Button x:Name="buttonAdd" Content="Add Chip" Grid.Column="1" Grid.Row="10"/>
+        <Button x:Name="buttonAdd" Content="Add Chip" Grid.Column="1" Grid.Row="10" Click="buttonAdd_Click"/>
         <Button x:Name="buttonDelete" Content="Remove Chip" Grid.Column="1" Grid.Row="11"/>
         <Button x:Name="buttonLoad" Content="Load" Grid.Column="2" Grid.Row="10"/>
         <Button x:Name="buttonSave" Content="Save" Grid.Column="2" Grid.Row="11" Click="buttonSave_Click"/>

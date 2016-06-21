@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using MifuminSoft.funyak.View.Resource;
 
@@ -22,6 +23,13 @@ namespace WPFTests
         private void textBoxSource_TextChanged(object sender, TextChangedEventArgs e)
         {
             chipSelector.Refresh();
+        }
+
+        private void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var newKey = chipSelector.Source.Chip.Keys.Max() + "x";
+            chipSelector.Source.Chip[newKey] = new SpriteChipInfo();
+            chipSelector.Select(newKey);
         }
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
