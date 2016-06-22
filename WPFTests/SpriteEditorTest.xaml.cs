@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using MifuminSoft.funyak.View.Resource;
 
 namespace WPFTests
@@ -10,6 +11,7 @@ namespace WPFTests
     /// </summary>
     public partial class SpriteEditorTest : Page
     {
+        string ImageFileName = @"Assets\main.png";
         public SpriteEditorTest()
         {
             InitializeComponent();
@@ -17,7 +19,7 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            chipSelector.Source = SpriteReader.Read(@"Assets\main.png");
+            chipSelector.Source = SpriteReader.Read(ImageFileName);
         }
 
         private void textBoxSource_TextChanged(object sender, TextChangedEventArgs e)
@@ -40,9 +42,21 @@ namespace WPFTests
             chipSelector.Source.Chip.Remove(key);
         }
 
+        private void buttonLoad_Click(object sender, RoutedEventArgs e)
+        {
+            var ofd = new OpenFileDialog();
+            ofd.FileName = ImageFileName;
+            ofd.Filter = @"画像ファイル|*.png;*.jpg;*.gif;*.bmp|すべてのファイル|*.*";
+            if (ofd.ShowDialog() == true)
+            {
+                ImageFileName = ofd.FileName;
+                chipSelector.Source = SpriteReader.Read(ImageFileName);
+            }
+        }
+
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
-            SpriteWriter.WriteFileInfo(chipSelector.Source, @"Assets\main.png");
+            SpriteWriter.WriteFileInfo(chipSelector.Source, ImageFileName);
         }
 
         private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
