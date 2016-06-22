@@ -12,7 +12,7 @@ namespace MifuminSoft.funyak.View.Resource
         public Dictionary<string, SpriteChipInfo> Chip { get; set; }
 
         [JsonProperty("data")]
-        public Dictionary<string, SpriteChipInfo> Metadata { get; set; }
+        public Dictionary<string, string> Metadata { get; set; }
 
         public void SetToImageResource(Sprite imageResource)
         {

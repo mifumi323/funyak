@@ -6,8 +6,8 @@ namespace MifuminSoft.funyak.View.Resource
 {
     public abstract class Sprite
     {
-        public Dictionary<string, SpriteChipInfo> Chip { get; set; }
-        public Dictionary<string, SpriteChipInfo> Metadata { get; set; }
+        public Dictionary<string, SpriteChipInfo> Chip { get; set; } = new Dictionary<string, SpriteChipInfo>();
+        public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();
 
         public void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale)
         {
