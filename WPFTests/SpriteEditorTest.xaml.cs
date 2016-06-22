@@ -32,6 +32,14 @@ namespace WPFTests
             chipSelector.Select(newKey);
         }
 
+        private void buttonRemove_Click(object sender, RoutedEventArgs e)
+        {
+            var key = chipSelector.SelectedKey;
+            if (string.IsNullOrEmpty(key)) return;
+            chipSelector.SelectedItem = null;
+            chipSelector.Source.Chip.Remove(key);
+        }
+
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
             SpriteWriter.WriteFileInfo(chipSelector.Source, @"Assets\main.png");
