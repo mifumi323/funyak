@@ -35,65 +35,6 @@ namespace WPFTests
             InitializeComponent();
 
             resource = SpriteReader.Read(@"Assets\main.png");
-            resource.Chip = new Dictionary<string, SpriteChipInfo>()
-            {
-                {
-                    "StandF",
-                    new SpriteChipInfo()
-                    {
-                        SourceLeft = 0,
-                        SourceTop = 0,
-                        SourceWidth = 40,
-                        SourceHeight = 40,
-                        SourceOriginX = 20,
-                        SourceOriginY = 20,
-                        DestinationWidth = 40,
-                        DestinationHeight = 40,
-                    }
-                },
-                {
-                    "JumpF",
-                    new SpriteChipInfo()
-                    {
-                        SourceLeft = 360,
-                        SourceTop = 0,
-                        SourceWidth = 40,
-                        SourceHeight = 40,
-                        SourceOriginX = 380,
-                        SourceOriginY = 20,
-                        DestinationWidth = 40,
-                        DestinationHeight = 40,
-                    }
-                },
-                {
-                    "FallF",
-                    new SpriteChipInfo()
-                    {
-                        SourceLeft = 0,
-                        SourceTop = 40,
-                        SourceWidth = 40,
-                        SourceHeight = 40,
-                        SourceOriginX = 20,
-                        SourceOriginY = 60,
-                        DestinationWidth = 40,
-                        DestinationHeight = 40,
-                    }
-                },
-                {
-                    "SitF",
-                    new SpriteChipInfo()
-                    {
-                        SourceLeft = 40,
-                        SourceTop = 40,
-                        SourceWidth = 40,
-                        SourceHeight = 40,
-                        SourceOriginX = 60,
-                        SourceOriginY = 60,
-                        DestinationWidth = 40,
-                        DestinationHeight = 40,
-                    }
-                },
-            };
 
             map = new Map(500, 500);
             map.BackgroundColor = "LightGreen";
