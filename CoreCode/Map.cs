@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.Core
@@ -48,6 +49,8 @@ namespace MifuminSoft.funyak.Core
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
 
+        private ICollection<MapEnvironment> mapEnvironmentCollection;
+
         /// <summary>
         /// ゲームのマップを初期化します。
         /// </summary>
@@ -61,6 +64,10 @@ namespace MifuminSoft.funyak.Core
 
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
+            mapEnvironmentCollection = new List<MapEnvironment>()
+            {
+                new MapEnvironment(),
+            };
         }
 
         /// <summary>
@@ -109,6 +116,39 @@ namespace MifuminSoft.funyak.Core
             if (bounds== null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
             return mapObjectCollection;
+        }
+
+        /// <summary>
+        /// 重力を取得します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
+        /// <returns>重力(0.0が無重力、1.0が通常)</returns>
+        public double GetGravity(double x, double y)
+        {
+            return GetEnvironment(x, y).Gravity;
+        }
+
+        /// <summary>
+        /// 風速を取得します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
+        /// <returns>風速(0.0：無風、正の数：右向きの風、負の数：左向きの風)</returns>
+        public double GetWind(double x, double y)
+        {
+            return GetEnvironment(x, y).Wind;
+        }
+
+        /// <summary>
+        /// 指定した位置の環境情報を取得します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
+        /// <returns>環境</returns>
+        public MapEnvironment GetEnvironment(double x, double y)
+        {
+            return mapEnvironmentCollection.Last(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom);
         }
     }
 }

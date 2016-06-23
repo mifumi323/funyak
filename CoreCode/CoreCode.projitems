@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\NullInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Map.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\IMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MainMapObject.cs" />
