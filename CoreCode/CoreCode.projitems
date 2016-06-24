@@ -9,12 +9,13 @@
     <Import_RootNamespace>MifuminSoft.funyak.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AreaEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\NullInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Map.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IMapEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\IMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MainMapObject.cs" />

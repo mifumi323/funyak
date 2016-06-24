@@ -24,7 +24,7 @@ namespace MifuminSoft.funyak.Core
     /// <summary>
     /// ゲームのマップ
     /// </summary>
-    public class Map
+    public class Map : IMapEnvironment
     {
         /// <summary>
         /// マップの幅(マップ空間内のピクセル単位)
@@ -35,6 +35,16 @@ namespace MifuminSoft.funyak.Core
         /// マップの高さ(マップ空間内のピクセル単位)
         /// </summary>
         public double Height { get; protected set; }
+
+        /// <summary>
+        /// 重力を設定します。
+        /// </summary>
+        public double Gravity { get; set; }
+
+        /// <summary>
+        /// 風速を設定します。
+        /// </summary>
+        public double Wind { get; set; }
 
         /// <summary>
         /// 背景色(未指定または無効な色の場合透明)
@@ -49,7 +59,7 @@ namespace MifuminSoft.funyak.Core
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
 
-        private ICollection<MapEnvironment> mapEnvironmentCollection;
+        private ICollection<AreaEnvironment> areaEnvironmentCollection;
 
         /// <summary>
         /// ゲームのマップを初期化します。
@@ -60,14 +70,13 @@ namespace MifuminSoft.funyak.Core
         {
             Width = width;
             Height = height;
+            Gravity = 1.0;
+            Wind = 0.0;
             BackgroundColor = null;
 
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
-            mapEnvironmentCollection = new List<MapEnvironment>()
-            {
-                new MapEnvironment(),
-            };
+            areaEnvironmentCollection = new List<AreaEnvironment>();
         }
 
         /// <summary>
@@ -146,9 +155,9 @@ namespace MifuminSoft.funyak.Core
         /// <param name="x">X座標</param>
         /// <param name="y">Y座標</param>
         /// <returns>環境</returns>
-        public MapEnvironment GetEnvironment(double x, double y)
+        public IMapEnvironment GetEnvironment(double x, double y)
         {
-            return mapEnvironmentCollection.Last(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom);
+            return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom) ?? this;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿namespace MifuminSoft.funyak.Core
 {
     /// <summary>
-    /// マップの環境を表します。
+    /// マップ中の局所的な環境を表します。
     /// </summary>
-    public class MapEnvironment : IBounds
+    public class AreaEnvironment : IMapEnvironment, IBounds
     {
         /// <summary>
         /// 環境の適用範囲の左端を取得または設定します。
