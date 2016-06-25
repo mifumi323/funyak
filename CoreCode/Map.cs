@@ -7,22 +7,6 @@ using MifuminSoft.funyak.Core.MapObject;
 namespace MifuminSoft.funyak.Core
 {
     /// <summary>
-    /// マップにマップオブジェクトが追加されたときに通知するイベントの引数を格納します。
-    /// </summary>
-    public class MapObjectAddedEventArgs : EventArgs
-    {
-        /// <summary>
-        /// 追加されたマップオブジェクト
-        /// </summary>
-        public IMapObject MapObject { get; private set; }
-
-        public MapObjectAddedEventArgs(IMapObject mapObject)
-        {
-            MapObject = mapObject;
-        }
-    }
-
-    /// <summary>
     /// ゲームのマップ
     /// </summary>
     public class Map : IMapEnvironment
@@ -55,7 +39,7 @@ namespace MifuminSoft.funyak.Core
         /// <summary>
         /// マップオブジェクトが追加されたときに発生します。
         /// </summary>
-        public event EventHandler<MapObjectAddedEventArgs> MapObjectAdded;
+        public event EventHandler<MapObjectEventArgs> MapObjectAdded;
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
@@ -90,7 +74,7 @@ namespace MifuminSoft.funyak.Core
             var dynamicMapObject = mapObject as IDynamicMapObject;
             if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
 
-            MapObjectAdded?.Invoke(this, new MapObjectAddedEventArgs(mapObject));
+            MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
 
         /// <summary>

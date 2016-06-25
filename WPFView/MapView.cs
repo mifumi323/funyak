@@ -58,7 +58,7 @@ namespace MifuminSoft.funyak.View
             }
         }
 
-        private void Map_MapObjectAdded(object sender, MapObjectAddedEventArgs e)
+        private void Map_MapObjectAdded(object sender, MapObjectEventArgs e)
         {
             AddMapObject(e.MapObject);
         }
