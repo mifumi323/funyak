@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MifuminSoft.funyak.Core.MapEnvironment;
 using MifuminSoft.funyak.Core.MapObject;
 
 namespace MifuminSoft.funyak.Core
