@@ -20,5 +20,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MainMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MapObjectEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UpdateMapObjectArgs.cs" />
   </ItemGroup>
 </Project>
