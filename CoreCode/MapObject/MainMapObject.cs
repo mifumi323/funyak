@@ -168,22 +168,22 @@ namespace MifuminSoft.funyak.Core.MapObject
             VelocityY = 0;
         }
 
-        public void UpdateSelf()
+        public void UpdateSelf(UpdateMapObjectArgs args)
         {
             if (Floating)
             {
-                UpdateSelfFloating();
+                UpdateSelfFloating(args);
             }
             else
             {
-                UpdateSelfNormal();
+                UpdateSelfNormal(args);
             }
         }
 
         /// <summary>
         /// 浮遊状態の状態更新
         /// </summary>
-        private void UpdateSelfFloating()
+        private void UpdateSelfFloating(UpdateMapObjectArgs args)
         {
             // 角度の処理
             var adx = X - PreviousX;
@@ -222,7 +222,7 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// <summary>
         /// 通常状態の状態更新
         /// </summary>
-        private void UpdateSelfNormal()
+        private void UpdateSelfNormal(UpdateMapObjectArgs args)
         {
             // 角度の処理
             AngularVelocity = 0;

@@ -27,7 +27,7 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// 自分自身の状態を更新します。
         /// この時点では当たり判定を行いません。
         /// </summary>
-        void UpdateSelf();
+        void UpdateSelf(UpdateMapObjectArgs args);
 
         /// <summary>
         /// 他のマップオブジェクトとの当たり判定を行います。
