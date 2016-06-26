@@ -110,10 +110,12 @@ namespace WPFTests
         {
             counter.Step();
             input.Update();
+            map.Wind = sliderWind.Value;
             map.Update();
-            mapView.Update(slider.Value);
+            mapView.Update(sliderScale.Value);
             var message = new StringBuilder();
-            message.AppendLine("拡大率：" + slider.Value);
+            message.AppendLine("拡大率：" + sliderScale.Value);
+            message.AppendLine("風：" + sliderWind.Value);
             message.AppendLine("FPS：" + counter.Fps);
             message.AppendLine("X：" + main.X);
             message.AppendLine("Y：" + main.Y);

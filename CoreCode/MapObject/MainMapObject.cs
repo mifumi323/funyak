@@ -185,6 +185,9 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// </summary>
         private void UpdateSelfFloating(UpdateMapObjectArgs args)
         {
+            // パラメータの保持
+            var wind = args.GetWind(X, Y);
+
             // 角度の処理
             var adx = X - PreviousX;
             var ady = Y - PreviousY;
@@ -207,7 +210,7 @@ namespace MifuminSoft.funyak.Core.MapObject
                 case MainMapObjectState.Floating:
                     double accelX = Input.X * FloatingAccel;
                     double accelY = Input.Y * FloatingAccel;
-                    double frictionX = VelocityX * FloatingFriction;
+                    double frictionX = (VelocityX - wind) * FloatingFriction;
                     double frictionY = VelocityY * FloatingFriction;
                     VelocityX += accelX - frictionX;
                     VelocityY += accelY - frictionY;
