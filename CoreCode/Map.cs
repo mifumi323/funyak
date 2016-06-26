@@ -83,6 +83,8 @@ namespace MifuminSoft.funyak.Core
         public void Update()
         {
             UpdateMapObjects();
+            var reaction = CheckMapObjectsCollision();
+            reaction?.Invoke();
         }
 
         /// <summary>
@@ -95,6 +97,17 @@ namespace MifuminSoft.funyak.Core
             {
                 mapObject.UpdateSelf(args);
             }
+        }
+
+        private Action CheckMapObjectsCollision()
+        {
+            var args = new CheckMapObjectCollisionArgs(this);
+            Action reaction = null;
+            foreach (var mapObject in dynamicMapObjectCollection)
+            {
+                reaction += mapObject.CheckCollision(args);
+            }
+            return reaction;
         }
 
         /// <summary>

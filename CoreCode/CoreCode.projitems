@@ -9,6 +9,7 @@
     <Import_RootNamespace>MifuminSoft.funyak.Core</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CheckMapObjectCollisionArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputBase.cs" />

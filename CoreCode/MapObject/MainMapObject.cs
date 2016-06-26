@@ -238,7 +238,7 @@ namespace MifuminSoft.funyak.Core.MapObject
             PreviousVelocityY = VelocityY;
         }
 
-        public Action CheckCollision()
+        public Action CheckCollision(CheckMapObjectCollisionArgs args)
         {
             return null;
         }

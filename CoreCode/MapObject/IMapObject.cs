@@ -35,7 +35,7 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// 戻り値にて、当たり判定によって生じる自分自身の状態の変化を反映させるActionを返します。
         /// </summary>
         /// <returns></returns>
-        Action CheckCollision();
+        Action CheckCollision(CheckMapObjectCollisionArgs args);
     }
 
     /// <summary>
