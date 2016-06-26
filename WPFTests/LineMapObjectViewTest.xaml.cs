@@ -33,20 +33,20 @@ namespace WPFTests
             map = new Map(500, 500);
             map.BackgroundColor = "LightGreen";
             lines = new[] {
-                new LineMapObject(0, 0, 50, 500),
-                new LineMapObject(0, 500, 500, 450),
-                new LineMapObject(500, 500, 450, 0),
-                new LineMapObject(500, 0, 0, 50),
-                new LineMapObject(200, 250, 300, 250),
-                new LineMapObject(250, 200, 250, 300),
+                new LineMapObject(0, 0, 50, 500) { Color = "Black" },
+                new LineMapObject(0, 500, 500, 450) { Color = "Black" },
+                new LineMapObject(500, 500, 450, 0) { Color = "Black" },
+                new LineMapObject(500, 0, 0, 50) { Color = "Black" },
+                new LineMapObject(200, 250, 300, 250) { Color = "Gray" },
+                new LineMapObject(250, 200, 250, 300) { Color = "Gray" },
             };
             foreach (var line in lines)
             {
                 map.AddMapObject(line);
             }
-            batten1 = new LineMapObject(-10, -10, 10, 10);
+            batten1 = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
             map.AddMapObject(batten1);
-            batten2 = new LineMapObject(-10, 10, 10, -10);
+            batten2 = new LineMapObject(-10, 10, 10, -10) { Color = "Red" };
             map.AddMapObject(batten2);
             mapView = new MapView(map)
             {

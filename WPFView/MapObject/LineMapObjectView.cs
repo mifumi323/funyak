@@ -13,6 +13,7 @@ namespace MifuminSoft.funyak.View.MapObject
         private Canvas canvas = null;
         private Line line = null;
         private bool registered = false;
+        private string color;
 
         public Canvas Canvas
         {
@@ -39,7 +40,7 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public void Update(MapObjectViewUpdateArgs args)
         {
-            if (!args.Area.IntersectsWith(new Rect(MapObject.Left, MapObject.Top, MapObject.Right - MapObject.Left, MapObject.Bottom - MapObject.Top)))
+            if (!args.Area.IntersectsWith(new Rect(MapObject.Left, MapObject.Top, MapObject.Right - MapObject.Left, MapObject.Bottom - MapObject.Top)) || string.IsNullOrWhiteSpace(MapObject.Color))
             {
                 RemoveFromCanvas();
                 return;
@@ -47,7 +48,18 @@ namespace MifuminSoft.funyak.View.MapObject
             if (line == null)
             {
                 line = new Line();
-                line.Stroke = new SolidColorBrush(Colors.Black);
+            }
+            if (color != MapObject.Color)
+            {
+                color = MapObject.Color;
+                try
+                {
+                    line.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+                }
+                catch
+                {
+                    line.Stroke = null;
+                }
             }
             line.X1 = args.TranslateX(MapObject.X1);
             line.Y1 = args.TranslateY(MapObject.Y1);

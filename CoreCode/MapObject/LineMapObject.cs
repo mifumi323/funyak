@@ -42,6 +42,31 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// </summary>
         public double Y2 { get; set; }
 
+        /// <summary>
+        /// 上の当たり判定
+        /// </summary>
+        public bool HitUpper { get; set; } = false;
+
+        /// <summary>
+        /// 下の当たり判定
+        /// </summary>
+        public bool HitBelow { get; set; } = false;
+
+        /// <summary>
+        /// 左の当たり判定
+        /// </summary>
+        public bool HitLeft { get; set; } = false;
+
+        /// <summary>
+        /// 右の当たり判定
+        /// </summary>
+        public bool HitRight { get; set; } = false;
+
+        /// <summary>
+        /// 色(未指定または無効な色の場合透明)
+        /// </summary>
+        public string Color { get; set; }
+
         public double X { get { return (X1 + X2) / 2; } }
         public double Y { get { return (Y1 + Y2) / 2; } }
         public double Left { get { return Math.Min(X1, X2); } }
