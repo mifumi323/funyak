@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using MifuminSoft.funyak.Core.CollisionHelper;
 using MifuminSoft.funyak.Core.Input;
 
 namespace MifuminSoft.funyak.Core.MapObject
@@ -94,32 +94,52 @@ namespace MifuminSoft.funyak.Core.MapObject
         {
             get
             {
-                return X - 14.0;
+                return GetLeft(X);
             }
+        }
+
+        public double GetLeft(double x)
+        {
+            return x - 14;
         }
 
         public double Top
         {
             get
             {
-                return Y - 14.0;
+                return GetTop(Y);
             }
+        }
+
+        public double GetTop(double y)
+        {
+            return y - 14;
         }
 
         public double Right
         {
             get
             {
-                return X + 14.0;
+                return GetRight(X);
             }
+        }
+
+        public double GetRight(double x)
+        {
+            return x + 14;
         }
 
         public double Bottom
         {
             get
             {
-                return Y + 14.0;
+                return GetBottom(Y);
             }
+        }
+
+        public double GetBottom(double y)
+        {
+            return y + 14;
         }
 
         #endregion
@@ -242,6 +262,7 @@ namespace MifuminSoft.funyak.Core.MapObject
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)
         {
+
             // 種類ごとに振り分ける
             var lineMapObjects = new List<LineMapObject>();
             foreach (var mapObject in args.GetMapObjects(this))
@@ -253,13 +274,114 @@ namespace MifuminSoft.funyak.Core.MapObject
                 }
             }
 
-            // 線との当たり判定
-            foreach (var lineMapObject in lineMapObjects)
+            var tempX = X;
+            var tempY = Y;
+            var tempVX = VelocityX;
+            var tempVY = VelocityY;
+
+            // X軸移動とY軸移動が別々に起こったものとして2回判定を行う。
+            // こうすることにより、すり抜けバグを防止できる。
+            for (int i = 0; i < 2; i++)
             {
-                // TODO: 当たり判定を行う
+                if (i == 0)
+                {
+                    // 1回目はY軸移動前
+                    tempY -= tempVY;
+                }
+                else
+                {
+                    // 2回目はY軸移動後
+                    tempY += tempVY;
+                }
+
+                // 当たり判定用図形を生成
+                var topSegment = new Segment2D(tempX, tempY, tempX, GetTop(tempY));
+                var bottomSegment = new Segment2D(tempX, tempY, tempX, GetBottom(tempY));
+                var leftSegment = new Segment2D(tempX, tempY, GetLeft(tempX), tempY);
+                var rightSegment = new Segment2D(tempX, tempY, GetRight(tempX), tempY);
+                var topVector = topSegment.End - topSegment.Start;
+                var bottomVector = bottomSegment.End - bottomSegment.Start;
+                var leftVector = leftSegment.End - leftSegment.Start;
+                var rightVector = rightSegment.End - rightSegment.Start;
+                var velocity = new Vector2D(tempVX, tempVY);
+
+                // 線との当たり判定
+                foreach (var lineMapObject in lineMapObjects)
+                {
+                    var lineSegment = lineMapObject.ToSegment2D();
+                    var lineVector = lineSegment.End - lineSegment.Start;
+                    var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
+                    lineNormal.Norm();
+
+                    // 主人公の下側と線の上側
+                    if (lineMapObject.HitUpper)
+                    {
+                        if (Collision2D.SegmentSegment(bottomSegment, lineSegment))
+                        {
+                            var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
+                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
+                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
+                            tempX = newPoint.X;
+                            tempY = newPoint.Y;
+                            tempVX = newVelocity.X;
+                            tempVY = newVelocity.Y;
+                        }
+                    }
+
+                    // 主人公の上側と線の下側
+                    if (lineMapObject.HitBelow)
+                    {
+                        if (Collision2D.SegmentSegment(topSegment, lineSegment))
+                        {
+                            var lineStartToCharaBottom = topSegment.End - lineSegment.Start;
+                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - topVector;
+                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
+                            tempX = newPoint.X;
+                            tempY = newPoint.Y;
+                            tempVX = newVelocity.X;
+                            tempVY = newVelocity.Y;
+                        }
+                    }
+
+                    // 主人公の右側と線の左側
+                    if (lineMapObject.HitLeft)
+                    {
+                        if (Collision2D.SegmentSegment(rightSegment, lineSegment))
+                        {
+                            var lineStartToCharaBottom = rightSegment.End - lineSegment.Start;
+                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - rightVector;
+                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
+                            tempX = newPoint.X;
+                            tempY = newPoint.Y;
+                            tempVX = newVelocity.X;
+                            tempVY = newVelocity.Y;
+                        }
+                    }
+
+                    // 主人公の左側と線の右側
+                    if (lineMapObject.HitRight)
+                    {
+                        if (Collision2D.SegmentSegment(leftSegment, lineSegment))
+                        {
+                            var lineStartToCharaBottom = leftSegment.End - lineSegment.Start;
+                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - leftVector;
+                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
+                            tempX = newPoint.X;
+                            tempY = newPoint.Y;
+                            tempVX = newVelocity.X;
+                            tempVY = newVelocity.Y;
+                        }
+                    }
+                }
             }
 
-            return null;
+            return () =>
+            {
+                X = tempX;
+                Y = tempY;
+                VelocityX = tempVX;
+                VelocityY = tempVY;
+            };
         }
     }
 }

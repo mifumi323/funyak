@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Core.CollisionHelper;
 
 namespace MifuminSoft.funyak.Core.MapObject
 {
@@ -25,22 +26,70 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// <summary>
         /// 始点のX座標
         /// </summary>
-        public double X1 { get; set; }
+        public double X1
+        {
+            get
+            {
+                return x1;
+            }
+            set
+            {
+                x1 = value;
+                segment = null;
+            }
+        }
+        private double x1 = 0;
 
         /// <summary>
         /// 始点のY座標
         /// </summary>
-        public double Y1 { get; set; }
+        public double Y1
+        {
+            get
+            {
+                return y1;
+            }
+            set
+            {
+                y1 = value;
+                segment = null;
+            }
+        }
+        private double y1 = 0;
 
         /// <summary>
         /// 終点のX座標
         /// </summary>
-        public double X2 { get; set; }
+        public double X2
+        {
+            get
+            {
+                return x2;
+            }
+            set
+            {
+                x2 = value;
+                segment = null;
+            }
+        }
+        private double x2 = 0;
 
         /// <summary>
         /// 終点のY座標
         /// </summary>
-        public double Y2 { get; set; }
+        public double Y2
+        {
+            get
+            {
+                return y2;
+            }
+            set
+            {
+                y2 = value;
+                segment = null;
+            }
+        }
+        private double y2 = 0;
 
         /// <summary>
         /// 上の当たり判定
@@ -73,5 +122,16 @@ namespace MifuminSoft.funyak.Core.MapObject
         public double Right { get { return Math.Max(X1, X2); } }
         public double Top { get { return Math.Min(Y1, Y2); } }
         public double Bottom { get { return Math.Max(Y1, Y2); } }
+
+        private Segment2D segment = null;
+
+        public Segment2D ToSegment2D()
+        {
+            if (segment == null)
+            {
+                segment = new Segment2D(X1, Y1, X2, Y2);
+            }
+            return segment;
+        }
     }
 }

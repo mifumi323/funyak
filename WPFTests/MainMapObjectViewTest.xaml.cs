@@ -38,10 +38,10 @@ namespace WPFTests
             map = new Map(500, 500);
             map.BackgroundColor = "LightGreen";
             lines = new[] {
-                new LineMapObject(0, 0, 50, 500) { Color = "Black" },
-                new LineMapObject(0, 500, 500, 450) { Color = "Black" },
-                new LineMapObject(500, 500, 450, 0) { Color = "Black" },
-                new LineMapObject(500, 0, 0, 50) { Color = "Black" },
+                new LineMapObject(0, 0, 50, 500) { Color = "Black", HitRight = true },
+                new LineMapObject(0, 500, 500, 450) { Color = "Black", HitUpper = true },
+                new LineMapObject(500, 500, 450, 0) { Color = "Black", HitLeft = true },
+                new LineMapObject(500, 0, 0, 50) { Color = "Black", HitBelow = true },
                 new LineMapObject(200, 250, 300, 250) { Color = "Gray" },
                 new LineMapObject(250, 200, 250, 300) { Color = "Gray" },
             };
