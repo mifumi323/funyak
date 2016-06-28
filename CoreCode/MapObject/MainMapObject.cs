@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using MifuminSoft.funyak.Core.Input;
 
 namespace MifuminSoft.funyak.Core.MapObject
@@ -240,6 +242,23 @@ namespace MifuminSoft.funyak.Core.MapObject
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)
         {
+            // 種類ごとに振り分ける
+            var lineMapObjects = new List<LineMapObject>();
+            foreach (var mapObject in args.GetMapObjects(this))
+            {
+                var lineMapObject = mapObject as LineMapObject;
+                if (lineMapObject != null)
+                {
+                    lineMapObjects.Add(lineMapObject);
+                }
+            }
+
+            // 線との当たり判定
+            foreach (var lineMapObject in lineMapObjects)
+            {
+                // TODO: 当たり判定を行う
+            }
+
             return null;
         }
     }

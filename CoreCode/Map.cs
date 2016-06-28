@@ -121,7 +121,7 @@ namespace MifuminSoft.funyak.Core
         /// <returns>マップオブジェクトの集合</returns>
         public IEnumerable<IMapObject> GetMapObjects(IBounds bounds = null)
         {
-            if (bounds== null) return mapObjectCollection;
+            if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
             return mapObjectCollection;
         }
