@@ -90,8 +90,9 @@ namespace MifuminSoft.funyak.Core.CollisionHelper
 
         public void Norm()
         {
-            X /= Length;
-            Y /= Length;
+            double length = Length;
+            X /= length;
+            Y /= length;
         }
 
         #endregion
