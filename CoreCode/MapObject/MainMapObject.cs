@@ -171,6 +171,11 @@ namespace MifuminSoft.funyak.Core.MapObject
         /// </summary>
         public double AngularFriction { get; set; } = 0.00667;
 
+        /// <summary>
+        /// 速度上限値
+        /// </summary>
+        public double VelocityLimit { get; set; } = 13;
+
         #endregion
 
         /// <summary>
@@ -236,6 +241,12 @@ namespace MifuminSoft.funyak.Core.MapObject
                     double frictionY = VelocityY * FloatingFriction;
                     VelocityX += accelX - frictionX;
                     VelocityY += accelY - frictionY;
+                    if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
+                    {
+                        var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
+                        VelocityX *= r;
+                        VelocityY *= r;
+                    }
                     X += VelocityX;
                     Y += VelocityY;
                     break;
