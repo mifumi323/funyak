@@ -323,64 +323,93 @@ namespace MifuminSoft.funyak.Core.MapObject
                     var lineVector = lineSegment.End - lineSegment.Start;
                     var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
                     lineNormal.Norm();
+                    var lineNormalNegative = -lineNormal;
 
                     // 主人公の下側と線の上側
                     if (lineMapObject.HitUpper)
                     {
-                        if (Collision2D.SegmentSegment(bottomSegment, lineSegment))
+                        if (lineNormal.Y != 0)
                         {
-                            var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
-                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
-                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                            tempX = newPoint.X;
-                            tempY = newPoint.Y;
-                            tempVX = newVelocity.X;
-                            tempVY = newVelocity.Y;
+                            var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
+                            if (velocity.Dot(n) <= 0)
+                            {
+                                if (Collision2D.SegmentSegment(bottomSegment, lineSegment))
+                                {
+                                    var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
+                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
+                                    var newVelocity = velocity - n * velocity.Dot(n);
+                                    tempX = newPoint.X;
+                                    tempY = newPoint.Y;
+                                    tempVX = newVelocity.X;
+                                    tempVY = newVelocity.Y;
+                                }
+                            }
                         }
                     }
 
                     // 主人公の上側と線の下側
                     if (lineMapObject.HitBelow)
                     {
-                        if (Collision2D.SegmentSegment(topSegment, lineSegment))
+                        if (lineNormal.Y != 0)
                         {
-                            var lineStartToCharaBottom = topSegment.End - lineSegment.Start;
-                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - topVector;
-                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                            tempX = newPoint.X;
-                            tempY = newPoint.Y;
-                            tempVX = newVelocity.X;
-                            tempVY = newVelocity.Y;
+                            var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
+                            if (velocity.Dot(n) <= 0)
+                            {
+                                if (Collision2D.SegmentSegment(topSegment, lineSegment))
+                                {
+                                    var lineStartToCharaTop = topSegment.End - lineSegment.Start;
+                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaTop) / lineVector.LengthSq) - topVector;
+                                    var newVelocity = velocity - n * velocity.Dot(n);
+                                    tempX = newPoint.X;
+                                    tempY = newPoint.Y;
+                                    tempVX = newVelocity.X;
+                                    tempVY = newVelocity.Y;
+                                }
+                            }
                         }
                     }
 
                     // 主人公の右側と線の左側
                     if (lineMapObject.HitLeft)
                     {
-                        if (Collision2D.SegmentSegment(rightSegment, lineSegment))
+                        if (lineNormal.X != 0)
                         {
-                            var lineStartToCharaBottom = rightSegment.End - lineSegment.Start;
-                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - rightVector;
-                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                            tempX = newPoint.X;
-                            tempY = newPoint.Y;
-                            tempVX = newVelocity.X;
-                            tempVY = newVelocity.Y;
+                            var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
+                            if (velocity.Dot(n) <= 0)
+                            {
+                                if (Collision2D.SegmentSegment(rightSegment, lineSegment))
+                                {
+                                    var lineStartToCharaRight = rightSegment.End - lineSegment.Start;
+                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaRight) / lineVector.LengthSq) - rightVector;
+                                    var newVelocity = velocity - n * velocity.Dot(n);
+                                    tempX = newPoint.X;
+                                    tempY = newPoint.Y;
+                                    tempVX = newVelocity.X;
+                                    tempVY = newVelocity.Y;
+                                }
+                            }
                         }
                     }
 
                     // 主人公の左側と線の右側
                     if (lineMapObject.HitRight)
                     {
-                        if (Collision2D.SegmentSegment(leftSegment, lineSegment))
+                        if (lineNormal.X != 0)
                         {
-                            var lineStartToCharaBottom = leftSegment.End - lineSegment.Start;
-                            var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - leftVector;
-                            var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                            tempX = newPoint.X;
-                            tempY = newPoint.Y;
-                            tempVX = newVelocity.X;
-                            tempVY = newVelocity.Y;
+                            var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
+                            if (velocity.Dot(n) <= 0)
+                            {
+                                if (Collision2D.SegmentSegment(leftSegment, lineSegment))
+                                {
+                                    var lineStartToCharaLeft = leftSegment.End - lineSegment.Start;
+                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaLeft) / lineVector.LengthSq) - leftVector;
+                                    var newVelocity = velocity - n * velocity.Dot(n);
+                                    tempX = newPoint.X;
+                                    tempY = newPoint.Y;
+                                    tempVX = newVelocity.X;
+                                    tempVY = newVelocity.Y;
+                                }
+                            }
                         }
                     }
                 }
