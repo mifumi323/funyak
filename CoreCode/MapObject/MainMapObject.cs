@@ -239,8 +239,9 @@ namespace MifuminSoft.funyak.Core.MapObject
                     double accelY = Input.Y * FloatingAccel;
                     double frictionX = (VelocityX - wind) * FloatingFriction;
                     double frictionY = VelocityY * FloatingFriction;
-                    VelocityX += accelX - frictionX;
-                    VelocityY += accelY - frictionY;
+                    double accelRatio = Input.IsPressed(Keys.Jump) ? 2.0 : 1.0;
+                    VelocityX += (accelX - frictionX) * accelRatio;
+                    VelocityY += (accelY - frictionY) * accelRatio;
                     if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
                     {
                         var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
