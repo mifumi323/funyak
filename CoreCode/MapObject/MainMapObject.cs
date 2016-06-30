@@ -317,6 +317,12 @@ namespace MifuminSoft.funyak.Core.MapObject
                 var rightVector = rightSegment.End - rightSegment.Start;
                 var velocity = new Vector2D(tempVX, tempVY);
 
+                var sumX = 0.0;
+                var sumY = 0.0;
+                var sumVX = 0.0;
+                var sumVY = 0.0;
+                var count = 0.0;
+
                 // 線との当たり判定
                 foreach (var lineMapObject in lineMapObjects)
                 {
@@ -339,10 +345,11 @@ namespace MifuminSoft.funyak.Core.MapObject
                                     var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    tempX = newPoint.X;
-                                    tempY = newPoint.Y;
-                                    tempVX = newVelocity.X;
-                                    tempVY = newVelocity.Y;
+                                    sumX += newPoint.X;
+                                    sumY += newPoint.Y;
+                                    sumVX += newVelocity.X;
+                                    sumVY += newVelocity.Y;
+                                    count++;
                                 }
                             }
                         }
@@ -361,10 +368,11 @@ namespace MifuminSoft.funyak.Core.MapObject
                                     var lineStartToCharaTop = topSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaTop) / lineVector.LengthSq) - topVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    tempX = newPoint.X;
-                                    tempY = newPoint.Y;
-                                    tempVX = newVelocity.X;
-                                    tempVY = newVelocity.Y;
+                                    sumX += newPoint.X;
+                                    sumY += newPoint.Y;
+                                    sumVX += newVelocity.X;
+                                    sumVY += newVelocity.Y;
+                                    count++;
                                 }
                             }
                         }
@@ -383,10 +391,11 @@ namespace MifuminSoft.funyak.Core.MapObject
                                     var lineStartToCharaRight = rightSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaRight) / lineVector.LengthSq) - rightVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    tempX = newPoint.X;
-                                    tempY = newPoint.Y;
-                                    tempVX = newVelocity.X;
-                                    tempVY = newVelocity.Y;
+                                    sumX += newPoint.X;
+                                    sumY += newPoint.Y;
+                                    sumVX += newVelocity.X;
+                                    sumVY += newVelocity.Y;
+                                    count++;
                                 }
                             }
                         }
@@ -405,14 +414,23 @@ namespace MifuminSoft.funyak.Core.MapObject
                                     var lineStartToCharaLeft = leftSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaLeft) / lineVector.LengthSq) - leftVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    tempX = newPoint.X;
-                                    tempY = newPoint.Y;
-                                    tempVX = newVelocity.X;
-                                    tempVY = newVelocity.Y;
+                                    sumX += newPoint.X;
+                                    sumY += newPoint.Y;
+                                    sumVX += newVelocity.X;
+                                    sumVY += newVelocity.Y;
+                                    count++;
                                 }
                             }
                         }
                     }
+                }
+
+                if (count > 0)
+                {
+                    tempX = sumX / count;
+                    tempY = sumY / count;
+                    tempVX = sumVX / count;
+                    tempVY = sumVY / count;
                 }
             }
 
