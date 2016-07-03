@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,8 +10,7 @@ using MifuminSoft.funyak.Core.Input;
 using MifuminSoft.funyak.Core.MapObject;
 using MifuminSoft.funyak.View;
 using MifuminSoft.funyak.View.Input;
-using MifuminSoft.funyak.View.Utility;
-using System.Text;
+using MifuminSoft.funyak.View.Timing;
 
 namespace WPFTests
 {

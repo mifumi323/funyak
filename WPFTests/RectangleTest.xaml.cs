@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ImageMagick;
 using Microsoft.Win32;
-using MifuminSoft.funyak.View.Utility;
+using MifuminSoft.funyak.View.Timing;
 
 namespace WPFTests
 {

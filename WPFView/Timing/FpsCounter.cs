@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MifuminSoft.funyak.View.Utility
+namespace MifuminSoft.funyak.View.Timing
 {
     public class FpsCounter
     {

@@ -12,7 +12,7 @@ using MifuminSoft.funyak.View;
 using MifuminSoft.funyak.View.Input;
 using MifuminSoft.funyak.View.MapObject;
 using MifuminSoft.funyak.View.Resource;
-using MifuminSoft.funyak.View.Utility;
+using MifuminSoft.funyak.View.Timing;
 
 namespace WPFTests
 {
@@ -107,27 +107,30 @@ namespace WPFTests
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
-            counter.Step();
-            input.Update();
-            map.Wind = sliderWind.Value;
-            map.Update();
-            mapView.Update(sliderScale.Value);
-            var message = new StringBuilder();
-            message.AppendLine("拡大率：" + sliderScale.Value);
-            message.AppendLine("風：" + sliderWind.Value);
-            message.AppendLine("FPS：" + counter.Fps);
-            message.AppendLine("X：" + main.X);
-            message.AppendLine("Y：" + main.Y);
-            message.AppendLine("速度X：" + main.VelocityX);
-            message.AppendLine("速度Y：" + main.VelocityY);
-            message.AppendLine("角度：" + main.Angle);
-            message.AppendLine("角速度：" + main.AngularVelocity);
-            message.AppendLine("表示オブジェクト：");
-            foreach (var child in canvas.Children)
+            if (counter != null)
             {
-                message.AppendLine(child.ToString());
+                counter.Step();
+                input.Update();
+                map.Wind = sliderWind.Value;
+                map.Update();
+                mapView.Update(sliderScale.Value);
+                var message = new StringBuilder();
+                message.AppendLine("拡大率：" + sliderScale.Value);
+                message.AppendLine("風：" + sliderWind.Value);
+                message.AppendLine("FPS：" + counter.Fps);
+                message.AppendLine("X：" + main.X);
+                message.AppendLine("Y：" + main.Y);
+                message.AppendLine("速度X：" + main.VelocityX);
+                message.AppendLine("速度Y：" + main.VelocityY);
+                message.AppendLine("角度：" + main.Angle);
+                message.AppendLine("角速度：" + main.AngularVelocity);
+                message.AppendLine("表示オブジェクト：");
+                foreach (var child in canvas.Children)
+                {
+                    message.AppendLine(child.ToString());
+                }
+                textBox.Text = message.ToString();
             }
-            textBox.Text = message.ToString();
         }
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
