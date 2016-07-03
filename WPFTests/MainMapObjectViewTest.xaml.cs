@@ -21,7 +21,9 @@ namespace WPFTests
     /// </summary>
     public partial class MainMapObjectViewTest : Page
     {
-        FpsCounter counter = new FpsCounter();
+        FpsCounter drawFpsCounter = new FpsCounter();
+        FpsCounter gameFpsCounter = new FpsCounter();
+        ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map;
         MapView mapView;
         LineMapObject[] lines;
@@ -107,17 +109,23 @@ namespace WPFTests
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
-            if (counter != null)
+            var frames = frameCounter.GetElapsedFrames(true);
+            if (frames > 0)
             {
-                counter.Step();
-                input.Update();
+                drawFpsCounter.Step();
                 map.Wind = sliderWind.Value;
-                map.Update();
+                for (int i = 0; i < frames; i++)
+                {
+                    gameFpsCounter.Step();
+                    input.Update();
+                    map.Update();
+                }
                 mapView.Update(sliderScale.Value);
                 var message = new StringBuilder();
                 message.AppendLine("拡大率：" + sliderScale.Value);
                 message.AppendLine("風：" + sliderWind.Value);
-                message.AppendLine("FPS：" + counter.Fps);
+                message.AppendLine("描画FPS：" + drawFpsCounter.Fps);
+                message.AppendLine("処理FPS：" + gameFpsCounter.Fps);
                 message.AppendLine("X：" + main.X);
                 message.AppendLine("Y：" + main.Y);
                 message.AppendLine("速度X：" + main.VelocityX);

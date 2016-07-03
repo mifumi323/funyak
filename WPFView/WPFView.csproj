@@ -68,6 +68,7 @@
     <Compile Include="Resource\SpriteReader.cs" />
     <Compile Include="Resource\ResourceManager.cs" />
     <Compile Include="Resource\SpriteWriter.cs" />
+    <Compile Include="Timing\ElapsedFrameCounter.cs" />
     <Compile Include="Timing\FpsCounter.cs" />
   </ItemGroup>
   <ItemGroup>
