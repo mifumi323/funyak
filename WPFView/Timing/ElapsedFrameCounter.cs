@@ -76,7 +76,7 @@ namespace MifuminSoft.funyak.View.Timing
                 {
                     if (step)
                     {
-                        Reset();
+                        previousTicks += ticksPerFrame * elapsedFrames;
                     }
                     return elapsedFrames;
                 }
