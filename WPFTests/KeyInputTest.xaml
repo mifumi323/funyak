@@ -17,7 +17,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Ellipse Stroke="Black" Margin="5" Width="100" Height="100"/>
+        <Ellipse Stroke="Black" Margin="5" Width="100" Height="100" Fill="White" MouseDown="Ellipse_MouseDown"/>
         <Ellipse x:Name="direction" HorizontalAlignment="Center" Height="4" Margin="0,0,0,0" Fill="Red" Stroke="Red" VerticalAlignment="Center" Width="4"/>
         <TextBox Grid.Row="1" Width="100"/>
         <Grid x:Name="keyTable" Grid.Column="1" Grid.RowSpan="2">

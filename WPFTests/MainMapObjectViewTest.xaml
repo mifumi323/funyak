@@ -21,7 +21,7 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5">
+        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="canvas_MouseDown">
         </Canvas>
         <Label Grid.Column="1" Content="拡大率"/>
         <Slider x:Name="sliderScale" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" Grid.Column="2" VerticalAlignment="Center"/>

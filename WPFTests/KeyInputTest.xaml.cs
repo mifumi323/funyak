@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.Core.Input;
@@ -73,6 +74,11 @@ namespace WPFTests
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
             CompositionTarget.Rendering -= CompositionTarget_Rendering;
+        }
+
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
         }
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)

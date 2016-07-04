@@ -2,6 +2,7 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -95,6 +96,11 @@ namespace WPFTests
                 encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
                 encoder.Save(os);
             }
+        }
+
+        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
         }
 
         private void CompositionTarget_Rendering(object sender, object e)
