@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MifuminSoft.funyak.Core.MapObject
+namespace MifuminSoft.funyak.MapObject
 {
     /// <summary>
     /// マップオブジェクトに関するイベントの引数を格納します。

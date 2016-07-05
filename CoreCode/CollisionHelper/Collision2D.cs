@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core.CollisionHelper
+﻿namespace MifuminSoft.funyak.CollisionHelper
 {
     /// <summary>
     /// 衝突判定の共通処理を行います。

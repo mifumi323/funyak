@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core.Input
+﻿namespace MifuminSoft.funyak.Input
 {
     /// <summary>入力なし</summary>
     class NullInput : IInput

@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core
+﻿namespace MifuminSoft.funyak
 {
     /// <summary>
     /// 範囲を表します。

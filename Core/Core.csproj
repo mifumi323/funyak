@@ -8,7 +8,7 @@
     <ProjectGuid>{E20B6550-CE87-4C30-AAE0-7798A5936672}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MifuminSoft.funyak.Core</RootNamespace>
+    <RootNamespace>MifuminSoft.funyak</RootNamespace>
     <AssemblyName>funyak.Core</AssemblyName>
     <DefaultLanguage>ja-JP</DefaultLanguage>
     <FileAlignment>512</FileAlignment>

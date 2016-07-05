@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MifuminSoft.funyak.Core.MapEnvironment;
-using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.MapEnvironment;
+using MifuminSoft.funyak.MapObject;
 
-namespace MifuminSoft.funyak.Core
+namespace MifuminSoft.funyak
 {
     /// <summary>
     /// ゲームのマップ

@@ -1,7 +1,7 @@
 ﻿using System;
-using MifuminSoft.funyak.Core.CollisionHelper;
+using MifuminSoft.funyak.CollisionHelper;
 
-namespace MifuminSoft.funyak.Core.MapObject
+namespace MifuminSoft.funyak.MapObject
 {
     /// <summary>
     /// 線のマップオブジェクト

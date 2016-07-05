@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.Core.CollisionHelper;
+using MifuminSoft.funyak.CollisionHelper;
 
 namespace MifuminSoft.funyak.Core.Tests
 {

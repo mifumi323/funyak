@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MifuminSoft.funyak.Core.Input
+namespace MifuminSoft.funyak.Input
 {
     /// <summary>
     /// ゲーム内の入力の共通化可能な機能を提供します。

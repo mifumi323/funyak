@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using MifuminSoft.funyak.Core.Input;
+using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.View.Input;
 
 namespace WPFTests

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Core.Tests
 {

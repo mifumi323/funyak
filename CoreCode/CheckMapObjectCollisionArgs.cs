@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.MapObject;
 
-namespace MifuminSoft.funyak.Core
+namespace MifuminSoft.funyak
 {
     /// <summary>
     /// マップオブジェクトの当たり判定の引数を格納します。

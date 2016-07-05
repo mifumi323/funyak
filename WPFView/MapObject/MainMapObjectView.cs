@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Shapes;
-using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View.Resource;
 
 namespace MifuminSoft.funyak.View.MapObject

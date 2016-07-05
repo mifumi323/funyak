@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core.Input
+﻿namespace MifuminSoft.funyak.Input
 {
     /// <summary>
     /// ゲーム内の入力を取り扱います。

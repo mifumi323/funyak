@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using MifuminSoft.funyak.Core.Input;
+using MifuminSoft.funyak.Input;
 
 namespace MifuminSoft.funyak.View.Input
 {

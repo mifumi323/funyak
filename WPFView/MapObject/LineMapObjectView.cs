@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using MifuminSoft.funyak.Core.MapObject;
+using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.View.MapObject
 {

@@ -1,6 +1,6 @@
-﻿using MifuminSoft.funyak.Core.MapEnvironment;
+﻿using MifuminSoft.funyak.MapEnvironment;
 
-namespace MifuminSoft.funyak.Core
+namespace MifuminSoft.funyak
 {
     /// <summary>
     /// マップオブジェクトの更新時の引数を格納します。

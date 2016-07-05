@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using MifuminSoft.funyak.Core.CollisionHelper;
-using MifuminSoft.funyak.Core.Input;
+using MifuminSoft.funyak.CollisionHelper;
+using MifuminSoft.funyak.Input;
 
-namespace MifuminSoft.funyak.Core.MapObject
+namespace MifuminSoft.funyak.MapObject
 {
     /// <summary>
     /// 主人公のマップオブジェクトの状態

@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Core.MapEnvironment
+﻿namespace MifuminSoft.funyak.MapEnvironment
 {
     /// <summary>
     /// マップの環境を表します。

@@ -6,7 +6,7 @@
     <SharedGUID>2ebecbe0-70cf-4ed6-b35f-4759d4c1801c</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>MifuminSoft.funyak.Core</Import_RootNamespace>
+    <Import_RootNamespace>MifuminSoft.funyak</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CheckMapObjectCollisionArgs.cs" />
