@@ -25,3 +25,7 @@ GPLだと他のライブラリとの組み合わせが不自由だったから�
 - Magick.NET  
   Copyright 2013-2016 Dirk Lemstra <https://magick.codeplex.com/>  
   詳しくはCopyright-Magick.NET.txtを参照。
+
+- Newtonsoft.Json  
+  Copyright (c) 2007 James Newton-King  
+  詳しくはCopyright-Newtonsoft.Json.txtを参照。
