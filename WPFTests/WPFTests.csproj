@@ -90,6 +90,9 @@
     <Compile Include="MainMapObjectViewTest.xaml.cs">
       <DependentUpon>MainMapObjectViewTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MapIOTest.xaml.cs">
+      <DependentUpon>MapIOTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MapIOTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="RectangleTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
