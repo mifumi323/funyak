@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.Data
 {
@@ -7,17 +6,25 @@ namespace MifuminSoft.funyak.Data
     {
         public static Map FromString(string data)
         {
-            dynamic def = JsonConvert.DeserializeObject(data, new JsonSerializerSettings()
+            return FromDynamic(JsonConvert.DeserializeObject(data));
+        }
+
+        public static Map FromDynamic(dynamic data)
+        {
+            var map = new Map((double)(data.width ?? 100.0), (double)(data.height ?? 100.0))
             {
-                DefaultValueHandling = DefaultValueHandling.Include,
-            });
-            double width = def.width ?? 100.0;
-            double height = def.height ?? 100.0;
-            string color = def.color ?? "Transparent";
-            var map = new Map(width, height)
-            {
-                BackgroundColor = color,
+                BackgroundColor = (string)(data.color ?? "Transparent"),
+                Gravity = (double)(data.gravity ?? 1.0),
+                Wind = (double)(data.wind ?? 0.0),
             };
+            if (data.objects != null)
+            {
+                foreach (var mapObjectData in data.objects)
+                {
+                    var mapObject = MapObjectReader.FromDynamic(mapObjectData);
+                    if (mapObject != null) map.AddMapObject(mapObject);
+                }
+            }
             return map;
         }
     }

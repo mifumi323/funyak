@@ -1,21 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using MifuminSoft.funyak;
 using MifuminSoft.funyak.Data;
 using MifuminSoft.funyak.Input;
-using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View;
 using MifuminSoft.funyak.View.Input;
 using MifuminSoft.funyak.View.MapObject;
@@ -30,8 +21,8 @@ namespace WPFTests
     public partial class MapIOTest : Page
     {
         ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
-        Map map;
-        MapView mapView;
+        Map map = null;
+        MapView mapView = null;
         IInput input;
         Sprite resource;
 
@@ -42,14 +33,8 @@ namespace WPFTests
             resource = SpriteReader.Read(@"Assets\main.png");
             input = new KeyInput();
 
-            map = new Map(100, 100);
-            mapView = new MapView(map, new MapObjectViewFactory()
-            {
-                MainMapObjectResourceSelector = a => resource,
-            })
-            {
-                Canvas = canvas,
-            };
+            textBox.Text = File.ReadAllText(@"Assets\mapiotest.json");
+            ReadMapFromTextBox();
         }
 
         private void Page_Unloaded(object sender, RoutedEventArgs e)
@@ -65,7 +50,7 @@ namespace WPFTests
         private void CompositionTarget_Rendering(object sender, object e)
         {
             var frames = frameCounter.GetElapsedFrames(true);
-            if (frames > 0)
+            if (frames > 0 && map != null)
             {
                 for (int i = 0; i < frames; i++)
                 {
@@ -82,6 +67,12 @@ namespace WPFTests
         }
 
         private void buttonFromString_Click(object sender, RoutedEventArgs e)
+        {
+            ReadMapFromTextBox();
+            e.Handled = true;
+        }
+
+        private void ReadMapFromTextBox()
         {
             try
             {
@@ -100,7 +91,6 @@ namespace WPFTests
             {
                 textBlockError.Text = ex.Message;
             }
-            e.Handled = true;
         }
     }
 }

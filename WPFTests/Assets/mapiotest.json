@@ -1,0 +1,19 @@
+﻿{
+  "width": 1000,
+  "height": 1000,
+  "color": "LightGreen",
+  "gravity": 1.0,
+  "wind": 0.0,
+  "objects": [
+    {
+      "type": "funya",
+      "x": 100,
+      "y": 100,
+    },
+    {
+      "type": "funya",
+      "x": 200,
+      "y": 100,
+    },
+  ],
+}
