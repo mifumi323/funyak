@@ -70,6 +70,7 @@ namespace WPFTests
         private void buttonFromString_Click(object sender, RoutedEventArgs e)
         {
             ReadMapFromTextBox();
+            Keyboard.ClearFocus();
             e.Handled = true;
         }
 
@@ -77,7 +78,10 @@ namespace WPFTests
         {
             try
             {
-                map = MapReader.FromString(textBox.Text);
+                map = MapReader.FromString(textBox.Text, new MapReaderOption()
+                {
+                    Input = input,
+                });
                 canvas.Children.Clear();
                 mapView = new MapView(map, new MapObjectViewFactory()
                 {
