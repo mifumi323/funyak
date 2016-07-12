@@ -12,6 +12,7 @@ namespace MifuminSoft.funyak.MapObject
     {
         Standing,
         Floating,
+        Falling,
     }
 
     /// <summary>
@@ -152,6 +153,16 @@ namespace MifuminSoft.funyak.MapObject
         public int Appearance { get; set; }
 
         /// <summary>
+        /// 重力加速度
+        /// </summary>
+        public double GravityAccel { get; set; } = 0.4 / 3;
+
+        /// <summary>
+        /// 落下摩擦係数
+        /// </summary>
+        public double FallFriction { get; set; } = 0.1;
+
+        /// <summary>
         /// 浮遊加速度
         /// </summary>
         public double FloatingAccel { get; set; } = 0.16;
@@ -197,13 +208,35 @@ namespace MifuminSoft.funyak.MapObject
 
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
+            var gravity = args.GetGravity(X, Y);
+            SwitchFloatingMode(gravity);
             if (Floating)
             {
                 UpdateSelfFloating(args);
             }
             else
             {
-                UpdateSelfNormal(args);
+                UpdateSelfNormal(args, gravity);
+            }
+        }
+
+        private void SwitchFloatingMode(double gravity)
+        {
+            if (Floating)
+            {
+                if (gravity > 0)
+                {
+                    Floating = false;
+                    State = MainMapObjectState.Falling;
+                }
+            }
+            else
+            {
+                if (gravity <= 0)
+                {
+                    Floating = true;
+                    State = MainMapObjectState.Floating;
+                }
             }
         }
 
@@ -259,8 +292,11 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 通常状態の状態更新
         /// </summary>
-        private void UpdateSelfNormal(UpdateMapObjectArgs args)
+        private void UpdateSelfNormal(UpdateMapObjectArgs args, double gravity)
         {
+            // パラメータの保持
+            var wind = args.GetWind(X, Y);
+
             // 角度の処理
             AngularVelocity = 0;
             Angle = 0;
@@ -270,6 +306,31 @@ namespace MifuminSoft.funyak.MapObject
             PreviousY = Y;
             PreviousVelocityX = VelocityX;
             PreviousVelocityY = VelocityY;
+
+            // 動作本体
+            switch (State)
+            {
+                case MainMapObjectState.Standing:
+                    break;
+                case MainMapObjectState.Falling:
+                    double accelX = Input.X * FloatingAccel;
+                    double accelY = gravity * GravityAccel;
+                    double frictionX = (VelocityX - wind) * FloatingFriction;
+                    double frictionY = VelocityY * FallFriction;
+                    VelocityX += accelX - frictionX;
+                    VelocityY += accelY - frictionY;
+                    if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
+                    {
+                        var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
+                        VelocityX *= r;
+                        VelocityY *= r;
+                    }
+                    X += VelocityX;
+                    Y += VelocityY;
+                    break;
+                default:
+                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
+            }
         }
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)

@@ -44,4 +44,14 @@ namespace MifuminSoft.funyak.MapObject
     public interface IStaticMapObject : IMapObject
     {
     }
+
+    /// <summary>
+    /// マップオブジェクトの向きを表します。
+    /// </summary>
+    public enum Direction
+    {
+        Front,
+        Left,
+        Right,
+    }
 }
