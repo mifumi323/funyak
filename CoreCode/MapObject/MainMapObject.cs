@@ -258,23 +258,37 @@ namespace MifuminSoft.funyak.MapObject
                 case MainMapObjectState.Floating:
                     double accelX = Input.X * FloatingAccel;
                     double accelY = Input.Y * FloatingAccel;
-                    double frictionX = (VelocityX - wind) * FloatingFriction;
-                    double frictionY = VelocityY * FloatingFriction;
-                    double accelRatio = Input.IsPressed(Keys.Jump) ? 2.0 : 1.0;
-                    VelocityX += (accelX - frictionX) * accelRatio;
-                    VelocityY += (accelY - frictionY) * accelRatio;
-                    if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
-                    {
-                        var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
-                        VelocityX *= r;
-                        VelocityY *= r;
-                    }
-                    X += VelocityX;
-                    Y += VelocityY;
+                    UpdatePositionFloating(wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
+        }
+
+        /// <summary>
+        /// 浮遊状態の位置更新を行います。
+        /// </summary>
+        /// <param name="wind">風速</param>
+        /// <param name="accelX">X軸方向の加速度</param>
+        /// <param name="accelY">Y軸方向の加速度</param>
+        /// <param name="accelCount">加速・減速を行う回数</param>
+        private void UpdatePositionFloating(double wind, double accelX = 0.0, double accelY = 0.0, int accelCount = 1)
+        {
+            for (int i = 0; i < accelCount; i++)
+            {
+                double frictionX = (VelocityX - wind) * FloatingFriction;
+                double frictionY = VelocityY * FloatingFriction;
+                VelocityX += accelX - frictionX;
+                VelocityY += accelY - frictionY;
+            }
+            if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
+            {
+                var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
+                VelocityX *= r;
+                VelocityY *= r;
+            }
+            X += VelocityX;
+            Y += VelocityY;
         }
 
         /// <summary>
