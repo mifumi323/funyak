@@ -45,7 +45,21 @@ namespace MifuminSoft.funyak.View.MapObject
                 rectangle = new Rectangle();
             }
             AddToCanvas();
-            ImageResource.SetToRectangle(rectangle, "Fall.F", args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
+
+            var imageKey = "Fall.F";
+            switch (MapObject.State)
+            {
+                case MainMapObjectState.Standing:
+                    imageKey = "Stand.F";
+                    break;
+                case MainMapObjectState.Floating:
+                    break;
+                case MainMapObjectState.Falling:
+                    break;
+                default:
+                    break;
+            }
+            ImageResource.SetToRectangle(rectangle, imageKey, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
         }
 
         private void AddToCanvas()

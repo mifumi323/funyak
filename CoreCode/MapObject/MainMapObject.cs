@@ -347,10 +347,12 @@ namespace MifuminSoft.funyak.MapObject
                 }
             }
 
+            // 結果
             var tempX = X;
             var tempY = Y;
             var tempVX = VelocityX;
             var tempVY = VelocityY;
+            var landed = false;
 
             // X軸移動とY軸移動が別々に起こったものとして2回判定を行う。
             // こうすることにより、すり抜けバグを防止できる。
@@ -411,6 +413,8 @@ namespace MifuminSoft.funyak.MapObject
                                     sumVX += newVelocity.X;
                                     sumVY += newVelocity.Y;
                                     count++;
+
+                                    landed = true;
                                 }
                             }
                         }
@@ -501,6 +505,14 @@ namespace MifuminSoft.funyak.MapObject
                 Y = tempY;
                 VelocityX = tempVX;
                 VelocityY = tempVY;
+
+                if (!Floating)
+                {
+                    if (landed)
+                    {
+                        State = MainMapObjectState.Standing;
+                    }
+                }
             };
         }
     }
