@@ -250,11 +250,7 @@ namespace MifuminSoft.funyak.MapObject
 
             RotateSelf();
 
-            // 変化前の値を保持
-            PreviousX = X;
-            PreviousY = Y;
-            PreviousVelocityX = VelocityX;
-            PreviousVelocityY = VelocityY;
+            UpdatePreviousValue();
 
             // 動作本体
             switch (State)
@@ -282,6 +278,17 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
+        /// 変化前の値を保持します。
+        /// </summary>
+        private void UpdatePreviousValue()
+        {
+            PreviousX = X;
+            PreviousY = Y;
+            PreviousVelocityX = VelocityX;
+            PreviousVelocityY = VelocityY;
+        }
+
+        /// <summary>
         /// 自身の移動に応じて回転させます。
         /// </summary>
         private void RotateSelf()
@@ -306,11 +313,7 @@ namespace MifuminSoft.funyak.MapObject
 
             ResetRotation();
 
-            // 変化前の値を保持
-            PreviousX = X;
-            PreviousY = Y;
-            PreviousVelocityX = VelocityX;
-            PreviousVelocityY = VelocityY;
+            UpdatePreviousValue();
 
             // 動作本体
             switch (State)
