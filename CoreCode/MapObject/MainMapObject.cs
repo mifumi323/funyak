@@ -248,15 +248,7 @@ namespace MifuminSoft.funyak.MapObject
             // パラメータの保持
             var wind = args.GetWind(X, Y);
 
-            // 角度の処理
-            var adx = X - PreviousX;
-            var ady = Y - PreviousY;
-            var addx = VelocityX - PreviousVelocityX;
-            var addy = VelocityY - PreviousVelocityY;
-            AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
-            Angle += AngularVelocity;
-            if (Angle > 180) Angle -= 360;
-            if (Angle < -180) Angle += 360;
+            RotateSelf();
 
             // 変化前の値を保持
             PreviousX = X;
@@ -290,6 +282,21 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
+        /// 自身の移動に応じて回転させます。
+        /// </summary>
+        private void RotateSelf()
+        {
+            var adx = X - PreviousX;
+            var ady = Y - PreviousY;
+            var addx = VelocityX - PreviousVelocityX;
+            var addy = VelocityY - PreviousVelocityY;
+            AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
+            Angle += AngularVelocity;
+            while (Angle > 180) Angle -= 360;
+            while (Angle < -180) Angle += 360;
+        }
+
+        /// <summary>
         /// 通常状態の状態更新
         /// </summary>
         private void UpdateSelfNormal(UpdateMapObjectArgs args, double gravity)
@@ -297,9 +304,7 @@ namespace MifuminSoft.funyak.MapObject
             // パラメータの保持
             var wind = args.GetWind(X, Y);
 
-            // 角度の処理
-            AngularVelocity = 0;
-            Angle = 0;
+            ResetRotation();
 
             // 変化前の値を保持
             PreviousX = X;
@@ -331,6 +336,15 @@ namespace MifuminSoft.funyak.MapObject
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
+        }
+
+        /// <summary>
+        /// 回転を初期状態に戻します。
+        /// </summary>
+        private void ResetRotation()
+        {
+            AngularVelocity = 0;
+            Angle = 0;
         }
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)
