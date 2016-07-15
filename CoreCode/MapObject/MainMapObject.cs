@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MifuminSoft.funyak.CollisionHelper;
 using MifuminSoft.funyak.Input;
+using MifuminSoft.funyak.MapEnvironment;
 
 namespace MifuminSoft.funyak.MapObject
 {
@@ -208,16 +209,44 @@ namespace MifuminSoft.funyak.MapObject
 
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
-            var gravity = args.GetGravity(X, Y);
-            SwitchFloatingMode(gravity);
-            if (Floating)
+            var env = args.GetEnvironment(X, Y);
+            SwitchFloatingMode(env.Gravity);
+
+            switch (State)
             {
-                UpdateSelfFloating(args);
+                case MainMapObjectState.Standing:
+                    UpdateSelfStanding(env);
+                    break;
+                case MainMapObjectState.Floating:
+                    UpdateSelfFloating(env);
+                    break;
+                case MainMapObjectState.Falling:
+                    UpdateSelfFalling(env);
+                    break;
+                default:
+                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
-            else
-            {
-                UpdateSelfNormal(args, gravity);
-            }
+        }
+
+        private void UpdateSelfStanding(IMapEnvironment env)
+        {
+            PreprocessNotFloating();
+        }
+
+        private void UpdateSelfFloating(IMapEnvironment env)
+        {
+            PreprocessFloating();
+            double accelX = Input.X * FloatingAccel;
+            double accelY = Input.Y * FloatingAccel;
+            UpdatePositionFloating(env.Wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
+        }
+
+        private void UpdateSelfFalling(IMapEnvironment env)
+        {
+            PreprocessNotFloating();
+            double accelX = Input.X * FloatingAccel;
+            double accelY = 0;
+            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
         }
 
         private void SwitchFloatingMode(double gravity)
@@ -237,28 +266,6 @@ namespace MifuminSoft.funyak.MapObject
                     Floating = true;
                     State = MainMapObjectState.Floating;
                 }
-            }
-        }
-
-        /// <summary>
-        /// 浮遊状態の状態更新
-        /// </summary>
-        private void UpdateSelfFloating(UpdateMapObjectArgs args)
-        {
-            // パラメータの保持
-            var wind = args.GetWind(X, Y);
-
-            // 動作本体
-            switch (State)
-            {
-                case MainMapObjectState.Floating:
-                    PreprocessFloating();
-                    double accelX = Input.X * FloatingAccel;
-                    double accelY = Input.Y * FloatingAccel;
-                    UpdatePositionFloating(wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
-                    break;
-                default:
-                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
         }
 
@@ -326,31 +333,6 @@ namespace MifuminSoft.funyak.MapObject
             Angle += AngularVelocity;
             while (Angle > 180) Angle -= 360;
             while (Angle < -180) Angle += 360;
-        }
-
-        /// <summary>
-        /// 通常状態の状態更新
-        /// </summary>
-        private void UpdateSelfNormal(UpdateMapObjectArgs args, double gravity)
-        {
-            // パラメータの保持
-            var wind = args.GetWind(X, Y);
-
-            // 動作本体
-            switch (State)
-            {
-                case MainMapObjectState.Standing:
-                    PreprocessNotFloating();
-                    break;
-                case MainMapObjectState.Falling:
-                    PreprocessNotFloating();
-                    double accelX = Input.X * FloatingAccel;
-                    double accelY = 0;
-                    UpdatePositionFalling(gravity, wind, accelX, accelY);
-                    break;
-                default:
-                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
-            }
         }
 
         /// <summary>
