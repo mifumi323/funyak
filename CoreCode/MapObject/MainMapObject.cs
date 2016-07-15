@@ -248,14 +248,11 @@ namespace MifuminSoft.funyak.MapObject
             // パラメータの保持
             var wind = args.GetWind(X, Y);
 
-            RotateSelf();
-
-            UpdatePreviousValue();
-
             // 動作本体
             switch (State)
             {
                 case MainMapObjectState.Floating:
+                    PreprocessFloating();
                     double accelX = Input.X * FloatingAccel;
                     double accelY = Input.Y * FloatingAccel;
                     UpdatePositionFloating(wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
@@ -263,6 +260,15 @@ namespace MifuminSoft.funyak.MapObject
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
+        }
+
+        /// <summary>
+        /// 浮遊状態の前処理を行います。
+        /// </summary>
+        private void PreprocessFloating()
+        {
+            RotateSelf();
+            UpdatePreviousValue();
         }
 
         /// <summary>
