@@ -341,16 +341,21 @@ namespace MifuminSoft.funyak.MapObject
                     break;
                 case MainMapObjectState.Falling:
                     double accelX = Input.X * FloatingAccel;
-                    double accelY = gravity * GravityAccel;
-                    double frictionX = (VelocityX - wind) * FloatingFriction;
-                    double frictionY = VelocityY * FallFriction;
-                    VelocityX += accelX - frictionX;
-                    VelocityY += accelY - frictionY;
-                    UpdatePosition();
+                    double accelY = 0;
+                    UpdatePositionFalling(gravity, wind, accelX, accelY);
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
+        }
+
+        private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0)
+        {
+            double frictionX = (VelocityX - wind) * FloatingFriction;
+            double frictionY = VelocityY * FallFriction;
+            VelocityX += accelX - frictionX;
+            VelocityY += accelY - frictionY + gravity * GravityAccel;
+            UpdatePosition();
         }
 
         /// <summary>
