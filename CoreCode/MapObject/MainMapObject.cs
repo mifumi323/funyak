@@ -281,6 +281,11 @@ namespace MifuminSoft.funyak.MapObject
                 VelocityX += accelX - frictionX;
                 VelocityY += accelY - frictionY;
             }
+            UpdatePosition();
+        }
+
+        private void UpdatePosition()
+        {
             if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
             {
                 var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
@@ -341,14 +346,7 @@ namespace MifuminSoft.funyak.MapObject
                     double frictionY = VelocityY * FallFriction;
                     VelocityX += accelX - frictionX;
                     VelocityY += accelY - frictionY;
-                    if (VelocityX * VelocityX + VelocityY * VelocityY > VelocityLimit * VelocityLimit)
-                    {
-                        var r = VelocityLimit / Math.Sqrt(VelocityX * VelocityX + VelocityY * VelocityY);
-                        VelocityX *= r;
-                        VelocityY *= r;
-                    }
-                    X += VelocityX;
-                    Y += VelocityY;
+                    UpdatePosition();
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
