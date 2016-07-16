@@ -450,18 +450,8 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.Y != 0)
                         {
                             var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                            if (velocity.Dot(n) <= 0)
-                            {
-                                if (Collision2D.SegmentSegment(bottomSegment, lineSegment))
-                                {
-                                    var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
-                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
-                                    var newVelocity = velocity - n * velocity.Dot(n);
-                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
-
-                                    landed = true;
-                                }
-                            }
+                            var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjuster);
+                            if (collided) landed = true;
                         }
                     }
 
@@ -471,16 +461,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.Y != 0)
                         {
                             var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                            if (velocity.Dot(n) <= 0)
-                            {
-                                if (Collision2D.SegmentSegment(topSegment, lineSegment))
-                                {
-                                    var lineStartToCharaTop = topSegment.End - lineSegment.Start;
-                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaTop) / lineVector.LengthSq) - topVector;
-                                    var newVelocity = velocity - n * velocity.Dot(n);
-                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
-                                }
-                            }
+                            var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjuster);
                         }
                     }
 
@@ -490,16 +471,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.X != 0)
                         {
                             var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                            if (velocity.Dot(n) <= 0)
-                            {
-                                if (Collision2D.SegmentSegment(rightSegment, lineSegment))
-                                {
-                                    var lineStartToCharaRight = rightSegment.End - lineSegment.Start;
-                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaRight) / lineVector.LengthSq) - rightVector;
-                                    var newVelocity = velocity - n * velocity.Dot(n);
-                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
-                                }
-                            }
+                            var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjuster);
                         }
                     }
 
@@ -509,16 +481,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.X != 0)
                         {
                             var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                            if (velocity.Dot(n) <= 0)
-                            {
-                                if (Collision2D.SegmentSegment(leftSegment, lineSegment))
-                                {
-                                    var lineStartToCharaLeft = leftSegment.End - lineSegment.Start;
-                                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaLeft) / lineVector.LengthSq) - leftVector;
-                                    var newVelocity = velocity - n * velocity.Dot(n);
-                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
-                                }
-                            }
+                            var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjuster);
                         }
                     }
                 }
@@ -547,6 +510,34 @@ namespace MifuminSoft.funyak.MapObject
                     }
                 }
             };
+        }
+
+        /// <summary>
+        /// 線分との当たり判定
+        /// </summary>
+        /// <param name="lineNormal">線分の、当たり判定を行いたい方向に向けた法線ベクトル</param>
+        /// <param name="charaSegment">キャラクターの、当たり判定に用いる線分</param>
+        /// <param name="lineSegment">当たり判定対象の線分</param>
+        /// <param name="charaVector">キャラクターの線分の、始点から終点へのベクトル</param>
+        /// <param name="lineVector">当たり判定対象の線分の、始点から終点へのベクトル</param>
+        /// <param name="velocity">当たり判定対象の線分に対する、キャラクターの相対速度</param>
+        /// <param name="adjuster">位置調整オブジェクト</param>
+        /// <returns>当たっていたらtrue</returns>
+        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, PositionAdjuster adjuster)
+        {
+            if (velocity.Dot(lineNormal) <= 0)
+            {
+                if (Collision2D.SegmentSegment(charaSegment, lineSegment))
+                {
+                    var lineStartToCharaEnd = charaSegment.End - lineSegment.Start;
+                    var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaEnd) / lineVector.LengthSq) - charaVector;
+                    var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
+                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
+
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
