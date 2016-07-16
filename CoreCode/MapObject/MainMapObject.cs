@@ -190,6 +190,30 @@ namespace MifuminSoft.funyak.MapObject
 
         #endregion
 
+        class PositionAdjuster
+        {
+            private double x = 0.0;
+            private double y = 0.0;
+            private double vx = 0.0;
+            private double vy = 0.0;
+            private int count = 0;
+
+            public void Add(double x, double y, double vx, double vy)
+            {
+                this.x += x;
+                this.y += y;
+                this.vx += vx;
+                this.vy += vy;
+                count++;
+            }
+
+            public bool HasValue => count > 0;
+            public double X => x / count;
+            public double Y => y / count;
+            public double VelocityX => vx / count;
+            public double VelocityY => vy / count;
+        }
+
         /// <summary>
         /// 場所を指定して主人公のマップオブジェクトを初期化します。
         /// </summary>
@@ -409,11 +433,7 @@ namespace MifuminSoft.funyak.MapObject
                 var rightVector = rightSegment.End - rightSegment.Start;
                 var velocity = new Vector2D(tempVX, tempVY);
 
-                var sumX = 0.0;
-                var sumY = 0.0;
-                var sumVX = 0.0;
-                var sumVY = 0.0;
-                var count = 0.0;
+                var adjuster = new PositionAdjuster();
 
                 // 線との当たり判定
                 foreach (var lineMapObject in lineMapObjects)
@@ -437,11 +457,7 @@ namespace MifuminSoft.funyak.MapObject
                                     var lineStartToCharaBottom = bottomSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaBottom) / lineVector.LengthSq) - bottomVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    sumX += newPoint.X;
-                                    sumY += newPoint.Y;
-                                    sumVX += newVelocity.X;
-                                    sumVY += newVelocity.Y;
-                                    count++;
+                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
 
                                     landed = true;
                                 }
@@ -462,11 +478,7 @@ namespace MifuminSoft.funyak.MapObject
                                     var lineStartToCharaTop = topSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaTop) / lineVector.LengthSq) - topVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    sumX += newPoint.X;
-                                    sumY += newPoint.Y;
-                                    sumVX += newVelocity.X;
-                                    sumVY += newVelocity.Y;
-                                    count++;
+                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
                                 }
                             }
                         }
@@ -485,11 +497,7 @@ namespace MifuminSoft.funyak.MapObject
                                     var lineStartToCharaRight = rightSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaRight) / lineVector.LengthSq) - rightVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    sumX += newPoint.X;
-                                    sumY += newPoint.Y;
-                                    sumVX += newVelocity.X;
-                                    sumVY += newVelocity.Y;
-                                    count++;
+                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
                                 }
                             }
                         }
@@ -508,23 +516,19 @@ namespace MifuminSoft.funyak.MapObject
                                     var lineStartToCharaLeft = leftSegment.End - lineSegment.Start;
                                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaLeft) / lineVector.LengthSq) - leftVector;
                                     var newVelocity = velocity - n * velocity.Dot(n);
-                                    sumX += newPoint.X;
-                                    sumY += newPoint.Y;
-                                    sumVX += newVelocity.X;
-                                    sumVY += newVelocity.Y;
-                                    count++;
+                                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
                                 }
                             }
                         }
                     }
                 }
 
-                if (count > 0)
+                if (adjuster.HasValue)
                 {
-                    tempX = sumX / count;
-                    tempY = sumY / count;
-                    tempVX = sumVX / count;
-                    tempVY = sumVY / count;
+                    tempX = adjuster.X;
+                    tempY = adjuster.Y;
+                    tempVX = adjuster.VelocityX;
+                    tempVY = adjuster.VelocityY;
                 }
             }
 
