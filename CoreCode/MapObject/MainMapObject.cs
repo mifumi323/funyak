@@ -502,14 +502,30 @@ namespace MifuminSoft.funyak.MapObject
                 VelocityX = tempVX;
                 VelocityY = tempVY;
 
-                if (!Floating)
+                if (landed)
                 {
-                    if (landed)
-                    {
-                        State = MainMapObjectState.Standing;
-                    }
+                    Land();
                 }
             };
+        }
+
+        /// <summary>
+        /// 着地
+        /// </summary>
+        private void Land()
+        {
+            switch (State)
+            {
+                case MainMapObjectState.Standing:
+                    break;
+                case MainMapObjectState.Floating:
+                    break;
+                case MainMapObjectState.Falling:
+                    State = MainMapObjectState.Standing;
+                    break;
+                default:
+                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
+            }
         }
 
         /// <summary>
