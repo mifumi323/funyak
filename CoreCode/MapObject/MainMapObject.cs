@@ -31,7 +31,37 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 状態
         /// </summary>
-        public MainMapObjectState State { get; set; }
+        public MainMapObjectState State
+        {
+            get
+            {
+                return state;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case MainMapObjectState.Standing:
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessStanding;
+                        break;
+                    case MainMapObjectState.Floating:
+                        updateSelfPreprocess = PreprocessFloating;
+                        updateSelfMainProcess = MainProcessFloating;
+                        break;
+                    case MainMapObjectState.Falling:
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessFalling;
+                        break;
+                    default:
+                        throw new Exception("MainMapObjectのStateがおかしいぞ。");
+                }
+                state = value;
+            }
+        }
+        private MainMapObjectState state;
+        private Action updateSelfPreprocess;
+        private Action<IMapEnvironment> updateSelfMainProcess;
 
         #endregion
 
@@ -236,38 +266,23 @@ namespace MifuminSoft.funyak.MapObject
             var env = args.GetEnvironment(X, Y);
             SwitchFloatingMode(env.Gravity);
 
-            switch (State)
-            {
-                case MainMapObjectState.Standing:
-                    UpdateSelfStanding(env);
-                    break;
-                case MainMapObjectState.Floating:
-                    UpdateSelfFloating(env);
-                    break;
-                case MainMapObjectState.Falling:
-                    UpdateSelfFalling(env);
-                    break;
-                default:
-                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
-            }
+            updateSelfPreprocess();
+            updateSelfMainProcess(env);
         }
 
-        private void UpdateSelfStanding(IMapEnvironment env)
+        private void MainProcessStanding(IMapEnvironment env)
         {
-            PreprocessNotFloating();
         }
 
-        private void UpdateSelfFloating(IMapEnvironment env)
+        private void MainProcessFloating(IMapEnvironment env)
         {
-            PreprocessFloating();
             double accelX = Input.X * FloatingAccel;
             double accelY = Input.Y * FloatingAccel;
             UpdatePositionFloating(env.Wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
         }
 
-        private void UpdateSelfFalling(IMapEnvironment env)
+        private void MainProcessFalling(IMapEnvironment env)
         {
-            PreprocessNotFloating();
             double accelX = Input.X * FloatingAccel;
             double accelY = 0;
             UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
