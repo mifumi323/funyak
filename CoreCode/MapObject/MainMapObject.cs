@@ -24,11 +24,6 @@ namespace MifuminSoft.funyak.MapObject
         #region 主人公の状態
 
         /// <summary>
-        /// 浮遊モードであるか否か
-        /// </summary>
-        public bool Floating { get; set; }
-
-        /// <summary>
         /// 状態
         /// </summary>
         public MainMapObjectState State
@@ -42,14 +37,17 @@ namespace MifuminSoft.funyak.MapObject
                 switch (value)
                 {
                     case MainMapObjectState.Standing:
+                        detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessStanding;
                         break;
                     case MainMapObjectState.Floating:
+                        detectGravity = DetectGravityFloating;
                         updateSelfPreprocess = PreprocessFloating;
                         updateSelfMainProcess = MainProcessFloating;
                         break;
                     case MainMapObjectState.Falling:
+                        detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessFalling;
                         break;
@@ -60,6 +58,7 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
         private MainMapObjectState state;
+        private Action<bool> detectGravity;
         private Action updateSelfPreprocess;
         private Action<IMapEnvironment> updateSelfMainProcess;
 
@@ -252,7 +251,6 @@ namespace MifuminSoft.funyak.MapObject
         public MainMapObject(double x, double y)
         {
             State = MainMapObjectState.Floating;
-            Floating = true;
 
             Input = new NullInput();
             X = x;
@@ -264,10 +262,26 @@ namespace MifuminSoft.funyak.MapObject
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
             var env = args.GetEnvironment(X, Y);
-            SwitchFloatingMode(env.Gravity);
 
+            detectGravity(env.Gravity > 0);
             updateSelfPreprocess();
             updateSelfMainProcess(env);
+        }
+
+        private void DetectGravityNormal(bool inGravity)
+        {
+            if (!inGravity)
+            {
+                State = MainMapObjectState.Floating;
+            }
+        }
+
+        private void DetectGravityFloating(bool inGravity)
+        {
+            if (inGravity)
+            {
+                State = MainMapObjectState.Falling;
+            }
         }
 
         private void MainProcessStanding(IMapEnvironment env)
@@ -286,26 +300,6 @@ namespace MifuminSoft.funyak.MapObject
             double accelX = Input.X * FloatingAccel;
             double accelY = 0;
             UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
-        }
-
-        private void SwitchFloatingMode(double gravity)
-        {
-            if (Floating)
-            {
-                if (gravity > 0)
-                {
-                    Floating = false;
-                    State = MainMapObjectState.Falling;
-                }
-            }
-            else
-            {
-                if (gravity <= 0)
-                {
-                    Floating = true;
-                    State = MainMapObjectState.Floating;
-                }
-            }
         }
 
         /// <summary>
