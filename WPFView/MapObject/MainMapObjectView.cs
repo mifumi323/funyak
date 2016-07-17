@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View.Resource;
@@ -56,8 +57,10 @@ namespace MifuminSoft.funyak.View.MapObject
                     break;
                 case MainMapObjectState.Falling:
                     break;
-                default:
+                case MainMapObjectState.Running:
                     break;
+                default:
+                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
             ImageResource.SetToRectangle(rectangle, imageKey, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
         }

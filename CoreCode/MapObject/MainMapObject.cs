@@ -14,6 +14,7 @@ namespace MifuminSoft.funyak.MapObject
         Standing,
         Floating,
         Falling,
+        Running,
     }
 
     /// <summary>
@@ -51,12 +52,18 @@ namespace MifuminSoft.funyak.MapObject
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessFalling;
                         break;
+                    case MainMapObjectState.Running:
+                        detectGravity = DetectGravityNormal;
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessRunning;
+                        break;
                     default:
                         throw new Exception("MainMapObjectのStateがおかしいぞ。");
                 }
                 state = value;
             }
         }
+
         private MainMapObjectState state;
         private Action<bool> detectGravity;
         private Action updateSelfPreprocess;
@@ -286,6 +293,14 @@ namespace MifuminSoft.funyak.MapObject
 
         private void MainProcessStanding(IMapEnvironment env)
         {
+            if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
+            {
+                State = MainMapObjectState.Running;
+                MainProcessRunning(env);
+                return;
+            }
+
+            UpdatePosition();
         }
 
         private void MainProcessFloating(IMapEnvironment env)
@@ -300,6 +315,21 @@ namespace MifuminSoft.funyak.MapObject
             double accelX = Input.X * FloatingAccel;
             double accelY = 0;
             UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
+        }
+
+        private void MainProcessRunning(IMapEnvironment env)
+        {
+            if (!Input.IsPressed(Keys.Left) && !Input.IsPressed(Keys.Right))
+            {
+                State = MainMapObjectState.Standing;
+                MainProcessStanding(env);
+                return;
+            }
+
+            // TODO: 走る処理の仮実装。あとでちゃんとした処理に書き直す
+            if (Input.IsPressed(Keys.Left)) VelocityX -= 1;
+            if (Input.IsPressed(Keys.Right)) VelocityX += 1;
+            UpdatePosition();
         }
 
         /// <summary>
@@ -531,6 +561,8 @@ namespace MifuminSoft.funyak.MapObject
                     break;
                 case MainMapObjectState.Falling:
                     State = MainMapObjectState.Standing;
+                    break;
+                case MainMapObjectState.Running:
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
