@@ -69,6 +69,11 @@ namespace MifuminSoft.funyak.MapObject
         private Action updateSelfPreprocess;
         private Action<IMapEnvironment> updateSelfMainProcess;
 
+        /// <summary>
+        /// 方向
+        /// </summary>
+        public Direction Direction { get; set; }
+
         #endregion
 
         #region 主人公の位置
@@ -280,6 +285,7 @@ namespace MifuminSoft.funyak.MapObject
             if (!inGravity)
             {
                 State = MainMapObjectState.Floating;
+                Direction = Direction.Front;
             }
         }
 
@@ -288,6 +294,14 @@ namespace MifuminSoft.funyak.MapObject
             if (inGravity)
             {
                 State = MainMapObjectState.Falling;
+                if (Input.IsPressed(Keys.Left))
+                {
+                    Direction = Direction.Left;
+                }
+                else if (Input.IsPressed(Keys.Right))
+                {
+                    Direction = Direction.Right;
+                }
             }
         }
 
@@ -314,6 +328,14 @@ namespace MifuminSoft.funyak.MapObject
         {
             double accelX = Input.X * FloatingAccel;
             double accelY = 0;
+            if (accelX < 0)
+            {
+                Direction = Direction.Left;
+            }
+            else if (accelX > 0)
+            {
+                Direction = Direction.Right;
+            }
             UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
         }
 
@@ -327,8 +349,16 @@ namespace MifuminSoft.funyak.MapObject
             }
 
             // TODO: 走る処理の仮実装。あとでちゃんとした処理に書き直す
-            if (Input.IsPressed(Keys.Left)) VelocityX -= 1;
-            if (Input.IsPressed(Keys.Right)) VelocityX += 1;
+            if (Input.IsPressed(Keys.Left))
+            {
+                VelocityX -= 1;
+                Direction = Direction.Left;
+            }
+            else if (Input.IsPressed(Keys.Right))
+            {
+                VelocityX += 1;
+                Direction = Direction.Right;
+            }
             UpdatePosition();
         }
 

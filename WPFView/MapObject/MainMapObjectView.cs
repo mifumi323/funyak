@@ -47,21 +47,26 @@ namespace MifuminSoft.funyak.View.MapObject
             }
             AddToCanvas();
 
-            var imageKey = "Fall.F";
+            var imageKey = "Fall";
             switch (MapObject.State)
             {
                 case MainMapObjectState.Standing:
-                    imageKey = "Stand.F";
+                    imageKey = "Stand";
                     break;
                 case MainMapObjectState.Floating:
                     break;
                 case MainMapObjectState.Falling:
                     break;
                 case MainMapObjectState.Running:
+                    imageKey = "Run1";
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
+            imageKey +=
+                MapObject.Direction == Direction.Left ? ".L" :
+                MapObject.Direction == Direction.Right ? ".R" :
+                ".F";
             ImageResource.SetToRectangle(rectangle, imageKey, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
         }
 
