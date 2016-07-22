@@ -35,6 +35,8 @@ namespace MifuminSoft.funyak.MapObject
             }
             set
             {
+                if (value == state) return;
+                StateCounter = 0;
                 switch (value)
                 {
                     case MainMapObjectState.Standing:
@@ -68,6 +70,8 @@ namespace MifuminSoft.funyak.MapObject
         private Action<bool> detectGravity;
         private Action updateSelfPreprocess;
         private Action<IMapEnvironment> updateSelfMainProcess;
+
+        public int StateCounter { get; private set; }
 
         /// <summary>
         /// 方向
@@ -575,6 +579,9 @@ namespace MifuminSoft.funyak.MapObject
                 {
                     Land();
                 }
+
+                // TODO: 本来ここでやることじゃない
+                StateCounter++;
             };
         }
 
