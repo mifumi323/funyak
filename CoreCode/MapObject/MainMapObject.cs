@@ -199,6 +199,16 @@ namespace MifuminSoft.funyak.MapObject
         public int Appearance { get; set; }
 
         /// <summary>
+        /// 走行速度
+        /// </summary>
+        public double RunSpeed { get; set; } = 200.0 / 60.0;
+
+        /// <summary>
+        /// 走行加速度
+        /// </summary>
+        public double RunAccel { get; set; } = 400.0 / 60.0 / 60.0;
+
+        /// <summary>
         /// 重力加速度
         /// </summary>
         public double GravityAccel { get; set; } = 0.4 / 3;
@@ -318,6 +328,43 @@ namespace MifuminSoft.funyak.MapObject
                 return;
             }
 
+            UpdatePositionOnGround(0.0, 0.5, env.Wind);
+        }
+
+        private void UpdatePositionOnGround(double targetVelocity, double accelScale, double wind)
+        {
+            var runAccel = RunAccel * accelScale;
+            var stopFriction = runAccel * 2.0;
+            var friction = (VelocityX - wind) * FloatingFriction;
+            var overFriction = friction < -stopFriction || stopFriction < friction;
+            var accel = 0.0;
+            if (VelocityX < targetVelocity)
+            {
+                accel = runAccel - friction;
+            }
+            else if (VelocityX > targetVelocity)
+            {
+                accel = -runAccel - friction;
+            }
+            else
+            {
+                if (friction < -stopFriction)
+                {
+                    accel = -stopFriction - friction;
+                }
+                else if (RunAccel < friction)
+                {
+                    accel = stopFriction - friction;
+                }
+            }
+            VelocityX += accel;
+            if (!overFriction)
+            {
+                if ((VelocityX < targetVelocity && targetVelocity < VelocityX - accel) || (VelocityX - accel < targetVelocity && targetVelocity < VelocityX))
+                {
+                    VelocityX = targetVelocity;
+                }
+            }
             UpdatePosition();
         }
 
@@ -345,25 +392,21 @@ namespace MifuminSoft.funyak.MapObject
 
         private void MainProcessRunning(IMapEnvironment env)
         {
-            if (!Input.IsPressed(Keys.Left) && !Input.IsPressed(Keys.Right))
-            {
-                State = MainMapObjectState.Standing;
-                MainProcessStanding(env);
-                return;
-            }
-
-            // TODO: 走る処理の仮実装。あとでちゃんとした処理に書き直す
             if (Input.IsPressed(Keys.Left))
             {
-                VelocityX -= 1;
                 Direction = Direction.Left;
+                UpdatePositionOnGround(-RunSpeed, 1.0, env.Wind);
             }
             else if (Input.IsPressed(Keys.Right))
             {
-                VelocityX += 1;
                 Direction = Direction.Right;
+                UpdatePositionOnGround(RunSpeed, 1.0, env.Wind);
             }
-            UpdatePosition();
+            else
+            {
+                State = MainMapObjectState.Standing;
+                MainProcessStanding(env);
+            }
         }
 
         /// <summary>
