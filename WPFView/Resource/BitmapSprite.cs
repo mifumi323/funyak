@@ -24,7 +24,17 @@ namespace MifuminSoft.funyak.View.Resource
             }
         }
 
-        public override Brush GetBrush(string key)
+        public override Brush GetBrush(string key, int frame)
+        {
+            if (Animation.ContainsKey(key))
+            {
+                var animation = Animation[key];
+                return GetStaticBrush(animation[frame % animation.Length]);
+            }
+            return GetStaticBrush(key);
+        }
+
+        public Brush GetStaticBrush(string key)
         {
             if (knownBrush.ContainsKey(key)) return knownBrush[key];
             SpriteChipInfo info;
@@ -52,12 +62,12 @@ namespace MifuminSoft.funyak.View.Resource
             return brush;
         }
 
-        public override void SetToRectangle(Rectangle rectangle, string key, double x, double y, double scale, Transform transform)
+        public override void SetToRectangle(Rectangle rectangle, string key, int frame, double x, double y, double scale, Transform transform)
         {
             SpriteChipInfo info;
             try
             {
-                info = GetChipInfo(key);
+                info = GetChipInfo(key, frame);
             }
             catch (Exception)
             {
@@ -67,7 +77,7 @@ namespace MifuminSoft.funyak.View.Resource
             var sourceOriginY = info.ActualSourceOriginY;
             var destinationWidth = info.ActualDestinationWidth;
             var destinationHeight = info.ActualDestinationHeight;
-            rectangle.Fill = GetBrush(key);
+            rectangle.Fill = GetBrush(key, frame);
             rectangle.Width = destinationWidth * scale;
             rectangle.Height = destinationHeight * scale;
             rectangle.RenderTransformOrigin = new Point(
@@ -76,6 +86,16 @@ namespace MifuminSoft.funyak.View.Resource
             rectangle.RenderTransform = transform;
             Canvas.SetLeft(rectangle, x - destinationWidth * scale * (sourceOriginX - info.SourceLeft) / info.SourceWidth);
             Canvas.SetTop(rectangle, y - destinationHeight * scale * (sourceOriginY - info.SourceTop) / info.SourceHeight);
+        }
+
+        private SpriteChipInfo GetChipInfo(string key, int frame)
+        {
+            if (Animation.ContainsKey(key))
+            {
+                var animation = Animation[key];
+                return GetChipInfo(animation[frame % animation.Length]);
+            }
+            return GetChipInfo(key);
         }
 
         private SpriteChipInfo GetChipInfo(string key)

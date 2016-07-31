@@ -58,7 +58,7 @@ namespace MifuminSoft.funyak.View.MapObject
                 case MainMapObjectState.Falling:
                     break;
                 case MainMapObjectState.Running:
-                    imageKey = "Run1";
+                    imageKey = "Run";
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
@@ -67,7 +67,7 @@ namespace MifuminSoft.funyak.View.MapObject
                 MapObject.Direction == Direction.Left ? ".L" :
                 MapObject.Direction == Direction.Right ? ".R" :
                 ".F";
-            ImageResource.SetToRectangle(rectangle, imageKey, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
+            ImageResource.SetToRectangle(rectangle, imageKey, MapObject.StateCounter - 1, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
         }
 
         private void AddToCanvas()

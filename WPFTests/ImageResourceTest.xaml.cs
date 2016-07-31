@@ -40,7 +40,7 @@ namespace WPFTests
             var key = selected.Key;
             var scale = sliderScale.Value;
             var angle = sliderRotate.Value;
-            resource.SetToRectangle(target, key, point.X, point.Y, scale, angle);
+            resource.SetToRectangle(target, key, 0, point.X, point.Y, scale, angle);
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

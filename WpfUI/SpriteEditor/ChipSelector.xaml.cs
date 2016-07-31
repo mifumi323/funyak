@@ -106,7 +106,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             var selectedChipFill = new SolidColorBrush(Colors.Transparent);
             if (source != null)
             {
-                source.SetToRectangle(background, "", 0, 0, 1.0);
+                source.SetToRectangle(background, "", 0, 0, 0, 1.0);
                 foreach (var item in source.Chip)
                 {
                     var key = item.Key;
