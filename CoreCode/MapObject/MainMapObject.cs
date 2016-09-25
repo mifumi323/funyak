@@ -618,10 +618,7 @@ namespace MifuminSoft.funyak.MapObject
                 VelocityX = tempVX;
                 VelocityY = tempVY;
 
-                if (landed)
-                {
-                    Land();
-                }
+                RealizeCollision(landed);
 
                 // TODO: 本来ここでやることじゃない
                 StateCounter++;
@@ -629,20 +626,26 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
-        /// 着地
+        /// 衝突結果を反映
         /// </summary>
-        private void Land()
+        private void RealizeCollision(bool landed)
         {
             switch (State)
             {
                 case MainMapObjectState.Standing:
+                case MainMapObjectState.Running:
+                    if (!landed)
+                    {
+                        State = MainMapObjectState.Falling;
+                    }
                     break;
                 case MainMapObjectState.Floating:
                     break;
                 case MainMapObjectState.Falling:
-                    State = MainMapObjectState.Standing;
-                    break;
-                case MainMapObjectState.Running:
+                    if (landed)
+                    {
+                        State = MainMapObjectState.Standing;
+                    }
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
