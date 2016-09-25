@@ -245,30 +245,6 @@ namespace MifuminSoft.funyak.MapObject
 
         #endregion
 
-        class PositionAdjuster
-        {
-            private double x = 0.0;
-            private double y = 0.0;
-            private double vx = 0.0;
-            private double vy = 0.0;
-            private int count = 0;
-
-            public void Add(double x, double y, double vx, double vy)
-            {
-                this.x += x;
-                this.y += y;
-                this.vx += vx;
-                this.vy += vy;
-                count++;
-            }
-
-            public bool HasValue => count > 0;
-            public double X => x / count;
-            public double Y => y / count;
-            public double VelocityX => vx / count;
-            public double VelocityY => vy / count;
-        }
-
         /// <summary>
         /// 場所を指定して主人公のマップオブジェクトを初期化します。
         /// </summary>
@@ -549,7 +525,11 @@ namespace MifuminSoft.funyak.MapObject
                 var rightVector = rightSegment.End - rightSegment.Start;
                 var velocity = new Vector2D(tempVX, tempVY);
 
-                var adjuster = new PositionAdjuster();
+                var adjuster = new PositionAdjusterAverage();
+                var adjusterHigh = new PositionAdjusterHigh();
+                var adjusterLow = new PositionAdjusterLow();
+                var adjusterLeft = new PositionAdjusterLeft();
+                var adjusterRight = new PositionAdjusterRight();
 
                 // 線との当たり判定
                 foreach (var lineMapObject in lineMapObjects)
@@ -566,7 +546,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.Y != 0)
                         {
                             var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjuster);
+                            var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjusterHigh);
                             if (collided) landed = true;
                         }
                     }
@@ -577,7 +557,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.Y != 0)
                         {
                             var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjuster);
+                            var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjusterLow);
                         }
                     }
 
@@ -587,7 +567,7 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.X != 0)
                         {
                             var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjuster);
+                            var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjusterLeft);
                         }
                     }
 
@@ -597,11 +577,15 @@ namespace MifuminSoft.funyak.MapObject
                         if (lineNormal.X != 0)
                         {
                             var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjuster);
+                            var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjusterRight);
                         }
                     }
                 }
 
+                adjuster.Add(adjusterHigh);
+                adjuster.Add(adjusterLow);
+                adjuster.Add(adjusterLeft);
+                adjuster.Add(adjusterRight);
                 if (adjuster.HasValue)
                 {
                     tempX = adjuster.X;
@@ -663,7 +647,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="velocity">当たり判定対象の線分に対する、キャラクターの相対速度</param>
         /// <param name="adjuster">位置調整オブジェクト</param>
         /// <returns>当たっていたらtrue</returns>
-        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, PositionAdjuster adjuster)
+        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, IPositionAdjuster adjuster)
         {
             if (velocity.Dot(lineNormal) <= 0)
             {
@@ -672,7 +656,7 @@ namespace MifuminSoft.funyak.MapObject
                     var lineStartToCharaEnd = charaSegment.End - lineSegment.Start;
                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaEnd) / lineVector.LengthSq) - charaVector;
                     var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y);
+                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, lineNormal.X, lineNormal.Y);
 
                     return true;
                 }

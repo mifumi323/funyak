@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CheckMapObjectCollisionArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Collision2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\PositionAdjuster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Segment2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Vector2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />
