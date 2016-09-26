@@ -5,6 +5,8 @@
     /// </summary>
     public static class Collision2D
     {
+        public const double DELTA = 0.0001;
+
         /// <summary>
         /// 線分と線分の交差判定を行います。
         /// 参考：http://marupeke296.com/COL_2D_No10_SegmentAndSegment.html
@@ -31,7 +33,7 @@
             var t1 = crs_v_v2 / crs_v1_v2;
             var t2 = crs_v_v1 / crs_v1_v2;
 
-            return 0 <= t1 && t1 <= 1 && 0 <= t2 && t2 <= 1;
+            return -DELTA <= t1 && t1 <= 1 + DELTA && -DELTA <= t2 && t2 <= 1 + DELTA;
         }
 
         /// <summary>
@@ -60,7 +62,7 @@
             var t1 = crs_v_v2 / crs_v1_v2;
             var t2 = crs_v_v1 / crs_v1_v2;
 
-            return 0 <= t1 && t1 <= 1 && 0 <= t2 && t2 <= 1 ?
+            return -DELTA <= t1 && t1 <= 1 + DELTA && -DELTA <= t2 && t2 <= 1 + DELTA ?
                 s1.Start + v1 * t1:
                 null;
         }

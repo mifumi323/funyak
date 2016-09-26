@@ -649,7 +649,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <returns>当たっていたらtrue</returns>
         private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, IPositionAdjuster adjuster)
         {
-            if (velocity.Dot(lineNormal) <= 0)
+            if (velocity.Dot(lineNormal) <= Collision2D.DELTA)
             {
                 if (Collision2D.SegmentSegment(charaSegment, lineSegment))
                 {
