@@ -118,6 +118,16 @@ namespace MifuminSoft.funyak.MapObject
         public double AngularVelocity { get; set; }
 
         /// <summary>
+        /// 地面の法線のX成分
+        /// </summary>
+        public double GroundNormalX { get; set; }
+
+        /// <summary>
+        /// 地面の法線のY成分
+        /// </summary>
+        public double GroundNormalY { get; set; }
+
+        /// <summary>
         /// 前フレームのX座標
         /// </summary>
         public double PreviousX { get; set; }
@@ -259,6 +269,8 @@ namespace MifuminSoft.funyak.MapObject
             Y = y;
             VelocityX = 0;
             VelocityY = 0;
+            GroundNormalX = 0.0;
+            GroundNormalY = -1.0;
         }
 
         public void UpdateSelf(UpdateMapObjectArgs args)
@@ -497,6 +509,8 @@ namespace MifuminSoft.funyak.MapObject
             var tempY = Y;
             var tempVX = VelocityX;
             var tempVY = VelocityY;
+            var tempNX = GroundNormalX;
+            var tempNY = GroundNormalY;
             var landed = false;
 
             // X軸移動とY軸移動が別々に起こったものとして2回判定を行う。
@@ -512,6 +526,7 @@ namespace MifuminSoft.funyak.MapObject
                 {
                     // 2回目はY軸移動後
                     tempY += tempVY;
+                    landed = false;
                 }
 
                 // 当たり判定用図形を生成
@@ -593,6 +608,11 @@ namespace MifuminSoft.funyak.MapObject
                     tempVX = adjuster.VelocityX;
                     tempVY = adjuster.VelocityY;
                 }
+                if (landed)
+                {
+                    tempNX = adjusterHigh.NormalX;
+                    tempNY = adjusterHigh.NormalY;
+                }
             }
 
             return () =>
@@ -601,6 +621,8 @@ namespace MifuminSoft.funyak.MapObject
                 Y = tempY;
                 VelocityX = tempVX;
                 VelocityY = tempVY;
+                GroundNormalX = tempNX;
+                GroundNormalY = tempNY;
 
                 RealizeCollision(landed);
 
