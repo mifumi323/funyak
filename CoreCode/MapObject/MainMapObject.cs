@@ -321,38 +321,52 @@ namespace MifuminSoft.funyak.MapObject
 
         private void UpdatePositionOnGround(double targetVelocity, double accelScale, double wind)
         {
-            var runAccel = RunAccel * accelScale;
+            // 地面の方向
+            var groundX = -GroundNormalY;
+            var groundY = GroundNormalX;
+            // 地面方向の速度
+            var velocityH = VelocityX * groundX + VelocityY * groundY;
+            // 地面方向の風
+            var windH = wind * groundX;
+            // 走る力
+            var runAccel = RunAccel * accelScale * groundX;
+            // 静止摩擦力
             var stopFriction = runAccel * 2.0;
-            var friction = (VelocityX - wind) * FloatingFriction;
+            // 空気抵抗
+            var friction = (velocityH - windH) * FloatingFriction;
+            // 動く力が静止摩擦を超えているか
             var overFriction = friction < -stopFriction || stopFriction < friction;
-            var accel = 0.0;
+            // 加速度
+            var accelH = 0.0;
             if (VelocityX < targetVelocity)
             {
-                accel = runAccel - friction;
+                accelH = runAccel - friction;
             }
             else if (VelocityX > targetVelocity)
             {
-                accel = -runAccel - friction;
+                accelH = -runAccel - friction;
             }
             else
             {
                 if (friction < -stopFriction)
                 {
-                    accel = -stopFriction - friction;
+                    accelH = -stopFriction - friction;
                 }
                 else if (RunAccel < friction)
                 {
-                    accel = stopFriction - friction;
+                    accelH = stopFriction - friction;
                 }
             }
-            VelocityX += accel;
+            velocityH += accelH;
             if (!overFriction)
             {
-                if ((VelocityX < targetVelocity && targetVelocity < VelocityX - accel) || (VelocityX - accel < targetVelocity && targetVelocity < VelocityX))
+                if ((velocityH < targetVelocity && targetVelocity < velocityH - accelH) || (velocityH - accelH < targetVelocity && targetVelocity < velocityH))
                 {
-                    VelocityX = targetVelocity;
+                    velocityH = targetVelocity;
                 }
             }
+            VelocityX = velocityH * groundX;
+            VelocityY = velocityH * groundY;
             UpdatePosition();
         }
 
