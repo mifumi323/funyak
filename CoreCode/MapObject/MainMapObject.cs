@@ -527,106 +527,89 @@ namespace MifuminSoft.funyak.MapObject
             var tempNY = GroundNormalY;
             var landed = false;
 
-            // X軸移動とY軸移動が別々に起こったものとして2回判定を行う。
-            // こうすることにより、すり抜けバグを防止できる。
-            for (int i = 0; i < 2; i++)
+            // 当たり判定用図形を生成
+            var topSegment = new Segment2D(tempX, tempY, tempX, GetTop(tempY));
+            var bottomSegment = new Segment2D(tempX, tempY, tempX, GetBottom(tempY));
+            var leftSegment = new Segment2D(tempX, tempY, GetLeft(tempX), tempY);
+            var rightSegment = new Segment2D(tempX, tempY, GetRight(tempX), tempY);
+            var topVector = topSegment.End - topSegment.Start;
+            var bottomVector = bottomSegment.End - bottomSegment.Start;
+            var leftVector = leftSegment.End - leftSegment.Start;
+            var rightVector = rightSegment.End - rightSegment.Start;
+            var velocity = new Vector2D(tempVX, tempVY);
+
+            var adjuster = new PositionAdjusterAverage();
+            var adjusterHigh = new PositionAdjusterHigh();
+            var adjusterLow = new PositionAdjusterLow();
+            var adjusterLeft = new PositionAdjusterLeft();
+            var adjusterRight = new PositionAdjusterRight();
+
+            // 線との当たり判定
+            foreach (var lineMapObject in lineMapObjects)
             {
-                if (i == 0)
+                var lineSegment = lineMapObject.ToSegment2D();
+                var lineVector = lineSegment.End - lineSegment.Start;
+                var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
+                lineNormal.Norm();
+                var lineNormalNegative = -lineNormal;
+
+                // 主人公の下側と線の上側
+                if (lineMapObject.HitUpper)
                 {
-                    // 1回目はY軸移動前
-                    tempY -= tempVY;
-                }
-                else
-                {
-                    // 2回目はY軸移動後
-                    tempY += tempVY;
-                    landed = false;
-                }
-
-                // 当たり判定用図形を生成
-                var topSegment = new Segment2D(tempX, tempY, tempX, GetTop(tempY));
-                var bottomSegment = new Segment2D(tempX, tempY, tempX, GetBottom(tempY));
-                var leftSegment = new Segment2D(tempX, tempY, GetLeft(tempX), tempY);
-                var rightSegment = new Segment2D(tempX, tempY, GetRight(tempX), tempY);
-                var topVector = topSegment.End - topSegment.Start;
-                var bottomVector = bottomSegment.End - bottomSegment.Start;
-                var leftVector = leftSegment.End - leftSegment.Start;
-                var rightVector = rightSegment.End - rightSegment.Start;
-                var velocity = new Vector2D(tempVX, tempVY);
-
-                var adjuster = new PositionAdjusterAverage();
-                var adjusterHigh = new PositionAdjusterHigh();
-                var adjusterLow = new PositionAdjusterLow();
-                var adjusterLeft = new PositionAdjusterLeft();
-                var adjusterRight = new PositionAdjusterRight();
-
-                // 線との当たり判定
-                foreach (var lineMapObject in lineMapObjects)
-                {
-                    var lineSegment = lineMapObject.ToSegment2D();
-                    var lineVector = lineSegment.End - lineSegment.Start;
-                    var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
-                    lineNormal.Norm();
-                    var lineNormalNegative = -lineNormal;
-
-                    // 主人公の下側と線の上側
-                    if (lineMapObject.HitUpper)
+                    if (lineNormal.Y != 0)
                     {
-                        if (lineNormal.Y != 0)
-                        {
-                            var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjusterHigh);
-                            if (collided) landed = true;
-                        }
-                    }
-
-                    // 主人公の上側と線の下側
-                    if (lineMapObject.HitBelow)
-                    {
-                        if (lineNormal.Y != 0)
-                        {
-                            var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjusterLow);
-                        }
-                    }
-
-                    // 主人公の右側と線の左側
-                    if (lineMapObject.HitLeft)
-                    {
-                        if (lineNormal.X != 0)
-                        {
-                            var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjusterLeft);
-                        }
-                    }
-
-                    // 主人公の左側と線の右側
-                    if (lineMapObject.HitRight)
-                    {
-                        if (lineNormal.X != 0)
-                        {
-                            var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                            var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjusterRight);
-                        }
+                        var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
+                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjusterHigh);
+                        if (collided) landed = true;
                     }
                 }
 
-                adjuster.Add(adjusterHigh);
-                adjuster.Add(adjusterLow);
-                adjuster.Add(adjusterLeft);
-                adjuster.Add(adjusterRight);
-                if (adjuster.HasValue)
+                // 主人公の上側と線の下側
+                if (lineMapObject.HitBelow)
                 {
-                    tempX = adjuster.X;
-                    tempY = adjuster.Y;
-                    tempVX = adjuster.VelocityX;
-                    tempVY = adjuster.VelocityY;
+                    if (lineNormal.Y != 0)
+                    {
+                        var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
+                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjusterLow);
+                    }
                 }
-                if (landed)
+
+                // 主人公の右側と線の左側
+                if (lineMapObject.HitLeft)
                 {
-                    tempNX = adjusterHigh.NormalX;
-                    tempNY = adjusterHigh.NormalY;
+                    if (lineNormal.X != 0)
+                    {
+                        var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
+                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjusterLeft);
+                    }
                 }
+
+                // 主人公の左側と線の右側
+                if (lineMapObject.HitRight)
+                {
+                    if (lineNormal.X != 0)
+                    {
+                        var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
+                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjusterRight);
+                    }
+                }
+            }
+
+            adjuster.Add(adjusterHigh);
+            adjuster.Add(adjusterLow);
+            adjuster.Add(adjusterLeft);
+            adjuster.Add(adjusterRight);
+            if (adjuster.HasValue)
+            {
+                tempX = adjuster.X;
+                tempY = adjuster.Y;
+                tempVX = adjuster.VelocityX;
+                tempVY = adjuster.VelocityY;
+            }
+            if (landed)
+            {
+                tempNX = adjusterHigh.NormalX;
+                tempNY = adjusterHigh.NormalY;
             }
 
             return () =>
