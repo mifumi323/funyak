@@ -93,6 +93,9 @@
     <Compile Include="MapIOTest.xaml.cs">
       <DependentUpon>MapIOTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NormalUnitTest.xaml.cs">
+      <DependentUpon>NormalUnitTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MapIOTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NormalUnitTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +192,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreTests\CoreTests.csproj">
+      <Project>{56934c3a-b143-47d7-80a6-df6c1c8aef0f}</Project>
+      <Name>CoreTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e20b6550-ce87-4c30-aae0-7798a5936672}</Project>
       <Name>Core</Name>
