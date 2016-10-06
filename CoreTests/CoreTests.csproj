@@ -53,6 +53,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CollisionHelperTest.cs" />
+    <Compile Include="GameTest\GameTestBase.cs" />
     <Compile Include="LineMapObjectTest.cs" />
     <Compile Include="MainMapObjectTest.cs" />
     <Compile Include="MapTest.cs" />
@@ -62,6 +63,10 @@
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e20b6550-ce87-4c30-aae0-7798a5936672}</Project>
       <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{c8d2ebb6-c260-48ca-b5e9-e91b602c1930}</Project>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
