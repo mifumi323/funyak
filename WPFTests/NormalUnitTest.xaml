@@ -16,8 +16,8 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <ListBox x:Name="lbTestCase" Grid.ColumnSpan="2" SelectionMode="Multiple"></ListBox>
-        <Button x:Name="btnTestSelected" Grid.Row="1">選択項目をテスト</Button>
-        <Button x:Name="btnTestAll" Grid.Row="1" Grid.Column="1">全部テスト</Button>
+        <ListBox x:Name="lbTestCase" Grid.ColumnSpan="2" SelectionMode="Extended"></ListBox>
+        <Button x:Name="btnTestSelected" Grid.Row="1" Click="btnTestSelected_Click">選択項目をテスト</Button>
+        <Button x:Name="btnTestAll" Grid.Row="1" Grid.Column="1" Click="btnTestAll_Click">全部テスト</Button>
     </Grid>
 </Page>
