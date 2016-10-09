@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MifuminSoft.funyak.Data;
 using MifuminSoft.funyak.Input;
@@ -29,9 +25,15 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
 
         /// <summary>
         /// テストの規定時間(フレーム数単位)
-        /// このフレーム数経過してもテスト成功しなければ失敗とみなします。
+        /// このフレーム数が経過した時点でテストを終了します。
         /// </summary>
         public int TimeOutFrames { get; protected set; }
+
+        /// <summary>
+        /// テストの規定時間が経過しても結果が出なかった場合に失敗にする場合true
+        /// falseの場合、テストの規定時間が経過した時点で失敗でなければ成功とみなされます。
+        /// </summary>
+        public bool FailOnTimeOut { get; protected set; }
 
         /// <summary>
         /// フレームごとの待機処理を設定します。
@@ -59,7 +61,7 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
                     }
                     WaitFrame?.Invoke();
                 }
-                Assert.Fail("テストが規定時間以内に完了しませんでした。");
+                if (FailOnTimeOut) Assert.Fail("テストが規定時間以内に成功しませんでした。");
             }
             finally
             {
