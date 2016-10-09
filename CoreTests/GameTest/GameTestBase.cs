@@ -18,6 +18,16 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
         public string MapFilePath { get; protected set; }
 
         /// <summary>
+        /// テスト中のマップ
+        /// </summary>
+        public Map Map { get; protected set; }
+
+        /// <summary>
+        /// テスト用の入力
+        /// </summary>
+        public IInput Input { get; protected set; }
+
+        /// <summary>
         /// テストの規定時間(フレーム数単位)
         /// このフレーム数経過してもテスト成功しなければ失敗とみなします。
         /// </summary>
@@ -54,9 +64,9 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
         /// </summary>
         public virtual void Initialize()
         {
-            var map = MapReader.FromString(File.ReadAllText(MapFilePath), new MapReaderOption()
+            Map = MapReader.FromString(File.ReadAllText(MapFilePath), new MapReaderOption()
             {
-                Input = new NullInput(),
+                Input = Input ?? new NullInput(),
             });
         }
 
@@ -65,6 +75,8 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
         /// </summary>
         public virtual void OnFrame()
         {
+            Input.Update();
+            Map.Update();
         }
 
         /// <summary>
