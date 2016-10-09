@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="CollisionHelperTest.cs" />
     <Compile Include="GameTest\GameTestBase.cs" />
+    <Compile Include="GameTest\GameTestBaseTest.cs" />
     <Compile Include="LineMapObjectTest.cs" />
     <Compile Include="MainMapObjectTest.cs" />
     <Compile Include="MapTest.cs" />
@@ -68,6 +69,11 @@
       <Project>{c8d2ebb6-c260-48ca-b5e9-e91b602c1930}</Project>
       <Name>Data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestFiles\GameTestBaseTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
