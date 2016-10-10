@@ -149,7 +149,7 @@ namespace MifuminSoft.funyak
         /// <returns>重力(0.0が無重力、1.0が通常)</returns>
         public double GetGravity(double x, double y)
         {
-            return GetEnvironment(x, y).Gravity;
+            return GetEnvironment(x, y, me => !double.IsNaN(me.Gravity)).Gravity;
         }
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace MifuminSoft.funyak
         /// <returns>風速(0.0：無風、正の数：右向きの風、負の数：左向きの風)</returns>
         public double GetWind(double x, double y)
         {
-            return GetEnvironment(x, y).Wind;
+            return GetEnvironment(x, y, me => !double.IsNaN(me.Wind)).Wind;
         }
 
         /// <summary>
@@ -172,6 +172,18 @@ namespace MifuminSoft.funyak
         public IMapEnvironment GetEnvironment(double x, double y)
         {
             return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom) ?? this;
+        }
+
+        /// <summary>
+        /// 指定した位置の環境情報を取得します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
+        /// <param name="predicate">追加の条件</param>
+        /// <returns>環境</returns>
+        public IMapEnvironment GetEnvironment(double x, double y, Func<AreaEnvironment, bool> predicate)
+        {
+            return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom && predicate(me)) ?? this;
         }
     }
 }
