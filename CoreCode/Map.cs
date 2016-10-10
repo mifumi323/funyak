@@ -44,6 +44,11 @@ namespace MifuminSoft.funyak
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
 
+        /// <summary>
+        /// 環境が追加されたときに発生します。
+        /// </summary>
+        public event EventHandler<AreaEnvironmentEventArgs> AreaEnvironmentAdded;
+
         private ICollection<AreaEnvironment> areaEnvironmentCollection;
 
         /// <summary>
@@ -75,6 +80,16 @@ namespace MifuminSoft.funyak
             if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
+        }
+
+        /// <summary>
+        /// 環境を追加します。
+        /// </summary>
+        /// <param name="mapObject">追加するマップオブジェクト</param>
+        public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
+        {
+            areaEnvironmentCollection.Add(areaEnvironment);
+            AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
         /// <summary>
