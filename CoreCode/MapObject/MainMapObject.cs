@@ -71,7 +71,7 @@ namespace MifuminSoft.funyak.MapObject
         private Action updateSelfPreprocess;
         private Action<IMapEnvironment> updateSelfMainProcess;
 
-        public int StateCounter { get; private set; }
+        public int StateCounter { get; set; }
 
         /// <summary>
         /// 方向
