@@ -28,11 +28,11 @@
         /// <summary>
         /// 重力を取得または設定します。
         /// </summary>
-        public double Gravity { get; set; } = 1.0;
+        public double Gravity { get; set; } = double.NaN;
 
         /// <summary>
         /// 風速を取得または設定します。
         /// </summary>
-        public double Wind { get; set; } = 0.0;
+        public double Wind { get; set; } = double.NaN;
     }
 }

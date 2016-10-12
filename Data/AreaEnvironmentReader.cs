@@ -1,5 +1,4 @@
-﻿using System;
-using MifuminSoft.funyak.MapEnvironment;
+﻿using MifuminSoft.funyak.MapEnvironment;
 using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.Data
@@ -20,8 +19,8 @@ namespace MifuminSoft.funyak.Data
                 Right = data.r ?? double.PositiveInfinity,
                 Bottom = data.b ?? double.PositiveInfinity,
 
-                Gravity = data.g ?? 1.0,
-                Wind = data.w ?? 0.0,
+                Gravity = data.g ?? double.NaN,
+                Wind = data.w ?? double.NaN,
             };
         }
     }
