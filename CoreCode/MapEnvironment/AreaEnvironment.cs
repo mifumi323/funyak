@@ -34,5 +34,11 @@
         /// 風速を取得または設定します。
         /// </summary>
         public double Wind { get; set; } = double.NaN;
+
+        /// <summary>
+        /// 背景色を取得または設定します。
+        /// (未指定または無効な色の場合透明)
+        /// </summary>
+        public string BackgroundColor { get; set; } = null;
     }
 }
