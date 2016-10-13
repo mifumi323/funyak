@@ -185,5 +185,14 @@ namespace MifuminSoft.funyak
         {
             return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom && predicate(me)) ?? this;
         }
+
+        /// <summary>
+        /// 全ての局所的環境を取得します。
+        /// </summary>
+        /// <returns>環境</returns>
+        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment()
+        {
+            return areaEnvironmentCollection;
+        }
     }
 }

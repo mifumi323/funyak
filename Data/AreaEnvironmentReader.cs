@@ -21,6 +21,8 @@ namespace MifuminSoft.funyak.Data
 
                 Gravity = data.g ?? double.NaN,
                 Wind = data.w ?? double.NaN,
+
+                BackgroundColor = data.c,
             };
         }
     }
