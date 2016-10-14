@@ -14,6 +14,8 @@ namespace MifuminSoft.funyak.Data
         {
             return new AreaEnvironment()
             {
+                Name = data.n ?? null,
+
                 Left = data.l ?? double.NegativeInfinity,
                 Top = data.t ?? double.NegativeInfinity,
                 Right = data.r ?? double.PositiveInfinity,

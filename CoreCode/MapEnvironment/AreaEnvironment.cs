@@ -6,6 +6,11 @@
     public class AreaEnvironment : IMapEnvironment, IBounds
     {
         /// <summary>
+        /// 名前を取得または設定します。
+        /// </summary>
+        public string Name { get; set; } = null;
+
+        /// <summary>
         /// 環境の適用範囲の左端を取得または設定します。
         /// </summary>
         public double Left { get; set; } = double.NegativeInfinity;

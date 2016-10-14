@@ -50,6 +50,7 @@ namespace MifuminSoft.funyak
         public event EventHandler<AreaEnvironmentEventArgs> AreaEnvironmentAdded;
 
         private ICollection<AreaEnvironment> areaEnvironmentCollection;
+        private IDictionary<string, AreaEnvironment> namedAreaEnvironment;
 
         /// <summary>
         /// ゲームのマップを初期化します。
@@ -67,6 +68,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
+            namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
         }
 
         /// <summary>
@@ -89,6 +91,7 @@ namespace MifuminSoft.funyak
         public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
         {
             areaEnvironmentCollection.Add(areaEnvironment);
+            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name] = areaEnvironment;
             AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
@@ -193,6 +196,18 @@ namespace MifuminSoft.funyak
         public IEnumerable<AreaEnvironment> GetAllAreaEnvironment()
         {
             return areaEnvironmentCollection;
+        }
+
+        /// <summary>
+        /// 名前で局所的環境を検索します。
+        /// </summary>
+        /// <param name="name">局所的環境の名前</param>
+        /// <returns></returns>
+        public AreaEnvironment FindAreaEnvironment(string name)
+        {
+            AreaEnvironment area = null;
+            namedAreaEnvironment.TryGetValue(name, out area);
+            return area;
         }
     }
 }
