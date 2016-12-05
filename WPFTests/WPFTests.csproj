@@ -76,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameUnitTest.xaml.cs">
+      <DependentUpon>GameUnitTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageMagickTest.xaml.cs">
       <DependentUpon>ImageMagickTest.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
     <Compile Include="SpriteEditorTest.xaml.cs">
       <DependentUpon>SpriteEditorTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="GameUnitTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImageMagickTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -10,6 +10,13 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
     [TestClass]
     public class GameTestBaseTest : GameTestBase
     {
+        public GameTestBaseTest()
+        {
+            MapFilePath = @"TestFiles\GameTestBaseTest.json";
+            FailOnTimeout = false;
+            TimeoutFrames = 100;
+        }
+
         public override bool IsSuccess()
         {
             return false;

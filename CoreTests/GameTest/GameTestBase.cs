@@ -6,6 +6,10 @@ using MifuminSoft.funyak.Input;
 
 namespace MifuminSoft.funyak.Core.Tests.GameTest
 {
+    /// <summary>
+    /// ゲーム画面上で動くテストを行います。
+    /// 基本的に、派生クラスで1クラスにつき1テストを実装してください。
+    /// </summary>
     public abstract class GameTestBase
     {
         /// <summary>
@@ -36,13 +40,6 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
         public bool FailOnTimeout { get; protected set; }
 
         /// <summary>
-        /// フレームごとの待機処理を設定します。
-        /// UI上のテストのための設定項目です。
-        /// nullの場合、待ちません。
-        /// </summary>
-        public Action WaitFrame { get; set; }
-
-        /// <summary>
         /// テストを行います。
         /// 派生クラスで、TestMethod属性を付けたメソッドから呼び出してください。
         /// </summary>
@@ -59,7 +56,6 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
                         // テスト成功！
                         return;
                     }
-                    WaitFrame?.Invoke();
                 }
                 if (FailOnTimeout) Assert.Fail("テストが規定時間以内に成功しませんでした。");
             }
