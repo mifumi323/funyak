@@ -139,6 +139,8 @@ namespace WPFTests
 
         MapView mapView = null;
         Sprite resource;
+        int resultFrame = 0;
+        const int ResultFrameMax = 60;
 
         public GameUnitTest()
         {
@@ -165,7 +167,7 @@ namespace WPFTests
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
-            if (executingTestProcess == null)
+            if (executingTestProcess == null || resultFrame >= ResultFrameMax)
             {
                 if (testProcessList.Count > 0)
                 {
@@ -183,22 +185,28 @@ namespace WPFTests
                         Canvas = canvas,
                         FocusTo = map.GetMapObjects().FirstOrDefault()
                     };
+                    lblResult.Content = null;
+                    lbTestCase.Items.Refresh();
+                    resultFrame = 0;
+                }
+            }
+            if (executingTestProcess != null)
+            {
+                if (executingTestProcess.TestCase.TestResult == TestCase.Result.None)
+                {
+                    executingTestProcess.OnFrame();
+                    if (executingTestProcess.TestCase.TestResult != TestCase.Result.None)
+                    {
+                        executingTestProcess.Terminate();
+                        lblResult.Content = executingTestProcess.TestCase.TestResult;
+                        lbTestCase.Items.Refresh();
+                    }
                 }
                 else
                 {
-                    return;
+                    resultFrame++;
                 }
-            }
-            if (executingTestProcess != null && executingTestProcess.TestCase.TestResult == TestCase.Result.None)
-            {
-                executingTestProcess.OnFrame();
-                mapView.Update(1.0);
-                if (executingTestProcess.TestCase.TestResult != TestCase.Result.None)
-                {
-                    executingTestProcess.Terminate();
-                    executingTestProcess = null;
-                    lbTestCase.Items.Refresh();
-                }
+                mapView.Update(sliderScale.Value);
             }
         }
 
