@@ -24,6 +24,11 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
+        /// 名前
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// 始点のX座標
         /// </summary>
         public double X1

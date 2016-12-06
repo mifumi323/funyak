@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MifuminSoft.funyak.MapEnvironment;
+using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Core.Tests
 {
@@ -12,6 +13,24 @@ namespace MifuminSoft.funyak.Core.Tests
             var map = new Map(320, 224);
             Assert.AreEqual(320, map.Width);
             Assert.AreEqual(224, map.Height);
+        }
+
+        [TestMethod]
+        public void FindMapObjectTest()
+        {
+            var map = new Map(320, 224);
+            var namedMapObject = new MainMapObject(80, 112)
+            {
+                Name = "knownName",
+            };
+            map.AddMapObject(namedMapObject);
+            var unnamedMapObject = new MainMapObject(240, 112)
+            {
+            };
+            map.AddMapObject(unnamedMapObject);
+
+            Assert.AreEqual(namedMapObject, map.FindMapObject("knownName"), "既知の名前によるマップオブジェクトの検索に失敗");
+            Assert.AreEqual(null, map.FindAreaEnvironment("unknownName"), "未知の名前によるマップオブジェクトの検索に失敗");
         }
 
         [TestMethod]
@@ -28,8 +47,8 @@ namespace MifuminSoft.funyak.Core.Tests
             };
             map.AddAreaEnvironment(unnamedArea);
 
-            Assert.AreEqual(map.FindAreaEnvironment("knownName"), namedArea, "既知の名前による局所的環境の検索に失敗");
-            Assert.AreEqual(map.FindAreaEnvironment("unknownName"), null, "未知の名前による局所的環境の検索に失敗");
+            Assert.AreEqual(namedArea, map.FindAreaEnvironment("knownName"), "既知の名前による局所的環境の検索に失敗");
+            Assert.AreEqual(null, map.FindAreaEnvironment("unknownName"), "未知の名前による局所的環境の検索に失敗");
         }
     }
 }

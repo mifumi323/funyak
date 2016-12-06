@@ -25,6 +25,8 @@ namespace MifuminSoft.funyak.Data
             {
                 Input = option.Input,
 
+                Name = data.n,
+
                 VelocityX = data.vx ?? 0.0,
                 VelocityY = data.vy ?? 0.0,
                 Angle = data.a ?? 0.0,
@@ -47,6 +49,7 @@ namespace MifuminSoft.funyak.Data
         private static IMapObject GenerateLineMapObject(dynamic data, MapReaderOption option)
         {
             var lineMapObject = new LineMapObject((double)(data.x1 ?? 0.0), (double)(data.y1 ?? 0.0), (double)(data.x2 ?? 0.0), (double)(data.y2 ?? 0.0));
+            lineMapObject.Name = data.n;
             if (data.color != null) lineMapObject.Color = (string)data.color;
             if (data.hit != null) lineMapObject.HitUpper = lineMapObject.HitBelow = lineMapObject.HitLeft = lineMapObject.HitRight = (bool)data.hit;
             if (data.ht != null) lineMapObject.HitUpper = (bool)data.ht;

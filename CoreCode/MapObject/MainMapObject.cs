@@ -25,6 +25,11 @@ namespace MifuminSoft.funyak.MapObject
         #region 主人公の状態
 
         /// <summary>
+        /// 名前
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// 状態
         /// </summary>
         public MainMapObjectState State
