@@ -6,6 +6,11 @@
     public class AreaEnvironment : IMapEnvironment, IBounds
     {
         /// <summary>
+        /// 名前を取得または設定します。
+        /// </summary>
+        public string Name { get; set; } = null;
+
+        /// <summary>
         /// 環境の適用範囲の左端を取得または設定します。
         /// </summary>
         public double Left { get; set; } = double.NegativeInfinity;
@@ -28,11 +33,17 @@
         /// <summary>
         /// 重力を取得または設定します。
         /// </summary>
-        public double Gravity { get; set; } = 1.0;
+        public double Gravity { get; set; } = double.NaN;
 
         /// <summary>
         /// 風速を取得または設定します。
         /// </summary>
-        public double Wind { get; set; } = 0.0;
+        public double Wind { get; set; } = double.NaN;
+
+        /// <summary>
+        /// 背景色を取得または設定します。
+        /// (未指定または無効な色の場合透明)
+        /// </summary>
+        public string BackgroundColor { get; set; } = null;
     }
 }

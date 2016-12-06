@@ -20,7 +20,7 @@ namespace MifuminSoft.funyak.View.Resource
                 var info = JsonConvert.DeserializeObject<SpriteFileInfo>(jsondata);
                 info.SetToImageResource(resource);
             }
-            catch (Exception e) { }
+            catch (Exception) { }
             return resource;
         }
     }

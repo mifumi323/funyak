@@ -44,7 +44,13 @@ namespace MifuminSoft.funyak
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
 
+        /// <summary>
+        /// 環境が追加されたときに発生します。
+        /// </summary>
+        public event EventHandler<AreaEnvironmentEventArgs> AreaEnvironmentAdded;
+
         private ICollection<AreaEnvironment> areaEnvironmentCollection;
+        private IDictionary<string, AreaEnvironment> namedAreaEnvironment;
 
         /// <summary>
         /// ゲームのマップを初期化します。
@@ -62,6 +68,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
+            namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
         }
 
         /// <summary>
@@ -75,6 +82,17 @@ namespace MifuminSoft.funyak
             if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
+        }
+
+        /// <summary>
+        /// 環境を追加します。
+        /// </summary>
+        /// <param name="mapObject">追加するマップオブジェクト</param>
+        public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
+        {
+            areaEnvironmentCollection.Add(areaEnvironment);
+            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name] = areaEnvironment;
+            AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
         /// <summary>
@@ -134,7 +152,7 @@ namespace MifuminSoft.funyak
         /// <returns>重力(0.0が無重力、1.0が通常)</returns>
         public double GetGravity(double x, double y)
         {
-            return GetEnvironment(x, y).Gravity;
+            return GetEnvironment(x, y, me => !double.IsNaN(me.Gravity)).Gravity;
         }
 
         /// <summary>
@@ -145,7 +163,7 @@ namespace MifuminSoft.funyak
         /// <returns>風速(0.0：無風、正の数：右向きの風、負の数：左向きの風)</returns>
         public double GetWind(double x, double y)
         {
-            return GetEnvironment(x, y).Wind;
+            return GetEnvironment(x, y, me => !double.IsNaN(me.Wind)).Wind;
         }
 
         /// <summary>
@@ -157,6 +175,39 @@ namespace MifuminSoft.funyak
         public IMapEnvironment GetEnvironment(double x, double y)
         {
             return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom) ?? this;
+        }
+
+        /// <summary>
+        /// 指定した位置の環境情報を取得します。
+        /// </summary>
+        /// <param name="x">X座標</param>
+        /// <param name="y">Y座標</param>
+        /// <param name="predicate">追加の条件</param>
+        /// <returns>環境</returns>
+        public IMapEnvironment GetEnvironment(double x, double y, Func<AreaEnvironment, bool> predicate)
+        {
+            return (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom && predicate(me)) ?? this;
+        }
+
+        /// <summary>
+        /// 全ての局所的環境を取得します。
+        /// </summary>
+        /// <returns>環境</returns>
+        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment()
+        {
+            return areaEnvironmentCollection;
+        }
+
+        /// <summary>
+        /// 名前で局所的環境を検索します。
+        /// </summary>
+        /// <param name="name">局所的環境の名前</param>
+        /// <returns></returns>
+        public AreaEnvironment FindAreaEnvironment(string name)
+        {
+            AreaEnvironment area = null;
+            namedAreaEnvironment.TryGetValue(name, out area);
+            return area;
         }
     }
 }

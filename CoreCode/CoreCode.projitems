@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Input\NullInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Map.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment\AreaEnvironment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment\AreaEnvironmentEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment\IMapEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\IMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />

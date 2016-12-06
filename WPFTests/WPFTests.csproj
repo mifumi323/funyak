@@ -54,6 +54,7 @@
       <HintPath>..\packages\Magick.NET-Q8-AnyCPU.7.0.2.100\lib\net40-client\Magick.NET-Q8-AnyCPU.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -75,6 +76,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GameUnitTest.xaml.cs">
+      <DependentUpon>GameUnitTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImageMagickTest.xaml.cs">
       <DependentUpon>ImageMagickTest.xaml</DependentUpon>
     </Compile>
@@ -93,12 +97,19 @@
     <Compile Include="MapIOTest.xaml.cs">
       <DependentUpon>MapIOTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NormalUnitTest.xaml.cs">
+      <DependentUpon>NormalUnitTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RectangleTest.xaml.cs">
       <DependentUpon>RectangleTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="SpriteEditorTest.xaml.cs">
       <DependentUpon>SpriteEditorTest.xaml</DependentUpon>
     </Compile>
+    <Page Include="GameUnitTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImageMagickTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +143,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MapIOTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NormalUnitTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +200,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreTests\CoreTests.csproj">
+      <Project>{56934c3a-b143-47d7-80a6-df6c1c8aef0f}</Project>
+      <Name>CoreTests</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
       <Project>{e20b6550-ce87-4c30-aae0-7798a5936672}</Project>
       <Name>Core</Name>

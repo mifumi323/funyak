@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
 
-namespace MifuminSoft.funyak.View.MapObject
+namespace MifuminSoft.funyak.View.AreaEnvironment
 {
-    public interface IMapObjectView
+    public interface IAreaEnvironmentView
     {
         /// <summary>
         /// 表示先のCanvas
@@ -13,6 +13,6 @@ namespace MifuminSoft.funyak.View.MapObject
         /// 表示を更新します
         /// </summary>
         /// <param name="args">更新のパラメータ</param>
-        void Update(MapObjectViewUpdateArgs args);
+        void Update(AreaEnvironmentViewUpdateArgs args);
     }
 }

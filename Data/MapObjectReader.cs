@@ -1,4 +1,5 @@
-﻿using MifuminSoft.funyak.MapObject;
+﻿using System;
+using MifuminSoft.funyak.MapObject;
 using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.Data
@@ -23,7 +24,23 @@ namespace MifuminSoft.funyak.Data
             var mainMapObject = new MainMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
             {
                 Input = option.Input,
+
+                VelocityX = data.vx ?? 0.0,
+                VelocityY = data.vy ?? 0.0,
+                Angle = data.a ?? 0.0,
+                AngularVelocity = data.av ?? 0.0,
+                Direction = (Direction)Enum.Parse(typeof(Direction), (string)data.dr ?? "Front"),
+
+                State = (MainMapObjectState)Enum.Parse(typeof(MainMapObjectState), (string)data.st ?? "Floating"),
+                StateCounter = data.sc ?? 0,
+
+                GroundNormalX = data.gx ?? 0.0,
+                GroundNormalY = data.gy ?? 0.0,
             };
+            mainMapObject.PreviousX = data.px ?? mainMapObject.X;
+            mainMapObject.PreviousY = data.py ?? mainMapObject.Y;
+            mainMapObject.PreviousVelocityX = data.pvx ?? mainMapObject.VelocityX;
+            mainMapObject.PreviousVelocityY = data.pvy ?? mainMapObject.VelocityY;
             return mainMapObject;
         }
 

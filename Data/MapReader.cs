@@ -31,6 +31,14 @@ namespace MifuminSoft.funyak.Data
                     if (mapObject != null) map.AddMapObject(mapObject);
                 }
             }
+            if (data.areas != null)
+            {
+                foreach (var areaEnvironmentData in data.areas)
+                {
+                    var areaEnvironment = AreaEnvironmentReader.FromDynamic(areaEnvironmentData, option);
+                    if (areaEnvironment != null) map.AddAreaEnvironment(areaEnvironment);
+                }
+            }
             return map;
         }
     }
