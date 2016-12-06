@@ -8,6 +8,11 @@ namespace MifuminSoft.funyak.MapObject
     public interface IMapObject : IBounds
     {
         /// <summary>
+        /// 名前
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// マップ中のX座標
         /// </summary>
         double X { get; }

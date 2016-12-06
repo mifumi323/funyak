@@ -43,6 +43,7 @@ namespace MifuminSoft.funyak
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
+        private IDictionary<string, IMapObject> namedMapObject;
 
         /// <summary>
         /// 環境が追加されたときに発生します。
@@ -67,6 +68,7 @@ namespace MifuminSoft.funyak
 
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
+            namedMapObject = new Dictionary<string, IMapObject>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
         }
@@ -80,6 +82,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Add(mapObject);
             var dynamicMapObject = mapObject as IDynamicMapObject;
             if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
+            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
@@ -142,6 +145,18 @@ namespace MifuminSoft.funyak
             if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
             return mapObjectCollection;
+        }
+
+        /// <summary>
+        /// 名前でマップオブジェクトを検索します。
+        /// </summary>
+        /// <param name="name">マップオブジェクトの名前</param>
+        /// <returns></returns>
+        public IMapObject FindMapObject(string name)
+        {
+            IMapObject mapObject = null;
+            namedMapObject.TryGetValue(name, out mapObject);
+            return mapObject;
         }
 
         /// <summary>
