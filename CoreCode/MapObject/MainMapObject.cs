@@ -542,6 +542,8 @@ namespace MifuminSoft.funyak.MapObject
             var leftVector = leftSegment.End - leftSegment.Start;
             var rightVector = rightSegment.End - rightSegment.Start;
             var velocity = new Vector2D(tempVX, tempVY);
+            topSegment.Start.Y -= tempVY;
+            bottomSegment.Start.Y -= tempVY;
 
             var adjuster = new PositionAdjusterAverage();
             var adjusterHigh = new PositionAdjusterHigh();
