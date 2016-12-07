@@ -89,7 +89,7 @@ namespace WPFTests
                 })
                 {
                     Canvas = canvas,
-                    FocusTo = map.GetMapObjects().FirstOrDefault()
+                    FocusTo = map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()
                 };
                 textBlockError.Text = "";
             }

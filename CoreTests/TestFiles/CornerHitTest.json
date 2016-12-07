@@ -109,6 +109,25 @@
       "color": "Black",
       "hit": true,
     },
+    {
+      "type": "line",
+      "x1": 140,
+      "y1": 140,
+      "x2": 160,
+      "y2": 160,
+      "color": "Gray",
+      "hit": true,
+      "n": "main",
+    },
+    {
+      "type": "line",
+      "x1": 140,
+      "y1": 160,
+      "x2": 160,
+      "y2": 140,
+      "color": "Gray",
+      "hit": true,
+    },
   ],
   "areas": [
     {
