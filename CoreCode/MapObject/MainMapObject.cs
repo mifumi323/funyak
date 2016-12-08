@@ -15,6 +15,14 @@ namespace MifuminSoft.funyak.MapObject
         Floating,
         Falling,
         Running,
+        Charging,
+        Jumping,
+    }
+
+    public class MainMapObjectCharge
+    {
+        public int Time { get; set; }
+        public double Velocity { get; set; }
     }
 
     /// <summary>
@@ -64,6 +72,17 @@ namespace MifuminSoft.funyak.MapObject
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessRunning;
                         break;
+                    case MainMapObjectState.Charging:
+                        detectGravity = DetectGravityNormal;
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessCharging;
+                        ChargeTime = 0;
+                        break;
+                    case MainMapObjectState.Jumping:
+                        detectGravity = DetectGravityNormal;
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessJumping;
+                        break;
                     default:
                         throw new Exception("MainMapObjectのStateがおかしいぞ。");
                 }
@@ -77,6 +96,7 @@ namespace MifuminSoft.funyak.MapObject
         private Action<IMapEnvironment> updateSelfMainProcess;
 
         public int StateCounter { get; set; }
+        public int ChargeTime { get; set; }
 
         /// <summary>
         /// 方向
@@ -226,7 +246,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 重力加速度
         /// </summary>
-        public double GravityAccel { get; set; } = 0.4 / 3;
+        public double GravityAccel { get; set; } = 0.1 / 1.5 / 1.5;
 
         /// <summary>
         /// 落下摩擦係数
@@ -257,6 +277,33 @@ namespace MifuminSoft.funyak.MapObject
         /// 速度上限値
         /// </summary>
         public double VelocityLimit { get; set; } = 13;
+
+        /// <summary>
+        /// ジャンプの溜めデータ
+        /// </summary>
+        public IList<MainMapObjectCharge> JumpCharge { get; set; } = new List<MainMapObjectCharge>()
+        {
+            new MainMapObjectCharge()
+            {
+                Time = 9,
+                Velocity = 4.5 / 1.5,
+            },
+            new MainMapObjectCharge()
+            {
+                Time = 30,
+                Velocity = 3.6 / 1.5,
+            },
+            new MainMapObjectCharge()
+            {
+                Time = 90,
+                Velocity = 2.6 / 1.5,
+            },
+            new MainMapObjectCharge()
+            {
+                Time = 0,
+                Velocity = 0.9 / 1.5,
+            },
+        };
 
         #endregion
 
@@ -319,6 +366,11 @@ namespace MifuminSoft.funyak.MapObject
                 State = MainMapObjectState.Running;
                 MainProcessRunning(env);
                 return;
+            }
+            else if (Input.IsPressed(Keys.Jump))
+            {
+                State = MainMapObjectState.Charging;
+                MainProcessCharging(env);
             }
 
             UpdatePositionOnGround(0.0, 0.5, env.Wind);
@@ -399,7 +451,12 @@ namespace MifuminSoft.funyak.MapObject
 
         private void MainProcessRunning(IMapEnvironment env)
         {
-            if (Input.IsPressed(Keys.Left))
+            if (Input.IsPressed(Keys.Jump))
+            {
+                State = MainMapObjectState.Charging;
+                MainProcessCharging(env);
+            }
+            else if (Input.IsPressed(Keys.Left))
             {
                 Direction = Direction.Left;
                 UpdatePositionOnGround(-RunSpeed, 1.0, env.Wind);
@@ -413,6 +470,45 @@ namespace MifuminSoft.funyak.MapObject
             {
                 State = MainMapObjectState.Standing;
                 MainProcessStanding(env);
+            }
+        }
+
+        private void MainProcessCharging(IMapEnvironment env)
+        {
+            if (!Input.IsPressed(Keys.Jump))
+            {
+                State = MainMapObjectState.Jumping;
+                var v = 0.0;
+                foreach (var c in JumpCharge)
+                {
+                    v = c.Velocity;
+                    if (ChargeTime < c.Time) break;
+                }
+                VelocityY = -v;
+                MainProcessJumping(env);
+                return;
+            }
+            ChargeTime++;
+        }
+
+        private void MainProcessJumping(IMapEnvironment env)
+        {
+            if (Input.IsPressed(Keys.Down))
+            {
+                State = MainMapObjectState.Falling;
+                MainProcessFalling(env);
+            }
+            else
+            {
+                var accelY = env.Gravity * GravityAccel;
+                if (VelocityY >= -accelY)
+                {
+                    State = MainMapObjectState.Falling;
+                    MainProcessFalling(env);
+                    return;
+                }
+                VelocityY += accelY;
+                UpdatePosition();
             }
         }
 
@@ -644,6 +740,7 @@ namespace MifuminSoft.funyak.MapObject
             {
                 case MainMapObjectState.Standing:
                 case MainMapObjectState.Running:
+                case MainMapObjectState.Charging:
                     if (!landed)
                     {
                         State = MainMapObjectState.Falling;
@@ -652,6 +749,7 @@ namespace MifuminSoft.funyak.MapObject
                 case MainMapObjectState.Floating:
                     break;
                 case MainMapObjectState.Falling:
+                case MainMapObjectState.Jumping:
                     if (landed)
                     {
                         State = MainMapObjectState.Standing;

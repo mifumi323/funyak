@@ -60,6 +60,12 @@ namespace MifuminSoft.funyak.View.MapObject
                 case MainMapObjectState.Running:
                     imageKey = "Run";
                     break;
+                case MainMapObjectState.Charging:
+                    imageKey = "Sit";
+                    break;
+                case MainMapObjectState.Jumping:
+                    imageKey = "Jump";
+                    break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
             }
