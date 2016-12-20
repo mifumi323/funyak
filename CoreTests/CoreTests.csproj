@@ -57,6 +57,7 @@
     <Compile Include="GameTest\GameTestBaseTest.cs" />
     <Compile Include="GameTest\CornerHitTest.cs" />
     <Compile Include="GameTest\ReplayInputTest.cs" />
+    <Compile Include="GameTest\RunOnSlopeTest.cs" />
     <Compile Include="LineMapObjectTest.cs" />
     <Compile Include="MainMapObjectTest.cs" />
     <Compile Include="MapTest.cs" />
@@ -82,6 +83,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="TestFiles\ReplayInputTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestFiles\RunOnSlopeTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
