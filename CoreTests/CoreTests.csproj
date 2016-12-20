@@ -56,6 +56,7 @@
     <Compile Include="GameTest\GameTestBase.cs" />
     <Compile Include="GameTest\GameTestBaseTest.cs" />
     <Compile Include="GameTest\CornerHitTest.cs" />
+    <Compile Include="GameTest\ReplayInputTest.cs" />
     <Compile Include="LineMapObjectTest.cs" />
     <Compile Include="MainMapObjectTest.cs" />
     <Compile Include="MapTest.cs" />
@@ -80,6 +81,9 @@
     <None Include="TestFiles\CornerHitTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="TestFiles\ReplayInputTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
