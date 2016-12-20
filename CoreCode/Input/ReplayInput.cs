@@ -2,6 +2,10 @@
 
 namespace MifuminSoft.funyak.Input
 {
+    /// <summary>
+    /// リプレイ入力
+    /// 事前に記録された入力を再生します。
+    /// </summary>
     public class ReplayInput : InputBase
     {
         public List<InputRecord> InputLog { get; private set; } = new List<InputRecord>();

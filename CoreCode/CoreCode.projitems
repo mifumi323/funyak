@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Segment2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Vector2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Input\ArrangeInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputRecord.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\IInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputBase.cs" />

@@ -23,7 +23,7 @@ namespace MifuminSoft.funyak.Data
         {
             var mainMapObject = new MainMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
             {
-                Input = option.Input,
+                Input = data.i != null ? InputReader.FromDynamic(data.i, option) : option.Input,
 
                 Name = data.n,
 
