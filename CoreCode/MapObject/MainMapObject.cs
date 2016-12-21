@@ -703,7 +703,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjusterHigh);
+                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, tempX, tempY, velocity, adjusterHigh);
                         if (collided) touchedBottom = true;
                     }
                 }
@@ -714,7 +714,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjusterLow);
+                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, tempX, tempY, velocity, adjusterLow);
                         if (collided) touchedTop = true;
                     }
                 }
@@ -725,7 +725,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjusterLeft);
+                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, tempX, tempY, velocity, adjusterLeft);
                         if (collided) touchedRight = true;
                     }
                 }
@@ -736,7 +736,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjusterRight);
+                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, tempX, tempY, velocity, adjusterRight);
                         if (collided) touchedLeft = true;
                     }
                 }
@@ -753,7 +753,7 @@ namespace MifuminSoft.funyak.MapObject
                 tempVX = adjuster.VelocityX;
                 tempVY = adjuster.VelocityY;
             }
-            if (touchedBottom)
+            if (adjusterHigh.HasValue)
             {
                 tempNX = adjusterHigh.NormalX;
                 tempNY = adjusterHigh.NormalY;
@@ -819,7 +819,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="velocity">当たり判定対象の線分に対する、キャラクターの相対速度</param>
         /// <param name="adjuster">位置調整オブジェクト</param>
         /// <returns>当たっていたらtrue</returns>
-        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, IPositionAdjuster adjuster)
+        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, double x, double y, Vector2D velocity, IPositionAdjuster adjuster)
         {
             if (velocity.Dot(lineNormal) <= Collision2D.DELTA)
             {
@@ -828,7 +828,13 @@ namespace MifuminSoft.funyak.MapObject
                     var lineStartToCharaEnd = charaSegment.End - lineSegment.Start;
                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaEnd) / lineVector.LengthSq) - charaVector;
                     var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, lineNormal.X, lineNormal.Y);
+                    if (Math.Abs(newPoint.X - x) >= PositionAdjustLowerLimit ||
+                        Math.Abs(newPoint.Y - y) >= PositionAdjustLowerLimit ||
+                        Math.Abs(newVelocity.X - velocity.X) >= PositionAdjustLowerLimit ||
+                        Math.Abs(newVelocity.Y - velocity.Y) >= PositionAdjustLowerLimit)
+                    {
+                        adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, lineNormal.X, lineNormal.Y);
+                    }
 
                     return true;
                 }
