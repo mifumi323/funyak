@@ -18,7 +18,6 @@ namespace MifuminSoft.funyak.View.Input
             SetDirection(x, y);
             SetKey(Keys.Jump, Keyboard.IsKeyDown(Key.Z));
             SetKey(Keys.Attack, Keyboard.IsKeyDown(Key.X));
-            SetKey(Keys.Smile, Keyboard.IsKeyDown(Key.C));
         }
     }
 }
