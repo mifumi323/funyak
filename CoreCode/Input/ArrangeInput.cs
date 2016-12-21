@@ -40,7 +40,7 @@ namespace MifuminSoft.funyak.Input
         {
             get
             {
-                return HorizontalReverse ? -Original.Y : Original.Y;
+                return VerticalReverse ? -Original.Y : Original.Y;
             }
         }
 
