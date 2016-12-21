@@ -45,6 +45,7 @@ namespace WPFTests
                 new LineMapObject(0, 500, 500, 450) { Color = "Black", HitUpper = true },
                 new LineMapObject(500, 500, 450, 0) { Color = "Black", HitLeft = true },
                 new LineMapObject(500, 0, 0, 50) { Color = "Black", HitBelow = true },
+                new LineMapObject(250, 400, 250, 500) { Color = "Black", HitLeft = true, HitRight = true },
                 new LineMapObject(200, 250, 300, 250) { Color = "Gray" },
                 new LineMapObject(250, 200, 250, 300) { Color = "Gray" },
             };

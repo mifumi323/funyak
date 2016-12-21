@@ -224,6 +224,26 @@ namespace MifuminSoft.funyak.MapObject
             return y + 14;
         }
 
+        /// <summary>
+        /// 左側が壁と接触しているかどうか
+        /// </summary>
+        public bool TouchedLeft { get; set; }
+
+        /// <summary>
+        /// 上側が壁と接触しているかどうか
+        /// </summary>
+        public bool TouchedTop { get; set; }
+
+        /// <summary>
+        /// 右側が壁と接触しているかどうか
+        /// </summary>
+        public bool TouchedRight { get; set; }
+
+        /// <summary>
+        /// 下側が壁と接触しているかどうか
+        /// </summary>
+        public bool TouchedBottom { get; set; }
+
         #endregion
 
         #region パラメータ
@@ -304,6 +324,12 @@ namespace MifuminSoft.funyak.MapObject
                 Velocity = 0.9 / 1.5,
             },
         };
+
+        /// <summary>
+        /// 当たり判定の位置補正の許容誤差
+        /// これ未満の補正量の場合位置補正をしない。
+        /// </summary>
+        public double PositionAdjustLowerLimit { get; set; } = 0.01;
 
         #endregion
 
@@ -421,6 +447,10 @@ namespace MifuminSoft.funyak.MapObject
                 {
                     velocityH = targetVelocity;
                 }
+            }
+            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
+            {
+                velocityH = 0;
             }
             VelocityX = velocityH * groundX;
             VelocityY = velocityH * groundY;
@@ -593,6 +623,14 @@ namespace MifuminSoft.funyak.MapObject
             double frictionY = VelocityY * FallFriction;
             VelocityX += accelX - frictionX;
             VelocityY += accelY - frictionY + gravity * GravityAccel;
+            if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
+            {
+                VelocityX = 0;
+            }
+            if ((TouchedBottom && VelocityY > 0) || (TouchedTop && VelocityY < 0))
+            {
+                VelocityY = 0;
+            }
             UpdatePosition();
         }
 
@@ -626,7 +664,10 @@ namespace MifuminSoft.funyak.MapObject
             var tempVY = VelocityY;
             var tempNX = GroundNormalX;
             var tempNY = GroundNormalY;
-            var landed = false;
+            var touchedLeft = false;
+            var touchedTop = false;
+            var touchedRight = false;
+            var touchedBottom = false;
 
             // 当たり判定用図形を生成
             var topSegment = new Segment2D(tempX, tempY, tempX, GetTop(tempY));
@@ -663,7 +704,7 @@ namespace MifuminSoft.funyak.MapObject
                     {
                         var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
                         var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, adjusterHigh);
-                        if (collided) landed = true;
+                        if (collided) touchedBottom = true;
                     }
                 }
 
@@ -674,6 +715,7 @@ namespace MifuminSoft.funyak.MapObject
                     {
                         var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
                         var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, adjusterLow);
+                        if (collided) touchedTop = true;
                     }
                 }
 
@@ -684,6 +726,7 @@ namespace MifuminSoft.funyak.MapObject
                     {
                         var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
                         var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, adjusterLeft);
+                        if (collided) touchedRight = true;
                     }
                 }
 
@@ -694,6 +737,7 @@ namespace MifuminSoft.funyak.MapObject
                     {
                         var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
                         var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, adjusterRight);
+                        if (collided) touchedLeft = true;
                     }
                 }
             }
@@ -709,7 +753,7 @@ namespace MifuminSoft.funyak.MapObject
                 tempVX = adjuster.VelocityX;
                 tempVY = adjuster.VelocityY;
             }
-            if (landed)
+            if (touchedBottom)
             {
                 tempNX = adjusterHigh.NormalX;
                 tempNY = adjusterHigh.NormalY;
@@ -717,14 +761,18 @@ namespace MifuminSoft.funyak.MapObject
 
             return () =>
             {
-                X = tempX;
-                Y = tempY;
+                if (Math.Abs(X - tempX) >= PositionAdjustLowerLimit) X = tempX;
+                if (Math.Abs(Y - tempY) >= PositionAdjustLowerLimit) Y = tempY;
                 VelocityX = tempVX;
                 VelocityY = tempVY;
                 GroundNormalX = tempNX;
                 GroundNormalY = tempNY;
+                TouchedLeft = touchedLeft;
+                TouchedTop = touchedTop;
+                TouchedRight = touchedRight;
+                TouchedBottom = touchedBottom;
 
-                RealizeCollision(landed);
+                RealizeCollision(touchedBottom);
 
                 // TODO: 本来ここでやることじゃない
                 StateCounter++;
