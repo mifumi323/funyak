@@ -11,12 +11,12 @@ namespace MifuminSoft.funyak.MapObject
     /// </summary>
     public enum MainMapObjectState
     {
-        Standing,
-        Floating,
-        Falling,
-        Running,
-        Charging,
-        Jumping,
+        Stand,
+        Float,
+        Fall,
+        Run,
+        Charge,
+        Jump,
     }
 
     public class MainMapObjectCharge
@@ -52,33 +52,33 @@ namespace MifuminSoft.funyak.MapObject
                 StateCounter = 0;
                 switch (value)
                 {
-                    case MainMapObjectState.Standing:
+                    case MainMapObjectState.Stand:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessStanding;
                         break;
-                    case MainMapObjectState.Floating:
+                    case MainMapObjectState.Float:
                         detectGravity = DetectGravityFloating;
                         updateSelfPreprocess = PreprocessFloating;
                         updateSelfMainProcess = MainProcessFloating;
                         break;
-                    case MainMapObjectState.Falling:
+                    case MainMapObjectState.Fall:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessFalling;
                         break;
-                    case MainMapObjectState.Running:
+                    case MainMapObjectState.Run:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessRunning;
                         break;
-                    case MainMapObjectState.Charging:
+                    case MainMapObjectState.Charge:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessCharging;
                         ChargeTime = 0;
                         break;
-                    case MainMapObjectState.Jumping:
+                    case MainMapObjectState.Jump:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessJumping;
@@ -340,7 +340,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y">Y座標</param>
         public MainMapObject(double x, double y)
         {
-            State = MainMapObjectState.Floating;
+            State = MainMapObjectState.Float;
 
             Input = new NullInput();
             X = x;
@@ -364,7 +364,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (!inGravity)
             {
-                State = MainMapObjectState.Floating;
+                State = MainMapObjectState.Float;
                 Direction = Direction.Front;
             }
         }
@@ -373,7 +373,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (inGravity)
             {
-                State = MainMapObjectState.Falling;
+                State = MainMapObjectState.Fall;
                 if (Input.IsPressed(Keys.Left))
                 {
                     Direction = Direction.Left;
@@ -389,13 +389,13 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
             {
-                State = MainMapObjectState.Running;
+                State = MainMapObjectState.Run;
                 MainProcessRunning(env);
                 return;
             }
             else if (Input.IsPressed(Keys.Jump))
             {
-                State = MainMapObjectState.Charging;
+                State = MainMapObjectState.Charge;
                 MainProcessCharging(env);
             }
 
@@ -483,7 +483,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Jump))
             {
-                State = MainMapObjectState.Charging;
+                State = MainMapObjectState.Charge;
                 MainProcessCharging(env);
             }
             else if (Input.IsPressed(Keys.Left))
@@ -498,7 +498,7 @@ namespace MifuminSoft.funyak.MapObject
             }
             else
             {
-                State = MainMapObjectState.Standing;
+                State = MainMapObjectState.Stand;
                 MainProcessStanding(env);
             }
         }
@@ -507,7 +507,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (!Input.IsPressed(Keys.Jump))
             {
-                State = MainMapObjectState.Jumping;
+                State = MainMapObjectState.Jump;
                 var v = 0.0;
                 foreach (var c in JumpCharge)
                 {
@@ -525,7 +525,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Down))
             {
-                State = MainMapObjectState.Falling;
+                State = MainMapObjectState.Fall;
                 MainProcessFalling(env);
             }
             else
@@ -533,7 +533,7 @@ namespace MifuminSoft.funyak.MapObject
                 var accelY = env.Gravity * GravityAccel;
                 if (VelocityY >= -accelY)
                 {
-                    State = MainMapObjectState.Falling;
+                    State = MainMapObjectState.Fall;
                     MainProcessFalling(env);
                     return;
                 }
@@ -786,21 +786,21 @@ namespace MifuminSoft.funyak.MapObject
         {
             switch (State)
             {
-                case MainMapObjectState.Standing:
-                case MainMapObjectState.Running:
-                case MainMapObjectState.Charging:
+                case MainMapObjectState.Stand:
+                case MainMapObjectState.Run:
+                case MainMapObjectState.Charge:
                     if (!landed)
                     {
-                        State = MainMapObjectState.Falling;
+                        State = MainMapObjectState.Fall;
                     }
                     break;
-                case MainMapObjectState.Floating:
+                case MainMapObjectState.Float:
                     break;
-                case MainMapObjectState.Falling:
-                case MainMapObjectState.Jumping:
+                case MainMapObjectState.Fall:
+                case MainMapObjectState.Jump:
                     if (landed)
                     {
-                        State = MainMapObjectState.Standing;
+                        State = MainMapObjectState.Stand;
                     }
                     break;
                 default:

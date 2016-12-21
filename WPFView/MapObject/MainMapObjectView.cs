@@ -50,20 +50,20 @@ namespace MifuminSoft.funyak.View.MapObject
             var imageKey = "Fall";
             switch (MapObject.State)
             {
-                case MainMapObjectState.Standing:
+                case MainMapObjectState.Stand:
                     imageKey = "Stand";
                     break;
-                case MainMapObjectState.Floating:
+                case MainMapObjectState.Float:
                     break;
-                case MainMapObjectState.Falling:
+                case MainMapObjectState.Fall:
                     break;
-                case MainMapObjectState.Running:
+                case MainMapObjectState.Run:
                     imageKey = "Run";
                     break;
-                case MainMapObjectState.Charging:
+                case MainMapObjectState.Charge:
                     imageKey = "Sit";
                     break;
-                case MainMapObjectState.Jumping:
+                case MainMapObjectState.Jump:
                     imageKey = "Jump";
                     break;
                 default:

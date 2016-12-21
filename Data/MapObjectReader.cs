@@ -31,9 +31,9 @@ namespace MifuminSoft.funyak.Data
                 VelocityY = data.vy ?? 0.0,
                 Angle = data.a ?? 0.0,
                 AngularVelocity = data.av ?? 0.0,
-                Direction = (Direction)Enum.Parse(typeof(Direction), (string)data.dr ?? "Front"),
+                Direction = (Direction)Enum.Parse(typeof(Direction), (string)data.dr ?? nameof(Direction.Front)),
 
-                State = (MainMapObjectState)Enum.Parse(typeof(MainMapObjectState), (string)data.st ?? "Floating"),
+                State = (MainMapObjectState)Enum.Parse(typeof(MainMapObjectState), (string)data.st ?? nameof(MainMapObjectState.Float)),
                 StateCounter = data.sc ?? 0,
 
                 GroundNormalX = data.gx ?? 0.0,
