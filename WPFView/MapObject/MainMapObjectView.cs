@@ -51,20 +51,42 @@ namespace MifuminSoft.funyak.View.MapObject
             switch (MapObject.State)
             {
                 case MainMapObjectState.Stand:
+                    // TODO: まばたきと睡眠と笑顔にも対応させよう
                     imageKey = "Stand";
-                    break;
-                case MainMapObjectState.Float:
-                    break;
-                case MainMapObjectState.Fall:
                     break;
                 case MainMapObjectState.Run:
                     imageKey = "Run";
+                    break;
+                case MainMapObjectState.Walk:
+                    imageKey = "Sit";
                     break;
                 case MainMapObjectState.Charge:
                     imageKey = "Sit";
                     break;
                 case MainMapObjectState.Jump:
                     imageKey = "Jump";
+                    break;
+                case MainMapObjectState.Fall:
+                    break;
+                case MainMapObjectState.Float:
+                    break;
+                case MainMapObjectState.BreatheIn:
+                    // TODO: 段階で絵を変えよう
+                    imageKey = "BreatheIn1";
+                    break;
+                case MainMapObjectState.BreatheOut:
+                    imageKey = "BreatheOut";
+                    break;
+                case MainMapObjectState.Tired:
+                    imageKey = "Tired";
+                    break;
+                case MainMapObjectState.Frozen:
+                    imageKey = "Freeze";
+                    break;
+                case MainMapObjectState.Damaged:
+                    break;
+                case MainMapObjectState.Die:
+                    imageKey = "Die";
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");

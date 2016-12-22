@@ -12,11 +12,18 @@ namespace MifuminSoft.funyak.MapObject
     public enum MainMapObjectState
     {
         Stand,
-        Float,
-        Fall,
         Run,
+        Walk,
         Charge,
         Jump,
+        Fall,
+        Float,
+        BreatheIn,
+        BreatheOut,
+        Tired,
+        Frozen,
+        Damaged,
+        Die,
     }
 
     public class MainMapObjectCharge
@@ -788,20 +795,27 @@ namespace MifuminSoft.funyak.MapObject
             {
                 case MainMapObjectState.Stand:
                 case MainMapObjectState.Run:
+                case MainMapObjectState.Walk:
                 case MainMapObjectState.Charge:
                     if (!landed)
                     {
                         State = MainMapObjectState.Fall;
                     }
                     break;
-                case MainMapObjectState.Float:
-                    break;
-                case MainMapObjectState.Fall:
                 case MainMapObjectState.Jump:
+                case MainMapObjectState.Fall:
                     if (landed)
                     {
                         State = MainMapObjectState.Stand;
                     }
+                    break;
+                case MainMapObjectState.Float:
+                case MainMapObjectState.BreatheIn:
+                case MainMapObjectState.BreatheOut:
+                case MainMapObjectState.Tired:
+                case MainMapObjectState.Frozen:
+                case MainMapObjectState.Damaged:
+                case MainMapObjectState.Die:
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
