@@ -50,5 +50,49 @@ namespace MifuminSoft.funyak.Core.Tests
             Assert.AreEqual(namedArea, map.FindAreaEnvironment("knownName"), "既知の名前による局所的環境の検索に失敗");
             Assert.AreEqual(null, map.FindAreaEnvironment("unknownName"), "未知の名前による局所的環境の検索に失敗");
         }
+
+        [TestMethod]
+        public void ManyMapObjectsTest()
+        {
+            var cellWidth = 50;
+            var cellHeight = 50;
+            var cellCountX = 10;
+            var cellCountY = 10;
+            var frameCount = 600;
+            var map = new Map(cellCountX * cellWidth, cellCountY * cellHeight);
+
+            // たくさんの壁を作る
+            for (int x = 0; x <= cellCountX; x++)
+            {
+                map.AddMapObject(new LineMapObject(x * cellWidth, 0, x * cellWidth, cellCountY * cellHeight)
+                {
+                    HitLeft = true,
+                    HitRight = true
+                });
+            }
+            for (int y = 0; y <= cellCountY; y++)
+            {
+                map.AddMapObject(new LineMapObject(0, y * cellHeight, cellCountX * cellWidth, y * cellHeight)
+                {
+                    HitUpper = true,
+                    HitBelow = true
+                });
+            }
+
+            // たくさんのふにゃを呼ぶ
+            for (int x = 0; x < cellCountX; x++)
+            {
+                for (int y = 0; y < cellCountY; y++)
+                {
+                    map.AddMapObject(new MainMapObject(x * cellWidth + cellWidth / 2, y * cellHeight + cellHeight / 2));
+                }
+            }
+
+            // 動かす
+            for (int f = 0; f < frameCount; f++)
+            {
+                map.Update();
+            }
+        }
     }
 }
