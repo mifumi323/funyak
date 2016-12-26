@@ -5,12 +5,10 @@ namespace MifuminSoft.funyak.CollisionHelper
     /// <summary>
     /// 2次元のベクトルを表します。
     /// </summary>
-    public class Vector2D
+    public struct Vector2D
     {
         public double X;
         public double Y;
-
-        public Vector2D() { }
 
         public Vector2D(double x, double y)
         {
