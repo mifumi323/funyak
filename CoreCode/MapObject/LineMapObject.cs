@@ -17,10 +17,11 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y2">終点のY座標</param>
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
-            X1 = x1;
-            Y1 = y1;
-            X2 = x2;
-            Y2 = y2;
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+            segment = new Segment2D(x1, y1, x2, y2);
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 x1 = value;
-                segment = null;
+                segment = new Segment2D(x1, y1, x2, y2);
             }
         }
         private double x1 = 0;
@@ -57,7 +58,7 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 y1 = value;
-                segment = null;
+                segment = new Segment2D(x1, y1, x2, y2);
             }
         }
         private double y1 = 0;
@@ -74,7 +75,7 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 x2 = value;
-                segment = null;
+                segment = new Segment2D(x1, y1, x2, y2);
             }
         }
         private double x2 = 0;
@@ -91,7 +92,7 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 y2 = value;
-                segment = null;
+                segment = new Segment2D(x1, y1, x2, y2);
             }
         }
         private double y2 = 0;
@@ -128,14 +129,10 @@ namespace MifuminSoft.funyak.MapObject
         public double Top { get { return Math.Min(Y1, Y2); } }
         public double Bottom { get { return Math.Max(Y1, Y2); } }
 
-        private Segment2D segment = null;
+        private Segment2D segment;
 
         public Segment2D ToSegment2D()
         {
-            if (segment == null)
-            {
-                segment = new Segment2D(X1, Y1, X2, Y2);
-            }
             return segment;
         }
     }
