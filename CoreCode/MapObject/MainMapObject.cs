@@ -28,8 +28,8 @@ namespace MifuminSoft.funyak.MapObject
 
     public class MainMapObjectCharge
     {
-        public int Time { get; set; }
-        public double Velocity { get; set; }
+        public int Time;
+        public double Velocity;
     }
 
     /// <summary>
@@ -258,57 +258,57 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 外見を示す値
         /// </summary>
-        public int Appearance { get; set; }
+        public int Appearance = 0;
 
         /// <summary>
         /// 走行速度
         /// </summary>
-        public double RunSpeed { get; set; } = 200.0 / 60.0;
+        public double RunSpeed = 200.0 / 60.0;
 
         /// <summary>
         /// 走行加速度
         /// </summary>
-        public double RunAccel { get; set; } = 400.0 / 60.0 / 60.0;
+        public double RunAccel = 400.0 / 60.0 / 60.0;
 
         /// <summary>
         /// 重力加速度
         /// </summary>
-        public double GravityAccel { get; set; } = 0.1 / 1.5 / 1.5;
+        public double GravityAccel = 0.1 / 1.5 / 1.5;
 
         /// <summary>
         /// 落下摩擦係数
         /// </summary>
-        public double FallFriction { get; set; } = 0.1;
+        public double FallFriction = 0.1;
 
         /// <summary>
         /// 浮遊加速度
         /// </summary>
-        public double FloatingAccel { get; set; } = 0.16;
+        public double FloatingAccel = 0.16;
 
         /// <summary>
         /// 浮遊摩擦係数
         /// </summary>
-        public double FloatingFriction { get; set; } = 0.0173;
+        public double FloatingFriction = 0.0173;
 
         /// <summary>
         /// 回転加速度
         /// </summary>
-        public double AngularAccel { get; set; } = 0.234375;
+        public double AngularAccel = 0.234375;
 
         /// <summary>
         /// 回転摩擦係数
         /// </summary>
-        public double AngularFriction { get; set; } = 0.00667;
+        public double AngularFriction = 0.00667;
 
         /// <summary>
         /// 速度上限値
         /// </summary>
-        public double VelocityLimit { get; set; } = 13;
+        public double VelocityLimit = 13;
 
         /// <summary>
         /// ジャンプの溜めデータ
         /// </summary>
-        public IList<MainMapObjectCharge> JumpCharge { get; set; } = new List<MainMapObjectCharge>()
+        public IList<MainMapObjectCharge> JumpCharge = new List<MainMapObjectCharge>()
         {
             new MainMapObjectCharge()
             {
@@ -336,7 +336,7 @@ namespace MifuminSoft.funyak.MapObject
         /// 当たり判定の位置補正の許容誤差
         /// これ未満の補正量の場合位置補正をしない。
         /// </summary>
-        public double PositionAdjustLowerLimit { get; set; } = 0.01;
+        public double PositionAdjustLowerLimit = 0.01;
 
         #endregion
 
@@ -627,7 +627,7 @@ namespace MifuminSoft.funyak.MapObject
         private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0)
         {
             double frictionX = (VelocityX - wind) * FloatingFriction;
-            double frictionY = VelocityY * FallFriction;
+            double frictionY = VelocityY * FloatingFriction;
             VelocityX += accelX - frictionX;
             VelocityY += accelY - frictionY + gravity * GravityAccel;
             if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
