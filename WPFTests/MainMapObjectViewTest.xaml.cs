@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using MifuminSoft.funyak;
+using MifuminSoft.funyak.Data;
 using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View;
@@ -27,7 +29,6 @@ namespace WPFTests
         ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map;
         MapView mapView;
-        LineMapObject[] lines;
         MainMapObject main;
         IInput input;
         Sprite resource;
@@ -37,28 +38,19 @@ namespace WPFTests
             InitializeComponent();
 
             resource = SpriteReader.Read(@"Assets\main.png");
-
-            map = new Map(500, 500);
-            map.BackgroundColor = "LightGreen";
-            lines = new[] {
-                new LineMapObject(0, 0, 50, 500) { Color = "Black", HitRight = true },
-                new LineMapObject(0, 500, 500, 450) { Color = "Black", HitUpper = true },
-                new LineMapObject(500, 500, 450, 0) { Color = "Black", HitLeft = true },
-                new LineMapObject(500, 0, 0, 50) { Color = "Black", HitBelow = true },
-                new LineMapObject(250, 400, 250, 500) { Color = "Black", HitLeft = true, HitRight = true },
-                new LineMapObject(200, 250, 300, 250) { Color = "Gray" },
-                new LineMapObject(250, 200, 250, 300) { Color = "Gray" },
-            };
-            foreach (var line in lines)
-            {
-                map.AddMapObject(line);
-            }
             input = new KeyInput();
-            main = new MainMapObject(250, 250)
+
+            Reset();
+        }
+
+        private void Reset()
+        {
+            map = MapReader.FromString(File.ReadAllText(@"Assets\mainmapobjectviewtest.json"), new MapReaderOption()
             {
                 Input = input,
-            };
-            map.AddMapObject(main);
+            });
+            main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as MainMapObject;
+            canvas.Children.Clear();
             mapView = new MapView(map, new MapObjectViewFactory()
             {
                 MainMapObjectResourceSelector = a => resource,
@@ -145,10 +137,8 @@ namespace WPFTests
 
         private void buttonReset_Click(object sender, RoutedEventArgs e)
         {
-            main.X = 250;
-            main.Y = 250;
-            main.VelocityX = 0;
-            main.VelocityY = 0;
+            Reset();
+            Keyboard.ClearFocus();
         }
 
         private void canvas_MouseDown(object sender, MouseButtonEventArgs e)

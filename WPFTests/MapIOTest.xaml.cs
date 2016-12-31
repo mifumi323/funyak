@@ -98,5 +98,10 @@ namespace WPFTests
                 textBlockError.Text = ex.Message;
             }
         }
+
+        private void textBlockError_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
+        }
     }
 }
