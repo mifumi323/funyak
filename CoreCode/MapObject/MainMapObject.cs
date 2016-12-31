@@ -273,22 +273,22 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 重力加速度
         /// </summary>
-        public double GravityAccel = 0.1 / 1.5 / 1.5;
+        public double GravityAccel = 300.0 / 60.0 / 60.0;
 
         /// <summary>
         /// 落下摩擦係数
         /// </summary>
-        public double FallFriction = 0.1;
+        public double FallFriction = 300.0 / 40.0 / 60.0;
 
         /// <summary>
         /// 浮遊加速度
         /// </summary>
-        public double FloatingAccel = 0.16;
+        public double FloatingAccel = 300.0 / 60.0 / 60.0;
 
         /// <summary>
         /// 浮遊摩擦係数
         /// </summary>
-        public double FloatingFriction = 0.0173;
+        public double FloatingFriction = 300.0 / 200.0 / 60.0;
 
         /// <summary>
         /// 回転加速度
@@ -313,22 +313,22 @@ namespace MifuminSoft.funyak.MapObject
             new MainMapObjectCharge()
             {
                 Time = 9,
-                Velocity = 4.5 / 1.5,
+                Velocity = 255.0 / 60.0,
             },
             new MainMapObjectCharge()
             {
                 Time = 30,
-                Velocity = 3.6 / 1.5,
+                Velocity = 205.0 / 60.0,
             },
             new MainMapObjectCharge()
             {
                 Time = 90,
-                Velocity = 2.6 / 1.5,
+                Velocity = 155.0 / 60.0,
             },
             new MainMapObjectCharge()
             {
                 Time = 0,
-                Velocity = 0.9 / 1.5,
+                Velocity = 60.0 / 60.0,
             },
         };
 
@@ -627,7 +627,7 @@ namespace MifuminSoft.funyak.MapObject
         private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0)
         {
             double frictionX = (VelocityX - wind) * FloatingFriction;
-            double frictionY = VelocityY * FloatingFriction;
+            double frictionY = VelocityY * FallFriction;
             VelocityX += accelX - frictionX;
             VelocityY += accelY - frictionY + gravity * GravityAccel;
             if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
