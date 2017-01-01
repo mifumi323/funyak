@@ -336,7 +336,7 @@ namespace MifuminSoft.funyak.MapObject
         /// 当たり判定の位置補正の許容誤差
         /// これ未満の補正量の場合位置補正をしない。
         /// </summary>
-        public double PositionAdjustLowerLimit = 0.01;
+        public double PositionAdjustLowerLimit = 0.05;
 
         #endregion
 
@@ -473,7 +473,7 @@ namespace MifuminSoft.funyak.MapObject
 
         private void MainProcessFalling(IMapEnvironment env)
         {
-            double accelX = Input.X * FloatingAccel;
+            double accelX = (Input.IsPressed(Keys.Left) ? -1.0 : Input.IsPressed(Keys.Right) ? 1.0 : 0.0) * FloatingAccel;
             double accelY = 0;
             if (accelX < 0)
             {
@@ -483,7 +483,7 @@ namespace MifuminSoft.funyak.MapObject
             {
                 Direction = Direction.Right;
             }
-            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY);
+            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY, VelocityY < 0 ^ Input.IsPressed(Keys.Down));
         }
 
         private void MainProcessRunning(IMapEnvironment env)
@@ -624,10 +624,10 @@ namespace MifuminSoft.funyak.MapObject
             UpdatePreviousValue();
         }
 
-        private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0)
+        private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0, bool fastFall = false)
         {
             double frictionX = (VelocityX - wind) * FloatingFriction;
-            double frictionY = VelocityY * FallFriction;
+            double frictionY = VelocityY * (fastFall ? FloatingFriction : FallFriction);
             VelocityX += accelX - frictionX;
             VelocityY += accelY - frictionY + gravity * GravityAccel;
             if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
