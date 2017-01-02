@@ -79,6 +79,11 @@ namespace MifuminSoft.funyak.MapObject
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessRunning;
                         break;
+                    case MainMapObjectState.Walk:
+                        detectGravity = DetectGravityNormal;
+                        updateSelfPreprocess = PreprocessNotFloating;
+                        updateSelfMainProcess = MainProcessWalking;
+                        break;
                     case MainMapObjectState.Charge:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
@@ -266,6 +271,11 @@ namespace MifuminSoft.funyak.MapObject
         public double RunSpeed = 200.0 / 60.0;
 
         /// <summary>
+        /// 歩行速度
+        /// </summary>
+        public double WalkSpeed = 40.0 / 60.0;
+
+        /// <summary>
         /// 走行加速度
         /// </summary>
         public double RunAccel = 400.0 / 60.0 / 60.0;
@@ -400,10 +410,21 @@ namespace MifuminSoft.funyak.MapObject
                 MainProcessRunning(env);
                 return;
             }
+            else if (Input.IsPressed(Keys.Down))
+            {
+                State = MainMapObjectState.Walk;
+                MainProcessWalking(env);
+                return;
+            }
             else if (Input.IsPressed(Keys.Jump))
             {
                 State = MainMapObjectState.Charge;
                 MainProcessCharging(env);
+                return;
+            }
+            else if (Input.IsPressed(Keys.Up))
+            {
+                Direction = Direction.Front;
             }
 
             UpdatePositionOnGround(0.0, 0.5, env.Wind);
@@ -493,6 +514,11 @@ namespace MifuminSoft.funyak.MapObject
                 State = MainMapObjectState.Charge;
                 MainProcessCharging(env);
             }
+            else if (Input.IsPressed(Keys.Down))
+            {
+                State = MainMapObjectState.Walk;
+                MainProcessWalking(env);
+            }
             else if (Input.IsPressed(Keys.Left))
             {
                 Direction = Direction.Left;
@@ -510,6 +536,51 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
+        private void MainProcessWalking(IMapEnvironment env)
+        {
+            if (Input.IsPushed(Keys.Jump))
+            {
+                State = MainMapObjectState.Charge;
+                MainProcessCharging(env);
+            }
+            else if (!Input.IsPressed(Keys.Down))
+            {
+                State = MainMapObjectState.Stand;
+                MainProcessStanding(env);
+            }
+            else if (Input.IsPressed(Keys.Left))
+            {
+                Direction = Direction.Left;
+                UpdatePositionWalking(-WalkSpeed);
+            }
+            else if (Input.IsPressed(Keys.Right))
+            {
+                Direction = Direction.Right;
+                UpdatePositionWalking(WalkSpeed);
+            }
+            else
+            {
+                Direction = Direction.Front;
+                UpdatePositionWalking(0.0);
+            }
+        }
+
+        private void UpdatePositionWalking(double targetVelocity)
+        {
+            // 地面の方向
+            var groundX = -GroundNormalY;
+            var groundY = GroundNormalX;
+            // 地面方向の速度
+            var velocityH = targetVelocity;
+            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
+            {
+                velocityH = 0;
+            }
+            VelocityX = velocityH * groundX;
+            VelocityY = velocityH * groundY;
+            UpdatePosition();
+        }
+
         private void MainProcessCharging(IMapEnvironment env)
         {
             if (!Input.IsPressed(Keys.Jump))
@@ -523,6 +594,12 @@ namespace MifuminSoft.funyak.MapObject
                 }
                 VelocityY = -v;
                 MainProcessJumping(env);
+                return;
+            }
+            else if (Input.IsPushed(Keys.Down))
+            {
+                State = MainMapObjectState.Walk;
+                MainProcessWalking(env);
                 return;
             }
             ChargeTime++;
