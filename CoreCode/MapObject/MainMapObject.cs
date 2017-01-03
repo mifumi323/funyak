@@ -402,6 +402,59 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
+        /// <summary>
+        /// 浮遊状態でないときの前処理を行います。
+        /// </summary>
+        private void PreprocessNotFloating()
+        {
+            ResetRotation();
+            UpdatePreviousValue();
+        }
+
+        /// <summary>
+        /// 浮遊状態の前処理を行います。
+        /// </summary>
+        private void PreprocessFloating()
+        {
+            RotateSelf();
+            UpdatePreviousValue();
+        }
+
+        /// <summary>
+        /// 回転を初期状態に戻します。
+        /// </summary>
+        private void ResetRotation()
+        {
+            AngularVelocity = 0;
+            Angle = 0;
+        }
+
+        /// <summary>
+        /// 自身の移動に応じて回転させます。
+        /// </summary>
+        private void RotateSelf()
+        {
+            var adx = X - PreviousX;
+            var ady = Y - PreviousY;
+            var addx = VelocityX - PreviousVelocityX;
+            var addy = VelocityY - PreviousVelocityY;
+            AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
+            Angle += AngularVelocity;
+            while (Angle > 180) Angle -= 360;
+            while (Angle < -180) Angle += 360;
+        }
+
+        /// <summary>
+        /// 変化前の値を保持します。
+        /// </summary>
+        private void UpdatePreviousValue()
+        {
+            PreviousX = X;
+            PreviousY = Y;
+            PreviousVelocityX = VelocityX;
+            PreviousVelocityY = VelocityY;
+        }
+
         private void MainProcessStanding(IMapEnvironment env)
         {
             if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
@@ -428,83 +481,6 @@ namespace MifuminSoft.funyak.MapObject
             }
 
             UpdatePositionOnGround(0.0, 0.5, env.Wind);
-        }
-
-        private void UpdatePositionOnGround(double targetVelocity, double accelScale, double wind)
-        {
-            // 地面の方向
-            var groundX = -GroundNormalY;
-            var groundY = GroundNormalX;
-            // 地面方向の速度
-            var velocityH = VelocityX * groundX + VelocityY * groundY;
-            // 地面方向の風
-            var windH = wind * groundX;
-            // 走る力
-            var runAccel = RunAccel * accelScale * groundX;
-            // 静止摩擦力
-            var stopFriction = runAccel * 2.0;
-            // 空気抵抗
-            var friction = (velocityH - windH) * FloatingFriction;
-            // 動く力が静止摩擦を超えているか
-            var overFriction = friction < -stopFriction || stopFriction < friction;
-            // 加速度
-            var accelH = 0.0;
-            if (VelocityX < targetVelocity)
-            {
-                accelH = runAccel - friction;
-            }
-            else if (VelocityX > targetVelocity)
-            {
-                accelH = -runAccel - friction;
-            }
-            else
-            {
-                if (friction < -stopFriction)
-                {
-                    accelH = -stopFriction - friction;
-                }
-                else if (RunAccel < friction)
-                {
-                    accelH = stopFriction - friction;
-                }
-            }
-            velocityH += accelH;
-            if (!overFriction)
-            {
-                if ((velocityH < targetVelocity && targetVelocity < velocityH - accelH) || (velocityH - accelH < targetVelocity && targetVelocity < velocityH))
-                {
-                    velocityH = targetVelocity;
-                }
-            }
-            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
-            {
-                velocityH = 0;
-            }
-            VelocityX = velocityH * groundX;
-            VelocityY = velocityH * groundY;
-            UpdatePosition();
-        }
-
-        private void MainProcessFloating(IMapEnvironment env)
-        {
-            double accelX = Input.X * FloatingAccel;
-            double accelY = Input.Y * FloatingAccel;
-            UpdatePositionFloating(env.Wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
-        }
-
-        private void MainProcessFalling(IMapEnvironment env)
-        {
-            double accelX = (Input.IsPressed(Keys.Left) ? -1.0 : Input.IsPressed(Keys.Right) ? 1.0 : 0.0) * FloatingAccel;
-            double accelY = 0;
-            if (accelX < 0)
-            {
-                Direction = Direction.Left;
-            }
-            else if (accelX > 0)
-            {
-                Direction = Direction.Right;
-            }
-            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY, VelocityY < 0 ^ Input.IsPressed(Keys.Down));
         }
 
         private void MainProcessRunning(IMapEnvironment env)
@@ -565,22 +541,6 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        private void UpdatePositionWalking(double targetVelocity)
-        {
-            // 地面の方向
-            var groundX = -GroundNormalY;
-            var groundY = GroundNormalX;
-            // 地面方向の速度
-            var velocityH = targetVelocity;
-            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
-            {
-                velocityH = 0;
-            }
-            VelocityX = velocityH * groundX;
-            VelocityY = velocityH * groundY;
-            UpdatePosition();
-        }
-
         private void MainProcessCharging(IMapEnvironment env)
         {
             if (!Input.IsPressed(Keys.Jump))
@@ -626,13 +586,114 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        /// <summary>
-        /// 浮遊状態の前処理を行います。
-        /// </summary>
-        private void PreprocessFloating()
+        private void MainProcessFalling(IMapEnvironment env)
         {
-            RotateSelf();
-            UpdatePreviousValue();
+            double accelX = (Input.IsPressed(Keys.Left) ? -1.0 : Input.IsPressed(Keys.Right) ? 1.0 : 0.0) * FloatingAccel;
+            double accelY = 0;
+            if (accelX < 0)
+            {
+                Direction = Direction.Left;
+            }
+            else if (accelX > 0)
+            {
+                Direction = Direction.Right;
+            }
+            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY, VelocityY < 0 ^ Input.IsPressed(Keys.Down));
+        }
+
+        private void MainProcessFloating(IMapEnvironment env)
+        {
+            double accelX = Input.X * FloatingAccel;
+            double accelY = Input.Y * FloatingAccel;
+            UpdatePositionFloating(env.Wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
+        }
+
+        private void UpdatePositionOnGround(double targetVelocity, double accelScale, double wind)
+        {
+            // 地面の方向
+            var groundX = -GroundNormalY;
+            var groundY = GroundNormalX;
+            // 地面方向の速度
+            var velocityH = VelocityX * groundX + VelocityY * groundY;
+            // 地面方向の風
+            var windH = wind * groundX;
+            // 走る力
+            var runAccel = RunAccel * accelScale * groundX;
+            // 静止摩擦力
+            var stopFriction = runAccel * 2.0;
+            // 空気抵抗
+            var friction = (velocityH - windH) * FloatingFriction;
+            // 動く力が静止摩擦を超えているか
+            var overFriction = friction < -stopFriction || stopFriction < friction;
+            // 加速度
+            var accelH = 0.0;
+            if (VelocityX < targetVelocity)
+            {
+                accelH = runAccel - friction;
+            }
+            else if (VelocityX > targetVelocity)
+            {
+                accelH = -runAccel - friction;
+            }
+            else
+            {
+                if (friction < -stopFriction)
+                {
+                    accelH = -stopFriction - friction;
+                }
+                else if (RunAccel < friction)
+                {
+                    accelH = stopFriction - friction;
+                }
+            }
+            velocityH += accelH;
+            if (!overFriction)
+            {
+                if ((velocityH < targetVelocity && targetVelocity < velocityH - accelH) || (velocityH - accelH < targetVelocity && targetVelocity < velocityH))
+                {
+                    velocityH = targetVelocity;
+                }
+            }
+            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
+            {
+                velocityH = 0;
+            }
+            VelocityX = velocityH * groundX;
+            VelocityY = velocityH * groundY;
+            UpdatePosition();
+        }
+
+        private void UpdatePositionWalking(double targetVelocity)
+        {
+            // 地面の方向
+            var groundX = -GroundNormalY;
+            var groundY = GroundNormalX;
+            // 地面方向の速度
+            var velocityH = targetVelocity;
+            if ((TouchedRight && velocityH > 0) || (TouchedLeft && velocityH < 0))
+            {
+                velocityH = 0;
+            }
+            VelocityX = velocityH * groundX;
+            VelocityY = velocityH * groundY;
+            UpdatePosition();
+        }
+
+        private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0, bool fastFall = false)
+        {
+            double frictionX = (VelocityX - wind) * FloatingFriction;
+            double frictionY = VelocityY * (fastFall ? FloatingFriction : FallFriction);
+            VelocityX += accelX - frictionX;
+            VelocityY += accelY - frictionY + gravity * GravityAccel;
+            if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
+            {
+                VelocityX = 0;
+            }
+            if ((TouchedBottom && VelocityY > 0) || (TouchedTop && VelocityY < 0))
+            {
+                VelocityY = 0;
+            }
+            UpdatePosition();
         }
 
         /// <summary>
@@ -664,67 +725,6 @@ namespace MifuminSoft.funyak.MapObject
             }
             X += VelocityX;
             Y += VelocityY;
-        }
-
-        /// <summary>
-        /// 変化前の値を保持します。
-        /// </summary>
-        private void UpdatePreviousValue()
-        {
-            PreviousX = X;
-            PreviousY = Y;
-            PreviousVelocityX = VelocityX;
-            PreviousVelocityY = VelocityY;
-        }
-
-        /// <summary>
-        /// 自身の移動に応じて回転させます。
-        /// </summary>
-        private void RotateSelf()
-        {
-            var adx = X - PreviousX;
-            var ady = Y - PreviousY;
-            var addx = VelocityX - PreviousVelocityX;
-            var addy = VelocityY - PreviousVelocityY;
-            AngularVelocity += (adx * addy - ady * addx) * AngularAccel - AngularVelocity * AngularFriction;
-            Angle += AngularVelocity;
-            while (Angle > 180) Angle -= 360;
-            while (Angle < -180) Angle += 360;
-        }
-
-        /// <summary>
-        /// 浮遊状態でないときの前処理を行います。
-        /// </summary>
-        private void PreprocessNotFloating()
-        {
-            ResetRotation();
-            UpdatePreviousValue();
-        }
-
-        private void UpdatePositionFalling(double gravity, double wind, double accelX = 0.0, double accelY = 0.0, bool fastFall = false)
-        {
-            double frictionX = (VelocityX - wind) * FloatingFriction;
-            double frictionY = VelocityY * (fastFall ? FloatingFriction : FallFriction);
-            VelocityX += accelX - frictionX;
-            VelocityY += accelY - frictionY + gravity * GravityAccel;
-            if ((TouchedRight && VelocityX > 0) || (TouchedLeft && VelocityX < 0))
-            {
-                VelocityX = 0;
-            }
-            if ((TouchedBottom && VelocityY > 0) || (TouchedTop && VelocityY < 0))
-            {
-                VelocityY = 0;
-            }
-            UpdatePosition();
-        }
-
-        /// <summary>
-        /// 回転を初期状態に戻します。
-        /// </summary>
-        private void ResetRotation()
-        {
-            AngularVelocity = 0;
-            Angle = 0;
         }
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)
