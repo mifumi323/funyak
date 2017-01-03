@@ -137,6 +137,42 @@
       "color": "Black",
       "hit": true,
     },
+    {
+      "type": "line",
+      "x1": 5000,
+      "y1": 4600,
+      "x2": 5400,
+      "y2": 4625,
+      "color": "Black",
+      "hit": true,
+    },
+    {
+      "type": "line",
+      "x1": 5000,
+      "y1": 4650,
+      "x2": 5400,
+      "y2": 4625,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 4900,
+      "y1": 4550,
+      "x2": 4875,
+      "y2": 4900,
+      "color": "Black",
+      "hit": true,
+    },
+    {
+      "type": "line",
+      "x1": 4850,
+      "y1": 4550,
+      "x2": 4875,
+      "y2": 4900,
+      "color": "Black",
+      "hit": true,
+    },
   ],
   "areas": [
     {
