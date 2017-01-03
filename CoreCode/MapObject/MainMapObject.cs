@@ -463,16 +463,16 @@ namespace MifuminSoft.funyak.MapObject
                 MainProcessRunning(env);
                 return;
             }
-            else if (Input.IsPressed(Keys.Down))
-            {
-                State = MainMapObjectState.Walk;
-                MainProcessWalking(env);
-                return;
-            }
-            else if (Input.IsPressed(Keys.Jump))
+            else if (Input.IsPushed(Keys.Jump))
             {
                 State = MainMapObjectState.Charge;
                 MainProcessCharging(env);
+                return;
+            }
+            else if (Input.IsPushed(Keys.Down))
+            {
+                State = MainMapObjectState.Walk;
+                MainProcessWalking(env);
                 return;
             }
             else if (Input.IsPressed(Keys.Up))
@@ -556,7 +556,7 @@ namespace MifuminSoft.funyak.MapObject
                 MainProcessJumping(env);
                 return;
             }
-            else if (Input.IsPushed(Keys.Down))
+            else if (Input.IsPushed(Keys.Down) && !Input.IsPushed(Keys.Jump))
             {
                 State = MainMapObjectState.Walk;
                 MainProcessWalking(env);
@@ -883,7 +883,22 @@ namespace MifuminSoft.funyak.MapObject
                 case MainMapObjectState.Fall:
                     if (landed)
                     {
-                        State = MainMapObjectState.Stand;
+                        if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
+                        {
+                            State = MainMapObjectState.Run;
+                        }
+                        else if (Input.IsPressed(Keys.Jump))
+                        {
+                            State = MainMapObjectState.Charge;
+                        }
+                        else if (Input.IsPressed(Keys.Down))
+                        {
+                            State = MainMapObjectState.Walk;
+                        }
+                        else
+                        {
+                            State = MainMapObjectState.Stand;
+                        }
                     }
                     break;
                 case MainMapObjectState.Float:
