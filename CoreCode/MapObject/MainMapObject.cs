@@ -212,7 +212,14 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetTop(double y)
         {
-            return y - Size / 2;
+            switch (State)
+            {
+                case MainMapObjectState.Walk:
+                case MainMapObjectState.Charge:
+                    return y;
+                default:
+                    return y - Size / 2;
+            }
         }
 
         public double Right
@@ -239,6 +246,23 @@ namespace MifuminSoft.funyak.MapObject
         public double GetBottom(double y)
         {
             return y + Size / 2;
+        }
+
+        public double GetCenterX(double x)
+        {
+            return x;
+        }
+
+        public double GetCenterY(double y)
+        {
+            switch (State)
+            {
+                case MainMapObjectState.Walk:
+                case MainMapObjectState.Charge:
+                    return y + Size / 4;
+                default:
+                    return y;
+            }
         }
 
         /// <summary>
@@ -766,17 +790,21 @@ namespace MifuminSoft.funyak.MapObject
             var touchedBottom = false;
 
             // 当たり判定用図形を生成
-            var topSegment = new Segment2D(tempX, tempY, tempX, GetTop(tempY));
-            var bottomSegment = new Segment2D(tempX, tempY, tempX, GetBottom(tempY));
-            var leftSegment = new Segment2D(tempX, tempY, GetLeft(tempX), tempY);
-            var rightSegment = new Segment2D(tempX, tempY, GetRight(tempX), tempY);
-            var topVector = topSegment.End - topSegment.Start;
-            var bottomVector = bottomSegment.End - bottomSegment.Start;
-            var leftVector = leftSegment.End - leftSegment.Start;
-            var rightVector = rightSegment.End - rightSegment.Start;
+            var centerX = GetCenterX(tempX);
+            var centerY = GetCenterY(tempY);
+            var top = GetTop(tempY);
+            var bottom = GetBottom(tempY);
+            var left = GetLeft(tempX);
+            var right = GetRight(tempX);
+            var topSegment = new Segment2D(centerX, centerY - tempVY, centerX, top);
+            var bottomSegment = new Segment2D(centerX, centerY - tempVY, centerX, bottom);
+            var leftSegment = new Segment2D(centerX, centerY, left, centerY);
+            var rightSegment = new Segment2D(centerX, centerY, right, centerY);
+            var topVector = new Vector2D(centerX - tempX, top - tempY);
+            var bottomVector = new Vector2D(centerX - tempX, bottom - tempY);
+            var leftVector = new Vector2D(left - tempX, centerY - tempY);
+            var rightVector = new Vector2D(right - tempX, centerY - tempY);
             var velocity = new Vector2D(tempVX, tempVY);
-            topSegment.Start.Y -= tempVY;
-            bottomSegment.Start.Y -= tempVY;
 
             var adjuster = new PositionAdjusterAverage();
             var adjusterHigh = new PositionAdjusterHigh();
