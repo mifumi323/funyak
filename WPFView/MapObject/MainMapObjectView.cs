@@ -95,7 +95,14 @@ namespace MifuminSoft.funyak.View.MapObject
                 MapObject.Direction == Direction.Left ? ".L" :
                 MapObject.Direction == Direction.Right ? ".R" :
                 ".F";
-            ImageResource.SetToRectangle(rectangle, imageKey, MapObject.StateCounter - 1, args.TranslateX(MapObject.X), args.TranslateY(MapObject.Y), args.Scale, MapObject.Angle);
+            ImageResource.SetToRectangle(
+                rectangle, 
+                imageKey,
+                MapObject.StateCounter - 1,
+                args.TranslateX(MapObject.X), 
+                args.TranslateY(MapObject.Y),
+                args.Scale * MapObject.Size / 28.0,
+                MapObject.Angle);
         }
 
         private void AddToCanvas()

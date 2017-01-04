@@ -40,7 +40,7 @@ namespace MifuminSoft.funyak.Data
                 GroundNormalY = data.gy ?? -1.0,
                 GroundFriction = data.f ?? 1.0,
 
-                GroundNormalY = data.gy ?? 0.0,
+                Size = data.size ?? 28.0,
             };
             mainMapObject.PreviousX = data.px ?? mainMapObject.X;
             mainMapObject.PreviousY = data.py ?? mainMapObject.Y;

@@ -15,6 +15,7 @@
       "type": "funya",
       "x": 200,
       "y": 976,
+      "size": 56.0,
       "i": {
         "type": "arrange",
         "hr": true,

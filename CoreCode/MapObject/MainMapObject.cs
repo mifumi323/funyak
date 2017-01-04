@@ -199,7 +199,7 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetLeft(double x)
         {
-            return x - 14;
+            return x - Size / 2;
         }
 
         public double Top
@@ -212,7 +212,7 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetTop(double y)
         {
-            return y - 14;
+            return y - Size / 2;
         }
 
         public double Right
@@ -225,7 +225,7 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetRight(double x)
         {
-            return x + 14;
+            return x + Size / 2;
         }
 
         public double Bottom
@@ -238,7 +238,7 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetBottom(double y)
         {
-            return y + 14;
+            return y + Size / 2;
         }
 
         /// <summary>
@@ -269,6 +269,11 @@ namespace MifuminSoft.funyak.MapObject
         /// 外見を示す値
         /// </summary>
         public int Appearance = 0;
+
+        /// <summary>
+        /// 大きさ
+        /// </summary>
+        public double Size = 28.0;
 
         /// <summary>
         /// 走行速度
