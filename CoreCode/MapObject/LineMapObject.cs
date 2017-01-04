@@ -17,11 +17,15 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y2">終点のY座標</param>
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
-            this.x1 = x1;
-            this.y1 = y1;
-            this.x2 = x2;
-            this.y2 = y2;
-            segment = new Segment2D(x1, y1, x2, y2);
+            segment = new CollidableSegment()
+            {
+                Segment = new Segment2D(x1, y1, x2, y2),
+                HitUpper = false,
+                HitBelow = false,
+                HitLeft = false,
+                HitRight = false,
+                Friction = 1.0,
+            };
         }
 
         /// <summary>
@@ -36,15 +40,13 @@ namespace MifuminSoft.funyak.MapObject
         {
             get
             {
-                return x1;
+                return segment.Segment.Start.X;
             }
             set
             {
-                x1 = value;
-                segment = new Segment2D(x1, y1, x2, y2);
+                segment.Segment.Start.X = value;
             }
         }
-        private double x1 = 0;
 
         /// <summary>
         /// 始点のY座標
@@ -53,15 +55,13 @@ namespace MifuminSoft.funyak.MapObject
         {
             get
             {
-                return y1;
+                return segment.Segment.Start.Y;
             }
             set
             {
-                y1 = value;
-                segment = new Segment2D(x1, y1, x2, y2);
+                segment.Segment.Start.Y = value;
             }
         }
-        private double y1 = 0;
 
         /// <summary>
         /// 終点のX座標
@@ -70,15 +70,13 @@ namespace MifuminSoft.funyak.MapObject
         {
             get
             {
-                return x2;
+                return segment.Segment.End.X;
             }
             set
             {
-                x2 = value;
-                segment = new Segment2D(x1, y1, x2, y2);
+                segment.Segment.End.X = value;
             }
         }
-        private double x2 = 0;
 
         /// <summary>
         /// 終点のY座標
@@ -87,35 +85,73 @@ namespace MifuminSoft.funyak.MapObject
         {
             get
             {
-                return y2;
+                return segment.Segment.End.Y;
             }
             set
             {
-                y2 = value;
-                segment = new Segment2D(x1, y1, x2, y2);
+                segment.Segment.End.Y = value;
             }
         }
-        private double y2 = 0;
 
         /// <summary>
         /// 上の当たり判定
         /// </summary>
-        public bool HitUpper { get; set; } = false;
+        public bool HitUpper
+        {
+            get
+            {
+                return segment.HitUpper;
+            }
+            set
+            {
+                segment.HitUpper = value;
+            }
+        }
 
         /// <summary>
         /// 下の当たり判定
         /// </summary>
-        public bool HitBelow { get; set; } = false;
+        public bool HitBelow
+        {
+            get
+            {
+                return segment.HitBelow;
+            }
+            set
+            {
+                segment.HitBelow = value;
+            }
+        }
 
         /// <summary>
         /// 左の当たり判定
         /// </summary>
-        public bool HitLeft { get; set; } = false;
+        public bool HitLeft
+        {
+            get
+            {
+                return segment.HitLeft;
+            }
+            set
+            {
+                segment.HitLeft = value;
+            }
+        }
 
         /// <summary>
         /// 右の当たり判定
         /// </summary>
-        public bool HitRight { get; set; } = false;
+        public bool HitRight
+        {
+            get
+            {
+                return segment.HitRight;
+            }
+            set
+            {
+                segment.HitRight = value;
+            }
+        }
 
         /// <summary>
         /// 色(未指定または無効な色の場合透明)
@@ -125,7 +161,17 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 摩擦力(1.0が通常)
         /// </summary>
-        public double Friction { get; set; } = 1.0;
+        public double Friction
+        {
+            get
+            {
+                return segment.Friction;
+            }
+            set
+            {
+                segment.Friction = value;
+            }
+        }
 
         public double X { get { return (X1 + X2) / 2; } }
         public double Y { get { return (Y1 + Y2) / 2; } }
@@ -134,9 +180,14 @@ namespace MifuminSoft.funyak.MapObject
         public double Top { get { return Math.Min(Y1, Y2); } }
         public double Bottom { get { return Math.Max(Y1, Y2); } }
 
-        private Segment2D segment;
+        private CollidableSegment segment;
 
         public Segment2D ToSegment2D()
+        {
+            return segment.Segment;
+        }
+
+        public CollidableSegment ToCollidableSegment()
         {
             return segment;
         }

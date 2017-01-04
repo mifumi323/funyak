@@ -766,13 +766,13 @@ namespace MifuminSoft.funyak.MapObject
         {
 
             // 種類ごとに振り分ける
-            var lineMapObjects = new List<LineMapObject>();
+            var collidableSegments = new List<CollidableSegment>();
             foreach (var mapObject in args.GetMapObjects(this))
             {
                 var lineMapObject = mapObject as LineMapObject;
                 if (lineMapObject != null)
                 {
-                    lineMapObjects.Add(lineMapObject);
+                    collidableSegments.Add(lineMapObject.ToCollidableSegment());
                 }
             }
 
@@ -813,17 +813,17 @@ namespace MifuminSoft.funyak.MapObject
             var adjusterRight = new PositionAdjusterRight();
 
             // 線との当たり判定
-            foreach (var lineMapObject in lineMapObjects)
+            foreach (var collidableSegment in collidableSegments)
             {
-                var lineSegment = lineMapObject.ToSegment2D();
+                var lineSegment = collidableSegment.Segment;
                 var lineVector = lineSegment.End - lineSegment.Start;
                 var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
-                var lineFriction = lineMapObject.Friction;
+                var lineFriction = collidableSegment.Friction;
                 lineNormal.Norm();
                 var lineNormalNegative = -lineNormal;
 
                 // 主人公の下側と線の上側
-                if (lineMapObject.HitUpper)
+                if (collidableSegment.HitUpper)
                 {
                     if (lineNormal.Y != 0)
                     {
@@ -834,7 +834,7 @@ namespace MifuminSoft.funyak.MapObject
                 }
 
                 // 主人公の上側と線の下側
-                if (lineMapObject.HitBelow)
+                if (collidableSegment.HitBelow)
                 {
                     if (lineNormal.Y != 0)
                     {
@@ -845,7 +845,7 @@ namespace MifuminSoft.funyak.MapObject
                 }
 
                 // 主人公の右側と線の左側
-                if (lineMapObject.HitLeft)
+                if (collidableSegment.HitLeft)
                 {
                     if (lineNormal.X != 0)
                     {
@@ -856,7 +856,7 @@ namespace MifuminSoft.funyak.MapObject
                 }
 
                 // 主人公の左側と線の右側
-                if (lineMapObject.HitRight)
+                if (collidableSegment.HitRight)
                 {
                     if (lineNormal.X != 0)
                     {
