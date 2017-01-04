@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.CollisionHelper
     /// </summary>
     public interface IPositionAdjuster
     {
-        void Add(double x, double y, double vx, double vy, double nx, double ny);
+        void Add(double x, double y, double vx, double vy, double nx, double ny, double f);
         void Add(IPositionAdjuster positionAdjuster);
         bool HasValue { get; }
         double X { get; }
@@ -16,6 +16,7 @@ namespace MifuminSoft.funyak.CollisionHelper
         double VelocityY { get; }
         double NormalX { get; }
         double NormalY { get; }
+        double Friction { get; }
     }
 
     /// <summary>
@@ -29,15 +30,16 @@ namespace MifuminSoft.funyak.CollisionHelper
         protected double vy = 0.0;
         protected double nx = 0.0;
         protected double ny = 0.0;
+        protected double f = 0.0;
         protected int count = 0;
 
-        public abstract void Add(double x, double y, double vx, double vy, double nx, double ny);
+        public abstract void Add(double x, double y, double vx, double vy, double nx, double ny, double f);
 
         public void Add(IPositionAdjuster positionAdjuster)
         {
             if (positionAdjuster.HasValue)
             {
-                Add(positionAdjuster.X, positionAdjuster.Y, positionAdjuster.VelocityX, positionAdjuster.VelocityY, positionAdjuster.NormalX, positionAdjuster.NormalY);
+                Add(positionAdjuster.X, positionAdjuster.Y, positionAdjuster.VelocityX, positionAdjuster.VelocityY, positionAdjuster.NormalX, positionAdjuster.NormalY, positionAdjuster.Friction);
             }
         }
 
@@ -48,6 +50,7 @@ namespace MifuminSoft.funyak.CollisionHelper
         public double VelocityY => vy / count;
         public double NormalX => nx / Math.Sqrt(nx * nx + ny * ny);
         public double NormalY => ny / Math.Sqrt(nx * nx + ny * ny);
+        public double Friction => f / count;
     }
 
     /// <summary>
@@ -55,7 +58,7 @@ namespace MifuminSoft.funyak.CollisionHelper
     /// </summary>
     public class PositionAdjusterAverage : PositionAdjusterBase
     {
-        public override void Add(double x, double y, double vx, double vy, double nx, double ny)
+        public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             this.x += x;
             this.y += y;
@@ -63,6 +66,7 @@ namespace MifuminSoft.funyak.CollisionHelper
             this.vy += vy;
             this.nx += nx;
             this.ny += ny;
+            this.f += f;
             count++;
         }
     }
@@ -75,7 +79,7 @@ namespace MifuminSoft.funyak.CollisionHelper
             y = double.PositiveInfinity;
         }
 
-        public override void Add(double x, double y, double vx, double vy, double nx, double ny)
+        public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (y < this.y)
             {
@@ -85,6 +89,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy = vy;
                 this.nx = nx;
                 this.ny = ny;
+                this.f = f;
                 count = 1;
             }
             else if (y == this.y)
@@ -95,6 +100,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy += vy;
                 this.nx += nx;
                 this.ny += ny;
+                this.f += f;
                 count++;
             }
         }
@@ -108,7 +114,7 @@ namespace MifuminSoft.funyak.CollisionHelper
             y = double.NegativeInfinity;
         }
 
-        public override void Add(double x, double y, double vx, double vy, double nx, double ny)
+        public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (y > this.y)
             {
@@ -118,6 +124,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy = vy;
                 this.nx = nx;
                 this.ny = ny;
+                this.f = f;
                 count = 1;
             }
             else if (y == this.y)
@@ -128,6 +135,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy += vy;
                 this.nx += nx;
                 this.ny += ny;
+                this.f += f;
                 count++;
             }
         }
@@ -141,7 +149,7 @@ namespace MifuminSoft.funyak.CollisionHelper
             x = double.PositiveInfinity;
         }
 
-        public override void Add(double x, double y, double vx, double vy, double nx, double ny)
+        public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (x < this.x)
             {
@@ -151,6 +159,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy = vy;
                 this.nx = nx;
                 this.ny = ny;
+                this.f = f;
                 count = 1;
             }
             else if (x == this.x)
@@ -161,6 +170,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy += vy;
                 this.nx += nx;
                 this.ny += ny;
+                this.f += f;
                 count++;
             }
         }
@@ -174,7 +184,7 @@ namespace MifuminSoft.funyak.CollisionHelper
             x = double.NegativeInfinity;
         }
 
-        public override void Add(double x, double y, double vx, double vy, double nx, double ny)
+        public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (x > this.x)
             {
@@ -184,6 +194,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy = vy;
                 this.nx = nx;
                 this.ny = ny;
+                this.f = f;
                 count = 1;
             }
             else if (x == this.x)
@@ -194,6 +205,7 @@ namespace MifuminSoft.funyak.CollisionHelper
                 this.vy += vy;
                 this.nx += nx;
                 this.ny += ny;
+                this.f += f;
                 count++;
             }
         }

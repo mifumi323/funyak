@@ -122,6 +122,11 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public string Color { get; set; }
 
+        /// <summary>
+        /// 摩擦力(1.0が通常)
+        /// </summary>
+        public double Friction { get; set; } = 1.0;
+
         public double X { get { return (X1 + X2) / 2; } }
         public double Y { get { return (Y1 + Y2) / 2; } }
         public double Left { get { return Math.Min(X1, X2); } }

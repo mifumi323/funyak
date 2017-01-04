@@ -37,6 +37,9 @@ namespace MifuminSoft.funyak.Data
                 StateCounter = data.sc ?? 0,
 
                 GroundNormalX = data.gx ?? 0.0,
+                GroundNormalY = data.gy ?? -1.0,
+                GroundFriction = data.f ?? 1.0,
+
                 GroundNormalY = data.gy ?? 0.0,
             };
             mainMapObject.PreviousX = data.px ?? mainMapObject.X;
@@ -56,6 +59,7 @@ namespace MifuminSoft.funyak.Data
             if (data.hb != null) lineMapObject.HitBelow = (bool)data.hb;
             if (data.hl != null) lineMapObject.HitLeft = (bool)data.hl;
             if (data.hr != null) lineMapObject.HitRight = (bool)data.hr;
+            if (data.f != null) lineMapObject.Friction = (double)data.f;
             return lineMapObject;
         }
     }
