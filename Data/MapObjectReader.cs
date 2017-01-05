@@ -16,6 +16,7 @@ namespace MifuminSoft.funyak.Data
             return
                 data.type == "funya" ? GenerateMainMapObject(data, option) :
                 data.type == "line" ? GenerateLineMapObject(data, option) :
+                data.type == "tile" ? GenerateTileMapObject(data, option) :
                 null;
         }
 
@@ -61,6 +62,13 @@ namespace MifuminSoft.funyak.Data
             if (data.hr != null) lineMapObject.HitRight = (bool)data.hr;
             if (data.f != null) lineMapObject.Friction = (double)data.f;
             return lineMapObject;
+        }
+
+        private static IMapObject GenerateTileMapObject(dynamic data, MapReaderOption option)
+        {
+            var tileMapObject = new TileMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h);
+            tileMapObject.Name = data.n;
+            return tileMapObject;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using MifuminSoft.funyak.Input;
+﻿using System.Collections.Generic;
+using MifuminSoft.funyak.Input;
+using MifuminSoft.funyak.MapObject;
 using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.Data
@@ -6,6 +8,7 @@ namespace MifuminSoft.funyak.Data
     public class MapReaderOption
     {
         public IInput Input = null;
+        public IList<TileChip> ChipList = null;
     }
 
     public static class MapReader
