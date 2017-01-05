@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MifuminSoft.funyak.MapObject
+﻿namespace MifuminSoft.funyak.MapObject
 {
-    public struct TileChip
+    public class TileChip
     {
-        public int Resource;
+        public object Resource;
         public bool HitUpper;
         public bool HitBelow;
         public bool HitLeft;
@@ -61,26 +57,21 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public int TileCountY { get; private set; }
 
-        public IList<TileChip> ChipSet { get; set; }
+        private TileChip[,] tiles;
 
-        private int[,] tiles;
-
-        public TileMapObject(int tileCountX, int tileCountY)
+        public TileMapObject(double x, double y, int tileCountX, int tileCountY)
         {
+            X = x;
+            Y = y;
             TileCountX = tileCountX;
             TileCountY = tileCountY;
-            tiles = new int[tileCountX, tileCountY];
+            tiles = new TileChip[tileCountX, tileCountY];
         }
 
-        public int this[int x, int y]
+        public TileChip this[int x, int y]
         {
             get { return tiles[x, y]; }
             set { tiles[x, y] = value; }
-        }
-
-        public TileChip GetChip(int x, int y)
-        {
-            return ChipSet[tiles[x, y]];
         }
     }
 }
