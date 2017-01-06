@@ -50,6 +50,48 @@ namespace WPFTests
                 Input = input,
             });
             main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as MainMapObject;
+
+            // ちょっとタイルマップのテストをねじ込もう
+            int tcx = 10, tcy = 7;
+            var tileMapObject = new TileMapObject(5000, 5000, tcx, tcy)
+            {
+                TileWidth = 32,
+                TileHeight = 32,
+            };
+            var tileResource = SpriteReader.Read(@"Assets\Ice.bmp");
+            var tiles = new TileChip[]
+            {
+                new TileChip()
+                {
+                    Resource = new TileChipResource(tileResource, "0,0"),
+                },
+                new TileChip()
+                {
+                    Resource = new TileChipResource(tileResource, "1,0"),
+                },
+                new TileChip()
+                {
+                    Resource = new TileChipResource(tileResource, "2,0"),
+                },
+                new TileChip()
+                {
+                    Resource = new TileChipResource(tileResource, "3,0"),
+                },
+                new TileChip()
+                {
+                    Resource = new TileChipResource(tileResource, "4,0"),
+                },
+            };
+            for (int x = 0; x < tcx; x++)
+            {
+                for (int y = 0; y < tcy; y++)
+                {
+                    int i = (x + y) % (tiles.Length + 1);
+                    tileMapObject[x, y] = i < tiles.Length ? tiles[i] : null;
+                }
+            }
+            map.AddMapObject(tileMapObject);
+
             canvas.Children.Clear();
             mapView = new MapView(map, new MapObjectViewFactory()
             {
