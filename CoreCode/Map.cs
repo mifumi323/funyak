@@ -54,6 +54,11 @@ namespace MifuminSoft.funyak
         private IDictionary<string, AreaEnvironment> namedAreaEnvironment;
 
         /// <summary>
+        /// 経過フレーム数を取得します。
+        /// </summary>
+        public int FrameCount { get; set; }
+
+        /// <summary>
         /// ゲームのマップを初期化します。
         /// </summary>
         /// <param name="width">マップの幅(マップ空間内のピクセル単位)</param>
@@ -65,6 +70,7 @@ namespace MifuminSoft.funyak
             Gravity = 1.0;
             Wind = 0.0;
             BackgroundColor = null;
+            FrameCount = 0;
 
             mapObjectCollection = new List<IMapObject>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
@@ -106,6 +112,7 @@ namespace MifuminSoft.funyak
             UpdateMapObjects();
             var reaction = CheckMapObjectsCollision();
             reaction?.Invoke();
+            FrameCount++;
         }
 
         /// <summary>

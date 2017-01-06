@@ -19,11 +19,17 @@ namespace MifuminSoft.funyak.View.MapObject
         /// </summary>
         public Rect Area { get; private set; }
 
-        public MapObjectViewUpdateArgs(Point offset, double scale, Rect area)
+        /// <summary>
+        /// 経過フレーム数
+        /// </summary>
+        public int Frame { get; private set; }
+
+        public MapObjectViewUpdateArgs(Point offset, double scale, Rect area, int frame)
         {
             Offset = offset;
             Scale = scale;
             Area = area;
+            Frame = frame;
         }
 
         public double TranslateX(double x)

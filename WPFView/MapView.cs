@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View.AreaEnvironment;
 using MifuminSoft.funyak.View.MapObject;
@@ -157,7 +156,7 @@ namespace MifuminSoft.funyak.View
             }
 
             // マップオブジェクトの状態を更新
-            var args = new MapObjectViewUpdateArgs(offset, scale, area);
+            var args = new MapObjectViewUpdateArgs(offset, scale, area, Map.FrameCount);
             foreach (var mapObjectView in MapObjectViewCollection)
             {
                 mapObjectView.Update(args);
