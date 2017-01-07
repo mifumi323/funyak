@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.MapObject
+﻿using System;
+
+namespace MifuminSoft.funyak.MapObject
 {
     public class TileChip
     {
@@ -76,6 +78,26 @@
         {
             get { return tiles[x, y]; }
             set { tiles[x, y] = value; }
+        }
+
+        /// <summary>
+        /// X方向のタイル番号を取得
+        /// </summary>
+        /// <param name="x">マップ座標でのX座標</param>
+        /// <returns>X方向のタイル番号</returns>
+        public int ToTileIndexX(double x)
+        {
+            return (int)Math.Floor((x - Left) / TileWidth);
+        }
+
+        /// <summary>
+        /// Y方向のタイル番号を取得
+        /// </summary>
+        /// <param name="y">マップ座標でのY座標</param>
+        /// <returns>Y方向のタイル番号</returns>
+        public int ToTileIndexY(double y)
+        {
+            return (int)Math.Floor((y - Top) / TileHeight);
         }
     }
 }

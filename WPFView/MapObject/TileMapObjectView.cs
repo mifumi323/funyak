@@ -58,10 +58,10 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public void Update(MapObjectViewUpdateArgs args)
         {
-            var startX = Math.Max((int)((args.Area.Left - MapObject.Left) / MapObject.TileWidth), 0);
-            var endX = Math.Min((int)((args.Area.Right - MapObject.Left) / MapObject.TileWidth), MapObject.TileCountX - 1);
-            var startY = Math.Max((int)((args.Area.Top - MapObject.Top) / MapObject.TileHeight), 0);
-            var endY = Math.Min((int)((args.Area.Bottom - MapObject.Top) / MapObject.TileHeight), MapObject.TileCountY - 1);
+            var startX = Math.Max(MapObject.ToTileIndexX(args.Area.Left), 0);
+            var endX = Math.Min(MapObject.ToTileIndexX(args.Area.Right), MapObject.TileCountX - 1);
+            var startY = Math.Max(MapObject.ToTileIndexY(args.Area.Top), 0);
+            var endY = Math.Min(MapObject.ToTileIndexY(args.Area.Bottom), MapObject.TileCountY - 1);
             var i = 0;
             for (int x = startX; x <= endX; x++)
             {
