@@ -764,8 +764,46 @@ namespace MifuminSoft.funyak.MapObject
 
         public Action CheckCollision(CheckMapObjectCollisionArgs args)
         {
+            // 位置とか
+            var x = X;
+            var y = Y;
+            var vx = VelocityX;
+            var vy = VelocityY;
+            var nx = GroundNormalX;
+            var ny = GroundNormalY;
+            var centerX = GetCenterX(x);
+            var centerY = GetCenterY(y);
+            var top = GetTop(y);
+            var bottom = GetBottom(y);
+            var left = GetLeft(x);
+            var right = GetRight(x);
 
-            // 種類ごとに振り分ける
+            // 暫定結果とか
+            var friction = GroundFriction;
+            var touchedLeft = false;
+            var touchedTop = false;
+            var touchedRight = false;
+            var touchedBottom = false;
+
+            // 当たり判定用図形とか
+            var topSegment = new Segment2D(centerX, centerY - vy, centerX, top);
+            var bottomSegment = new Segment2D(centerX, centerY - vy, centerX, bottom);
+            var leftSegment = new Segment2D(centerX, centerY, left, centerY);
+            var rightSegment = new Segment2D(centerX, centerY, right, centerY);
+            var topVector = new Vector2D(centerX - x, top - y);
+            var bottomVector = new Vector2D(centerX - x, bottom - y);
+            var leftVector = new Vector2D(left - x, centerY - y);
+            var rightVector = new Vector2D(right - x, centerY - y);
+            var velocity = new Vector2D(vx, vy);
+
+            // 位置調整オブジェクト
+            var adjuster = new PositionAdjusterAverage();
+            var adjusterHigh = new PositionAdjusterHigh();
+            var adjusterLow = new PositionAdjusterLow();
+            var adjusterLeft = new PositionAdjusterLeft();
+            var adjusterRight = new PositionAdjusterRight();
+
+            // 判定対象の種類ごとに振り分ける
             var collidableSegments = new List<CollidableSegment>();
             foreach (var mapObject in args.GetMapObjects(this))
             {
@@ -774,43 +812,13 @@ namespace MifuminSoft.funyak.MapObject
                 {
                     collidableSegments.Add(lineMapObject.ToCollidableSegment());
                 }
+
+                var tileMapObject = mapObject as TileMapObject;
+                if (tileMapObject != null)
+                {
+                    tileMapObject.AddCollidableSegmentsToList(collidableSegments, left, top, right, bottom);
+                }
             }
-
-            // 結果
-            var tempX = X;
-            var tempY = Y;
-            var tempVX = VelocityX;
-            var tempVY = VelocityY;
-            var tempNX = GroundNormalX;
-            var tempNY = GroundNormalY;
-            var tempF = GroundFriction;
-            var touchedLeft = false;
-            var touchedTop = false;
-            var touchedRight = false;
-            var touchedBottom = false;
-
-            // 当たり判定用図形を生成
-            var centerX = GetCenterX(tempX);
-            var centerY = GetCenterY(tempY);
-            var top = GetTop(tempY);
-            var bottom = GetBottom(tempY);
-            var left = GetLeft(tempX);
-            var right = GetRight(tempX);
-            var topSegment = new Segment2D(centerX, centerY - tempVY, centerX, top);
-            var bottomSegment = new Segment2D(centerX, centerY - tempVY, centerX, bottom);
-            var leftSegment = new Segment2D(centerX, centerY, left, centerY);
-            var rightSegment = new Segment2D(centerX, centerY, right, centerY);
-            var topVector = new Vector2D(centerX - tempX, top - tempY);
-            var bottomVector = new Vector2D(centerX - tempX, bottom - tempY);
-            var leftVector = new Vector2D(left - tempX, centerY - tempY);
-            var rightVector = new Vector2D(right - tempX, centerY - tempY);
-            var velocity = new Vector2D(tempVX, tempVY);
-
-            var adjuster = new PositionAdjusterAverage();
-            var adjusterHigh = new PositionAdjusterHigh();
-            var adjusterLow = new PositionAdjusterLow();
-            var adjusterLeft = new PositionAdjusterLeft();
-            var adjusterRight = new PositionAdjusterRight();
 
             // 線との当たり判定
             foreach (var collidableSegment in collidableSegments)
@@ -828,7 +836,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, tempX, tempY, velocity, lineFriction, adjusterHigh);
+                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, x, y, velocity, lineFriction, adjusterHigh);
                         if (collided) touchedBottom = true;
                     }
                 }
@@ -839,7 +847,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, tempX, tempY, velocity, lineFriction, adjusterLow);
+                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, x, y, velocity, lineFriction, adjusterLow);
                         if (collided) touchedTop = true;
                     }
                 }
@@ -850,7 +858,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, tempX, tempY, velocity, lineFriction, adjusterLeft);
+                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, x, y, velocity, lineFriction, adjusterLeft);
                         if (collided) touchedRight = true;
                     }
                 }
@@ -861,7 +869,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, tempX, tempY, velocity, lineFriction, adjusterRight);
+                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, x, y, velocity, lineFriction, adjusterRight);
                         if (collided) touchedLeft = true;
                     }
                 }
@@ -873,27 +881,27 @@ namespace MifuminSoft.funyak.MapObject
             adjuster.Add(adjusterRight);
             if (adjuster.HasValue)
             {
-                tempX = adjuster.X;
-                tempY = adjuster.Y;
-                tempVX = adjuster.VelocityX;
-                tempVY = adjuster.VelocityY;
+                x = adjuster.X;
+                y = adjuster.Y;
+                vx = adjuster.VelocityX;
+                vy = adjuster.VelocityY;
             }
             if (adjusterHigh.HasValue)
             {
-                tempNX = adjusterHigh.NormalX;
-                tempNY = adjusterHigh.NormalY;
-                tempF = adjusterHigh.Friction;
+                nx = adjusterHigh.NormalX;
+                ny = adjusterHigh.NormalY;
+                friction = adjusterHigh.Friction;
             }
 
             return () =>
             {
-                if (Math.Abs(X - tempX) >= PositionAdjustLowerLimit) X = tempX;
-                if (Math.Abs(Y - tempY) >= PositionAdjustLowerLimit) Y = tempY;
-                VelocityX = tempVX;
-                VelocityY = tempVY;
-                GroundNormalX = tempNX;
-                GroundNormalY = tempNY;
-                GroundFriction = tempF;
+                if (Math.Abs(X - x) >= PositionAdjustLowerLimit) X = x;
+                if (Math.Abs(Y - y) >= PositionAdjustLowerLimit) Y = y;
+                VelocityX = vx;
+                VelocityY = vy;
+                GroundNormalX = nx;
+                GroundNormalY = ny;
+                GroundFriction = friction;
                 TouchedLeft = touchedLeft;
                 TouchedTop = touchedTop;
                 TouchedRight = touchedRight;

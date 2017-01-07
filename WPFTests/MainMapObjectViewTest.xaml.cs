@@ -53,7 +53,7 @@ namespace WPFTests
 
             // ちょっとタイルマップのテストをねじ込もう
             int tcx = 10, tcy = 7;
-            var tileMapObject = new TileMapObject(5000, 5000, tcx, tcy)
+            var tileMapObject = new TileMapObject(4700, 4200, tcx, tcy)
             {
             };
             var tileResource = SpriteReader.Read(@"Assets\Ice.bmp");
@@ -66,6 +66,11 @@ namespace WPFTests
                 new TileChip()
                 {
                     Resource = new TileChipResource(tileResource, "1,0"),
+                    HitUpper = true,
+                    HitBelow = true,
+                    HitLeft = true,
+                    HitRight = true,
+                    Friction = 1.0,
                 },
                 new TileChip()
                 {
@@ -74,10 +79,13 @@ namespace WPFTests
                 new TileChip()
                 {
                     Resource = new TileChipResource(tileResource, "3,0"),
+                    HitBelow = true,
                 },
                 new TileChip()
                 {
                     Resource = new TileChipResource(tileResource, "4,0"),
+                    HitUpper = true,
+                    Friction = 1.0,
                 },
             };
             for (int x = 0; x < tcx; x++)
