@@ -55,8 +55,6 @@ namespace WPFTests
             int tcx = 10, tcy = 7;
             var tileMapObject = new TileMapObject(5000, 5000, tcx, tcy)
             {
-                TileWidth = 32,
-                TileHeight = 32,
             };
             var tileResource = SpriteReader.Read(@"Assets\Ice.bmp");
             var tiles = new TileChip[]

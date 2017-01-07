@@ -40,12 +40,16 @@
         /// <summary>
         /// タイル一つの幅
         /// </summary>
-        public double TileWidth { get; set; }
+        public double TileWidth { get; set; } = DefaultTileWidth;
+
+        public const double DefaultTileWidth = 32.0;
 
         /// <summary>
         /// タイル一つの高さ
         /// </summary>
-        public double TileHeight { get; set; }
+        public double TileHeight { get; set; } = DefaultTileHeight;
+
+        public const double DefaultTileHeight = 32.0;
 
         /// <summary>
         /// X方向のタイル数
