@@ -73,48 +73,24 @@ namespace MifuminSoft.funyak.View.Resource
         /// 画像全体の左上を原点とします。
         /// </summary>
         [JsonIgnore]
-        public double ActualSourceOriginX
-        {
-            get
-            {
-                return double.IsNaN(SourceOriginX) ? (SourceLeft + SourceWidth / 2) : SourceOriginX;
-            }
-        }
+        public double ActualSourceOriginX => double.IsNaN(SourceOriginX) ? (SourceLeft + SourceWidth / 2) : SourceOriginX;
         /// <summary>
         /// 表示の中心となる点の元画像におけるY座標の実際の値を取得します。
         /// 画像全体の左上を原点とします。
         /// </summary>
         [JsonIgnore]
-        public double ActualSourceOriginY
-        {
-            get
-            {
-                return double.IsNaN(SourceOriginY) ? (SourceTop + SourceHeight / 2) : SourceOriginY;
-            }
-        }
+        public double ActualSourceOriginY => double.IsNaN(SourceOriginY) ? (SourceTop + SourceHeight / 2) : SourceOriginY;
 
         /// <summary>
         /// 表示先における画像チップの幅の実際の値を取得します。
         /// </summary>
         [JsonIgnore]
-        public double ActualDestinationWidth
-        {
-            get
-            {
-                return double.IsNaN(DestinationWidth) ? SourceWidth : DestinationWidth;
-            }
-        }
+        public double ActualDestinationWidth => double.IsNaN(DestinationWidth) ? SourceWidth : DestinationWidth;
         /// <summary>
         /// 表示先における画像チップの高さの実際の値を取得します。
         /// </summary>
         [JsonIgnore]
-        public double ActualDestinationHeight
-        {
-            get
-            {
-                return double.IsNaN(DestinationHeight) ? SourceHeight : DestinationHeight;
-            }
-        }
+        public double ActualDestinationHeight => double.IsNaN(DestinationHeight) ? SourceHeight : DestinationHeight;
 
         /// <summary>
         /// 表示と直接かかわりのないデータを文字列を保持します。

@@ -182,14 +182,8 @@ namespace MifuminSoft.funyak.MapObject
 
         private CollidableSegment segment;
 
-        public Segment2D ToSegment2D()
-        {
-            return segment.Segment;
-        }
+        public Segment2D ToSegment2D() => segment.Segment;
 
-        public CollidableSegment ToCollidableSegment()
-        {
-            return segment;
-        }
+        public CollidableSegment ToCollidableSegment() => segment;
     }
 }

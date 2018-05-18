@@ -54,9 +54,11 @@ namespace MifuminSoft.funyak.View.Resource
 
         public static SpriteFileInfo FromImageResource(Sprite imageResource)
         {
-            var irfi = new SpriteFileInfo();
-            irfi.Chip = imageResource.Chip;
-            irfi.Animation = new Dictionary<string, FrameGroup[]>();
+            var irfi = new SpriteFileInfo
+            {
+                Chip = imageResource.Chip,
+                Animation = new Dictionary<string, FrameGroup[]>()
+            };
             foreach (var animation in imageResource.Animation)
             {
                 string currentKey = null;
@@ -82,9 +84,6 @@ namespace MifuminSoft.funyak.View.Resource
             return irfi;
         }
 
-        public static string ToSpriteInfoFileName(string imageFilename)
-        {
-            return imageFilename + ".json";
-        }
+        public static string ToSpriteInfoFileName(string imageFilename) => imageFilename + ".json";
     }
 }

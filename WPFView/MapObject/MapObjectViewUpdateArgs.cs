@@ -32,19 +32,10 @@ namespace MifuminSoft.funyak.View.MapObject
             Frame = frame;
         }
 
-        public double TranslateX(double x)
-        {
-            return (x - Area.X) * Scale + Offset.X;
-        }
+        public double TranslateX(double x) => (x - Area.X) * Scale + Offset.X;
 
-        public double TranslateY(double y)
-        {
-            return (y - Area.Y) * Scale + Offset.Y;
-        }
+        public double TranslateY(double y) => (y - Area.Y) * Scale + Offset.Y;
 
-        public Point Translate(Point point)
-        {
-            return new Point(TranslateX(point.X), TranslateY(point.Y));
-        }
+        public Point Translate(Point point) => new Point(TranslateX(point.X), TranslateY(point.Y));
     }
 }

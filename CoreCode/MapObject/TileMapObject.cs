@@ -26,21 +26,9 @@ namespace MifuminSoft.funyak.MapObject
 
         public double Top { get { return Y; } }
 
-        public double Right
-        {
-            get
-            {
-                return X + TileWidth * TileCountX;
-            }
-        }
+        public double Right => X + TileWidth * TileCountX;
 
-        public double Bottom
-        {
-            get
-            {
-                return Y + TileHeight * TileCountY;
-            }
-        }
+        public double Bottom => Y + TileHeight * TileCountY;
 
         /// <summary>
         /// タイル一つの幅
@@ -88,20 +76,14 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         /// <param name="x">マップ座標でのX座標</param>
         /// <returns>X方向のタイル番号</returns>
-        public int ToTileIndexX(double x)
-        {
-            return (int)Math.Floor((x - Left) / TileWidth);
-        }
+        public int ToTileIndexX(double x) => (int)Math.Floor((x - Left) / TileWidth);
 
         /// <summary>
         /// Y方向のタイル番号を取得
         /// </summary>
         /// <param name="y">マップ座標でのY座標</param>
         /// <returns>Y方向のタイル番号</returns>
-        public int ToTileIndexY(double y)
-        {
-            return (int)Math.Floor((y - Top) / TileHeight);
-        }
+        public int ToTileIndexY(double y) => (int)Math.Floor((y - Top) / TileHeight);
 
         public void AddCollidableSegmentsToList(IList<CollidableSegment> list, double left, double top, double right, double bottom)
         {

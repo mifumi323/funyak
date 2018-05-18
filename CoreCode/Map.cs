@@ -86,8 +86,7 @@ namespace MifuminSoft.funyak
         public void AddMapObject(IMapObject mapObject)
         {
             mapObjectCollection.Add(mapObject);
-            var dynamicMapObject = mapObject as IDynamicMapObject;
-            if (dynamicMapObject != null) dynamicMapObjectCollection.Add(dynamicMapObject);
+            if (mapObject is IDynamicMapObject dynamicMapObject) dynamicMapObjectCollection.Add(dynamicMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
@@ -161,8 +160,7 @@ namespace MifuminSoft.funyak
         /// <returns></returns>
         public IMapObject FindMapObject(string name)
         {
-            IMapObject mapObject = null;
-            namedMapObject.TryGetValue(name, out mapObject);
+            namedMapObject.TryGetValue(name, out IMapObject mapObject);
             return mapObject;
         }
 
@@ -215,10 +213,7 @@ namespace MifuminSoft.funyak
         /// 全ての局所的環境を取得します。
         /// </summary>
         /// <returns>環境</returns>
-        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment()
-        {
-            return areaEnvironmentCollection;
-        }
+        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment() => areaEnvironmentCollection;
 
         /// <summary>
         /// 名前で局所的環境を検索します。
@@ -227,8 +222,7 @@ namespace MifuminSoft.funyak
         /// <returns></returns>
         public AreaEnvironment FindAreaEnvironment(string name)
         {
-            AreaEnvironment area = null;
-            namedAreaEnvironment.TryGetValue(name, out area);
+            namedAreaEnvironment.TryGetValue(name, out AreaEnvironment area);
             return area;
         }
     }

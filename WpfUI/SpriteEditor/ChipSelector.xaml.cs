@@ -44,19 +44,13 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         /// 選択中のチップを取得します
         /// </summary>
         [Description("選択中のチップを取得します")]
-        public SpriteChipInfo SelectedChip
-        {
-            get { return SelectedItem?.Value; }
-        }
+        public SpriteChipInfo SelectedChip => SelectedItem?.Value;
 
         /// <summary>
         /// 選択中のキーを取得します
         /// </summary>
         [Description("選択中のキーを取得します")]
-        public string SelectedKey
-        {
-            get { return SelectedItem?.Key; }
-        }
+        public string SelectedKey => SelectedItem?.Key;
 
         /// <summary>
         /// 項目の表示色を取得または設定します
@@ -150,7 +144,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             e.Handled = true;
         }
 
-        private void background_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Background_MouseDown(object sender, MouseButtonEventArgs e)
         {
             SelectedItem = null;
             e.Handled = true;
@@ -163,8 +157,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
 
         private static void OnSelectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var chipSelector = d as ChipSelector;
-            if (chipSelector == null) return;
+            if (!(d is ChipSelector chipSelector)) return;
             chipSelector.Refresh();
             chipSelector.SelectionChanged?.Invoke(chipSelector, EventArgs.Empty);
         }

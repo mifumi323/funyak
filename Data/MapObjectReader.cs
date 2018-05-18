@@ -52,8 +52,10 @@ namespace MifuminSoft.funyak.Data
 
         private static IMapObject GenerateLineMapObject(dynamic data, MapReaderOption option)
         {
-            var lineMapObject = new LineMapObject((double)(data.x1 ?? 0.0), (double)(data.y1 ?? 0.0), (double)(data.x2 ?? 0.0), (double)(data.y2 ?? 0.0));
-            lineMapObject.Name = data.n;
+            var lineMapObject = new LineMapObject((double)(data.x1 ?? 0.0), (double)(data.y1 ?? 0.0), (double)(data.x2 ?? 0.0), (double)(data.y2 ?? 0.0))
+            {
+                Name = data.n
+            };
             if (data.color != null) lineMapObject.Color = (string)data.color;
             if (data.hit != null) lineMapObject.HitUpper = lineMapObject.HitBelow = lineMapObject.HitLeft = lineMapObject.HitRight = (bool)data.hit;
             if (data.ht != null) lineMapObject.HitUpper = (bool)data.ht;
@@ -66,9 +68,10 @@ namespace MifuminSoft.funyak.Data
 
         private static IMapObject GenerateTileMapObject(dynamic data, MapReaderOption option)
         {
-            var tileMapObject = new TileMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h);
-            tileMapObject.Name = data.n;
-            return tileMapObject;
+            return new TileMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
+            {
+                Name = data.n
+            };
         }
     }
 }
