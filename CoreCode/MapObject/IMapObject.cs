@@ -5,7 +5,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// マップオブジェクトを表します。
     /// </summary>
-    public interface IMapObject : IBounds
+    public interface IMapObject
     {
         /// <summary>
         /// 名前
