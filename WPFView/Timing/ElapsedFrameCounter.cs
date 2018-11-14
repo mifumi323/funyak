@@ -99,10 +99,7 @@ namespace MifuminSoft.funyak.View.Timing
         /// 前回からの経過時間を取得します。
         /// </summary>
         /// <returns></returns>
-        public long GetElapsedTicks()
-        {
-            return DateTime.Now.Ticks - previousTicks;
-        }
+        public long GetElapsedTicks() => DateTime.Now.Ticks - previousTicks;
 
         /// <summary>
         /// フレームを進めます。

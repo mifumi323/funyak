@@ -70,8 +70,7 @@ namespace MifuminSoft.funyak.View.MapObject
                     var chip = MapObject[x, y];
                     if (chip != null)
                     {
-                        var resource = chip.Resource as TileChipResource;
-                        if (resource != null)
+                        if (chip.Resource is TileChipResource resource)
                         {
                             var rect = rectangles[i];
                             if (rect == null)

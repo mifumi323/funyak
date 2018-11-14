@@ -24,9 +24,6 @@ namespace MifuminSoft.funyak
         /// nullの場合は全マップオブジェクトが返される
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<IMapObject> GetMapObjects(IBounds bounds = null)
-        {
-            return map.GetMapObjects(bounds);
-        }
+        public IEnumerable<IMapObject> GetMapObjects(IBounds bounds = null) => map.GetMapObjects(bounds);
     }
 }

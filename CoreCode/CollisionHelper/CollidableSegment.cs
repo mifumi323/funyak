@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MifuminSoft.funyak.CollisionHelper
+﻿namespace MifuminSoft.funyak.CollisionHelper
 {
     public struct CollidableSegment
     {

@@ -35,7 +35,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 主人公のマップオブジェクト
     /// </summary>
-    public class MainMapObject : IDynamicMapObject
+    public class MainMapObject : IDynamicMapObject, IBounds
     {
         #region 主人公の状態
 
@@ -189,26 +189,11 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double PreviousVelocityY { get; set; }
 
-        public double Left
-        {
-            get
-            {
-                return GetLeft(X);
-            }
-        }
+        public double Left => GetLeft(X);
 
-        public double GetLeft(double x)
-        {
-            return x - Size / 2;
-        }
+        public double GetLeft(double x) => x - Size / 2;
 
-        public double Top
-        {
-            get
-            {
-                return GetTop(Y);
-            }
-        }
+        public double Top => GetTop(Y);
 
         public double GetTop(double y)
         {
@@ -222,36 +207,15 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        public double Right
-        {
-            get
-            {
-                return GetRight(X);
-            }
-        }
+        public double Right => GetRight(X);
 
-        public double GetRight(double x)
-        {
-            return x + Size / 2;
-        }
+        public double GetRight(double x) => x + Size / 2;
 
-        public double Bottom
-        {
-            get
-            {
-                return GetBottom(Y);
-            }
-        }
+        public double Bottom => GetBottom(Y);
 
-        public double GetBottom(double y)
-        {
-            return y + Size / 2;
-        }
+        public double GetBottom(double y) => y + Size / 2;
 
-        public double GetCenterX(double x)
-        {
-            return x;
-        }
+        public double GetCenterX(double x) => x;
 
         public double GetCenterY(double y)
         {
@@ -807,14 +771,12 @@ namespace MifuminSoft.funyak.MapObject
             var collidableSegments = new List<CollidableSegment>();
             foreach (var mapObject in args.GetMapObjects(this))
             {
-                var lineMapObject = mapObject as LineMapObject;
-                if (lineMapObject != null)
+                if (mapObject is LineMapObject lineMapObject)
                 {
                     collidableSegments.Add(lineMapObject.ToCollidableSegment());
                 }
 
-                var tileMapObject = mapObject as TileMapObject;
-                if (tileMapObject != null)
+                if (mapObject is TileMapObject tileMapObject)
                 {
                     tileMapObject.AddCollidableSegmentsToList(collidableSegments, left, top, right, bottom);
                 }

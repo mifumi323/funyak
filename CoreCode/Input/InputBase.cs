@@ -12,36 +12,15 @@ namespace MifuminSoft.funyak.Input
         private bool[] keys = new bool[Enum.GetValues(typeof(Keys)).Length];
         private bool[] prevKeys = new bool[Enum.GetValues(typeof(Keys)).Length];
 
-        public double X
-        {
-            get
-            {
-                return x;
-            }
-        }
+        public double X => x;
 
-        public double Y
-        {
-            get
-            {
-                return y;
-            }
-        }
+        public double Y => y;
 
-        public bool IsPressed(Keys key)
-        {
-            return keys[(int)key];
-        }
+        public bool IsPressed(Keys key) => keys[(int)key];
 
-        public bool IsPushed(Keys key)
-        {
-            return keys[(int)key] && !prevKeys[(int)key];
-        }
+        public bool IsPushed(Keys key) => keys[(int)key] && !prevKeys[(int)key];
 
-        public bool IsReleased(Keys key)
-        {
-            return !keys[(int)key] && prevKeys[(int)key];
-        }
+        public bool IsReleased(Keys key) => !keys[(int)key] && prevKeys[(int)key];
 
         public void Update()
         {

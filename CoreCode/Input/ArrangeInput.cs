@@ -24,40 +24,18 @@ namespace MifuminSoft.funyak.Input
 
         public ArrangeInput(IInput original)
         {
-            if (original == null) throw new ArgumentNullException();
-            Original = original;
+            Original = original ?? throw new ArgumentNullException();
         }
 
-        public double X
-        {
-            get
-            {
-                return HorizontalReverse ? -Original.X : Original.X;
-            }
-        }
+        public double X => HorizontalReverse ? -Original.X : Original.X;
 
-        public double Y
-        {
-            get
-            {
-                return VerticalReverse ? -Original.Y : Original.Y;
-            }
-        }
+        public double Y => VerticalReverse ? -Original.Y : Original.Y;
 
-        public bool IsPressed(Keys key)
-        {
-            return Original.IsPressed(GetActualKey(key));
-        }
+        public bool IsPressed(Keys key) => Original.IsPressed(GetActualKey(key));
 
-        public bool IsPushed(Keys key)
-        {
-            return Original.IsPushed(GetActualKey(key));
-        }
+        public bool IsPushed(Keys key) => Original.IsPushed(GetActualKey(key));
 
-        public bool IsReleased(Keys key)
-        {
-            return Original.IsReleased(GetActualKey(key));
-        }
+        public bool IsReleased(Keys key) => Original.IsReleased(GetActualKey(key));
 
         public void Update()
         {
