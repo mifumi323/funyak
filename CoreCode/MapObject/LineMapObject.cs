@@ -6,7 +6,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 線のマップオブジェクト
     /// </summary>
-    public class LineMapObject : IStaticMapObject, IBounds
+    public class LineMapObject : IMapObject, IBounds
     {
         /// <summary>
         /// 線のマップオブジェクトを初期化します。

@@ -14,7 +14,7 @@ namespace MifuminSoft.funyak.MapObject
         public double Friction;
     }
 
-    public class TileMapObject : IStaticMapObject, IBounds
+    public class TileMapObject : IMapObject, IBounds
     {
         public string Name { get; set; }
 
