@@ -42,6 +42,7 @@ namespace MifuminSoft.funyak
         public event EventHandler<MapObjectEventArgs> MapObjectAdded;
 
         private ICollection<IMapObject> mapObjectCollection;
+        private ICollection<ISelfUpdatable> selfUpdatableMapObjectCollection;
         private ICollection<IDynamicMapObject> dynamicMapObjectCollection;
         private IDictionary<string, IMapObject> namedMapObject;
 
@@ -73,6 +74,7 @@ namespace MifuminSoft.funyak
             FrameCount = 0;
 
             mapObjectCollection = new List<IMapObject>();
+            selfUpdatableMapObjectCollection = new List<ISelfUpdatable>();
             dynamicMapObjectCollection = new List<IDynamicMapObject>();
             namedMapObject = new Dictionary<string, IMapObject>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
@@ -86,6 +88,7 @@ namespace MifuminSoft.funyak
         public void AddMapObject(IMapObject mapObject)
         {
             mapObjectCollection.Add(mapObject);
+            if (mapObject is ISelfUpdatable selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
             if (mapObject is IDynamicMapObject dynamicMapObject) dynamicMapObjectCollection.Add(dynamicMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
 
@@ -120,7 +123,7 @@ namespace MifuminSoft.funyak
         private void UpdateMapObjects()
         {
             var args = new UpdateMapObjectArgs(this);
-            foreach (var mapObject in dynamicMapObjectCollection)
+            foreach (var mapObject in selfUpdatableMapObjectCollection)
             {
                 mapObject.UpdateSelf(args);
             }
