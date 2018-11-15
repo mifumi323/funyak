@@ -35,7 +35,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 主人公のマップオブジェクト
     /// </summary>
-    public class MainMapObject : IDynamicMapObject, IBounds
+    public class MainMapObject : IUpdatableMapObject, IDynamicMapObject, IBounds
     {
         #region 主人公の状態
 

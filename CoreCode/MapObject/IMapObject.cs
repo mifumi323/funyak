@@ -26,7 +26,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 能動的な動きのあるマップオブジェクトを表します。
     /// </summary>
-    public interface IDynamicMapObject : IMapObject, ISelfUpdatable
+    public interface IDynamicMapObject : IMapObject
     {
         /// <summary>
         /// 他のマップオブジェクトとの当たり判定を行います。

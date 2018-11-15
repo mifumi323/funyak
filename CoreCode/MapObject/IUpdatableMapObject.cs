@@ -3,7 +3,7 @@
     /// <summary>
     /// 自分自身の状態を他者によらず更新できるマップオブジェクトを表します。
     /// </summary>
-    public interface ISelfUpdatable
+    public interface IUpdatableMapObject
     {
         /// <summary>
         /// 自分自身の状態を更新します。
