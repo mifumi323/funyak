@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MifuminSoft.funyak.MapObject
+﻿namespace MifuminSoft.funyak.MapObject
 {
     /// <summary>
     /// マップオブジェクトを表します。
@@ -21,20 +19,6 @@ namespace MifuminSoft.funyak.MapObject
         /// マップ中のY座標
         /// </summary>
         double Y { get; }
-    }
-
-    /// <summary>
-    /// 能動的な動きのあるマップオブジェクトを表します。
-    /// </summary>
-    public interface IDynamicMapObject : IMapObject
-    {
-        /// <summary>
-        /// 他のマップオブジェクトとの当たり判定を行います。
-        /// このメソッド内では他のマップオブジェクトや自分自身の状態の更新を行いません。
-        /// 戻り値にて、当たり判定によって生じる自分自身の状態の変化を反映させるActionを返します。
-        /// </summary>
-        /// <returns></returns>
-        Action CheckCollision(CheckMapObjectCollisionArgs args);
     }
 
     /// <summary>
