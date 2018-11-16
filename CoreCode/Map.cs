@@ -43,7 +43,7 @@ namespace MifuminSoft.funyak
 
         private ICollection<IMapObject> mapObjectCollection;
         private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
-        private ICollection<ICollidableMapObject> dynamicMapObjectCollection;
+        private ICollection<ICollidableMapObject> collidableMapObjectCollection;
         private IDictionary<string, IMapObject> namedMapObject;
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace MifuminSoft.funyak
 
             mapObjectCollection = new List<IMapObject>();
             selfUpdatableMapObjectCollection = new List<IUpdatableMapObject>();
-            dynamicMapObjectCollection = new List<ICollidableMapObject>();
+            collidableMapObjectCollection = new List<ICollidableMapObject>();
             namedMapObject = new Dictionary<string, IMapObject>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
@@ -89,7 +89,7 @@ namespace MifuminSoft.funyak
         {
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
-            if (mapObject is ICollidableMapObject dynamicMapObject) dynamicMapObjectCollection.Add(dynamicMapObject);
+            if (mapObject is ICollidableMapObject dynamicMapObject) collidableMapObjectCollection.Add(dynamicMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
@@ -112,8 +112,8 @@ namespace MifuminSoft.funyak
         public void Update()
         {
             UpdateMapObjects();
-            var reaction = CheckMapObjectsCollision();
-            reaction?.Invoke();
+            CheckMapObjectsCollision();
+            RealizeMapObjectsCollision();
             FrameCount++;
         }
 
@@ -129,15 +129,21 @@ namespace MifuminSoft.funyak
             }
         }
 
-        private Action CheckMapObjectsCollision()
+        private void CheckMapObjectsCollision()
         {
             var args = new CheckMapObjectCollisionArgs(this);
-            Action reaction = null;
-            foreach (var mapObject in dynamicMapObjectCollection)
+            foreach (var mapObject in collidableMapObjectCollection)
             {
-                reaction += mapObject.CheckCollision(args);
+                mapObject.CheckCollision(args);
             }
-            return reaction;
+        }
+
+        private void RealizeMapObjectsCollision()
+        {
+            foreach (var mapObject in collidableMapObjectCollection)
+            {
+                mapObject.RealizeCollision();
+            }
         }
 
         /// <summary>

@@ -348,6 +348,22 @@ namespace MifuminSoft.funyak.MapObject
 
         #endregion
 
+        #region Check→Realizeへの引き渡し用
+
+        private double c2rX;
+        private double c2rY;
+        private double c2rVelocityX;
+        private double c2rVelocityY;
+        private double c2rGroundNormalX;
+        private double c2rGroundNormalY;
+        private double c2rGroundFriction;
+        private bool c2rTouchedLeft;
+        private bool c2rTouchedTop;
+        private bool c2rTouchedRight;
+        private bool c2rTouchedBottom;
+
+        #endregion
+
         /// <summary>
         /// 場所を指定して主人公のマップオブジェクトを初期化します。
         /// </summary>
@@ -726,7 +742,7 @@ namespace MifuminSoft.funyak.MapObject
             Y += VelocityY;
         }
 
-        public Action CheckCollision(CheckMapObjectCollisionArgs args)
+        public void CheckCollision(CheckMapObjectCollisionArgs args)
         {
             // 位置とか
             var x = X;
@@ -855,25 +871,36 @@ namespace MifuminSoft.funyak.MapObject
                 friction = adjusterHigh.Friction;
             }
 
-            return () =>
-            {
-                if (Math.Abs(X - x) >= PositionAdjustLowerLimit) X = x;
-                if (Math.Abs(Y - y) >= PositionAdjustLowerLimit) Y = y;
-                VelocityX = vx;
-                VelocityY = vy;
-                GroundNormalX = nx;
-                GroundNormalY = ny;
-                GroundFriction = friction;
-                TouchedLeft = touchedLeft;
-                TouchedTop = touchedTop;
-                TouchedRight = touchedRight;
-                TouchedBottom = touchedBottom;
+            c2rX = x;
+            c2rY = y;
+            c2rVelocityX = vx;
+            c2rVelocityY = vy;
+            c2rGroundNormalX = nx;
+            c2rGroundNormalY = ny;
+            c2rGroundFriction = friction;
+            c2rTouchedLeft = touchedLeft;
+            c2rTouchedTop = touchedTop;
+            c2rTouchedRight = touchedRight;
+            c2rTouchedBottom = touchedBottom;
+        }
 
-                RealizeCollision(touchedBottom);
+        public void RealizeCollision()
+        {
+            if (Math.Abs(X - c2rX) >= PositionAdjustLowerLimit) X = c2rX;
+            if (Math.Abs(Y - c2rY) >= PositionAdjustLowerLimit) Y = c2rY;
+            VelocityX = c2rVelocityX;
+            VelocityY = c2rVelocityY;
+            GroundNormalX = c2rGroundNormalX;
+            GroundNormalY = c2rGroundNormalY;
+            GroundFriction = c2rGroundFriction;
+            TouchedLeft = c2rTouchedLeft;
+            TouchedTop = c2rTouchedTop;
+            TouchedRight = c2rTouchedRight;
+            TouchedBottom = c2rTouchedBottom;
 
-                // TODO: 本来ここでやることじゃない
-                StateCounter++;
-            };
+            RealizeCollision(c2rTouchedBottom);
+
+            StateCounter++;
         }
 
         /// <summary>
