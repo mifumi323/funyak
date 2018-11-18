@@ -20,14 +20,4 @@
         /// </summary>
         double Y { get; }
     }
-
-    /// <summary>
-    /// マップオブジェクトの向きを表します。
-    /// </summary>
-    public enum Direction
-    {
-        Front,
-        Left,
-        Right,
-    }
 }
