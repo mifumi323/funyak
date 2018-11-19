@@ -49,10 +49,7 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public MainMapObjectState State
         {
-            get
-            {
-                return state;
-            }
+            get => state;
             set
             {
                 if (value == state) return;

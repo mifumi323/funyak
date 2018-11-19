@@ -38,14 +38,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double X1
         {
-            get
-            {
-                return segment.Segment.Start.X;
-            }
-            set
-            {
-                segment.Segment.Start.X = value;
-            }
+            get => segment.Segment.Start.X;
+            set => segment.Segment.Start.X = value;
         }
 
         /// <summary>
@@ -53,14 +47,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double Y1
         {
-            get
-            {
-                return segment.Segment.Start.Y;
-            }
-            set
-            {
-                segment.Segment.Start.Y = value;
-            }
+            get => segment.Segment.Start.Y;
+            set => segment.Segment.Start.Y = value;
         }
 
         /// <summary>
@@ -68,14 +56,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double X2
         {
-            get
-            {
-                return segment.Segment.End.X;
-            }
-            set
-            {
-                segment.Segment.End.X = value;
-            }
+            get => segment.Segment.End.X;
+            set => segment.Segment.End.X = value;
         }
 
         /// <summary>
@@ -83,14 +65,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double Y2
         {
-            get
-            {
-                return segment.Segment.End.Y;
-            }
-            set
-            {
-                segment.Segment.End.Y = value;
-            }
+            get => segment.Segment.End.Y;
+            set => segment.Segment.End.Y = value;
         }
 
         /// <summary>
@@ -98,14 +74,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitUpper
         {
-            get
-            {
-                return segment.HitUpper;
-            }
-            set
-            {
-                segment.HitUpper = value;
-            }
+            get => segment.HitUpper;
+            set => segment.HitUpper = value;
         }
 
         /// <summary>
@@ -113,14 +83,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitBelow
         {
-            get
-            {
-                return segment.HitBelow;
-            }
-            set
-            {
-                segment.HitBelow = value;
-            }
+            get => segment.HitBelow;
+            set => segment.HitBelow = value;
         }
 
         /// <summary>
@@ -128,14 +92,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitLeft
         {
-            get
-            {
-                return segment.HitLeft;
-            }
-            set
-            {
-                segment.HitLeft = value;
-            }
+            get => segment.HitLeft;
+            set => segment.HitLeft = value;
         }
 
         /// <summary>
@@ -143,14 +101,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitRight
         {
-            get
-            {
-                return segment.HitRight;
-            }
-            set
-            {
-                segment.HitRight = value;
-            }
+            get => segment.HitRight;
+            set => segment.HitRight = value;
         }
 
         /// <summary>
@@ -163,22 +115,16 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double Friction
         {
-            get
-            {
-                return segment.Friction;
-            }
-            set
-            {
-                segment.Friction = value;
-            }
+            get => segment.Friction;
+            set => segment.Friction = value;
         }
 
-        public double X { get { return (X1 + X2) / 2; } }
-        public double Y { get { return (Y1 + Y2) / 2; } }
-        public double Left { get { return Math.Min(X1, X2); } }
-        public double Right { get { return Math.Max(X1, X2); } }
-        public double Top { get { return Math.Min(Y1, Y2); } }
-        public double Bottom { get { return Math.Max(Y1, Y2); } }
+        public double X => (X1 + X2) / 2;
+        public double Y => (Y1 + Y2) / 2;
+        public double Left => Math.Min(X1, X2);
+        public double Right => Math.Max(X1, X2);
+        public double Top => Math.Min(Y1, Y2);
+        public double Bottom => Math.Max(Y1, Y2);
 
         private CollidableSegment segment;
 

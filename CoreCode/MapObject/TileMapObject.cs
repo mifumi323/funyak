@@ -22,9 +22,9 @@ namespace MifuminSoft.funyak.MapObject
 
         public double Y { get; set; }
 
-        public double Left { get { return X; } }
+        public double Left => X;
 
-        public double Top { get { return Y; } }
+        public double Top => Y;
 
         public double Right => X + TileWidth * TileCountX;
 
