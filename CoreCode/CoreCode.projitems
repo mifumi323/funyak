@@ -10,6 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)CheckMapObjectCollisionArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collider\ColliderBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collider\PointCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collider\RegionCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collider\SegmentCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\CollidableSegment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Collision2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\PositionAdjuster.cs" />
