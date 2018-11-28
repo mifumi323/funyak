@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.CollisionHelper
+﻿namespace MifuminSoft.funyak.Geometry
 {
     /// <summary>
     /// 2次元の始点と終点を持つ線分を表します。

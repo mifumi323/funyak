@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MifuminSoft.funyak.CollisionHelper
+namespace MifuminSoft.funyak.Geometry
 {
     /// <summary>
     /// 2次元のベクトルを表します。

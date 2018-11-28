@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MifuminSoft.funyak.Collision;
-using MifuminSoft.funyak.CollisionHelper;
+using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.Core.Tests
 {

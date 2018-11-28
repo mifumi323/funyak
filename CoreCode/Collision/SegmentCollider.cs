@@ -1,4 +1,4 @@
-﻿using MifuminSoft.funyak.CollisionHelper;
+﻿using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.Collision
 {

@@ -14,11 +14,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\SegmentCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\CollidableSegment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Collision2D.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\PositionAdjuster.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Segment2D.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)CollisionHelper\Vector2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\CollidableSegment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\Collision2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\PositionAdjuster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\Segment2D.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\ArrangeInput.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input\InputRecord.cs" />

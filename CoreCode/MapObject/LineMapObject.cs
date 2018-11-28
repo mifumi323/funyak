@@ -1,5 +1,5 @@
 ﻿using System;
-using MifuminSoft.funyak.CollisionHelper;
+using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
 {

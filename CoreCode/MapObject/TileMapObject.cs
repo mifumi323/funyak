@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MifuminSoft.funyak.CollisionHelper;
+using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
 {

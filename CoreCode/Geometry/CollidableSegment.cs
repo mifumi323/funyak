@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.CollisionHelper
+﻿namespace MifuminSoft.funyak.Geometry
 {
     public struct CollidableSegment
     {

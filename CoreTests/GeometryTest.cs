@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.CollisionHelper;
+using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.Core.Tests
 {
     [TestClass]
-    public class CollisionHelperTest
+    public class GeometryTest
     {
         [TestMethod]
         public void SegmentSegmentTest()
