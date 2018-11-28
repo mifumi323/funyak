@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.Collider;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.CollisionHelper;
 
 namespace MifuminSoft.funyak.Core.Tests
 {
     [TestClass]
-    public class ColliderTest
+    public class CollisionTest
     {
         [TestMethod]
         public void PointColliderTest()

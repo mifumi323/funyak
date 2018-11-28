@@ -1,6 +1,6 @@
 ﻿using MifuminSoft.funyak.CollisionHelper;
 
-namespace MifuminSoft.funyak.Collider
+namespace MifuminSoft.funyak.Collision
 {
     public class SegmentCollider : ColliderBase
     {

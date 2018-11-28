@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak.Collider
+﻿namespace MifuminSoft.funyak.Collision
 {
     public class PointCollider : ColliderBase
     {
