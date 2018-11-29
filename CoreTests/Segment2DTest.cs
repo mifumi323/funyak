@@ -31,7 +31,7 @@ namespace MifuminSoft.funyak.Core.Tests
         }
 
         [TestMethod]
-        public void SegmentSegmentCrossPointTest()
+        public void TryGetCrossPointTest()
         {
             // 交差しているパターン
             {

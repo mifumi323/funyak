@@ -57,7 +57,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="GeometryTest.cs" />
     <Compile Include="GameTest\GameTestBase.cs" />
     <Compile Include="GameTest\GameTestBaseTest.cs" />
     <Compile Include="GameTest\CornerHitTest.cs" />
