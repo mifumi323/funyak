@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.Geometry
+﻿using System;
+
+namespace MifuminSoft.funyak.Geometry
 {
     /// <summary>
     /// 衝突判定の共通処理を行います。
@@ -14,27 +16,8 @@
         /// <param name="s1">線分1</param>
         /// <param name="s2">線分2</param>
         /// <returns>交差していればtrue</returns>
-        public static bool SegmentSegment(Segment2D s1, Segment2D s2)
-        {
-            var v1 = s1.End - s1.Start;
-            var v2 = s2.End - s2.Start;
-            var crs_v1_v2 = v1.Cross(v2);
-
-            // 平行
-            if (crs_v1_v2 == 0)
-            {
-                return false;
-            }
-
-            var v = s2.Start - s1.Start;
-            var crs_v_v1 = v.Cross(v1);
-            var crs_v_v2 = v.Cross(v2);
-
-            var t1 = crs_v_v2 / crs_v1_v2;
-            var t2 = crs_v_v1 / crs_v1_v2;
-
-            return -DELTA <= t1 && t1 <= 1 + DELTA && -DELTA <= t2 && t2 <= 1 + DELTA;
-        }
+        [Obsolete("Collision2D.SegmentSegmentは古い形式です。Segment2D.IsCrossedを使用してください。")]
+        public static bool SegmentSegment(Segment2D s1, Segment2D s2) => s1.IsCrossed(s2);
 
         /// <summary>
         /// 線分と線分の交差判定を行います。
@@ -44,34 +27,7 @@
         /// <param name="s2">線分2</param>
         /// <param name="crossPoint">交差していた場合に交点の位置ベクトルを格納するVector2Dへの参照</param>
         /// <returns>交差していればtrue</returns>
-        public static bool SegmentSegment(Segment2D s1, Segment2D s2, ref Vector2D crossPoint)
-        {
-            var v1 = s1.End - s1.Start;
-            var v2 = s2.End - s2.Start;
-            var crs_v1_v2 = v1.Cross(v2);
-
-            // 平行
-            if (crs_v1_v2 == 0)
-            {
-                return false;
-            }
-
-            var v = s2.Start - s1.Start;
-            var crs_v_v1 = v.Cross(v1);
-            var crs_v_v2 = v.Cross(v2);
-
-            var t1 = crs_v_v2 / crs_v1_v2;
-            var t2 = crs_v_v1 / crs_v1_v2;
-
-            if (-DELTA <= t1 && t1 <= 1 + DELTA && -DELTA <= t2 && t2 <= 1 + DELTA)
-            {
-                crossPoint = s1.Start + v1 * t1;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        [Obsolete("Collision2D.SegmentSegmentは古い形式です。Segment2D.TryGetCrossPointを使用してください。")]
+        public static bool SegmentSegment(Segment2D s1, Segment2D s2, ref Vector2D crossPoint) => s1.TryGetCrossPoint(s2, out crossPoint);
     }
 }

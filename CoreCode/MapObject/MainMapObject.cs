@@ -966,7 +966,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (velocity.Dot(lineNormal) <= Collision2D.DELTA)
             {
-                if (Collision2D.SegmentSegment(charaSegment, lineSegment))
+                if (charaSegment.IsCrossed(lineSegment))
                 {
                     var lineStartToCharaEnd = charaSegment.End - lineSegment.Start;
                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaEnd) / lineVector.LengthSq) - charaVector;
