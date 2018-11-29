@@ -11,7 +11,7 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void PointColliderTest()
         {
-            var collider = new PointCollider();
+            var collider = new PointCollider(null);
             collider.SetPoint(100.0, 200.0);
             Assert.AreEqual(100.0, collider.X, 0.0001, "PointCollider.Xが不正");
             Assert.AreEqual(200.0, collider.Y, 0.0001, "PointCollider.Yが不正");
@@ -24,7 +24,7 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void RegionColliderTest()
         {
-            var collider = new RegionCollider();
+            var collider = new RegionCollider(null);
             collider.SetPosition(100.0, 200.0, 300.0, 400.0);
             Assert.AreEqual(100.0, collider.Left, 0.0001, "RegionCollider.Leftが不正");
             Assert.AreEqual(200.0, collider.Top, 0.0001, "RegionCollider.Topが不正");
@@ -35,7 +35,7 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void SegmentColliderTest()
         {
-            var collider = new SegmentCollider();
+            var collider = new SegmentCollider(null);
             collider.SetSegment(new Segment2D(100.0, 200.0, 300.0, 400.0));
             Assert.AreEqual(100.0, collider.Left, 0.0001, "SegmentCollider.Leftが不正");
             Assert.AreEqual(200.0, collider.Top, 0.0001, "SegmentCollider.Topが不正");

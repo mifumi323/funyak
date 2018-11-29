@@ -1,10 +1,13 @@
 ﻿using MifuminSoft.funyak.Geometry;
+using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
 {
     public class SegmentCollider : ColliderBase
     {
         public Segment2D Segment { get; private set; }
+
+        public SegmentCollider(IMapObject owner) : base(owner) { }
 
         public void SetSegment(Segment2D segment)
         {
