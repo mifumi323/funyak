@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MifuminSoft.funyak.Geometry
+namespace MifuminSoft.funyak.Collision
 {
     /// <summary>
     /// 当たり判定の結果の位置補正に使います

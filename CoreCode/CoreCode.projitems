@@ -15,7 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\SegmentCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\CollidableSegment.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Geometry\PositionAdjuster.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\PositionAdjuster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Segment2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Vector2D.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBounds.cs" />

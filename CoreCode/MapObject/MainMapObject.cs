@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.MapEnvironment;
