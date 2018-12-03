@@ -22,14 +22,14 @@ namespace MifuminSoft.funyak.Core.Tests
         }
 
         [TestMethod]
-        public void RegionColliderTest()
+        public void RectangleColliderTest()
         {
-            var collider = new RegionCollider(null);
+            var collider = new RectangleCollider(null);
             collider.SetPosition(100.0, 200.0, 300.0, 400.0);
-            Assert.AreEqual(100.0, collider.Left, 0.0001, "RegionCollider.Leftが不正");
-            Assert.AreEqual(200.0, collider.Top, 0.0001, "RegionCollider.Topが不正");
-            Assert.AreEqual(300.0, collider.Right, 0.0001, "RegionCollider.Rightが不正");
-            Assert.AreEqual(400.0, collider.Bottom, 0.0001, "RegionCollider.Bottomが不正");
+            Assert.AreEqual(100.0, collider.Left, 0.0001, "RectangleCollider.Leftが不正");
+            Assert.AreEqual(200.0, collider.Top, 0.0001, "RectangleCollider.Topが不正");
+            Assert.AreEqual(300.0, collider.Right, 0.0001, "RectangleCollider.Rightが不正");
+            Assert.AreEqual(400.0, collider.Bottom, 0.0001, "RectangleCollider.Bottomが不正");
         }
 
         [TestMethod]

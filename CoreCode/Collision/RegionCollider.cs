@@ -2,10 +2,12 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class RegionCollider: ColliderBase
+    public abstract class RegionCollider: ColliderBase
     {
         public RegionCollider(IMapObject owner) : base(owner) { }
 
-        public void SetPosition(double left, double top, double right, double bottom) => UpdatePosition(left, top, right, bottom);
+        public abstract bool Contains(PointCollider pointCollider);
+
+        protected bool ContainsInAABB(double x, double y) => Left <= x && x <= Right && Top <= y && y <= Bottom;
     }
 }
