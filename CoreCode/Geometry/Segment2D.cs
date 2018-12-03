@@ -68,7 +68,7 @@
             // 平行
             if (crs_v1_v2 == 0)
             {
-                crossPoint = default(Vector2D);
+                crossPoint = new Vector2D(double.NaN, double.NaN);
                 return false;
             }
 
@@ -86,7 +86,7 @@
             }
             else
             {
-                crossPoint = default(Vector2D);
+                crossPoint = new Vector2D(double.NaN, double.NaN);
                 return false;
             }
         }
