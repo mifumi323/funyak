@@ -8,6 +8,6 @@ namespace MifuminSoft.funyak.Collision
 
         public void SetPosition(double left, double top, double right, double bottom) => UpdatePosition(left, top, right, bottom);
 
-        public override bool Contains(PointCollider pointCollider) => ContainsInAABB(pointCollider.X, pointCollider.Y);
+        public override bool Contains(double x, double y) => ContainsInAABB(x, y);
     }
 }

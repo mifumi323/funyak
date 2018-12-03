@@ -6,7 +6,9 @@ namespace MifuminSoft.funyak.Collision
     {
         public RegionCollider(IMapObject owner) : base(owner) { }
 
-        public abstract bool Contains(PointCollider pointCollider);
+        public bool Contains(PointCollider pointCollider) => Contains(pointCollider.X, pointCollider.Y);
+
+        public abstract bool Contains(double x, double y);
 
         protected bool ContainsInAABB(double x, double y) => Left <= x && x <= Right && Top <= y && y <= Bottom;
     }
