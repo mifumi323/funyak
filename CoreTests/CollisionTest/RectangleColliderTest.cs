@@ -10,7 +10,8 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         public void SetPositionTest()
         {
             var collider = new RectangleCollider(null);
-            collider.SetPosition(100.0, 200.0, 300.0, 400.0);
+            var listener = new Map(1000.0, 1000.0);
+            collider.SetPosition(100.0, 200.0, 300.0, 400.0, listener);
             Assert.AreEqual(100.0, collider.Left, 0.0001, "RectangleCollider.Leftが不正");
             Assert.AreEqual(200.0, collider.Top, 0.0001, "RectangleCollider.Topが不正");
             Assert.AreEqual(300.0, collider.Right, 0.0001, "RectangleCollider.Rightが不正");
@@ -21,7 +22,8 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         public void ContainsTest()
         {
             var collider = new RectangleCollider(null);
-            collider.SetPosition(200.0, 300.0, 400.0, 500.0);
+            var listener = new Map(1000.0, 1000.0);
+            collider.SetPosition(200.0, 300.0, 400.0, 500.0, listener);
             var testCases = new[]
             {
                 // 真ん中

@@ -9,7 +9,7 @@ namespace MifuminSoft.funyak.Collision
 
         public SegmentCollider(IMapObject owner) : base(owner) { }
 
-        public void SetSegment(Segment2D segment)
+        public void SetSegment(Segment2D segment, IColliderUpdatePositionListener listener)
         {
             Segment = segment;
             double left, top, right, bottom;
@@ -33,7 +33,7 @@ namespace MifuminSoft.funyak.Collision
                 top = segment.End.Y;
                 bottom = segment.Start.Y;
             }
-            UpdatePosition(left, top, right, bottom);
+            UpdatePosition(left, top, right, bottom, listener);
         }
     }
 }

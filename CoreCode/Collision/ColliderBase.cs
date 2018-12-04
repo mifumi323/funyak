@@ -13,7 +13,7 @@ namespace MifuminSoft.funyak.Collision
 
         public ColliderBase(IMapObject owner) => Owner = owner;
 
-        protected void UpdatePosition(double left, double top, double right, double bottom)
+        protected void UpdatePosition(double left, double top, double right, double bottom, IColliderUpdatePositionListener listener)
         {
             Left = left;
             Top = top;
