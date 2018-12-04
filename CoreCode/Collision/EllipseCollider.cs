@@ -25,12 +25,15 @@ namespace MifuminSoft.funyak.Collision
             }
 
             // 楕円侵入判定をまじめにやるべきケース
-            var centerX = (Left + Right) * 0.5;
-            var centerY = (Top + Bottom) * 0.5;
-            var radiusX = (Right - Left) * 0.5;
-            var radiusY = (Bottom - Top) * 0.5;
-            var normalizedPointX = (x - centerX) / radiusX;
-            var normalizedPointY = (y - centerY) / radiusY;
+            //var centerX = (Left + Right) * 0.5;
+            //var centerY = (Top + Bottom) * 0.5;
+            //var radiusX = (Right - Left) * 0.5;
+            //var radiusY = (Bottom - Top) * 0.5;
+            //var normalizedPointX = (x - centerX) / radiusX;
+            //var normalizedPointY = (y - centerY) / radiusY;
+            // 上式をまとめて簡略化
+            var normalizedPointX = (x * 2.0 - (Left + Right)) / (Right - Left);
+            var normalizedPointY = (y * 2.0 - (Top + Bottom)) / (Bottom - Top);
             var normalizedDistanceSquare = normalizedPointX * normalizedPointX + normalizedPointY * normalizedPointY;
 
             return normalizedDistanceSquare <= 1;
