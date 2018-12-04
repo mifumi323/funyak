@@ -26,17 +26,27 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             {
                 // 真ん中
                 new { X = 300.0, Y=400.0, Expects = true },
-                // 四隅
+                // AABB四隅
                 new { X = 200.0, Y=300.0, Expects = false },
                 new { X = 400.0, Y=300.0, Expects = false },
                 new { X = 400.0, Y=500.0, Expects = false },
                 new { X = 200.0, Y=500.0, Expects = false },
-                // 辺上
+                // AABB内接点
                 new { X = 200.0, Y=400.0, Expects = true },
                 new { X = 300.0, Y=300.0, Expects = true },
                 new { X = 400.0, Y=400.0, Expects = true },
                 new { X = 300.0, Y=500.0, Expects = true },
-                // 外
+                // 真ん中以外の内部
+                new { X = 230.0, Y=330.0, Expects = true },
+                new { X = 370.0, Y=330.0, Expects = true },
+                new { X = 370.0, Y=470.0, Expects = true },
+                new { X = 230.0, Y=470.0, Expects = true },
+                // AABB内部の楕円外部
+                new { X = 220.0, Y=320.0, Expects = false },
+                new { X = 380.0, Y=320.0, Expects = false },
+                new { X = 380.0, Y=480.0, Expects = false },
+                new { X = 220.0, Y=480.0, Expects = false },
+                // 完全に外
                 new { X = 100.0, Y=400.0, Expects = false },
                 new { X = 300.0, Y=200.0, Expects = false },
                 new { X = 500.0, Y=400.0, Expects = false },
