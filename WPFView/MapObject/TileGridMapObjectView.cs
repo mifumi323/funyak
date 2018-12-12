@@ -20,9 +20,9 @@ namespace MifuminSoft.funyak.View.MapObject
         }
     }
 
-    public class TileMapObjectView : IMapObjectView
+    public class TileGridMapObjectView : IMapObjectView
     {
-        public TileMapObject MapObject { get; protected set; }
+        public TileGridMapObject MapObject { get; protected set; }
 
         private Canvas canvas = null;
         private Rectangle[] rectangles = null;
@@ -50,7 +50,7 @@ namespace MifuminSoft.funyak.View.MapObject
             }
         }
 
-        public TileMapObjectView(TileMapObject mapObject)
+        public TileGridMapObjectView(TileGridMapObject mapObject)
         {
             MapObject = mapObject;
             rectangles = new Rectangle[mapObject.TileCountX * mapObject.TileCountY];

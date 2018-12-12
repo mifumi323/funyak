@@ -790,7 +790,7 @@ namespace MifuminSoft.funyak.MapObject
                     collidableSegments.Add(lineMapObject.ToCollidableSegment());
                 }
 
-                if (mapObject is TileMapObject tileMapObject)
+                if (mapObject is TileGridMapObject tileMapObject)
                 {
                     tileMapObject.AddCollidableSegmentsToList(collidableSegments, left, top, right, bottom);
                 }

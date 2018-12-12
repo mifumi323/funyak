@@ -51,9 +51,9 @@ namespace WPFTests
             });
             main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as MainMapObject;
 
-            // ちょっとタイルマップのテストをねじ込もう
+            // ちょっとタイルグリッドのテストをねじ込もう
             int tcx = 10, tcy = 7;
-            var tileMapObject = new TileMapObject(4700, 4200, tcx, tcy)
+            var tileMapObject = new TileGridMapObject(4700, 4200, tcx, tcy)
             {
             };
             var tileResource = SpriteReader.Read(@"Assets\Ice.bmp");

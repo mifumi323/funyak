@@ -21,9 +21,9 @@ namespace MifuminSoft.funyak.View.MapObject
                     ImageResource = MainMapObjectResourceSelector?.Invoke(((MainMapObject)mapObject).Appearance),
                 };
             }
-            if (mapObject is TileMapObject)
+            if (mapObject is TileGridMapObject)
             {
-                return new TileMapObjectView((TileMapObject)mapObject);
+                return new TileGridMapObjectView((TileGridMapObject)mapObject);
             }
             return null;
         }

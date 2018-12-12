@@ -14,7 +14,7 @@ namespace MifuminSoft.funyak.MapObject
         public double Friction;
     }
 
-    public class TileMapObject : IMapObject, IBounds
+    public class TileGridMapObject : IMapObject, IBounds
     {
         public string Name { get; set; }
 
@@ -56,7 +56,7 @@ namespace MifuminSoft.funyak.MapObject
 
         private TileChip[,] tiles;
 
-        public TileMapObject(double x, double y, int tileCountX, int tileCountY)
+        public TileGridMapObject(double x, double y, int tileCountX, int tileCountY)
         {
             X = x;
             Y = y;

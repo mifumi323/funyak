@@ -68,7 +68,7 @@ namespace MifuminSoft.funyak.Data
 
         private static IMapObject GenerateTileMapObject(dynamic data, MapReaderOption option)
         {
-            return new TileMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
+            return new TileGridMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
             {
                 Name = data.n
             };
