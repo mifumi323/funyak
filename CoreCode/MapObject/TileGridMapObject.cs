@@ -67,8 +67,8 @@ namespace MifuminSoft.funyak.MapObject
 
         public TileChip this[int x, int y]
         {
-            get { return tiles[x, y]; }
-            set { tiles[x, y] = value; }
+            get => tiles[x, y];
+            set => tiles[x, y] = value;
         }
 
         /// <summary>

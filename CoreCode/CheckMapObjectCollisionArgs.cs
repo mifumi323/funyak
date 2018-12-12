@@ -10,10 +10,7 @@ namespace MifuminSoft.funyak
     {
         private Map map;
 
-        public CheckMapObjectCollisionArgs(Map map)
-        {
-            this.map = map;
-        }
+        public CheckMapObjectCollisionArgs(Map map) => this.map = map;
 
         /// <summary>
         /// 登録されているマップオブジェクトを取得します。

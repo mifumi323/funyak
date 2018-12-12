@@ -9,9 +9,6 @@ namespace MifuminSoft.funyak.MapEnvironment
         /// </summary>
         public AreaEnvironment AreaEnvironment { get; private set; }
 
-        public AreaEnvironmentEventArgs(AreaEnvironment areaEnvironment)
-        {
-            AreaEnvironment = areaEnvironment;
-        }
+        public AreaEnvironmentEventArgs(AreaEnvironment areaEnvironment) => AreaEnvironment = areaEnvironment;
     }
 }

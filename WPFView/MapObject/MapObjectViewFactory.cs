@@ -10,20 +10,20 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public IMapObjectView Create(IMapObject mapObject)
         {
-            if (mapObject is LineMapObject)
+            if (mapObject is LineMapObject lineMapObject)
             {
-                return new LineMapObjectView((LineMapObject)mapObject);
+                return new LineMapObjectView(lineMapObject);
             }
-            if (mapObject is MainMapObject)
+            if (mapObject is MainMapObject mainMapObject)
             {
-                return new MainMapObjectView((MainMapObject)mapObject)
+                return new MainMapObjectView(mainMapObject)
                 {
-                    ImageResource = MainMapObjectResourceSelector?.Invoke(((MainMapObject)mapObject).Appearance),
+                    ImageResource = MainMapObjectResourceSelector?.Invoke(mainMapObject.Appearance),
                 };
             }
-            if (mapObject is TileGridMapObject)
+            if (mapObject is TileGridMapObject tileGridMapObject)
             {
-                return new TileGridMapObjectView((TileGridMapObject)mapObject);
+                return new TileGridMapObjectView(tileGridMapObject);
             }
             return null;
         }

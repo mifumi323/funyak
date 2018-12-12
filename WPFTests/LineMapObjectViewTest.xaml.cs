@@ -58,15 +58,9 @@ namespace WPFTests
             input = new KeyInput();
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering += CompositionTarget_Rendering;
 
         private void button_Click(object sender, RoutedEventArgs e)
         {
@@ -98,10 +92,7 @@ namespace WPFTests
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Keyboard.ClearFocus();
-        }
+        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void CompositionTarget_Rendering(object sender, object e)
         {

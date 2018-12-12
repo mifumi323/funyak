@@ -31,18 +31,12 @@ namespace WPFTests
 
             public Exception TestException { get; set; }
 
-            public override string ToString()
-            {
-                return string.Format("{0}.{1}({2})", TestClass.Name, TestMethod.Name, TestResult);
-            }
+            public override string ToString() => $"{TestClass.Name}.{TestMethod.Name}({TestResult})";
         }
 
         public IList<TestCase> TestCaseList { get; set; } = new List<TestCase>();
 
-        public NormalUnitTest()
-        {
-            InitializeComponent();
-        }
+        public NormalUnitTest() => InitializeComponent();
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -63,15 +57,9 @@ namespace WPFTests
             lbTestCase.ItemsSource = TestCaseList;
         }
 
-        private void btnTestSelected_Click(object sender, RoutedEventArgs e)
-        {
-            Test(lbTestCase.SelectedItems.Cast<TestCase>());
-        }
+        private void btnTestSelected_Click(object sender, RoutedEventArgs e) => Test(lbTestCase.SelectedItems.Cast<TestCase>());
 
-        private void btnTestAll_Click(object sender, RoutedEventArgs e)
-        {
-            Test(TestCaseList);
-        }
+        private void btnTestAll_Click(object sender, RoutedEventArgs e) => Test(TestCaseList);
 
         private void Test(IEnumerable<TestCase> testCaseList)
         {

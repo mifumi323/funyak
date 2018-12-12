@@ -22,10 +22,7 @@ namespace MifuminSoft.funyak.Input
         /// </summary>
         public bool VerticalReverse { get; set; } = false;
 
-        public ArrangeInput(IInput original)
-        {
-            Original = original ?? throw new ArgumentNullException();
-        }
+        public ArrangeInput(IInput original) => Original = original ?? throw new ArgumentNullException();
 
         public double X => HorizontalReverse ? -Original.X : Original.X;
 
@@ -37,9 +34,7 @@ namespace MifuminSoft.funyak.Input
 
         public bool IsReleased(Keys key) => Original.IsReleased(GetActualKey(key));
 
-        public void Update()
-        {
-        }
+        public void Update() { }
 
         private Keys GetActualKey(Keys key)
         {

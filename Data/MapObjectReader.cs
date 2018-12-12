@@ -6,19 +6,14 @@ namespace MifuminSoft.funyak.Data
 {
     public class MapObjectReader
     {
-        public static IMapObject FromString(string data, MapReaderOption option)
-        {
-            return FromDynamic(JsonConvert.DeserializeObject(data), option);
-        }
+        public static IMapObject FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
 
         public static IMapObject FromDynamic(dynamic data, MapReaderOption option)
-        {
-            return
-                data.type == "funya" ? GenerateMainMapObject(data, option) :
+            // VS2019になったらswitch式できれいに書けそうだ
+            => data.type == "funya" ? GenerateMainMapObject(data, option) :
                 data.type == "line" ? GenerateLineMapObject(data, option) :
                 data.type == "tile" ? GenerateTileMapObject(data, option) :
                 null;
-        }
 
         private static IMapObject GenerateMainMapObject(dynamic data, MapReaderOption option)
         {
@@ -67,11 +62,9 @@ namespace MifuminSoft.funyak.Data
         }
 
         private static IMapObject GenerateTileMapObject(dynamic data, MapReaderOption option)
-        {
-            return new TileGridMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
+            => new TileGridMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
             {
                 Name = data.n
             };
-        }
     }
 }

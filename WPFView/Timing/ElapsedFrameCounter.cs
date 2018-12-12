@@ -44,10 +44,7 @@ namespace MifuminSoft.funyak.View.Timing
             Reset();
         }
 
-        public void Reset()
-        {
-            previousTicks = DateTime.Now.Ticks;
-        }
+        public void Reset() => previousTicks = DateTime.Now.Ticks;
 
         /// <summary>
         /// 経過フレーム数を取得します。

@@ -38,15 +38,9 @@ namespace WPFTests
             ReadMapFromTextBox();
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering += CompositionTarget_Rendering;
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
@@ -62,10 +56,7 @@ namespace WPFTests
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Keyboard.ClearFocus();
-        }
+        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void buttonFromString_Click(object sender, RoutedEventArgs e)
         {

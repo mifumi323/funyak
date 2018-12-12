@@ -109,15 +109,9 @@ namespace WPFTests
             };
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering += CompositionTarget_Rendering;
 
         private void buttonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -189,9 +183,6 @@ namespace WPFTests
             Keyboard.ClearFocus();
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Keyboard.ClearFocus();
-        }
+        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
     }
 }

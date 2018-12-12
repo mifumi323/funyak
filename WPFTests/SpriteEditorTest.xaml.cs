@@ -12,20 +12,11 @@ namespace WPFTests
     public partial class SpriteEditorTest : Page
     {
         string ImageFileName = @"Assets\main.png";
-        public SpriteEditorTest()
-        {
-            InitializeComponent();
-        }
+        public SpriteEditorTest() => InitializeComponent();
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            chipSelector.Source = SpriteReader.Read(ImageFileName);
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) => chipSelector.Source = SpriteReader.Read(ImageFileName);
 
-        private void textBoxSource_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            chipSelector.Refresh();
-        }
+        private void textBoxSource_TextChanged(object sender, TextChangedEventArgs e) => chipSelector.Refresh();
 
         private void buttonAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -54,10 +45,7 @@ namespace WPFTests
             }
         }
 
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
-        {
-            SpriteWriter.WriteFileInfo(chipSelector.Source, ImageFileName);
-        }
+        private void buttonSave_Click(object sender, RoutedEventArgs e) => SpriteWriter.WriteFileInfo(chipSelector.Source, ImageFileName);
 
         private void textBoxName_TextChanged(object sender, TextChangedEventArgs e)
         {

@@ -10,10 +10,7 @@ namespace WPFTests
     /// </summary>
     public partial class ImageMagickTest : Page
     {
-        public ImageMagickTest()
-        {
-            InitializeComponent();
-        }
+        public ImageMagickTest() => InitializeComponent();
 
         private void textBox_Drop(object sender, DragEventArgs e)
         {

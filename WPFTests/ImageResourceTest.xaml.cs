@@ -17,10 +17,7 @@ namespace WPFTests
         Sprite resource;
         Point point = new Point(0, 0);
 
-        public ImageResourceTest()
-        {
-            InitializeComponent();
-        }
+        public ImageResourceTest() => InitializeComponent();
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -43,15 +40,9 @@ namespace WPFTests
             resource.SetToRectangle(target, key, 0, point.X, point.Y, scale, angle);
         }
 
-        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            Update();
-        }
+        private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) => Update();
 
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Update();
-        }
+        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e) => Update();
 
         private void canvas_MouseDown(object sender, MouseButtonEventArgs e)
         {

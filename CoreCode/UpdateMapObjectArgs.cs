@@ -9,10 +9,7 @@ namespace MifuminSoft.funyak
     {
         private Map map;
 
-        public UpdateMapObjectArgs(Map map)
-        {
-            this.map = map;
-        }
+        public UpdateMapObjectArgs(Map map) => this.map = map;
 
         /// <summary>
         /// マップの幅を取得します。

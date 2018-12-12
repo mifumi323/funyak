@@ -74,10 +74,7 @@ namespace MifuminSoft.funyak.Collision
     /// <summary>最も高い位置(小さいY座標)に補正する</summary>
     public class PositionAdjusterHigh : PositionAdjusterBase
     {
-        public PositionAdjusterHigh()
-        {
-            y = double.PositiveInfinity;
-        }
+        public PositionAdjusterHigh() => y = double.PositiveInfinity;
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
@@ -109,10 +106,7 @@ namespace MifuminSoft.funyak.Collision
     /// <summary>最も低い位置(大きいY座標)に補正する</summary>
     public class PositionAdjusterLow : PositionAdjusterBase
     {
-        public PositionAdjusterLow()
-        {
-            y = double.NegativeInfinity;
-        }
+        public PositionAdjusterLow() => y = double.NegativeInfinity;
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
@@ -144,10 +138,7 @@ namespace MifuminSoft.funyak.Collision
     /// <summary>最も左の位置(小さいX座標)に補正する</summary>
     public class PositionAdjusterLeft : PositionAdjusterBase
     {
-        public PositionAdjusterLeft()
-        {
-            x = double.PositiveInfinity;
-        }
+        public PositionAdjusterLeft() => x = double.PositiveInfinity;
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
@@ -179,10 +170,7 @@ namespace MifuminSoft.funyak.Collision
     /// <summary>最も右の位置(大きいX座標)に補正する</summary>
     public class PositionAdjusterRight : PositionAdjusterBase
     {
-        public PositionAdjusterRight()
-        {
-            x = double.NegativeInfinity;
-        }
+        public PositionAdjusterRight() => x = double.NegativeInfinity;
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {

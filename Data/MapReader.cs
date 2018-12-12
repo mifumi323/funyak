@@ -13,10 +13,7 @@ namespace MifuminSoft.funyak.Data
 
     public static class MapReader
     {
-        public static Map FromString(string data, MapReaderOption option)
-        {
-            return FromDynamic(JsonConvert.DeserializeObject(data), option);
-        }
+        public static Map FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
 
         public static Map FromDynamic(dynamic data, MapReaderOption option)
         {

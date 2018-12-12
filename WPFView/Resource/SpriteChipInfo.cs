@@ -93,7 +93,7 @@ namespace MifuminSoft.funyak.View.Resource
         public double ActualDestinationHeight => double.IsNaN(DestinationHeight) ? SourceHeight : DestinationHeight;
 
         /// <summary>
-        /// 表示と直接かかわりのないデータを文字列を保持します。
+        /// 表示と直接かかわりのないデータを文字列で保持します。
         /// </summary>
         [JsonProperty("data")]
         public Dictionary<string, string> Metadata { get; set; } = new Dictionary<string, string>();

@@ -25,10 +25,7 @@ namespace WPFTests
 
         double vx = 0, vy = 0, vr = 0, vs = 1;
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -108,10 +105,7 @@ namespace WPFTests
             }
         }
 
-        public RectangleTest()
-        {
-            InitializeComponent();
-        }
+        public RectangleTest() => InitializeComponent();
 
         private void CompositionTarget_Rendering(object sender, object e)
         {

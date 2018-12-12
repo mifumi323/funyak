@@ -17,11 +17,7 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public Canvas Canvas
         {
-            get
-            {
-                return canvas;
-            }
-
+            get => canvas;
             set
             {
                 if (canvas != null && line != null && registered)
@@ -33,10 +29,7 @@ namespace MifuminSoft.funyak.View.MapObject
             }
         }
 
-        public LineMapObjectView(LineMapObject mapObject)
-        {
-            MapObject = mapObject;
-        }
+        public LineMapObjectView(LineMapObject mapObject) => MapObject = mapObject;
 
         public void Update(MapObjectViewUpdateArgs args)
         {

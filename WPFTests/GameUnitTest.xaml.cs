@@ -34,10 +34,7 @@ namespace WPFTests
 
             public Exception TestException { get; set; }
 
-            public override string ToString()
-            {
-                return string.Format("{0}({1})", TestClass.Name, TestResult);
-            }
+            public override string ToString() => $"{TestClass.Name}({TestResult})";
         }
 
         IList<TestCase> testCaseList = new List<TestCase>();
@@ -50,10 +47,7 @@ namespace WPFTests
 
             public int Frames { get; private set; }
 
-            public TestProcess(TestCase testCase)
-            {
-                TestCase = testCase;
-            }
+            public TestProcess(TestCase testCase) => TestCase = testCase;
 
             public void Initialize()
             {
@@ -210,15 +204,9 @@ namespace WPFTests
             }
         }
 
-        private void btnTestSelected_Click(object sender, RoutedEventArgs e)
-        {
-            Test(lbTestCase.SelectedItems.Cast<TestCase>());
-        }
+        private void btnTestSelected_Click(object sender, RoutedEventArgs e) => Test(lbTestCase.SelectedItems.Cast<TestCase>());
 
-        private void btnTestAll_Click(object sender, RoutedEventArgs e)
-        {
-            Test(testCaseList);
-        }
+        private void btnTestAll_Click(object sender, RoutedEventArgs e) => Test(testCaseList);
 
         private void Test(IEnumerable<TestCase> testCaseList)
         {

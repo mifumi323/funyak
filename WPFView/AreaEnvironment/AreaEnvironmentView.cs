@@ -16,11 +16,7 @@ namespace MifuminSoft.funyak.View.AreaEnvironment
 
         public Canvas Canvas
         {
-            get
-            {
-                return canvas;
-            }
-
+            get => canvas;
             set
             {
                 if (canvas != null && rectangle != null && registered)
@@ -32,10 +28,7 @@ namespace MifuminSoft.funyak.View.AreaEnvironment
             }
         }
 
-        public AreaEnvironmentView(MapEnvironment.AreaEnvironment areaEnvironment)
-        {
-            this.areaEnvironment = areaEnvironment;
-        }
+        public AreaEnvironmentView(MapEnvironment.AreaEnvironment areaEnvironment) => this.areaEnvironment = areaEnvironment;
 
         public void Update(AreaEnvironmentViewUpdateArgs args)
         {

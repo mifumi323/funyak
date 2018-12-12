@@ -71,15 +71,9 @@ namespace WPFTests
             direction.Focus();
         }
 
-        private void Page_Unloaded(object sender, RoutedEventArgs e)
-        {
-            CompositionTarget.Rendering -= CompositionTarget_Rendering;
-        }
+        private void Page_Unloaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering -= CompositionTarget_Rendering;
 
-        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            Keyboard.ClearFocus();
-        }
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void CompositionTarget_Rendering(object sender, EventArgs e)
         {

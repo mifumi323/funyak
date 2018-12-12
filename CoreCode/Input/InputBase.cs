@@ -8,13 +8,12 @@ namespace MifuminSoft.funyak.Input
     /// </summary>
     public abstract class InputBase : IInput
     {
-        private double x, y;
         private bool[] keys = new bool[Enum.GetValues(typeof(Keys)).Length];
         private bool[] prevKeys = new bool[Enum.GetValues(typeof(Keys)).Length];
 
-        public double X => x;
+        public double X { get; private set; }
 
-        public double Y => y;
+        public double Y { get; private set; }
 
         public bool IsPressed(Keys key) => keys[(int)key];
 
@@ -29,7 +28,7 @@ namespace MifuminSoft.funyak.Input
                 prevKeys[i] = keys[i];
                 keys[i] = false;
             }
-            x = y = 0;
+            X = Y = 0;
             UpdateImpl();
         }
 
@@ -56,8 +55,8 @@ namespace MifuminSoft.funyak.Input
             keys[(int)Keys.Up] = (y <= -0.5);
             keys[(int)Keys.Right] = (x >= 0.5);
             keys[(int)Keys.Down] = (y >= 0.5);
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
 
         /// <summary>

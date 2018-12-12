@@ -13,8 +13,6 @@
 
         public bool IsReleased(Keys key) => false;
 
-        public void Update()
-        {
-        }
+        public void Update() { }
     }
 }

@@ -22,10 +22,7 @@ namespace MifuminSoft.funyak.View
         private Canvas canvas = null;
         public Canvas Canvas
         {
-            get
-            {
-                return canvas;
-            }
+            get => canvas;
             set
             {
                 canvas = value;
@@ -73,15 +70,9 @@ namespace MifuminSoft.funyak.View
             }
         }
 
-        private void Map_MapObjectAdded(object sender, MapObjectEventArgs e)
-        {
-            AddMapObject(e.MapObject);
-        }
+        private void Map_MapObjectAdded(object sender, MapObjectEventArgs e) => AddMapObject(e.MapObject);
 
-        private void Map_AreaEnvironmentAdded(object sender, MapEnvironment.AreaEnvironmentEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        private void Map_AreaEnvironmentAdded(object sender, MapEnvironment.AreaEnvironmentEventArgs e) => throw new NotImplementedException();
 
         private void AddMapObject(IMapObject mapObject)
         {

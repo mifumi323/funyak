@@ -22,8 +22,8 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         [Description("表示・選択するSpriteを取得または設定します")]
         public Sprite Source
         {
-            get { return (Sprite)GetValue(SourceProperty); }
-            set { SetValue(SourceProperty, value); }
+            get => (Sprite)GetValue(SourceProperty);
+            set => SetValue(SourceProperty, value);
         }
         public static readonly DependencyProperty SourceProperty =
             DependencyProperty.Register(nameof(Source), typeof(Sprite), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSourceChanged)));
@@ -34,8 +34,8 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         [Description("選択中の項目を取得または設定します")]
         public KeyValuePair<string, SpriteChipInfo>? SelectedItem
         {
-            get { return (KeyValuePair<string, SpriteChipInfo>?)GetValue(SelectedItemProperty); }
-            set { SetValue(SelectedItemProperty, value); }
+            get => (KeyValuePair<string, SpriteChipInfo>?)GetValue(SelectedItemProperty);
+            set => SetValue(SelectedItemProperty, value);
         }
         public static readonly DependencyProperty SelectedItemProperty =
             DependencyProperty.Register(nameof(SelectedItem), typeof(KeyValuePair<string, SpriteChipInfo>?), typeof(ChipSelector), new PropertyMetadata(null, new PropertyChangedCallback(OnSelectionChanged)));
@@ -58,8 +58,8 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         [Description("項目の表示色を取得または設定します")]
         public Color ChipColor
         {
-            get { return (Color)GetValue(ChipColorProperty); }
-            set { SetValue(ChipColorProperty, value); }
+            get => (Color)GetValue(ChipColorProperty);
+            set => SetValue(ChipColorProperty, value);
         }
         public static readonly DependencyProperty ChipColorProperty =
             DependencyProperty.Register(nameof(ChipColor), typeof(Color), typeof(ChipSelector), new PropertyMetadata(Colors.Black, new PropertyChangedCallback(OnSourceChanged)));
@@ -70,8 +70,8 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         [Description("選択中の項目の表示色を取得または設定します")]
         public Color SelectedChipColor
         {
-            get { return (Color)GetValue(SelectedChipColorProperty); }
-            set { SetValue(SelectedChipColorProperty, value); }
+            get => (Color)GetValue(SelectedChipColorProperty);
+            set => SetValue(SelectedChipColorProperty, value);
         }
         public static readonly DependencyProperty SelectedChipColorProperty =
             DependencyProperty.Register(nameof(SelectedChipColor), typeof(Color), typeof(ChipSelector), new PropertyMetadata(Colors.Red, new PropertyChangedCallback(OnSourceChanged)));
@@ -81,10 +81,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
         /// </summary>
         public event EventHandler SelectionChanged;
 
-        public ChipSelector()
-        {
-            InitializeComponent();
-        }
+        public ChipSelector() => InitializeComponent();
 
         /// <summary>
         /// 表示を更新します
@@ -150,10 +147,7 @@ namespace MifuminSoft.funyak.UI.SpriteEditor
             e.Handled = true;
         }
 
-        private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            (d as ChipSelector)?.Refresh();
-        }
+        private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) => (d as ChipSelector)?.Refresh();
 
         private static void OnSelectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

@@ -12,9 +12,6 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public IMapObject MapObject { get; private set; }
 
-        public MapObjectEventArgs(IMapObject mapObject)
-        {
-            MapObject = mapObject;
-        }
+        public MapObjectEventArgs(IMapObject mapObject) => MapObject = mapObject;
     }
 }
