@@ -10,8 +10,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         public void SetPointTest()
         {
             var collider = new PointCollider(null);
-            var listener = new Map(1000.0, 1000.0);
-            collider.SetPoint(100.0, 200.0, listener);
+            collider.SetPoint(100.0, 200.0);
             Assert.AreEqual(100.0, collider.X, 0.0001, "PointCollider.Xが不正");
             Assert.AreEqual(200.0, collider.Y, 0.0001, "PointCollider.Yが不正");
             Assert.AreEqual(100.0, collider.Left, 0.0001, "PointCollider.Leftが不正");

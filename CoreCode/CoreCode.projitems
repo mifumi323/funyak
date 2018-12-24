@@ -12,7 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)CheckMapObjectCollisionArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\ColliderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\EllipseCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collision\IColliderUpdatePositionListener.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\IColliderPositionUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RectangleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionCollider.cs" />

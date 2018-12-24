@@ -10,7 +10,7 @@ namespace MifuminSoft.funyak
     /// <summary>
     /// ゲームのマップ
     /// </summary>
-    public class Map : IMapEnvironment, IColliderUpdatePositionListener
+    public class Map : IMapEnvironment
     {
         /// <summary>
         /// マップの幅(マップ空間内のピクセル単位)
@@ -224,11 +224,6 @@ namespace MifuminSoft.funyak
         {
             namedAreaEnvironment.TryGetValue(name, out AreaEnvironment area);
             return area;
-        }
-
-        public void ColliderPositionUpdated(ColliderBase collider)
-        {
-            // TODO: ちゃんと実装しようね
         }
     }
 }

@@ -9,6 +9,6 @@ namespace MifuminSoft.funyak.Collision
 
         public PointCollider(IMapObject owner) : base(owner) { }
 
-        public void SetPoint(double x, double y, IColliderUpdatePositionListener listener) => UpdatePosition(x, y, x, y, listener);
+        public void SetPoint(double x, double y) => UpdatePosition(x, y, x, y);
     }
 }
