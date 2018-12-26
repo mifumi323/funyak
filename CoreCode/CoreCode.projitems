@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\ColliderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\EllipseCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\IColliderPositionUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\NeedleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RectangleCollider.cs" />

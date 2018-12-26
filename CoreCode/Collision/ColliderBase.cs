@@ -1,4 +1,5 @@
-﻿using MifuminSoft.funyak.MapObject;
+﻿using MifuminSoft.funyak.Geometry;
+using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
 {
@@ -19,6 +20,36 @@ namespace MifuminSoft.funyak.Collision
             Top = top;
             Right = right;
             Bottom = bottom;
+        }
+
+        /// <summary>
+        /// segmentを包含する位置に更新します。
+        /// </summary>
+        /// <param name="segment"></param>
+        protected void UpdatePosition(Segment2D segment)
+        {
+            double left, top, right, bottom;
+            if (segment.Start.X <= segment.End.X)
+            {
+                left = segment.Start.X;
+                right = segment.End.X;
+            }
+            else
+            {
+                left = segment.End.X;
+                right = segment.Start.X;
+            }
+            if (segment.Start.Y <= segment.End.Y)
+            {
+                top = segment.Start.Y;
+                bottom = segment.End.Y;
+            }
+            else
+            {
+                top = segment.End.Y;
+                bottom = segment.Start.Y;
+            }
+            UpdatePosition(left, top, right, bottom);
         }
     }
 }
