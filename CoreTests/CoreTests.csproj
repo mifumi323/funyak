@@ -59,7 +59,7 @@
   <ItemGroup>
     <Compile Include="CollisionTest\PointColliderTest.cs" />
     <Compile Include="CollisionTest\RectangleColliderTest.cs" />
-    <Compile Include="CollisionTest\SegmentColliderTest.cs" />
+    <Compile Include="CollisionTest\SegmentPlateColliderTest.cs" />
     <Compile Include="CollisionTest\EllipseColliderTest.cs" />
     <Compile Include="GameTest\GameTestBase.cs" />
     <Compile Include="GameTest\GameTestBaseTest.cs" />

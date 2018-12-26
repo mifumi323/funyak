@@ -13,10 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\ColliderBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\EllipseCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\IColliderPositionUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RectangleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionCollider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collision\SegmentCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\SegmentPlateCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\CollidableSegment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PositionAdjuster.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\Segment2D.cs" />
