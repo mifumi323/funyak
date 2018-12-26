@@ -24,5 +24,35 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             Assert.AreEqual(350.0, collider.Right, 0.0001, "始点と終点を入れ替えたSegmentPlateCollider.Rightが不正");
             Assert.AreEqual(450.0, collider.Bottom, 0.0001, "始点と終点を入れ替えたSegmentPlateCollider.Bottomが不正");
         }
+
+        [TestMethod]
+        public void GetCollisionCollidedTest()
+        {
+            // 交差しているパターン
+            var collider = new SegmentPlateCollider(null);
+            collider.SetSegment(new Segment2D(100.0, 200.0, 300.0, 400.0));
+
+            var needle = new NeedleCollider(null);
+            needle.SetSegment(new Segment2D(300.0, 200.0, 100.0, 400.0));
+            var collision = collider.GetCollision(needle);
+            Assert.IsTrue(collision.IsCollided);
+            Assert.AreEqual(collider, collision.Plate);
+            Assert.AreEqual(needle, collision.Needle);
+            Assert.AreEqual(200.0, collision.CrossPoint.X, 0.0001);
+            Assert.AreEqual(300.0, collision.CrossPoint.Y, 0.0001);
+        }
+
+        [TestMethod]
+        public void GetCollisionNotCollidedTest()
+        {
+            // 交差していないパターン
+            var collider = new SegmentPlateCollider(null);
+            collider.SetSegment(new Segment2D(100.0, 200.0, 300.0, 400.0));
+
+            var needle = new NeedleCollider(null);
+            needle.SetSegment(new Segment2D(300.0, 200.0, 300.0, 300.0));
+            var collision = collider.GetCollision(needle);
+            Assert.IsFalse(collision.IsCollided);
+        }
     }
 }

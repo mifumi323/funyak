@@ -10,5 +10,13 @@ namespace MifuminSoft.funyak.Collision
         public SegmentPlateCollider(IMapObject owner) : base(owner) { }
 
         public void SetSegment(Segment2D segment) => UpdatePosition(Segment = segment);
+
+        public override PlateNeedleCollision GetCollision(NeedleCollider needleCollider) => new PlateNeedleCollision
+        {
+            IsCollided = Segment.TryGetCrossPoint(needleCollider.Needle, out var crossPoint),
+            Plate = this,
+            Needle = needleCollider,
+            CrossPoint = crossPoint,
+        };
     }
 }
