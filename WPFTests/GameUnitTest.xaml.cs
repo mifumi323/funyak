@@ -204,9 +204,9 @@ namespace WPFTests
             }
         }
 
-        private void btnTestSelected_Click(object sender, RoutedEventArgs e) => Test(lbTestCase.SelectedItems.Cast<TestCase>());
+        private void BtnTestSelected_Click(object sender, RoutedEventArgs e) => Test(lbTestCase.SelectedItems.Cast<TestCase>());
 
-        private void btnTestAll_Click(object sender, RoutedEventArgs e) => Test(testCaseList);
+        private void BtnTestAll_Click(object sender, RoutedEventArgs e) => Test(testCaseList);
 
         private void Test(IEnumerable<TestCase> testCaseList)
         {

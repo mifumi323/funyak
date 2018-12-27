@@ -25,7 +25,7 @@
         <Label Grid.Column="1" Content="拡大率"/>
         <Slider x:Name="sliderScale" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" Grid.Column="2" VerticalAlignment="Center"/>
         <ListBox x:Name="lbTestCase" SelectionMode="Extended" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"></ListBox>
-        <Button x:Name="btnTestSelected" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Click="btnTestSelected_Click">選択項目をテスト</Button>
-        <Button x:Name="btnTestAll" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Click="btnTestAll_Click">全部テスト</Button>
+        <Button x:Name="btnTestSelected" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Click="BtnTestSelected_Click">選択項目をテスト</Button>
+        <Button x:Name="btnTestAll" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Click="BtnTestAll_Click">全部テスト</Button>
     </Grid>
 </Page>

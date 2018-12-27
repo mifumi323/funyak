@@ -21,14 +21,14 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="canvas_MouseDown">
+        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="Canvas_MouseDown">
         </Canvas>
         <Label Grid.Column="1" Content="拡大率"/>
         <Slider x:Name="sliderScale" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" Grid.Column="2" VerticalAlignment="Center"/>
         <Label Grid.Column="1" Grid.Row="1" Content="風"/>
         <Slider x:Name="sliderWind" Minimum="-10" Maximum="10" TickFrequency="0.1" Value="0" LargeChange="1" IsSnapToTickEnabled="True" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center"/>
         <TextBox x:Name="textBox" TextWrapping="Wrap" IsReadOnly="True" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonSave" Content="Save" Click="buttonSave_Click" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
-        <Button x:Name="buttonReset" Content="Reset" Click="buttonReset_Click" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Button x:Name="buttonSave" Content="Save" Click="ButtonSave_Click" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <Button x:Name="buttonReset" Content="Reset" Click="ButtonReset_Click" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2"/>
     </Grid>
 </Page>

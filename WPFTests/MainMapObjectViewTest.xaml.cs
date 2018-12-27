@@ -113,7 +113,7 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering += CompositionTarget_Rendering;
 
-        private void buttonSave_Click(object sender, RoutedEventArgs e)
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog()
             {
@@ -177,12 +177,12 @@ namespace WPFTests
             }
         }
 
-        private void buttonReset_Click(object sender, RoutedEventArgs e)
+        private void ButtonReset_Click(object sender, RoutedEventArgs e)
         {
             Reset();
             Keyboard.ClearFocus();
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
     }
 }

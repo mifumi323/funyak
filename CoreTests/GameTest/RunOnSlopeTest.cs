@@ -7,9 +7,9 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
     [TestClass]
     public class RunOnSlopeTest : GameTestBase
     {
-        MainMapObject[] mapObject = new MainMapObject[4];
-        MainMapObjectState[] state = new MainMapObjectState[4];
-        int[] stable = new int[4];
+        readonly MainMapObject[] mapObject = new MainMapObject[4];
+        readonly MainMapObjectState[] state = new MainMapObjectState[4];
+        readonly int[] stable = new int[4];
 
         public RunOnSlopeTest()
         {

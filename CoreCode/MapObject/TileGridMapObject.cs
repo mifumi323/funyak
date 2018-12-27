@@ -52,7 +52,7 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public int TileCountY { get; private set; }
 
-        private TileChip[,] tiles;
+        private readonly TileChip[,] tiles;
 
         public TileGridMapObject(double x, double y, int tileCountX, int tileCountY)
         {

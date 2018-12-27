@@ -20,13 +20,13 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="canvas_MouseDown">
+        <Canvas x:Name="canvas" ClipToBounds="True" Grid.RowSpan="5" Background="White" MouseDown="Canvas_MouseDown">
         </Canvas>
-        <TextBlock x:Name="textBlockError" Grid.RowSpan="5" Panel.ZIndex="9999" TextWrapping="Wrap" MouseDown="textBlockError_MouseDown"/>
+        <TextBlock x:Name="textBlockError" Grid.RowSpan="5" Panel.ZIndex="9999" TextWrapping="Wrap" MouseDown="TextBlockError_MouseDown"/>
         <Label Grid.Column="1" Content="拡大率"/>
         <Slider x:Name="sliderScale" Minimum="0.5" Maximum="2" TickFrequency="0.1" Value="1" LargeChange="0.5" IsSnapToTickEnabled="True" Grid.Column="2" VerticalAlignment="Center"/>
         <TextBox x:Name="textBox" TextWrapping="Wrap" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
-        <Button x:Name="buttonFromString" Content="FromString" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Click="buttonFromString_Click"/>
+        <Button x:Name="buttonFromString" Content="FromString" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Click="ButtonFromString_Click"/>
         <Button x:Name="buttonToString" Content="ToString" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" IsEnabled="False"/>
     </Grid>
 </Page>

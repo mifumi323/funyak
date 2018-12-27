@@ -56,9 +56,9 @@ namespace WPFTests
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
-        private void buttonFromString_Click(object sender, RoutedEventArgs e)
+        private void ButtonFromString_Click(object sender, RoutedEventArgs e)
         {
             ReadMapFromTextBox();
             Keyboard.ClearFocus();
@@ -90,7 +90,7 @@ namespace WPFTests
             }
         }
 
-        private void textBlockError_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TextBlockError_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Keyboard.ClearFocus();
         }

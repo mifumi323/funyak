@@ -31,8 +31,10 @@ namespace WPFTests
         public LineMapObjectViewTest()
         {
             InitializeComponent();
-            map = new Map(500, 500);
-            map.BackgroundColor = "LightGreen";
+            map = new Map(500, 500)
+            {
+                BackgroundColor = "LightGreen"
+            };
             lines = new[] {
                 new LineMapObject(0, 0, 50, 500) { Color = "Black" },
                 new LineMapObject(0, 500, 500, 450) { Color = "Black" },
@@ -62,7 +64,7 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => CompositionTarget.Rendering += CompositionTarget_Rendering;
 
-        private void button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog()
             {
@@ -92,7 +94,7 @@ namespace WPFTests
             }
         }
 
-        private void canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
+        private void Canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();
 
         private void CompositionTarget_Rendering(object sender, object e)
         {
