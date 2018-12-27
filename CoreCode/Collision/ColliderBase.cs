@@ -10,9 +10,9 @@ namespace MifuminSoft.funyak.Collision
         public double Right { get; private set; }
         public double Bottom { get; private set; }
 
-        public IMapObject Owner { get; private set; }
+        public MapObjectBase Owner { get; private set; }
 
-        public ColliderBase(IMapObject owner) => Owner = owner;
+        public ColliderBase(MapObjectBase owner) => Owner = owner;
 
         protected void UpdatePosition(double left, double top, double right, double bottom)
         {

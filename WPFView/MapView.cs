@@ -42,7 +42,7 @@ namespace MifuminSoft.funyak.View
         /// <summary>
         /// 注視対象のマップオブジェクト
         /// </summary>
-        public IMapObject FocusTo { get; set; }
+        public MapObjectBase FocusTo { get; set; }
 
         /// <summary>
         /// 注視点が注視対象の座標からどの程度ずれるか
@@ -74,7 +74,7 @@ namespace MifuminSoft.funyak.View
 
         private void Map_AreaEnvironmentAdded(object sender, MapEnvironment.AreaEnvironmentEventArgs e) => throw new NotImplementedException();
 
-        private void AddMapObject(IMapObject mapObject)
+        private void AddMapObject(MapObjectBase mapObject)
         {
             var mapObjectView = MapObjectViewFactory.Create(mapObject);
             if (mapObjectView != null) AddMapObjectView(mapObjectView);

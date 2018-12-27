@@ -10,8 +10,8 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 追加されたマップオブジェクト
         /// </summary>
-        public IMapObject MapObject { get; private set; }
+        public MapObjectBase MapObject { get; private set; }
 
-        public MapObjectEventArgs(IMapObject mapObject) => MapObject = mapObject;
+        public MapObjectEventArgs(MapObjectBase mapObject) => MapObject = mapObject;
     }
 }

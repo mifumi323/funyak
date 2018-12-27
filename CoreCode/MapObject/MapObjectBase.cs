@@ -3,7 +3,7 @@
     /// <summary>
     /// マップオブジェクトを表します。
     /// </summary>
-    public abstract class IMapObject
+    public abstract class MapObjectBase
     {
         /// <summary>
         /// 名前を設定および取得します。MapObject以外が各MapObjectを区別するために用います。

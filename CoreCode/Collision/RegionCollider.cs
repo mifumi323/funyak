@@ -4,7 +4,7 @@ namespace MifuminSoft.funyak.Collision
 {
     public abstract class RegionCollider: ColliderBase
     {
-        public RegionCollider(IMapObject owner) : base(owner) { }
+        public RegionCollider(MapObjectBase owner) : base(owner) { }
 
         public bool Contains(PointCollider pointCollider) => Contains(pointCollider.X, pointCollider.Y);
 

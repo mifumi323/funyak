@@ -14,7 +14,7 @@ namespace MifuminSoft.funyak.MapObject
         public double Friction;
     }
 
-    public class TileGridMapObject : IMapObject, IBounds
+    public class TileGridMapObject : MapObjectBase, IBounds
     {
         public override double X { get; set; }
 

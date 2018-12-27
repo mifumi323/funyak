@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Collision
     {
         public Segment2D Segment { get; private set; }
 
-        public SegmentPlateCollider(IMapObject owner) : base(owner) { }
+        public SegmentPlateCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetSegment(Segment2D segment) => UpdatePosition(Segment = segment);
 

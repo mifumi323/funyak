@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.View.MapObject
     {
         public Func<int, Sprite> MainMapObjectResourceSelector { get; set; }
 
-        public IMapObjectView Create(IMapObject mapObject)
+        public IMapObjectView Create(MapObjectBase mapObject)
         {
             if (mapObject is LineMapObject lineMapObject)
             {

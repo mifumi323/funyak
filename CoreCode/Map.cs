@@ -42,10 +42,10 @@ namespace MifuminSoft.funyak
         /// </summary>
         public event EventHandler<MapObjectEventArgs> MapObjectAdded;
 
-        private ICollection<IMapObject> mapObjectCollection;
+        private ICollection<MapObjectBase> mapObjectCollection;
         private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
         private ICollection<ICollidableMapObject> collidableMapObjectCollection;
-        private IDictionary<string, IMapObject> namedMapObject;
+        private IDictionary<string, MapObjectBase> namedMapObject;
 
         /// <summary>
         /// 環境が追加されたときに発生します。
@@ -74,10 +74,10 @@ namespace MifuminSoft.funyak
             BackgroundColor = null;
             FrameCount = 0;
 
-            mapObjectCollection = new List<IMapObject>();
+            mapObjectCollection = new List<MapObjectBase>();
             selfUpdatableMapObjectCollection = new List<IUpdatableMapObject>();
             collidableMapObjectCollection = new List<ICollidableMapObject>();
-            namedMapObject = new Dictionary<string, IMapObject>();
+            namedMapObject = new Dictionary<string, MapObjectBase>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
         }
@@ -86,7 +86,7 @@ namespace MifuminSoft.funyak
         /// マップオブジェクトを追加します。
         /// </summary>
         /// <param name="mapObject">追加するマップオブジェクト</param>
-        public void AddMapObject(IMapObject mapObject)
+        public void AddMapObject(MapObjectBase mapObject)
         {
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
@@ -156,7 +156,7 @@ namespace MifuminSoft.funyak
         /// nullの場合は全マップオブジェクトが返される
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<IMapObject> GetMapObjects(IBounds bounds = null)
+        public IEnumerable<MapObjectBase> GetMapObjects(IBounds bounds = null)
         {
             if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
@@ -168,9 +168,9 @@ namespace MifuminSoft.funyak
         /// </summary>
         /// <param name="name">マップオブジェクトの名前</param>
         /// <returns></returns>
-        public IMapObject FindMapObject(string name)
+        public MapObjectBase FindMapObject(string name)
         {
-            namedMapObject.TryGetValue(name, out IMapObject mapObject);
+            namedMapObject.TryGetValue(name, out MapObjectBase mapObject);
             return mapObject;
         }
 

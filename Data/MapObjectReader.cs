@@ -6,16 +6,16 @@ namespace MifuminSoft.funyak.Data
 {
     public class MapObjectReader
     {
-        public static IMapObject FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
+        public static MapObjectBase FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
 
-        public static IMapObject FromDynamic(dynamic data, MapReaderOption option)
+        public static MapObjectBase FromDynamic(dynamic data, MapReaderOption option)
             // VS2019になったらswitch式できれいに書けそうだ
             => data.type == "funya" ? GenerateMainMapObject(data, option) :
                 data.type == "line" ? GenerateLineMapObject(data, option) :
                 data.type == "tile" ? GenerateTileMapObject(data, option) :
                 null;
 
-        private static IMapObject GenerateMainMapObject(dynamic data, MapReaderOption option)
+        private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
         {
             var mainMapObject = new MainMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
             {
@@ -45,7 +45,7 @@ namespace MifuminSoft.funyak.Data
             return mainMapObject;
         }
 
-        private static IMapObject GenerateLineMapObject(dynamic data, MapReaderOption option)
+        private static MapObjectBase GenerateLineMapObject(dynamic data, MapReaderOption option)
         {
             var lineMapObject = new LineMapObject((double)(data.x1 ?? 0.0), (double)(data.y1 ?? 0.0), (double)(data.x2 ?? 0.0), (double)(data.y2 ?? 0.0))
             {
@@ -61,7 +61,7 @@ namespace MifuminSoft.funyak.Data
             return lineMapObject;
         }
 
-        private static IMapObject GenerateTileMapObject(dynamic data, MapReaderOption option)
+        private static MapObjectBase GenerateTileMapObject(dynamic data, MapReaderOption option)
             => new TileGridMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0), (int)data.w, (int)data.h)
             {
                 Name = data.n

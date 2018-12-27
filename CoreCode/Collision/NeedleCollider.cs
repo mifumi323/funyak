@@ -41,7 +41,7 @@ namespace MifuminSoft.funyak.Collision
 
         public Segment2D Needle { get; private set; }
 
-        public NeedleCollider(IMapObject owner) : base(owner) { }
+        public NeedleCollider(MapObjectBase owner) : base(owner) { }
 
         private void UpdateNeedle() => UpdatePosition(Needle = new Segment2D(StartPoint, EndPoint));
 

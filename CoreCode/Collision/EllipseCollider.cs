@@ -4,7 +4,7 @@ namespace MifuminSoft.funyak.Collision
 {
     public class EllipseCollider : RegionCollider
     {
-        public EllipseCollider(IMapObject owner) : base(owner) { }
+        public EllipseCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPosition(double left, double top, double right, double bottom) => UpdatePosition(left, top, right, bottom);
 

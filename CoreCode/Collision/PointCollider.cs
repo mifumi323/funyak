@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Collision
         public double X => Left;
         public double Y => Top;
 
-        public PointCollider(IMapObject owner) : base(owner) { }
+        public PointCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPoint(double x, double y) => UpdatePosition(x, y, x, y);
     }
