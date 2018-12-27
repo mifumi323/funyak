@@ -5,7 +5,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 当たり判定を行うマップオブジェクトを表します。
     /// </summary>
-    public interface ICollidableMapObject : IMapObject
+    public interface ICollidableMapObject
     {
         /// <summary>
         /// 他のマップオブジェクトとの当たり判定を行います。

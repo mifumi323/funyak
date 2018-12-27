@@ -36,14 +36,9 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 主人公のマップオブジェクト
     /// </summary>
-    public class MainMapObject : IUpdatableMapObject, ICollidableMapObject, IBounds
+    public class MainMapObject : IMapObject, IUpdatableMapObject, ICollidableMapObject, IBounds
     {
         #region 主人公の状態
-
-        /// <summary>
-        /// 名前
-        /// </summary>
-        public string Name { get; set; }
 
         /// <summary>
         /// 状態
@@ -125,12 +120,12 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// X座標
         /// </summary>
-        public double X { get; set; }
+        public override double X { get; set; }
 
         /// <summary>
         /// Y座標
         /// </summary>
-        public double Y { get; set; }
+        public override double Y { get; set; }
 
         /// <summary>
         /// 速度のX成分

@@ -3,21 +3,21 @@
     /// <summary>
     /// マップオブジェクトを表します。
     /// </summary>
-    public interface IMapObject
+    public abstract class IMapObject
     {
         /// <summary>
-        /// 名前
+        /// 名前を設定および取得します。MapObject以外が各MapObjectを区別するために用います。
         /// </summary>
-        string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
-        /// マップ中のX座標
+        /// マップ中のX座標を設定および取得します。MapObjectが自発的に更新しますが、MapObject以外によって特定のタイミングで変更されることもあり得ます。
         /// </summary>
-        double X { get; }
+        public abstract double X { get; set; }
 
         /// <summary>
-        /// マップ中のY座標
+        /// マップ中のY座標を設定および取得します。MapObjectが自発的に更新しますが、MapObject以外によって特定のタイミングで変更されることもあり得ます。
         /// </summary>
-        double Y { get; }
+        public abstract double Y { get; set; }
     }
 }

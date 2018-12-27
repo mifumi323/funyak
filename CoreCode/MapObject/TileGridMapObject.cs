@@ -16,11 +16,9 @@ namespace MifuminSoft.funyak.MapObject
 
     public class TileGridMapObject : IMapObject, IBounds
     {
-        public string Name { get; set; }
+        public override double X { get; set; }
 
-        public double X { get; set; }
-
-        public double Y { get; set; }
+        public override double Y { get; set; }
 
         public double Left => X;
 

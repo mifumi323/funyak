@@ -29,11 +29,6 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
-        /// 名前
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
         /// 始点のX座標
         /// </summary>
         public double X1
@@ -119,8 +114,27 @@ namespace MifuminSoft.funyak.MapObject
             set => segment.Friction = value;
         }
 
-        public double X => (X1 + X2) / 2;
-        public double Y => (Y1 + Y2) / 2;
+        public override double X
+        {
+            get => (X1 + X2) / 2;
+            set
+            {
+                var diff = value - X;
+                X1 += diff;
+                X2 += diff;
+            }
+        }
+        public override double Y
+        {
+            get => (Y1 + Y2) / 2;
+            set
+            {
+                var diff = value - Y;
+                Y1 += diff;
+                Y2 += diff;
+            }
+        }
+
         public double Left => Math.Min(X1, X2);
         public double Right => Math.Max(X1, X2);
         public double Top => Math.Min(Y1, Y2);
