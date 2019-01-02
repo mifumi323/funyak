@@ -36,7 +36,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment\AreaEnvironmentEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapEnvironment\IMapEnvironment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\Direction.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MapObject\ICollidableMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MapObjectBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\IUpdatableMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />

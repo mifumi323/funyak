@@ -44,7 +44,6 @@ namespace MifuminSoft.funyak
 
         private ICollection<MapObjectBase> mapObjectCollection;
         private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
-        private ICollection<ICollidableMapObject> collidableMapObjectCollection;
         private IDictionary<string, MapObjectBase> namedMapObject;
 
         /// <summary>
@@ -76,7 +75,6 @@ namespace MifuminSoft.funyak
 
             mapObjectCollection = new List<MapObjectBase>();
             selfUpdatableMapObjectCollection = new List<IUpdatableMapObject>();
-            collidableMapObjectCollection = new List<ICollidableMapObject>();
             namedMapObject = new Dictionary<string, MapObjectBase>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
@@ -90,7 +88,6 @@ namespace MifuminSoft.funyak
         {
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
-            if (mapObject is ICollidableMapObject dynamicMapObject) collidableMapObjectCollection.Add(dynamicMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
@@ -133,7 +130,7 @@ namespace MifuminSoft.funyak
         private void CheckMapObjectsCollision()
         {
             var args = new CheckMapObjectCollisionArgs(this);
-            foreach (var mapObject in collidableMapObjectCollection)
+            foreach (var mapObject in mapObjectCollection)
             {
                 mapObject.CheckCollision(args);
             }
@@ -141,7 +138,7 @@ namespace MifuminSoft.funyak
 
         private void RealizeMapObjectsCollision()
         {
-            foreach (var mapObject in collidableMapObjectCollection)
+            foreach (var mapObject in mapObjectCollection)
             {
                 mapObject.RealizeCollision();
             }

@@ -36,7 +36,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 主人公のマップオブジェクト
     /// </summary>
-    public class MainMapObject : MapObjectBase, IUpdatableMapObject, ICollidableMapObject, IBounds
+    public class MainMapObject : MapObjectBase, IUpdatableMapObject, IBounds
     {
         #region 主人公の状態
 
@@ -735,7 +735,7 @@ namespace MifuminSoft.funyak.MapObject
             Y += VelocityY;
         }
 
-        public void CheckCollision(CheckMapObjectCollisionArgs args)
+        public override void CheckCollision(CheckMapObjectCollisionArgs args)
         {
             // 位置とか
             var x = X;
@@ -877,7 +877,7 @@ namespace MifuminSoft.funyak.MapObject
             c2rTouchedBottom = touchedBottom;
         }
 
-        public void RealizeCollision()
+        public override void RealizeCollision()
         {
             if (Math.Abs(X - c2rX) >= PositionAdjustLowerLimit) X = c2rX;
             if (Math.Abs(Y - c2rY) >= PositionAdjustLowerLimit) Y = c2rY;

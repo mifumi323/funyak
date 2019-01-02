@@ -19,5 +19,18 @@
         /// マップ中のY座標を設定および取得します。MapObjectが自発的に更新しますが、MapObject以外によって特定のタイミングで変更されることもあり得ます。
         /// </summary>
         public abstract double Y { get; set; }
+
+        /// <summary>
+        /// 他のマップオブジェクトとの当たり判定を行います。
+        /// このメソッド内では他のマップオブジェクトや自分自身の状態の更新を行いません。
+        /// RealizeCollisionにて、当たり判定によって生じる自分自身の状態の変化を反映させます。
+        /// </summary>
+        /// <param name="args"></param>
+        public virtual void CheckCollision(CheckMapObjectCollisionArgs args) { }
+
+        /// <summary>
+        /// CheckCollisionによって生じた変化を自分自身の状態に反映します。
+        /// </summary>
+        public virtual void RealizeCollision() { }
     }
 }
