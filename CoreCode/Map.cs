@@ -45,6 +45,7 @@ namespace MifuminSoft.funyak
         private ICollection<MapObjectBase> mapObjectCollection;
         private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
         private IDictionary<string, MapObjectBase> namedMapObject;
+        private CollisionManager collisionManager;
 
         /// <summary>
         /// 環境が追加されたときに発生します。
@@ -78,6 +79,7 @@ namespace MifuminSoft.funyak
             namedMapObject = new Dictionary<string, MapObjectBase>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
+            collisionManager = new CollisionManager();
         }
 
         /// <summary>
@@ -111,6 +113,7 @@ namespace MifuminSoft.funyak
         {
             UpdateMapObjects();
             CheckMapObjectsCollision();
+            collisionManager.Collide();
             RealizeMapObjectsCollision();
             FrameCount++;
         }
