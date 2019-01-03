@@ -91,6 +91,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
+            mapObject.OnJoin(this, collisionManager);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
         }

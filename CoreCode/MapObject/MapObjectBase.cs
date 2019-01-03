@@ -40,5 +40,10 @@ namespace MifuminSoft.funyak.MapObject
         /// CheckCollisionによって生じた変化を自分自身の状態に反映します。
         /// </summary>
         public virtual void RealizeCollision() { }
+
+        public virtual void OnJoin(Map map, CollisionManager collisionManager) { }
+
+        // TODO: MapObjectの削除機能がないのでこれはまだ無意味だ。
+        // public virtual void OnLeave(Map map, CollisionManager collisionManager) { }
     }
 }
