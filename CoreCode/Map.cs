@@ -42,6 +42,11 @@ namespace MifuminSoft.funyak
         /// </summary>
         public event EventHandler<MapObjectEventArgs> MapObjectAdded;
 
+        /// <summary>
+        /// マップオブジェクトが削除されたときに発生します。
+        /// </summary>
+        public event EventHandler<MapObjectEventArgs> MapObjectRemoved;
+
         private ICollection<MapObjectBase> mapObjectCollection;
         private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
         private IDictionary<string, MapObjectBase> namedMapObject;
@@ -94,6 +99,20 @@ namespace MifuminSoft.funyak
             mapObject.OnJoin(this, collisionManager);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
+        }
+
+        /// <summary>
+        /// マップオブジェクトを削除します。
+        /// </summary>
+        /// <param name="mapObject">削除するマップオブジェクト</param>
+        public void RemoveMapObject(MapObjectBase mapObject)
+        {
+            mapObjectCollection.Remove(mapObject);
+            if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Remove(selfUpdatableMapObject);
+            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject.Remove(mapObject.Name);
+            mapObject.OnLeave(this, collisionManager);
+
+            MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
 
         /// <summary>
