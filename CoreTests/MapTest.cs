@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 
@@ -13,6 +14,29 @@ namespace MifuminSoft.funyak.Core.Tests
             var map = new Map(320, 224);
             Assert.AreEqual(320, map.Width);
             Assert.AreEqual(224, map.Height);
+        }
+
+        [TestMethod]
+        public void AddMapObjectTest()
+        {
+            var map = new Map(320, 224);
+            var mapObject = new MainMapObject(80, 112);
+            map.AddMapObject(mapObject);
+            var mapObjects = map.GetMapObjects();
+
+            Assert.AreEqual(1, mapObjects.Count());
+        }
+
+        [TestMethod]
+        public void RemoveMapObjectTest()
+        {
+            var map = new Map(320, 224);
+            var mapObject = new MainMapObject(80, 112);
+            map.AddMapObject(mapObject);
+            map.RemoveMapObject(mapObject);
+            var mapObjects = map.GetMapObjects();
+
+            Assert.AreEqual(0, mapObjects.Count());
         }
 
         [TestMethod]
