@@ -38,8 +38,7 @@ namespace MifuminSoft.funyak.Collision
                 {
                     if (plateCollider.Owner != needleCollider.Owner)
                     {
-                        var collision = plateCollider.GetCollision(needleCollider);
-                        if (collision.IsCollided)
+                        if (plateCollider.IsCollided(needleCollider, out var collision))
                         {
                             plateCollider.Owner.OnCollided(plateCollider, needleCollider, collision.CrossPoint);
                             needleCollider.Owner.OnCollided(needleCollider, plateCollider, collision.CrossPoint);

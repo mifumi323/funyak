@@ -6,6 +6,6 @@ namespace MifuminSoft.funyak.Collision
     {
         public PlateCollider(MapObjectBase owner) : base(owner) { }
 
-        public abstract PlateNeedleCollision GetCollision(NeedleCollider needleCollider);
+        public abstract bool IsCollided(NeedleCollider needleCollider, out PlateNeedleCollision collision);
     }
 }

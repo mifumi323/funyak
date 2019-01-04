@@ -26,7 +26,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         }
 
         [TestMethod]
-        public void GetCollisionCollidedTest()
+        public void IsCollidedTest()
         {
             // 交差しているパターン
             var collider = new SegmentPlateCollider(null);
@@ -34,8 +34,8 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
 
             var needle = new NeedleCollider(null);
             needle.SetSegment(new Segment2D(300.0, 200.0, 100.0, 400.0));
-            var collision = collider.GetCollision(needle);
-            Assert.IsTrue(collision.IsCollided);
+            var isCollided = collider.IsCollided(needle, out var collision);
+            Assert.IsTrue(isCollided);
             Assert.AreEqual(collider, collision.Plate);
             Assert.AreEqual(needle, collision.Needle);
             Assert.AreEqual(200.0, collision.CrossPoint.X, 0.0001);
@@ -43,7 +43,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         }
 
         [TestMethod]
-        public void GetCollisionNotCollidedTest()
+        public void NotIsCollidedTest()
         {
             // 交差していないパターン
             var collider = new SegmentPlateCollider(null);
@@ -51,8 +51,8 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
 
             var needle = new NeedleCollider(null);
             needle.SetSegment(new Segment2D(300.0, 200.0, 300.0, 300.0));
-            var collision = collider.GetCollision(needle);
-            Assert.IsFalse(collision.IsCollided);
+            var isCollided = collider.IsCollided(needle, out var collision);
+            Assert.IsFalse(isCollided);
         }
     }
 }
