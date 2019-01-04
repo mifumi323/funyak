@@ -8,8 +8,8 @@ namespace MifuminSoft.funyak.Input
     /// </summary>
     public abstract class InputBase : IInput
     {
-        private bool[] keys = new bool[Enum.GetValues(typeof(Keys)).Length];
-        private bool[] prevKeys = new bool[Enum.GetValues(typeof(Keys)).Length];
+        private readonly bool[] keys = new bool[Enum.GetValues(typeof(Keys)).Length];
+        private readonly bool[] prevKeys = new bool[Enum.GetValues(typeof(Keys)).Length];
 
         public double X { get; private set; }
 

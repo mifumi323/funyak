@@ -80,6 +80,7 @@
     <Compile Include="GameUnitTest.xaml.cs">
       <DependentUpon>GameUnitTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ImageMagickTest.xaml.cs">
       <DependentUpon>ImageMagickTest.xaml</DependentUpon>
     </Compile>

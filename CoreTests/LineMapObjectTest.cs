@@ -25,11 +25,13 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void PositionTest()
         {
-            var lineMapObject = new LineMapObject(0, 1, 2, 3);
-            lineMapObject.X1 = 10;
-            lineMapObject.Y1 = 11;
-            lineMapObject.X2 = 12;
-            lineMapObject.Y2 = 13;
+            var lineMapObject = new LineMapObject(0, 1, 2, 3)
+            {
+                X1 = 10,
+                Y1 = 11,
+                X2 = 12,
+                Y2 = 13
+            };
             Assert.AreEqual(10, lineMapObject.X1);
             Assert.AreEqual(11, lineMapObject.Y1);
             Assert.AreEqual(12, lineMapObject.X2);

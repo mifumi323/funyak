@@ -35,9 +35,11 @@ namespace WPFTests
 
         private void buttonLoad_Click(object sender, RoutedEventArgs e)
         {
-            var ofd = new OpenFileDialog();
-            ofd.FileName = ImageFileName;
-            ofd.Filter = @"画像ファイル|*.png;*.jpg;*.gif;*.bmp|すべてのファイル|*.*";
+            var ofd = new OpenFileDialog
+            {
+                FileName = ImageFileName,
+                Filter = @"画像ファイル|*.png;*.jpg;*.gif;*.bmp|すべてのファイル|*.*"
+            };
             if (ofd.ShowDialog() == true)
             {
                 ImageFileName = ofd.FileName;

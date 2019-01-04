@@ -133,15 +133,15 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             var testCases = new[]
             {
                 // 真ん中
-                new { X = 300.0, Y=400.0, Expects = true },
+                new { X = 300.0, Y = 400.0, Expects = true },
                 // 左右
-                new { X = 200.0, Y=400.0, Expects = true },
-                new { X = 400.0, Y=400.0, Expects = true },
+                new { X = 200.0, Y = 400.0, Expects = true },
+                new { X = 400.0, Y = 400.0, Expects = true },
                 // 外
-                new { X = 100.0, Y=400.0, Expects = false },
-                new { X = 300.0, Y=200.0, Expects = false },
-                new { X = 500.0, Y=400.0, Expects = false },
-                new { X = 300.0, Y=600.0, Expects = false },
+                new { X = 100.0, Y = 400.0, Expects = false },
+                new { X = 300.0, Y = 200.0, Expects = false },
+                new { X = 500.0, Y = 400.0, Expects = false },
+                new { X = 300.0, Y = 600.0, Expects = false },
             };
             foreach (var testCase in testCases)
             {

@@ -21,9 +21,11 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void PositionTest()
         {
-            var mainMapObject = new MainMapObject(0, 0);
-            mainMapObject.X = 100;
-            mainMapObject.Y = 100;
+            var mainMapObject = new MainMapObject(0, 0)
+            {
+                X = 100,
+                Y = 100
+            };
             Assert.AreEqual(100, mainMapObject.X);
             Assert.AreEqual(100, mainMapObject.Y);
             Assert.AreEqual(86, mainMapObject.Left);
