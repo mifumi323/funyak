@@ -6,7 +6,16 @@ namespace MifuminSoft.funyak.Collision
     {
         public RegionCollider(MapObjectBase owner) : base(owner) { }
 
-        public bool Contains(PointCollider pointCollider) => Contains(pointCollider.X, pointCollider.Y);
+        public bool Contains(PointCollider pointCollider, out RegionPointCollision collision)
+        {
+            var contains = Contains(pointCollider.X, pointCollider.Y);
+            collision = contains ? new RegionPointCollision()
+            {
+                Region = this,
+                Point = pointCollider
+            } : default;
+            return contains;
+        }
 
         public abstract bool Contains(double x, double y);
 

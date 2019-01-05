@@ -25,7 +25,7 @@ namespace MifuminSoft.funyak.Collision
             {
                 foreach (var pointCollider in pointColliders)
                 {
-                    if (regionCollider.Owner != pointCollider.Owner && regionCollider.Contains(pointCollider))
+                    if (regionCollider.Owner != pointCollider.Owner && regionCollider.Contains(pointCollider, out var collision))
                     {
                         regionCollider.Owner.OnCollided(regionCollider, pointCollider);
                         pointCollider.Owner.OnCollided(pointCollider, regionCollider);
