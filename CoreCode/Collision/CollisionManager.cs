@@ -27,8 +27,8 @@ namespace MifuminSoft.funyak.Collision
                 {
                     if (regionCollider.Owner != pointCollider.Owner && regionCollider.Contains(pointCollider, out var collision))
                     {
-                        regionCollider.Owner.OnCollided(regionCollider, pointCollider);
-                        pointCollider.Owner.OnCollided(pointCollider, regionCollider);
+                        regionCollider.OnCollided?.Invoke(ref collision);
+                        pointCollider.OnCollided?.Invoke(ref collision);
                     }
                 }
             }
@@ -40,8 +40,8 @@ namespace MifuminSoft.funyak.Collision
                     {
                         if (plateCollider.IsCollided(needleCollider, out var collision))
                         {
-                            plateCollider.Owner.OnCollided(plateCollider, needleCollider, collision.CrossPoint);
-                            needleCollider.Owner.OnCollided(needleCollider, plateCollider, collision.CrossPoint);
+                            plateCollider.OnCollided?.Invoke(ref collision);
+                            needleCollider.OnCollided?.Invoke(ref collision);
                         }
                     }
                 }

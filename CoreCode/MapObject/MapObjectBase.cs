@@ -31,11 +31,6 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="args"></param>
         public virtual void CheckCollision(CheckMapObjectCollisionArgs args) { }
 
-        public virtual void OnCollided(RegionCollider myCollider, PointCollider theirCollider) { }
-        public virtual void OnCollided(PointCollider myCollider, RegionCollider theirCollider) { }
-        public virtual void OnCollided(PlateCollider myCollider, NeedleCollider theirCollider, Vector2D crossPoint) { }
-        public virtual void OnCollided(NeedleCollider myCollider, PlateCollider theirCollider, Vector2D crossPoint) { }
-
         /// <summary>
         /// CheckCollisionによって生じた変化を自分自身の状態に反映します。
         /// </summary>

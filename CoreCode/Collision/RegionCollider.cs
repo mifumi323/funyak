@@ -4,6 +4,11 @@ namespace MifuminSoft.funyak.Collision
 {
     public abstract class RegionCollider: ColliderBase
     {
+        /// <summary>
+        /// 衝突時に呼ばれるコールバックを指定します。
+        /// </summary>
+        public RegionPointCollision.Listener OnCollided { get; set; }
+
         public RegionCollider(MapObjectBase owner) : base(owner) { }
 
         public bool Contains(PointCollider pointCollider, out RegionPointCollision collision)

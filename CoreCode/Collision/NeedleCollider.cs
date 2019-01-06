@@ -41,6 +41,11 @@ namespace MifuminSoft.funyak.Collision
 
         public Segment2D Needle { get; private set; }
 
+        /// <summary>
+        /// 衝突時に呼ばれるコールバックを指定します。
+        /// </summary>
+        public PlateNeedleCollision.Listener OnCollided { get; set; }
+
         public NeedleCollider(MapObjectBase owner) : base(owner) { }
 
         private void UpdateNeedle() => UpdatePosition(Needle = new Segment2D(StartPoint, EndPoint));
