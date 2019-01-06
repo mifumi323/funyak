@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
@@ -8,6 +9,7 @@ namespace MifuminSoft.funyak.MapObject
     /// </summary>
     public class LineMapObject : MapObjectBase, IBounds
     {
+        private SegmentPlateCollider collider;
         private CollidableSegment segment;
 
         /// <summary>
@@ -47,12 +49,25 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
+        /// 有効か否か
+        /// </summary>
+        public bool Active
+        {
+            get => collider.PlateInfo.HasFlag(PlateFlags.Active);
+            set => collider.PlateInfo.SetFlag(PlateFlags.Active, value);
+        }
+
+        /// <summary>
         /// 上の当たり判定
         /// </summary>
         public bool HitUpper
         {
-            get => segment.HitUpper;
-            set => segment.HitUpper = value;
+            get => collider.PlateInfo.HasFlag(PlateFlags.HitUpper);
+            set
+            {
+                collider.PlateInfo.SetFlag(PlateFlags.HitUpper, value);
+                segment.HitUpper = value;
+            }
         }
 
         /// <summary>
@@ -60,8 +75,12 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitBelow
         {
-            get => segment.HitBelow;
-            set => segment.HitBelow = value;
+            get => collider.PlateInfo.HasFlag(PlateFlags.HitBelow);
+            set
+            {
+                collider.PlateInfo.SetFlag(PlateFlags.HitBelow, value);
+                segment.HitBelow = value;
+            }
         }
 
         /// <summary>
@@ -69,8 +88,12 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitLeft
         {
-            get => segment.HitLeft;
-            set => segment.HitLeft = value;
+            get => collider.PlateInfo.HasFlag(PlateFlags.HitLeft);
+            set
+            {
+                collider.PlateInfo.SetFlag(PlateFlags.HitLeft, value);
+                segment.HitLeft = value;
+            }
         }
 
         /// <summary>
@@ -78,8 +101,12 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitRight
         {
-            get => segment.HitRight;
-            set => segment.HitRight = value;
+            get => collider.PlateInfo.HasFlag(PlateFlags.HitRight);
+            set
+            {
+                collider.PlateInfo.SetFlag(PlateFlags.HitRight, value);
+                segment.HitRight = value;
+            }
         }
 
         /// <summary>
@@ -92,8 +119,12 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public double Friction
         {
-            get => segment.Friction;
-            set => segment.Friction = value;
+            get => collider.PlateInfo.Friction;
+            set
+            {
+                collider.PlateInfo.Friction = value;
+                segment.Friction = value;
+            }
         }
 
         public override double X
@@ -131,6 +162,15 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y2">終点のY座標</param>
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
+            collider = new SegmentPlateCollider(this)
+            {
+                PlateInfo = new PlateInfo
+                {
+                    Flags = PlateFlags.Active,
+                    Friction = 1.0
+                },
+            };
+            collider.SetSegment(new Segment2D(x1, y1, x2, y2));
             segment = new CollidableSegment()
             {
                 Segment = new Segment2D(x1, y1, x2, y2),
@@ -145,5 +185,8 @@ namespace MifuminSoft.funyak.MapObject
         public Segment2D ToSegment2D() => segment.Segment;
 
         public CollidableSegment ToCollidableSegment() => segment;
+
+        public override void OnJoin(Map map, CollisionManager collisionManager) => collisionManager.Add(collider);
+        public override void OnLeave(Map map, CollisionManager collisionManager) => collisionManager.Remove(collider);
     }
 }
