@@ -8,25 +8,7 @@ namespace MifuminSoft.funyak.MapObject
     /// </summary>
     public class LineMapObject : MapObjectBase, IBounds
     {
-        /// <summary>
-        /// 線のマップオブジェクトを初期化します。
-        /// </summary>
-        /// <param name="x1">始点のX座標</param>
-        /// <param name="y1">始点のY座標</param>
-        /// <param name="x2">終点のX座標</param>
-        /// <param name="y2">終点のY座標</param>
-        public LineMapObject(double x1, double y1, double x2, double y2)
-        {
-            segment = new CollidableSegment()
-            {
-                Segment = new Segment2D(x1, y1, x2, y2),
-                HitUpper = false,
-                HitBelow = false,
-                HitLeft = false,
-                HitRight = false,
-                Friction = 1.0,
-            };
-        }
+        private CollidableSegment segment;
 
         /// <summary>
         /// 始点のX座標
@@ -140,7 +122,25 @@ namespace MifuminSoft.funyak.MapObject
         public double Top => Math.Min(Y1, Y2);
         public double Bottom => Math.Max(Y1, Y2);
 
-        private CollidableSegment segment;
+        /// <summary>
+        /// 線のマップオブジェクトを初期化します。
+        /// </summary>
+        /// <param name="x1">始点のX座標</param>
+        /// <param name="y1">始点のY座標</param>
+        /// <param name="x2">終点のX座標</param>
+        /// <param name="y2">終点のY座標</param>
+        public LineMapObject(double x1, double y1, double x2, double y2)
+        {
+            segment = new CollidableSegment()
+            {
+                Segment = new Segment2D(x1, y1, x2, y2),
+                HitUpper = false,
+                HitBelow = false,
+                HitLeft = false,
+                HitRight = false,
+                Friction = 1.0,
+            };
+        }
 
         public Segment2D ToSegment2D() => segment.Segment;
 
