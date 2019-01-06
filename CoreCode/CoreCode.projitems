@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\IColliderPositionUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\NeedleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateFlags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PlateNeedleCollision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RectangleCollider.cs" />

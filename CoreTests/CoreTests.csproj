@@ -62,6 +62,7 @@
     <Compile Include="CollisionTest\SegmentPlateColliderTest.cs" />
     <Compile Include="CollisionTest\EllipseColliderTest.cs" />
     <Compile Include="CollisionTest\NeedleColliderTest.cs" />
+    <Compile Include="CollisionTest\PlateInfoTest.cs" />
     <Compile Include="GameTest\GameTestBase.cs" />
     <Compile Include="GameTest\GameTestBaseTest.cs" />
     <Compile Include="GameTest\CornerHitTest.cs" />

@@ -9,5 +9,6 @@ namespace MifuminSoft.funyak.Collision
         public PlateCollider Plate { get; set; }
         public NeedleCollider Needle { get; set; }
         public Vector2D CrossPoint { get; set; }
+        public PlateInfo PlateInfo { get; set; }
     }
 }
