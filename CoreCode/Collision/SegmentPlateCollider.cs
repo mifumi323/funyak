@@ -15,12 +15,7 @@ namespace MifuminSoft.funyak.Collision
         public override bool IsCollided(NeedleCollider needleCollider, out PlateNeedleCollision collision)
         {
             var isCollided = Segment.TryGetCrossPoint(needleCollider.Needle, out var crossPoint);
-            collision = isCollided ? new PlateNeedleCollision
-            {
-                Plate = this,
-                Needle = needleCollider,
-                CrossPoint = crossPoint,
-            } : default;
+            collision = isCollided ? new PlateNeedleCollision(this, needleCollider, crossPoint, PlateInfo) : default;
             return isCollided;
         }
     }
