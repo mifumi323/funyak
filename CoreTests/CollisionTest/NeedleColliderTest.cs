@@ -12,7 +12,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         {
             var collider = new NeedleCollider(null);
 
-            // 全部セット
+            // 始点と終点をセット
             collider.Set(new Vector2D(100.0, 200.0), new Vector2D(300.0, 400.0));
             Assert.AreEqual(100.0, collider.Left, 0.0001, "NeedleCollider.Leftが不正");
             Assert.AreEqual(200.0, collider.Top, 0.0001, "NeedleCollider.Topが不正");
@@ -32,6 +32,30 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             Assert.AreEqual(100.0, collider.Top, 0.0001, "逆向きのNeedleCollider.Topが不正");
             Assert.AreEqual(400.0, collider.Right, 0.0001, "逆向きのNeedleCollider.Rightが不正");
             Assert.AreEqual(500.0, collider.Bottom, 0.0001, "逆向きのNeedleCollider.Bottomが不正");
+        }
+
+        [TestMethod]
+        public void StartMarginTest()
+        {
+            var collider = new NeedleCollider(null);
+
+            collider.Set(new Vector2D(100.0, 200.0), new Vector2D(300.0, 400.0), 1.0);
+            Assert.AreEqual(100.0 - 0.6, collider.Left, 0.0001, "NeedleCollider.Leftが不正");
+            Assert.AreEqual(200.0 - 0.8, collider.Top, 0.0001, "NeedleCollider.Topが不正");
+            Assert.AreEqual(400.0, collider.Right, 0.0001, "NeedleCollider.Rightが不正");
+            Assert.AreEqual(600.0, collider.Bottom, 0.0001, "NeedleCollider.Bottomが不正");
+        }
+
+        [TestMethod]
+        public void EndMarginTest()
+        {
+            var collider = new NeedleCollider(null);
+
+            collider.Set(new Vector2D(100.0, 200.0), new Vector2D(300.0, 400.0), 0.0, 1.0);
+            Assert.AreEqual(100.0, collider.Left, 0.0001, "NeedleCollider.Leftが不正");
+            Assert.AreEqual(200.0, collider.Top, 0.0001, "NeedleCollider.Topが不正");
+            Assert.AreEqual(400.0 + 0.6, collider.Right, 0.0001, "NeedleCollider.Rightが不正");
+            Assert.AreEqual(600.0 + 0.8, collider.Bottom, 0.0001, "NeedleCollider.Bottomが不正");
         }
     }
 }
