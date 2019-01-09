@@ -24,7 +24,11 @@ namespace MifuminSoft.funyak.Geometry
 
         public static Vector2D operator *(Vector2D v, double d) => new Vector2D(v.X * d, v.Y * d);
 
-        public static Vector2D operator /(Vector2D v, double d) => new Vector2D(v.X / d, v.Y / d);
+        public static Vector2D operator /(Vector2D v, double d)
+        {
+            var rd = 1.0 / d;
+            return new Vector2D(v.X * rd, v.Y * rd);
+        }
 
         public static Vector2D operator -(Vector2D v) => new Vector2D(-v.X, -v.Y);
 
@@ -44,7 +48,12 @@ namespace MifuminSoft.funyak.Geometry
 
         public double LengthSq => X * X + Y * Y;
 
-        public Vector2D GetNorm() => new Vector2D(X / Length, Y / Length);
+        public Vector2D GetNorm()
+        {
+            // なぜか逆数を取ったほうが速い
+            var rLength = 1.0 / Length;
+            return new Vector2D(X * rLength, Y * rLength);
+        }
 
         #endregion
 
@@ -52,7 +61,8 @@ namespace MifuminSoft.funyak.Geometry
 
         public void Norm()
         {
-            double length = Length;
+            // なぜか逆数を取らないほうが速い
+            var length = Length;
             X /= length;
             Y /= length;
         }
