@@ -11,13 +11,15 @@ namespace MifuminSoft.funyak.Collision
         public NeedleCollider Needle { get; }
         public Vector2D CrossPoint { get; }
         public PlateInfo PlateInfo { get; }
+        public Segment2D PlateSegment { get; }
 
-        public PlateNeedleCollision(PlateCollider plate, NeedleCollider needle, Vector2D crossPoint, PlateInfo plateInfo)
+        public PlateNeedleCollision(PlateCollider plate, NeedleCollider needle, Vector2D crossPoint, PlateInfo plateInfo, in Segment2D plateSegment)
         {
             Plate = plate;
             Needle = needle;
             CrossPoint = crossPoint;
             PlateInfo = plateInfo;
+            PlateSegment = plateSegment;
         }
     }
 }
