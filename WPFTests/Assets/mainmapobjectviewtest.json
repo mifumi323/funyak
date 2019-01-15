@@ -9,7 +9,7 @@
       "type": "funya",
       "x": 5000,
       "y": 4986,
-      "n": "main",
+      "n": "main"
     },
     {
       "type": "line",
@@ -18,7 +18,7 @@
       "x2": 8000,
       "y2": 5000,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -27,7 +27,7 @@
       "x2": 5200,
       "y2": 4968,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -36,7 +36,7 @@
       "x2": 5200,
       "y2": 4936,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -45,7 +45,7 @@
       "x2": 5200,
       "y2": 4904,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -54,7 +54,7 @@
       "x2": 6000,
       "y2": 4800,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -63,7 +63,7 @@
       "x2": 6020,
       "y2": 4720,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -72,7 +72,7 @@
       "x2": 6020,
       "y2": 4720,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -81,7 +81,7 @@
       "x2": 6100,
       "y2": 4600,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -90,7 +90,7 @@
       "x2": 6180,
       "y2": 4720,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -99,7 +99,7 @@
       "x2": 6180,
       "y2": 4720,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -108,7 +108,7 @@
       "x2": 6200,
       "y2": 4800,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -117,7 +117,7 @@
       "x2": 5100,
       "y2": 4800,
       "color": "Blue",
-      "ht": true,
+      "ht": true
     },
     {
       "type": "line",
@@ -126,7 +126,7 @@
       "x2": 5000,
       "y2": 4768,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -135,7 +135,7 @@
       "x2": 4968,
       "y2": 4704,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -144,7 +144,7 @@
       "x2": 5400,
       "y2": 4625,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -162,7 +162,7 @@
       "x2": 4875,
       "y2": 4900,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
     {
       "type": "line",
@@ -171,8 +171,197 @@
       "x2": 4875,
       "y2": 4900,
       "color": "Black",
-      "hit": true,
+      "hit": true
     },
+    {
+      "type": "line",
+      "x1": 5300,
+      "y1": 4600,
+      "x2": 5200,
+      "y2": 4500,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5800,
+      "y1": 5100,
+      "x2": 5721,
+      "y2": 5106,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5721,
+      "y1": 5106,
+      "x2": 5645,
+      "y2": 5124,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5645,
+      "y1": 5124,
+      "x2": 5573,
+      "y2": 5154,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5573,
+      "y1": 5154,
+      "x2": 5506,
+      "y2": 5195,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5506,
+      "y1": 5195,
+      "x2": 5446,
+      "y2": 5246,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5446,
+      "y1": 5246,
+      "x2": 5395,
+      "y2": 5306,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5395,
+      "y1": 5306,
+      "x2": 5354,
+      "y2": 5373,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5354,
+      "y1": 5373,
+      "x2": 5324,
+      "y2": 5445,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5324,
+      "y1": 5445,
+      "x2": 5306,
+      "y2": 5521,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5306,
+      "y1": 5521,
+      "x2": 5300,
+      "y2": 5600,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5300,
+      "y1": 5600,
+      "x2": 5293,
+      "y2": 5678,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5293,
+      "y1": 5678,
+      "x2": 5275,
+      "y2": 5754,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5275,
+      "y1": 5754,
+      "x2": 5245,
+      "y2": 5826,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5245,
+      "y1": 5826,
+      "x2": 5204,
+      "y2": 5893,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5204,
+      "y1": 5893,
+      "x2": 5153,
+      "y2": 5953,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5153,
+      "y1": 5953,
+      "x2": 5093,
+      "y2": 6004,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5093,
+      "y1": 6004,
+      "x2": 5026,
+      "y2": 6045,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 5026,
+      "y1": 6045,
+      "x2": 4954,
+      "y2": 6075,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 4954,
+      "y1": 6075,
+      "x2": 4878,
+      "y2": 6093,
+      "color": "Black",
+      "hit": true
+    },
+    {
+      "type": "line",
+      "x1": 4878,
+      "y1": 6093,
+      "x2": 4800,
+      "y2": 6100,
+      "color": "Black",
+      "hit": true
+    }
   ],
   "areas": [
     {
@@ -182,7 +371,7 @@
       "b": 10000,
       "g": 0.0,
       "w": 0.0,
-      "c": "#80808080",
-    },
-  ],
+      "c": "#80808080"
+    }
+  ]
 }
