@@ -68,6 +68,7 @@
     <Compile Include="GameTest\CornerHitTest.cs" />
     <Compile Include="GameTest\ReplayInputTest.cs" />
     <Compile Include="GameTest\RunOnSlopeTest.cs" />
+    <Compile Include="GameTest\RingOutTest.cs" />
     <Compile Include="LineMapObjectTest.cs" />
     <Compile Include="MainMapObjectTest.cs" />
     <Compile Include="MapTest.cs" />
@@ -92,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Content Include="TestFiles\RingOutTest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="TestFiles\CornerHitTest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
