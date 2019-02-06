@@ -341,7 +341,9 @@ namespace MifuminSoft.funyak.MapObject
 
         #endregion
 
-        #region Check→Realizeへの引き渡し用
+        #region 当たり判定
+
+        PointCollider centerCollider;
 
         private double c2rX;
         private double c2rY;
@@ -374,6 +376,18 @@ namespace MifuminSoft.funyak.MapObject
             GroundNormalX = 0.0;
             GroundNormalY = -1.0;
             GroundFriction = 1.0;
+
+            centerCollider = new PointCollider(this);
+        }
+
+        public override void OnJoin(Map map, CollisionManager collisionManager)
+        {
+            collisionManager.Add(centerCollider);
+        }
+
+        public override void OnLeave(Map map, CollisionManager collisionManager)
+        {
+            collisionManager.Remove(centerCollider);
         }
 
         public void UpdateSelf(UpdateMapObjectArgs args)
@@ -383,6 +397,7 @@ namespace MifuminSoft.funyak.MapObject
             detectGravity(env.Gravity > 0);
             updateSelfPreprocess();
             updateSelfMainProcess(env);
+            centerCollider.SetPoint(GetCenterX(X), GetCenterY(Y));
         }
 
         private void DetectGravityNormal(bool inGravity)

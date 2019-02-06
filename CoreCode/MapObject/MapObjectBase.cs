@@ -1,5 +1,4 @@
 ﻿using MifuminSoft.funyak.Collision;
-using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
 {
@@ -36,7 +35,18 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public virtual void RealizeCollision() { }
 
+        /// <summary>
+        /// マップに登録されるとき呼び出されます。
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="collisionManager"></param>
         public virtual void OnJoin(Map map, CollisionManager collisionManager) { }
+
+        /// <summary>
+        /// マップから登録解除されるときに呼び出されます。
+        /// </summary>
+        /// <param name="map"></param>
+        /// <param name="collisionManager"></param>
         public virtual void OnLeave(Map map, CollisionManager collisionManager) { }
     }
 }
