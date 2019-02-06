@@ -892,7 +892,7 @@ namespace MifuminSoft.funyak.MapObject
             c2rTouchedBottom = touchedBottom;
         }
 
-        public override void RealizeCollision()
+        public override void RealizeCollision(RealizeCollisionArgs args)
         {
             if (Math.Abs(X - c2rX) >= PositionAdjustLowerLimit) X = c2rX;
             if (Math.Abs(Y - c2rY) >= PositionAdjustLowerLimit) Y = c2rY;

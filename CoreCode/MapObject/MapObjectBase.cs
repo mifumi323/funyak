@@ -33,7 +33,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// CheckCollisionによって生じた変化を自分自身の状態に反映します。
         /// </summary>
-        public virtual void RealizeCollision() { }
+        public virtual void RealizeCollision(RealizeCollisionArgs args) { }
 
         /// <summary>
         /// マップに登録されるとき呼び出されます。

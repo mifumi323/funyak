@@ -65,6 +65,10 @@ namespace MifuminSoft.funyak
         /// </summary>
         public int FrameCount { get; set; }
 
+        #region EventArgs
+        private readonly RealizeCollisionArgs realizeCollisionArgs;
+        #endregion
+
         /// <summary>
         /// ゲームのマップを初期化します。
         /// </summary>
@@ -85,6 +89,8 @@ namespace MifuminSoft.funyak
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
             collisionManager = new CollisionManager();
+
+            realizeCollisionArgs = new RealizeCollisionArgs(this);
         }
 
         /// <summary>
@@ -163,7 +169,7 @@ namespace MifuminSoft.funyak
         {
             foreach (var mapObject in mapObjectCollection)
             {
-                mapObject.RealizeCollision();
+                mapObject.RealizeCollision(realizeCollisionArgs);
             }
         }
 

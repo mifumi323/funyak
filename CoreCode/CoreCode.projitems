@@ -45,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\LineMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MainMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\MapObjectEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MapObject\RealizeCollisionArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MapObject\TileGridMapObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UpdateMapObjectArgs.cs" />
   </ItemGroup>
