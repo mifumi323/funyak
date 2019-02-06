@@ -88,6 +88,11 @@ namespace MifuminSoft.funyak.MapObject
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessJumping;
                         break;
+                    case MainMapObjectState.Die:
+                        detectGravity = b => { };
+                        updateSelfPreprocess = ()=> { };
+                        updateSelfMainProcess = me => { };
+                        break;
                     default:
                         throw new Exception("MainMapObjectのStateがおかしいぞ。");
                 }
@@ -905,6 +910,11 @@ namespace MifuminSoft.funyak.MapObject
             TouchedTop = c2rTouchedTop;
             TouchedRight = c2rTouchedRight;
             TouchedBottom = c2rTouchedBottom;
+
+            if (Right < 0 || args.MapWidth < Left || Bottom < 0 || args.MapHeight < Top)
+            {
+                State = MainMapObjectState.Die;
+            }
 
             RealizeCollision(c2rTouchedBottom);
 
