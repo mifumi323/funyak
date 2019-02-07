@@ -22,6 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Collision\PointCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RectangleCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionCollider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionFlags.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\RegionPointCollision.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collision\SegmentPlateCollider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Geometry\CollidableSegment.cs" />

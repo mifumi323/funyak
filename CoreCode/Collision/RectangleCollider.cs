@@ -2,12 +2,18 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class RectangleCollider : RegionCollider
+    public sealed class RectangleCollider : RegionCollider
     {
+        public RegionInfo RegionInfo;
+
         public RectangleCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPosition(double left, double top, double right, double bottom) => UpdatePosition(left, top, right, bottom);
 
-        public override bool Contains(double x, double y) => ContainsInAABB(x, y);
+        public override bool Contains(double x, double y, out RegionInfo regionInfo)
+        {
+            regionInfo = RegionInfo;
+            return ContainsInAABB(x, y);
+        }
     }
 }

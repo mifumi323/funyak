@@ -13,16 +13,12 @@ namespace MifuminSoft.funyak.Collision
 
         public bool Contains(PointCollider pointCollider, out RegionPointCollision collision)
         {
-            var contains = Contains(pointCollider.X, pointCollider.Y);
-            collision = contains ? new RegionPointCollision()
-            {
-                Region = this,
-                Point = pointCollider
-            } : default;
+            var contains = Contains(pointCollider.X, pointCollider.Y, out RegionInfo regionInfo);
+            collision = contains ? new RegionPointCollision(this, pointCollider, regionInfo) : default;
             return contains;
         }
 
-        public abstract bool Contains(double x, double y);
+        public abstract bool Contains(double x, double y, out RegionInfo regionInfo);
 
         protected bool ContainsInAABB(double x, double y) => Left <= x && x <= Right && Top <= y && y <= Bottom;
     }

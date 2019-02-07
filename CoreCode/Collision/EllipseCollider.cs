@@ -2,14 +2,18 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class EllipseCollider : RegionCollider
+    public sealed class EllipseCollider : RegionCollider
     {
+        public RegionInfo RegionInfo;
+
         public EllipseCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPosition(double left, double top, double right, double bottom) => UpdatePosition(left, top, right, bottom);
 
-        public override bool Contains(double x, double y)
+        public override bool Contains(double x, double y, out RegionInfo regionInfo)
         {
+            regionInfo = RegionInfo;
+
             // 特殊なケース
             if (!ContainsInAABB(x, y))
             {

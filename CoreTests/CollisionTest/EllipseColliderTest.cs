@@ -55,7 +55,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             };
             foreach (var testCase in testCases)
             {
-                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y), $"({testCase.X}, {testCase.Y})で失敗");
+                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y, out _), $"({testCase.X}, {testCase.Y})で失敗");
             }
         }
 
@@ -97,7 +97,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             };
             foreach (var testCase in testCases)
             {
-                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y), $"({testCase.X}, {testCase.Y})で失敗");
+                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y, out _), $"({testCase.X}, {testCase.Y})で失敗");
             }
         }
 
@@ -121,7 +121,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             };
             foreach (var testCase in testCases)
             {
-                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y), $"({testCase.X}, {testCase.Y})で失敗");
+                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y, out _), $"({testCase.X}, {testCase.Y})で失敗");
             }
         }
 
@@ -145,7 +145,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             };
             foreach (var testCase in testCases)
             {
-                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y), $"({testCase.X}, {testCase.Y})で失敗");
+                Assert.AreEqual(testCase.Expects, collider.Contains(testCase.X, testCase.Y, out _), $"({testCase.X}, {testCase.Y})で失敗");
             }
         }
     }
