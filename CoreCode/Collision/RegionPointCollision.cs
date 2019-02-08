@@ -8,7 +8,7 @@
         public readonly PointCollider Point;
         public readonly RegionInfo RegionInfo;
 
-        public RegionPointCollision(RegionCollider region,PointCollider point, RegionInfo regionInfo)
+        public RegionPointCollision(RegionCollider region, PointCollider point, RegionInfo regionInfo)
         {
             Region = region;
             Point = point;

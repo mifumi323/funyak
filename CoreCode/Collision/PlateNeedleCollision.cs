@@ -7,11 +7,11 @@ namespace MifuminSoft.funyak.Collision
     {
         public delegate void Listener(ref PlateNeedleCollision collision);
 
-        public PlateCollider Plate { get; }
-        public NeedleCollider Needle { get; }
-        public Vector2D CrossPoint { get; }
-        public PlateInfo PlateInfo { get; }
-        public Segment2D PlateSegment { get; }
+        public readonly PlateCollider Plate;
+        public readonly NeedleCollider Needle;
+        public readonly Vector2D CrossPoint;
+        public readonly PlateInfo PlateInfo;
+        public readonly Segment2D PlateSegment;
 
         public PlateNeedleCollision(PlateCollider plate, NeedleCollider needle, Vector2D crossPoint, PlateInfo plateInfo, in Segment2D plateSegment)
         {
