@@ -2,7 +2,7 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class PointCollider : ColliderBase
+    public sealed class PointCollider : ColliderBase
     {
         public double X => Left;
         public double Y => Top;
@@ -15,5 +15,7 @@ namespace MifuminSoft.funyak.Collision
         public PointCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPoint(double x, double y) => UpdatePosition(x, y, x, y);
+
+        public override void Shift(double dx, double dy) => SetPoint(X + dx, Y + dy);
     }
 }

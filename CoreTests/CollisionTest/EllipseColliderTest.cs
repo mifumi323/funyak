@@ -4,7 +4,7 @@ using MifuminSoft.funyak.Collision;
 namespace MifuminSoft.funyak.Core.Tests.CollisionTest
 {
     [TestClass]
-    public class EllipseColliderTest
+    public sealed class EllipseColliderTest
     {
         [TestMethod]
         public void SetPositionTest()
@@ -15,6 +15,18 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
             Assert.AreEqual(200.0, collider.Top, 0.0001, "EllipseCollider.Topが不正");
             Assert.AreEqual(300.0, collider.Right, 0.0001, "EllipseCollider.Rightが不正");
             Assert.AreEqual(400.0, collider.Bottom, 0.0001, "EllipseCollider.Bottomが不正");
+        }
+
+        [TestMethod]
+        public void ShiftTest()
+        {
+            var collider = new EllipseCollider(null);
+            collider.SetPosition(100.0, 200.0, 300.0, 400.0);
+            collider.Shift(30.0, 60.0);
+            Assert.AreEqual(130.0, collider.Left, 0.0001, "EllipseCollider.Leftが不正");
+            Assert.AreEqual(260.0, collider.Top, 0.0001, "EllipseCollider.Topが不正");
+            Assert.AreEqual(330.0, collider.Right, 0.0001, "EllipseCollider.Rightが不正");
+            Assert.AreEqual(460.0, collider.Bottom, 0.0001, "EllipseCollider.Bottomが不正");
         }
 
         [TestMethod]

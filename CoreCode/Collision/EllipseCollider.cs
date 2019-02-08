@@ -42,5 +42,7 @@ namespace MifuminSoft.funyak.Collision
 
             return normalizedDistanceSquare <= 1;
         }
+
+        public override void Shift(double dx, double dy) => SetPosition(Left + dx, Top + dy, Right + dx, Bottom + dy);
     }
 }

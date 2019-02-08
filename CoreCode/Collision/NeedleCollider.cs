@@ -3,7 +3,7 @@ using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class NeedleCollider : ColliderBase
+    public sealed class NeedleCollider : ColliderBase
     {
         private Vector2D startPoint;
         private Vector2D directedLength;
@@ -112,5 +112,7 @@ namespace MifuminSoft.funyak.Collision
         }
 
         public void SetSegment(Segment2D segment) => Set(segment.Start, segment.End - segment.Start);
+
+        public override void Shift(double dx, double dy) => StartPoint = new Vector2D(startPoint.X + dx, startPoint.Y + dy);
     }
 }

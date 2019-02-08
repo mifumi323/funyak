@@ -3,7 +3,10 @@ using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class ColliderBase : IBounds
+    /// <summary>
+    /// 衝突図形を表します。
+    /// </summary>
+    public abstract class ColliderBase : IBounds
     {
         public double Left { get; private set; }
         public double Top { get; private set; }
@@ -13,6 +16,13 @@ namespace MifuminSoft.funyak.Collision
         public MapObjectBase Owner { get; private set; }
 
         public ColliderBase(MapObjectBase owner) => Owner = owner;
+
+        /// <summary>
+        /// 平行移動します。
+        /// </summary>
+        /// <param name="dx">X座標の差分</param>
+        /// <param name="dy">Y座標の差分</param>
+        public abstract void Shift(double dx, double dy);
 
         protected void UpdatePosition(double left, double top, double right, double bottom)
         {

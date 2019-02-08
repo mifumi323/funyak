@@ -15,5 +15,7 @@ namespace MifuminSoft.funyak.Collision
             regionInfo = RegionInfo;
             return ContainsInAABB(x, y);
         }
+
+        public override void Shift(double dx, double dy) => SetPosition(Left + dx, Top + dy, Right + dx, Bottom + dy);
     }
 }
