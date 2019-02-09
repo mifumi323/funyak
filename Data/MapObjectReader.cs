@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.MapObject;
 using Newtonsoft.Json;
 
@@ -13,6 +14,8 @@ namespace MifuminSoft.funyak.Data
             => data.type == "funya" ? GenerateMainMapObject(data, option) :
                 data.type == "line" ? GenerateLineMapObject(data, option) :
                 data.type == "tile" ? GenerateTileMapObject(data, option) :
+                data.type == "rect" ? GenerateRectangleMapObject(data, option) :
+                data.type == "ellipse" ? GenerateEllipseMapObject(data, option) :
                 null;
 
         private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
@@ -66,5 +69,44 @@ namespace MifuminSoft.funyak.Data
             {
                 Name = data.n
             };
+
+        private static MapObjectBase GenerateRectangleMapObject(dynamic data, MapReaderOption option)
+        {
+            var regionMapObject = new RegionMapObject()
+            {
+                Name = data.n,
+                Color = data.c,
+            };
+            var collider = new RectangleCollider(regionMapObject);
+            collider.SetPosition((double)(data.l ?? 0.0), (double)(data.t ?? 0.0), (double)(data.r ?? 0.0), (double)(data.b ?? 0.0));
+            collider.RegionInfo = new RegionInfo()
+            {
+                Gravity = data.g ?? double.NaN,
+                Wind = data.w ?? double.NaN,
+            };
+            collider.RegionInfo.SetFlag(RegionFlags.Active, true);
+            regionMapObject.Collider = collider;
+            if (data.color != null) regionMapObject.Color = (string)data.color;
+            return regionMapObject;
+        }
+
+        private static MapObjectBase GenerateEllipseMapObject(dynamic data, MapReaderOption option)
+        {
+            var ellipseMapObject = new RegionMapObject()
+            {
+                Name = data.n,
+                Color = data.c,
+            };
+            var collider = new EllipseCollider(ellipseMapObject);
+            collider.SetPosition((double)(data.l ?? 0.0), (double)(data.t ?? 0.0), (double)(data.r ?? 0.0), (double)(data.b ?? 0.0));
+            collider.RegionInfo = new RegionInfo()
+            {
+                Gravity = data.g ?? double.NaN,
+                Wind = data.w ?? double.NaN,
+            };
+            collider.RegionInfo.SetFlag(RegionFlags.Active, true);
+            ellipseMapObject.Collider = collider;
+            return ellipseMapObject;
+        }
     }
 }

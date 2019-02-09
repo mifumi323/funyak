@@ -61,6 +61,7 @@
     <Compile Include="MapObject\LineMapObjectView.cs" />
     <Compile Include="MapObject\MainMapObjectView.cs" />
     <Compile Include="MapObject\MapObjectViewFactory.cs" />
+    <Compile Include="MapObject\RegionMapObjectView.cs" />
     <Compile Include="MapObject\TileGridMapObjectView.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="MapObject\MapObjectViewUpdateArgs.cs" />

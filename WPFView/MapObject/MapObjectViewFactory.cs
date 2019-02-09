@@ -25,7 +25,11 @@ namespace MifuminSoft.funyak.View.MapObject
             {
                 return new TileGridMapObjectView(tileGridMapObject);
             }
-            return null;
+            if (mapObject is RegionMapObject regionGridMapObject)
+            {
+                return new RegionMapObjectView(regionGridMapObject);
+            }
+            throw new ArgumentException($"非対応の型「{mapObject.GetType().Name}」です。", nameof(mapObject));
         }
     }
 }
