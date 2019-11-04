@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{E20B6550-CE87-4C30-AAE0-7798A5936672}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTests", "WPFTests\WpfTests.csproj", "{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}"
@@ -14,26 +12,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTests", "WPFTests\WpfTes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfView", "WPFView\WpfView.csproj", "{B855F852-EE65-4DA5-821F-26D5E69FE1AA}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "CoreCode", "CoreCode\CoreCode.shproj", "{2EBECBE0-70CF-4ED6-B35F-4759D4C1801C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfUI", "WpfUI\WpfUI.csproj", "{26DF7145-C6C1-41B1-A8E7-8AE8303AC515}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{C8D2EBB6-C260-48CA-B5E9-E91B602C1930}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{BECEBF8F-44A2-4DE2-B5B5-63B968BD4DD8}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		CoreCode\CoreCode.projitems*{2ebecbe0-70cf-4ed6-b35f-4759d4c1801c}*SharedItemsImports = 13
-		CoreCode\CoreCode.projitems*{e20b6550-ce87-4c30-aae0-7798a5936672}*SharedItemsImports = 4
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E20B6550-CE87-4C30-AAE0-7798A5936672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E20B6550-CE87-4C30-AAE0-7798A5936672}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E20B6550-CE87-4C30-AAE0-7798A5936672}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E20B6550-CE87-4C30-AAE0-7798A5936672}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -54,8 +44,15 @@ Global
 		{C8D2EBB6-C260-48CA-B5E9-E91B602C1930}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8D2EBB6-C260-48CA-B5E9-E91B602C1930}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8D2EBB6-C260-48CA-B5E9-E91B602C1930}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BECEBF8F-44A2-4DE2-B5B5-63B968BD4DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BECEBF8F-44A2-4DE2-B5B5-63B968BD4DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BECEBF8F-44A2-4DE2-B5B5-63B968BD4DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BECEBF8F-44A2-4DE2-B5B5-63B968BD4DD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {672366C7-A445-4CF3-863B-134A45E40330}
 	EndGlobalSection
 EndGlobal

@@ -213,7 +213,7 @@
       <Name>CoreTests</Name>
     </ProjectReference>
     <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{e20b6550-ce87-4c30-aae0-7798a5936672}</Project>
+      <Project>{becebf8f-44a2-4de2-b5b5-63b968bd4dd8}</Project>
       <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">

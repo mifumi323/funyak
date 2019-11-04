@@ -38,10 +38,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{e20b6550-ce87-4c30-aae0-7798a5936672}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WPFView\WpfView.csproj">
       <Project>{b855f852-ee65-4da5-821f-26d5e69fe1aa}</Project>
       <Name>WpfView</Name>
