@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.View.Resource
@@ -36,7 +35,7 @@ namespace MifuminSoft.funyak.View.Resource
                 {
                     var key = animation.Key;
                     var groups = animation.Value;
-                    var animationData =new List<string>();
+                    var animationData = new List<string>();
                     foreach (var group in groups)
                     {
                         var frameKey = group.Key;

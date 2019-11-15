@@ -1,5 +1,4 @@
-﻿using System;
-using MifuminSoft.funyak.Geometry;
+﻿using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.Collision
 {

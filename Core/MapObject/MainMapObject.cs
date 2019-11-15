@@ -90,7 +90,7 @@ namespace MifuminSoft.funyak.MapObject
                         break;
                     case MainMapObjectState.Die:
                         detectGravity = b => { };
-                        updateSelfPreprocess = ()=> { };
+                        updateSelfPreprocess = () => { };
                         updateSelfMainProcess = me => { };
                         break;
                     default:

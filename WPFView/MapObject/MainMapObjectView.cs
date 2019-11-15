@@ -89,10 +89,10 @@ namespace MifuminSoft.funyak.View.MapObject
                 MapObject.Direction == Direction.Right ? ".R" :
                 ".F";
             ImageResource.SetToRectangle(
-                rectangle, 
+                rectangle,
                 imageKey,
                 MapObject.StateCounter - 1,
-                args.TranslateX(MapObject.X), 
+                args.TranslateX(MapObject.X),
                 args.TranslateY(MapObject.Y),
                 args.Scale * MapObject.Size / 28.0,
                 MapObject.Angle);

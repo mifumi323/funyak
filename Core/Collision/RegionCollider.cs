@@ -2,7 +2,7 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public abstract class RegionCollider: ColliderBase
+    public abstract class RegionCollider : ColliderBase
     {
         /// <summary>
         /// 衝突時に呼ばれるコールバックを指定します。
