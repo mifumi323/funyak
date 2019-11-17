@@ -35,7 +35,7 @@ namespace MifuminSoft.funyak
         /// <summary>
         /// 背景色(未指定または無効な色の場合透明)
         /// </summary>
-        public string BackgroundColor { get; set; }
+        public string? BackgroundColor { get; set; }
 
         /// <summary>
         /// マップオブジェクトが追加されたときに発生します。
