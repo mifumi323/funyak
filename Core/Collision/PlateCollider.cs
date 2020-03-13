@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Collision
         /// <summary>
         /// 衝突時に呼ばれるコールバックを指定します。
         /// </summary>
-        public PlateNeedleCollision.Listener OnCollided { get; set; }
+        public PlateNeedleCollision.Listener? OnCollided { get; set; }
 
         public PlateCollider(MapObjectBase owner) : base(owner) { }
 

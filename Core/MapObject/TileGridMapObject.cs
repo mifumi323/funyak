@@ -6,7 +6,7 @@ namespace MifuminSoft.funyak.MapObject
 {
     public class TileChip
     {
-        public object Resource;
+        public object? Resource;
         public bool HitUpper;
         public bool HitBelow;
         public bool HitLeft;

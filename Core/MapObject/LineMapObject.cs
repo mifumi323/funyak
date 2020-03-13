@@ -112,7 +112,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 色(未指定または無効な色の場合透明)
         /// </summary>
-        public string Color { get; set; }
+        public string? Color { get; set; }
 
         /// <summary>
         /// 摩擦力(1.0が通常)
