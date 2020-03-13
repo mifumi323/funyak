@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak
     /// </summary>
     public class UpdateMapObjectArgs
     {
-        private Map map;
+        private readonly Map map;
 
         public UpdateMapObjectArgs(Map map) => this.map = map;
 

@@ -33,7 +33,6 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
         public void ContainsTest()
         {
             var collider = new EllipseCollider(null);
-            var listener = new Map(1000.0, 1000.0);
             collider.SetPosition(200.0, 300.0, 400.0, 500.0);
             var testCases = new[]
             {

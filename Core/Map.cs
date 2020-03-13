@@ -47,18 +47,18 @@ namespace MifuminSoft.funyak
         /// </summary>
         public event EventHandler<MapObjectEventArgs> MapObjectRemoved;
 
-        private ICollection<MapObjectBase> mapObjectCollection;
-        private ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
-        private IDictionary<string, MapObjectBase> namedMapObject;
-        private CollisionManager collisionManager;
+        private readonly ICollection<MapObjectBase> mapObjectCollection;
+        private readonly ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
+        private readonly IDictionary<string, MapObjectBase> namedMapObject;
+        private readonly CollisionManager collisionManager;
 
         /// <summary>
         /// 環境が追加されたときに発生します。
         /// </summary>
         public event EventHandler<AreaEnvironmentEventArgs> AreaEnvironmentAdded;
 
-        private ICollection<AreaEnvironment> areaEnvironmentCollection;
-        private IDictionary<string, AreaEnvironment> namedAreaEnvironment;
+        private readonly ICollection<AreaEnvironment> areaEnvironmentCollection;
+        private readonly IDictionary<string, AreaEnvironment> namedAreaEnvironment;
 
         /// <summary>
         /// 経過フレーム数を取得します。

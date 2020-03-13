@@ -38,19 +38,14 @@ namespace MifuminSoft.funyak.Input
 
         private Keys GetActualKey(Keys key)
         {
-            switch (key)
+            return key switch
             {
-                case Keys.Left:
-                    return HorizontalReverse ? Keys.Right : Keys.Left;
-                case Keys.Up:
-                    return VerticalReverse ? Keys.Down : Keys.Up;
-                case Keys.Right:
-                    return HorizontalReverse ? Keys.Left : Keys.Right;
-                case Keys.Down:
-                    return VerticalReverse ? Keys.Up : Keys.Down;
-                default:
-                    return key;
-            }
+                Keys.Left => HorizontalReverse ? Keys.Right : Keys.Left,
+                Keys.Up => VerticalReverse ? Keys.Down : Keys.Up,
+                Keys.Right => HorizontalReverse ? Keys.Left : Keys.Right,
+                Keys.Down => VerticalReverse ? Keys.Up : Keys.Down,
+                _ => key,
+            };
         }
     }
 }

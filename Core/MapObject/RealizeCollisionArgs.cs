@@ -2,7 +2,7 @@
 {
     public sealed class RealizeCollisionArgs
     {
-        private Map map;
+        private readonly Map map;
 
         public RealizeCollisionArgs(Map map) => this.map = map;
 

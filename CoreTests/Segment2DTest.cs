@@ -45,14 +45,14 @@ namespace MifuminSoft.funyak.Core.Tests
             {
                 var s1 = new Segment2D(10, 10, 20, 20);
                 var s2 = new Segment2D(110, 120, 120, 110);
-                var result = s1.TryGetCrossPoint(s2, out var cp);
+                var result = s1.TryGetCrossPoint(s2, out _);
                 Assert.IsFalse(result, "交差していないパターンで失敗");
             }
             // 平行なパターン
             {
                 var s1 = new Segment2D(10, 10, 20, 20);
                 var s2 = new Segment2D(110, 10, 120, 20);
-                var result = s1.TryGetCrossPoint(s2, out var cp);
+                var result = s1.TryGetCrossPoint(s2, out _);
                 Assert.IsFalse(result, "平行なパターンで失敗");
             }
         }

@@ -37,7 +37,7 @@ namespace WPFTests
             public override string ToString() => $"{TestClass.Name}({TestResult})";
         }
 
-        IList<TestCase> testCaseList = new List<TestCase>();
+        private readonly IList<TestCase> testCaseList = new List<TestCase>();
 
         class TestProcess
         {
@@ -127,12 +127,12 @@ namespace WPFTests
             }
         }
 
-        IList<TestProcess> testProcessList = new List<TestProcess>();
+        private readonly IList<TestProcess> testProcessList = new List<TestProcess>();
 
         TestProcess executingTestProcess = null;
 
         MapView mapView = null;
-        Sprite resource;
+        readonly Sprite resource;
         int resultFrame = 0;
         const int ResultFrameMax = 60;
 

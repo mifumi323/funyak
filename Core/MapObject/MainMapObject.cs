@@ -348,7 +348,7 @@ namespace MifuminSoft.funyak.MapObject
 
         #region 当たり判定
 
-        PointCollider centerCollider;
+        private readonly PointCollider centerCollider;
 
         private double c2rX;
         private double c2rY;

@@ -4,10 +4,10 @@ namespace MifuminSoft.funyak.Collision
 {
     public class CollisionManager
     {
-        private List<RegionCollider> regionColliders = new List<RegionCollider>();
-        private List<PointCollider> pointColliders = new List<PointCollider>();
-        private List<PlateCollider> plateColliders = new List<PlateCollider>();
-        private List<NeedleCollider> needleColliders = new List<NeedleCollider>();
+        private readonly List<RegionCollider> regionColliders = new List<RegionCollider>();
+        private readonly List<PointCollider> pointColliders = new List<PointCollider>();
+        private readonly List<PlateCollider> plateColliders = new List<PlateCollider>();
+        private readonly List<NeedleCollider> needleColliders = new List<NeedleCollider>();
 
         public void Add(RegionCollider collider) => regionColliders.Add(collider);
         public void Add(PointCollider collider) => pointColliders.Add(collider);

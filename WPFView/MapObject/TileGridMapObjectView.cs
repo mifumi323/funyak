@@ -25,7 +25,7 @@ namespace MifuminSoft.funyak.View.MapObject
         public TileGridMapObject MapObject { get; protected set; }
 
         private Canvas canvas = null;
-        private Rectangle[] rectangles = null;
+        private readonly Rectangle[] rectangles = null;
 
         public Canvas Canvas
         {

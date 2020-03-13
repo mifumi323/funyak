@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.View.AreaEnvironment
 {
     public class AreaEnvironmentView : IAreaEnvironmentView
     {
-        private MapEnvironment.AreaEnvironment areaEnvironment;
+        private readonly MapEnvironment.AreaEnvironment areaEnvironment;
 
         private Canvas canvas = null;
         private Rectangle rectangle = null;

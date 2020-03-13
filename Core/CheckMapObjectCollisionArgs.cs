@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak
     /// </summary>
     public class CheckMapObjectCollisionArgs
     {
-        private Map map;
+        private readonly Map map;
 
         public CheckMapObjectCollisionArgs(Map map) => this.map = map;
 

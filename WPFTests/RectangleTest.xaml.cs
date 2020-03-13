@@ -17,11 +17,11 @@ namespace WPFTests
     public partial class RectangleTest : Page
     {
         const int vw = 1920 / 32, vh = 1080 / 32;
-        Rectangle[,] rectMap = new Rectangle[vw, vh];
+        readonly Rectangle[,] rectMap = new Rectangle[vw, vh];
         Rectangle rectMain = null;
         BitmapSource imageMap = null;
         BitmapSource imageMain = null;
-        FpsCounter counter = new FpsCounter();
+        readonly FpsCounter counter = new FpsCounter();
 
         double vx = 0, vy = 0, vr = 0, vs = 1;
 
@@ -29,12 +29,12 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            using (MagickImage miMap = new MagickImage("Assets/Ice.bmp"))
+            using (var miMap = new MagickImage("Assets/Ice.bmp"))
             {
                 imageMap = miMap.ToBitmapSource();
                 imageMap.Freeze();
             }
-            using (MagickImage miMain = new MagickImage("Assets/main.png"))
+            using (var miMain = new MagickImage("Assets/main.png"))
             {
                 imageMain = miMain.ToBitmapSource();
                 imageMain.Freeze();
@@ -97,12 +97,10 @@ namespace WPFTests
             renderBitmap.Render(canvas);
 
             string path = dlg.FileName;
-            using (var os = new FileStream(path, FileMode.Create))
-            {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                encoder.Save(os);
-            }
+            using var os = new FileStream(path, FileMode.Create);
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+            encoder.Save(os);
         }
 
         public RectangleTest() => InitializeComponent();
