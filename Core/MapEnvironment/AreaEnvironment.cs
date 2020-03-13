@@ -8,7 +8,7 @@
         /// <summary>
         /// 名前を取得または設定します。
         /// </summary>
-        public string Name { get; set; } = null;
+        public string? Name { get; set; } = null;
 
         /// <summary>
         /// 環境の適用範囲の左端を取得または設定します。
@@ -44,6 +44,6 @@
         /// 背景色を取得または設定します。
         /// (未指定または無効な色の場合透明)
         /// </summary>
-        public string BackgroundColor { get; set; } = null;
+        public string? BackgroundColor { get; set; } = null;
     }
 }

@@ -40,12 +40,12 @@ namespace MifuminSoft.funyak
         /// <summary>
         /// マップオブジェクトが追加されたときに発生します。
         /// </summary>
-        public event EventHandler<MapObjectEventArgs> MapObjectAdded;
+        public event EventHandler<MapObjectEventArgs>? MapObjectAdded;
 
         /// <summary>
         /// マップオブジェクトが削除されたときに発生します。
         /// </summary>
-        public event EventHandler<MapObjectEventArgs> MapObjectRemoved;
+        public event EventHandler<MapObjectEventArgs>? MapObjectRemoved;
 
         private readonly ICollection<MapObjectBase> mapObjectCollection;
         private readonly ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
@@ -55,7 +55,7 @@ namespace MifuminSoft.funyak
         /// <summary>
         /// 環境が追加されたときに発生します。
         /// </summary>
-        public event EventHandler<AreaEnvironmentEventArgs> AreaEnvironmentAdded;
+        public event EventHandler<AreaEnvironmentEventArgs>? AreaEnvironmentAdded;
 
         private readonly ICollection<AreaEnvironment> areaEnvironmentCollection;
         private readonly IDictionary<string, AreaEnvironment> namedAreaEnvironment;
@@ -182,7 +182,7 @@ namespace MifuminSoft.funyak
         /// nullの場合は全マップオブジェクトが返される
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<MapObjectBase> GetMapObjects(IBounds bounds = null)
+        public IEnumerable<MapObjectBase> GetMapObjects(IBounds? bounds = null)
         {
             if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す

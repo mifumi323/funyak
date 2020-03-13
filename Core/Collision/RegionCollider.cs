@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Collision
         /// <summary>
         /// 衝突時に呼ばれるコールバックを指定します。
         /// </summary>
-        public RegionPointCollision.Listener OnCollided { get; set; }
+        public RegionPointCollision.Listener? OnCollided { get; set; }
 
         public RegionCollider(MapObjectBase owner) : base(owner) { }
 
