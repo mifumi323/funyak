@@ -12,16 +12,14 @@ namespace MifuminSoft.funyak.View.Resource
 {
     public class BitmapSprite : Sprite
     {
-        BitmapSource bitmapSource = null;
-        Dictionary<string, Brush> knownBrush = new Dictionary<string, Brush>();
+        readonly BitmapSource bitmapSource = null;
+        readonly Dictionary<string, Brush> knownBrush = new Dictionary<string, Brush>();
 
         public BitmapSprite(Stream bitmapStream)
         {
-            using (var mi = new MagickImage(bitmapStream))
-            {
-                bitmapSource = mi.ToBitmapSource();
-                bitmapSource.Freeze();
-            }
+            using var mi = new MagickImage(bitmapStream);
+            bitmapSource = mi.ToBitmapSource();
+            bitmapSource.Freeze();
         }
 
         public override Brush GetBrush(string key, int frame)

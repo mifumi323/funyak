@@ -21,11 +21,11 @@ namespace WPFTests
     /// </summary>
     public partial class MapIOTest : Page
     {
-        ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
+        readonly ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map = null;
         MapView mapView = null;
-        IInput input;
-        Sprite resource;
+        readonly IInput input;
+        readonly Sprite resource;
 
         public MapIOTest()
         {

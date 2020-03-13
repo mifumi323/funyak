@@ -63,7 +63,7 @@ namespace MifuminSoft.funyak.Core.Tests.CollisionTest
 
             var needle = new NeedleCollider(null);
             needle.SetSegment(new Segment2D(300.0, 200.0, 300.0, 300.0));
-            var isCollided = collider.IsCollided(needle, out var collision);
+            var isCollided = collider.IsCollided(needle, out _);
             Assert.IsFalse(isCollided);
         }
     }

@@ -20,13 +20,14 @@ namespace WPFTests
     /// </summary>
     public partial class LineMapObjectViewTest : Page
     {
-        FpsCounter counter = new FpsCounter();
-        Map map;
-        MapView mapView;
-        LineMapObject[] lines;
-        LineMapObject batten1, batten2;
+        readonly FpsCounter counter = new FpsCounter();
+        readonly Map map;
+        readonly MapView mapView;
+        readonly LineMapObject[] lines;
+        private readonly LineMapObject batten1;
+        private readonly LineMapObject batten2;
         Point target;
-        IInput input;
+        readonly IInput input;
 
         public LineMapObjectViewTest()
         {
@@ -86,12 +87,10 @@ namespace WPFTests
             renderBitmap.Render(canvas);
 
             string path = dlg.FileName;
-            using (var os = new FileStream(path, FileMode.Create))
-            {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                encoder.Save(os);
-            }
+            using var os = new FileStream(path, FileMode.Create);
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+            encoder.Save(os);
         }
 
         private void Canvas_MouseDown(object sender, MouseButtonEventArgs e) => Keyboard.ClearFocus();

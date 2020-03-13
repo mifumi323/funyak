@@ -15,7 +15,7 @@ namespace WPFTests
     /// </summary>
     public partial class KeyInputTest : Page
     {
-        KeyInput keyInput;
+        readonly KeyInput keyInput;
 
         class StatusControls
         {
@@ -23,8 +23,10 @@ namespace WPFTests
             public Rectangle pressed;
             public Rectangle released;
         }
-        Dictionary<int, StatusControls> statusControls;
-        Brush brushOn, brushOff;
+
+        readonly Dictionary<int, StatusControls> statusControls;
+        private readonly Brush brushOn;
+        private readonly Brush brushOff;
 
         public KeyInputTest()
         {

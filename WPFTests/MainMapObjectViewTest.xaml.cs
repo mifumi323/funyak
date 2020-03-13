@@ -24,14 +24,14 @@ namespace WPFTests
     /// </summary>
     public partial class MainMapObjectViewTest : Page
     {
-        FpsCounter drawFpsCounter = new FpsCounter();
-        FpsCounter gameFpsCounter = new FpsCounter();
-        ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
+        readonly FpsCounter drawFpsCounter = new FpsCounter();
+        readonly FpsCounter gameFpsCounter = new FpsCounter();
+        readonly ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map;
         MapView mapView;
         MainMapObject main;
-        IInput input;
-        Sprite resource;
+        readonly IInput input;
+        readonly Sprite resource;
 
         public MainMapObjectViewTest()
         {
@@ -135,12 +135,10 @@ namespace WPFTests
             renderBitmap.Render(canvas);
 
             string path = dlg.FileName;
-            using (var os = new FileStream(path, FileMode.Create))
-            {
-                BitmapEncoder encoder = new PngBitmapEncoder();
-                encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-                encoder.Save(os);
-            }
+            using var os = new FileStream(path, FileMode.Create);
+            BitmapEncoder encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+            encoder.Save(os);
         }
 
         private void CompositionTarget_Rendering(object sender, object e)

@@ -9,7 +9,7 @@ namespace MifuminSoft.funyak.MapObject
     /// </summary>
     public class LineMapObject : MapObjectBase, IBounds
     {
-        private SegmentPlateCollider collider;
+        private readonly SegmentPlateCollider collider;
         private CollidableSegment segment;
 
         /// <summary>
