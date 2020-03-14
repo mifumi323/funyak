@@ -101,9 +101,9 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         private MainMapObjectState state;
-        private Action<bool> detectGravity;
-        private Action updateSelfPreprocess;
-        private Action<IMapEnvironment> updateSelfMainProcess;
+        private Action<bool> detectGravity = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
+        private Action updateSelfPreprocess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
+        private Action<IMapEnvironment> updateSelfMainProcess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
 
         public int StateCounter { get; set; }
         public int ChargeTime { get; set; }
