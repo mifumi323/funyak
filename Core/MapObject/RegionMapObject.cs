@@ -4,7 +4,7 @@ namespace MifuminSoft.funyak.MapObject
 {
     public sealed class RegionMapObject : MapObjectBase
     {
-        public RegionCollider Collider;
+        public RegionCollider Collider = null!; // 初期化直後にすぐこれも代入すべし。
         public string? Color;
 
         public override double X
