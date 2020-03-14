@@ -101,7 +101,7 @@ namespace MifuminSoft.funyak
         {
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
-            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name] = mapObject;
+            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name!] = mapObject;
             mapObject.OnJoin(this, collisionManager);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
@@ -115,7 +115,7 @@ namespace MifuminSoft.funyak
         {
             mapObjectCollection.Remove(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Remove(selfUpdatableMapObject);
-            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject.Remove(mapObject.Name);
+            if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject.Remove(mapObject.Name!);
             mapObject.OnLeave(this, collisionManager);
 
             MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
@@ -128,7 +128,7 @@ namespace MifuminSoft.funyak
         public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
         {
             areaEnvironmentCollection.Add(areaEnvironment);
-            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name] = areaEnvironment;
+            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name!] = areaEnvironment;
             AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
