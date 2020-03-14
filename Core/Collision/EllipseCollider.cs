@@ -4,7 +4,7 @@ namespace MifuminSoft.funyak.Collision
 {
     public sealed class EllipseCollider : RegionCollider
     {
-        public RegionInfo RegionInfo;
+        public RegionInfo RegionInfo { get; private set; } = new RegionInfo();
 
         public EllipseCollider(MapObjectBase owner) : base(owner) { }
 

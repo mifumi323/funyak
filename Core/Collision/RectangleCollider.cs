@@ -4,7 +4,7 @@ namespace MifuminSoft.funyak.Collision
 {
     public sealed class RectangleCollider : RegionCollider
     {
-        public RegionInfo RegionInfo;
+        public RegionInfo RegionInfo { get; private set; } = new RegionInfo();
 
         public RectangleCollider(MapObjectBase owner) : base(owner) { }
 

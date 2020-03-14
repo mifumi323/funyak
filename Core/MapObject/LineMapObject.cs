@@ -162,14 +162,9 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y2">終点のY座標</param>
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
-            collider = new SegmentPlateCollider(this)
-            {
-                PlateInfo = new PlateInfo
-                {
-                    Flags = PlateFlags.Active,
-                    Friction = 1.0
-                },
-            };
+            collider = new SegmentPlateCollider(this);
+            collider.PlateInfo.Flags = PlateFlags.Active;
+            collider.PlateInfo.Friction = 1.0;
             collider.SetSegment(new Segment2D(x1, y1, x2, y2));
             segment = new CollidableSegment()
             {
