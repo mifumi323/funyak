@@ -69,7 +69,7 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
         /// </summary>
         public virtual void Initialize()
         {
-            if (Input == null) Input = new NullInput();
+            if (Input == null) Input = NullInput.Instance;
             Map = MapReader.FromString(File.ReadAllText(MapFilePath), new MapReaderOption()
             {
                 Input = Input,

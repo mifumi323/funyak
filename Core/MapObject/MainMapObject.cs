@@ -373,7 +373,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             State = MainMapObjectState.Float;
 
-            Input = new NullInput();
+            Input = NullInput.Instance;
             X = x;
             Y = y;
             VelocityX = 0;

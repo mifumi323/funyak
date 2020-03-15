@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Data
 {
     public class MapReaderOption
     {
-        public IInput Input = null;
+        public IInput Input = NullInput.Instance;
         public IList<TileChip> ChipList = null;
     }
 
