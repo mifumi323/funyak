@@ -14,5 +14,23 @@
         public bool IsReleased(Keys key) => false;
 
         public void Update() { }
+
+        private static NullInput? instance;
+        /// <summary>
+        /// NullInput のデフォルトインスタンスを取得します。
+        /// </summary>
+        public static NullInput Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new NullInput();
+                }
+                return instance;
+            }
+        }
+
+        private NullInput() { }
     }
 }
