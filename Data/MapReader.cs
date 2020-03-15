@@ -9,7 +9,6 @@ namespace MifuminSoft.funyak.Data
     public class MapReaderOption
     {
         public IInput Input = NullInput.Instance;
-        public IList<TileChip> ChipList = null;
     }
 
     public static class MapReader
