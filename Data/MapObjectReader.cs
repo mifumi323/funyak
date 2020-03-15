@@ -13,7 +13,7 @@ namespace MifuminSoft.funyak.Data
                 data.type == "tile" ? GenerateTileMapObject(data, option) :
                 data.type == "rect" ? GenerateRectangleMapObject(data, option) :
                 data.type == "ellipse" ? GenerateEllipseMapObject(data, option) :
-                null;
+                throw new ArgumentException($"不明なdata.type\"{data.type}\"です。");
 
         private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
         {
