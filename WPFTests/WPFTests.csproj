@@ -217,7 +217,7 @@
       <Name>Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{c8d2ebb6-c260-48ca-b5e9-e91b602c1930}</Project>
+      <Project>{fbb86a72-491d-4214-bddf-8c97b060c65a}</Project>
       <Name>Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\WpfUI\WpfUI.csproj">
