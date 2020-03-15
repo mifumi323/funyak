@@ -193,17 +193,12 @@ namespace MifuminSoft.funyak.MapObject
 
         public double Top => GetTop(Y);
 
-        public double GetTop(double y)
+        public double GetTop(double y) => State switch
         {
-            switch (State)
-            {
-                case MainMapObjectState.Walk:
-                case MainMapObjectState.Charge:
-                    return y;
-                default:
-                    return y - Size / 2;
-            }
-        }
+            MainMapObjectState.Walk => y,
+            MainMapObjectState.Charge => y,
+            _ => y - Size / 2,
+        };
 
         public double Right => GetRight(X);
 
@@ -215,17 +210,12 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetCenterX(double x) => x;
 
-        public double GetCenterY(double y)
+        public double GetCenterY(double y) => State switch
         {
-            switch (State)
-            {
-                case MainMapObjectState.Walk:
-                case MainMapObjectState.Charge:
-                    return y + Size / 4;
-                default:
-                    return y;
-            }
-        }
+            MainMapObjectState.Walk => y + Size / 4,
+            MainMapObjectState.Charge => y + Size / 4,
+            _ => y,
+        };
 
         /// <summary>
         /// 左側が壁と接触しているかどうか

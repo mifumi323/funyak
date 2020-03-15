@@ -39,51 +39,23 @@ namespace MifuminSoft.funyak.View.MapObject
                 rectangle = new Rectangle();
             }
             AddToCanvas();
-
-            var imageKey = "Fall";
-            switch (MapObject.State)
+            var imageKey = MapObject.State switch
             {
-                case MainMapObjectState.Stand:
-                    // TODO: まばたきと睡眠と笑顔にも対応させよう
-                    imageKey = "Stand";
-                    break;
-                case MainMapObjectState.Run:
-                    imageKey = "Run";
-                    break;
-                case MainMapObjectState.Walk:
-                    imageKey = "Sit";
-                    break;
-                case MainMapObjectState.Charge:
-                    imageKey = "Sit";
-                    break;
-                case MainMapObjectState.Jump:
-                    imageKey = "Jump";
-                    break;
-                case MainMapObjectState.Fall:
-                    break;
-                case MainMapObjectState.Float:
-                    break;
-                case MainMapObjectState.BreatheIn:
-                    // TODO: 段階で絵を変えよう
-                    imageKey = "BreatheIn1";
-                    break;
-                case MainMapObjectState.BreatheOut:
-                    imageKey = "BreatheOut";
-                    break;
-                case MainMapObjectState.Tired:
-                    imageKey = "Tired";
-                    break;
-                case MainMapObjectState.Frozen:
-                    imageKey = "Freeze";
-                    break;
-                case MainMapObjectState.Damaged:
-                    break;
-                case MainMapObjectState.Die:
-                    imageKey = "Die";
-                    break;
-                default:
-                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
-            }
+                MainMapObjectState.Stand => "Stand", // TODO: まばたきと睡眠と笑顔にも対応させよう
+                MainMapObjectState.Run => "Run",
+                MainMapObjectState.Walk => "Sit",
+                MainMapObjectState.Charge => "Sit",
+                MainMapObjectState.Jump => "Jump",
+                MainMapObjectState.Fall => "Fall",
+                MainMapObjectState.Float => "Fall",
+                MainMapObjectState.BreatheIn => "BreatheIn1", // TODO: 段階で絵を変えよう
+                MainMapObjectState.BreatheOut => "BreatheOut",
+                MainMapObjectState.Tired => "Tired",
+                MainMapObjectState.Frozen => "Freeze",
+                MainMapObjectState.Damaged => "Die",
+                MainMapObjectState.Die => "Die",
+                _ => throw new Exception("MainMapObjectのStateがおかしいぞ。"),
+            };
             imageKey +=
                 MapObject.Direction == Direction.Left ? ".L" :
                 MapObject.Direction == Direction.Right ? ".R" :
