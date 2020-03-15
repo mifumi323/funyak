@@ -1,14 +1,11 @@
 ﻿using System;
 using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.MapObject;
-using Newtonsoft.Json;
 
 namespace MifuminSoft.funyak.Data
 {
     public class MapObjectReader
     {
-        public static MapObjectBase FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
-
         public static MapObjectBase FromDynamic(dynamic data, MapReaderOption option)
             // VS2019になったらswitch式できれいに書けそうだ
             => data.type == "funya" ? GenerateMainMapObject(data, option) :
