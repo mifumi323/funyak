@@ -6,14 +6,15 @@ namespace MifuminSoft.funyak.Data
 {
     public class MapObjectReader
     {
-        public static MapObjectBase FromDynamic(dynamic data, MapReaderOption option)
-            // VS2019になったらswitch式できれいに書けそうだ
-            => data.type == "funya" ? GenerateMainMapObject(data, option) :
-                data.type == "line" ? GenerateLineMapObject(data, option) :
-                data.type == "tile" ? GenerateTileMapObject(data, option) :
-                data.type == "rect" ? GenerateRectangleMapObject(data, option) :
-                data.type == "ellipse" ? GenerateEllipseMapObject(data, option) :
-                throw new ArgumentException($"不明なdata.type\"{data.type}\"です。");
+        public static MapObjectBase FromDynamic(dynamic data, MapReaderOption option) => (string)data.type switch
+        {
+            "funya" => GenerateMainMapObject(data, option),
+            "line" => GenerateLineMapObject(data, option),
+            "tile" => GenerateTileMapObject(data, option),
+            "rect" => GenerateRectangleMapObject(data, option),
+            "ellipse" => GenerateEllipseMapObject(data, option),
+            _ => throw new ArgumentException($"不明なdata.type\"{data.type}\"です。")
+        };
 
         private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
         {
