@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.MapObject;
 using Newtonsoft.Json;
@@ -13,7 +14,15 @@ namespace MifuminSoft.funyak.Data
 
     public static class MapReader
     {
-        public static Map FromString(string data, MapReaderOption option) => FromDynamic(JsonConvert.DeserializeObject(data), option);
+        public static Map FromString(string data, MapReaderOption option)
+        {
+            var deserialized = JsonConvert.DeserializeObject(data);
+            if (deserialized == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+            return FromDynamic(deserialized, option);
+        }
 
         public static Map FromDynamic(dynamic data, MapReaderOption option)
         {
