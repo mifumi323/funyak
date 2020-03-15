@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
 using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.MapObject;
+using NUnit.Framework;
 
 namespace MifuminSoft.funyak.UnitTests.Game
 {
@@ -12,7 +13,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
 
         public RunOnSlopeTest()
         {
-            MapFilePath = @"TestFiles\RunOnSlopeTest.json";
+            MapFilePath = Path.Combine("TestFiles", "RunOnSlopeTest.json");
             FailOnTimeout = true;
             TimeoutFrames = 600;
             var input = new ReplayInput()

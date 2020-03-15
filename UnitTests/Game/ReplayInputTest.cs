@@ -1,5 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
 using MifuminSoft.funyak.Input;
+using NUnit.Framework;
 
 namespace MifuminSoft.funyak.UnitTests.Game
 {
@@ -7,7 +8,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public ReplayInputTest()
         {
-            MapFilePath = @"TestFiles\ReplayInputTest.json";
+            MapFilePath = Path.Combine("TestFiles", "ReplayInputTest.json");
             FailOnTimeout = true;
             TimeoutFrames = 15 * 60;
             var input = new ReplayInput()

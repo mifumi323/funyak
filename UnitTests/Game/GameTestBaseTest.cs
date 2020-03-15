@@ -11,7 +11,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public GameTestBaseTest()
         {
-            MapFilePath = @"TestFiles\GameTestBaseTest.json";
+            MapFilePath = Path.Combine("TestFiles", "GameTestBaseTest.json");
             FailOnTimeout = false;
             TimeoutFrames = 100;
         }
@@ -58,7 +58,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
         [Test]
         public void FailOnTimeoutTest()
         {
-            MapFilePath = @"TestFiles\GameTestBaseTest.json";
+            MapFilePath = Path.Combine("TestFiles", "GameTestBaseTest.json");
             FailOnTimeout = true;
             TimeoutFrames = 100;
             try
@@ -80,7 +80,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
         [Test]
         public void SucceedOnTimeoutTest()
         {
-            MapFilePath = @"TestFiles\GameTestBaseTest.json";
+            MapFilePath = Path.Combine("TestFiles", "GameTestBaseTest.json");
             FailOnTimeout = false;
             TimeoutFrames = 100;
             try
