@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mifumi323/funyak.svg?branch=master)](https://travis-ci.com/mifumi323/funyak)
+
 # funyak
 そう、なんらかのプロジェクトなんだ。
 まだ開発初期だから詳しいことは言えないけれど、たぶん、それは、ゲーム的なものになるだろう。
