@@ -4,6 +4,8 @@ namespace MifuminSoft.funyak.Collision
 {
     public sealed class PointCollider : ColliderBase
     {
+        public RegionAttributeFlag Reactivities { get; set; }
+
         public double X => Left;
         public double Y => Top;
 

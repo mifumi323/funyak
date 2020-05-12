@@ -10,11 +10,11 @@ namespace MifuminSoft.funyak.UnitTests.Collision
         {
             var plateInfo = new PlateInfo
             {
-                Flags = PlateFlags.Active | PlateFlags.HitUpper
+                Flags = PlateAttributeFlag.Active | PlateAttributeFlag.HitUpper
             };
-            Assert.IsTrue(plateInfo.HasFlag(PlateFlags.Active));
-            Assert.IsTrue(plateInfo.HasFlag(PlateFlags.HitUpper));
-            Assert.IsFalse(plateInfo.HasFlag(PlateFlags.HitBelow));
+            Assert.IsTrue(plateInfo.HasFlag(PlateAttributeFlag.Active));
+            Assert.IsTrue(plateInfo.HasFlag(PlateAttributeFlag.HitUpper));
+            Assert.IsFalse(plateInfo.HasFlag(PlateAttributeFlag.HitBelow));
         }
 
         [Test]
@@ -22,13 +22,13 @@ namespace MifuminSoft.funyak.UnitTests.Collision
         {
             var plateInfo = new PlateInfo
             {
-                Flags = PlateFlags.Active | PlateFlags.HitUpper
+                Flags = PlateAttributeFlag.Active | PlateAttributeFlag.HitUpper
             };
-            plateInfo.SetFlag(PlateFlags.HitUpper, false);
-            plateInfo.SetFlag(PlateFlags.HitBelow, true);
-            Assert.IsTrue(plateInfo.HasFlag(PlateFlags.Active), "関係ないフラグが変化");
-            Assert.IsFalse(plateInfo.HasFlag(PlateFlags.HitUpper), "フラグをOFFにできていない");
-            Assert.IsTrue(plateInfo.HasFlag(PlateFlags.HitBelow), "フラグをONにできていない");
+            plateInfo.SetFlag(PlateAttributeFlag.HitUpper, false);
+            plateInfo.SetFlag(PlateAttributeFlag.HitBelow, true);
+            Assert.IsTrue(plateInfo.HasFlag(PlateAttributeFlag.Active), "関係ないフラグが変化");
+            Assert.IsFalse(plateInfo.HasFlag(PlateAttributeFlag.HitUpper), "フラグをOFFにできていない");
+            Assert.IsTrue(plateInfo.HasFlag(PlateAttributeFlag.HitBelow), "フラグをONにできていない");
         }
     }
 }
