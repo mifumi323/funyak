@@ -79,7 +79,7 @@ namespace MifuminSoft.funyak.Data
             collider.SetPosition((double)(data.l ?? 0.0), (double)(data.t ?? 0.0), (double)(data.r ?? 0.0), (double)(data.b ?? 0.0));
             collider.RegionInfo.Gravity = data.g ?? double.NaN;
             collider.RegionInfo.Wind = data.w ?? double.NaN;
-            collider.RegionInfo.SetFlag(RegionFlags.Active, true);
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
             regionMapObject.Collider = collider;
             if (data.color != null) regionMapObject.Color = (string)data.color;
             return regionMapObject;
@@ -96,7 +96,7 @@ namespace MifuminSoft.funyak.Data
             collider.SetPosition((double)(data.l ?? 0.0), (double)(data.t ?? 0.0), (double)(data.r ?? 0.0), (double)(data.b ?? 0.0));
             collider.RegionInfo.Gravity = data.g ?? double.NaN;
             collider.RegionInfo.Wind = data.w ?? double.NaN;
-            collider.RegionInfo.SetFlag(RegionFlags.Active, true);
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
             ellipseMapObject.Collider = collider;
             return ellipseMapObject;
         }

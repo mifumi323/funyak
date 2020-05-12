@@ -3,7 +3,7 @@
 namespace MifuminSoft.funyak.Collision
 {
     [Flags]
-    public enum PlateFlags : ulong
+    public enum PlateAttributeFlag : ulong
     {
         None = 0,
         Active = 1 << 0,

@@ -53,8 +53,8 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool Active
         {
-            get => collider.PlateInfo.HasFlag(PlateFlags.Active);
-            set => collider.PlateInfo.SetFlag(PlateFlags.Active, value);
+            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.Active);
+            set => collider.PlateInfo.SetFlag(PlateAttributeFlag.Active, value);
         }
 
         /// <summary>
@@ -62,10 +62,10 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitUpper
         {
-            get => collider.PlateInfo.HasFlag(PlateFlags.HitUpper);
+            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.HitUpper);
             set
             {
-                collider.PlateInfo.SetFlag(PlateFlags.HitUpper, value);
+                collider.PlateInfo.SetFlag(PlateAttributeFlag.HitUpper, value);
                 segment.HitUpper = value;
             }
         }
@@ -75,10 +75,10 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitBelow
         {
-            get => collider.PlateInfo.HasFlag(PlateFlags.HitBelow);
+            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.HitBelow);
             set
             {
-                collider.PlateInfo.SetFlag(PlateFlags.HitBelow, value);
+                collider.PlateInfo.SetFlag(PlateAttributeFlag.HitBelow, value);
                 segment.HitBelow = value;
             }
         }
@@ -88,10 +88,10 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitLeft
         {
-            get => collider.PlateInfo.HasFlag(PlateFlags.HitLeft);
+            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.HitLeft);
             set
             {
-                collider.PlateInfo.SetFlag(PlateFlags.HitLeft, value);
+                collider.PlateInfo.SetFlag(PlateAttributeFlag.HitLeft, value);
                 segment.HitLeft = value;
             }
         }
@@ -101,10 +101,10 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public bool HitRight
         {
-            get => collider.PlateInfo.HasFlag(PlateFlags.HitRight);
+            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.HitRight);
             set
             {
-                collider.PlateInfo.SetFlag(PlateFlags.HitRight, value);
+                collider.PlateInfo.SetFlag(PlateAttributeFlag.HitRight, value);
                 segment.HitRight = value;
             }
         }
@@ -163,7 +163,7 @@ namespace MifuminSoft.funyak.MapObject
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
             collider = new SegmentPlateCollider(this);
-            collider.PlateInfo.Flags = PlateFlags.Active;
+            collider.PlateInfo.Flags = PlateAttributeFlag.Active;
             collider.PlateInfo.Friction = 1.0;
             collider.SetSegment(new Segment2D(x1, y1, x2, y2));
             segment = new CollidableSegment()

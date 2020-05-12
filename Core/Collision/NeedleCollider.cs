@@ -5,6 +5,8 @@ namespace MifuminSoft.funyak.Collision
 {
     public sealed class NeedleCollider : ColliderBase
     {
+        public PlateAttributeFlag Reactivities { get; set; }
+
         private Vector2D startPoint;
         private Vector2D directedLength;
         private double startMargin;
