@@ -85,6 +85,10 @@
       <Project>{fbb86a72-491d-4214-bddf-8c97b060c65a}</Project>
       <Name>Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Geometry\Geometry.csproj">
+      <Project>{d9a838ea-ca21-40fc-8eb5-0a802dc198b1}</Project>
+      <Name>Geometry</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="TestFiles\GameTestBaseTest.json">
