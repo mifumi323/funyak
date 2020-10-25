@@ -2,14 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.0</TargetFramework>
-    <AssemblyName>funyak.Core</AssemblyName>
-    <RootNamespace>MifuminSoft.funyak</RootNamespace>
+    <RootNamespace>MifuminSoft.funyak.Geometry</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Geometry\Geometry.csproj" />
-  </ItemGroup>
 
 </Project>
