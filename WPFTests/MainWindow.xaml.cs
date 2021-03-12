@@ -30,7 +30,7 @@ namespace WPFTests
                     Type = typeof(SpriteEditorTest),
                 },
                 new {
-                    Name = "MainMapObject",
+                    Name = "FunyaMapObject",
                     Type = typeof(FunyaMapObjectViewTest),
                 },
                 new {

@@ -54,7 +54,7 @@ namespace MifuminSoft.funyak.View.MapObject
                 FunyaMapObjectState.Frozen => "Freeze",
                 FunyaMapObjectState.Damaged => "Die",
                 FunyaMapObjectState.Die => "Die",
-                _ => throw new Exception("MainMapObjectのStateがおかしいぞ。"),
+                _ => throw new Exception("FunyaMapObjectのStateがおかしいぞ。"),
             };
             imageKey +=
                 MapObject.Direction == Direction.Left ? ".L" :

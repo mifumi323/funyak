@@ -20,7 +20,7 @@ using MifuminSoft.funyak.View.Timing;
 namespace WPFTests
 {
     /// <summary>
-    /// MainMapObjectViewTest.xaml の相互作用ロジック
+    /// FunyaMapObjectViewTest.xaml の相互作用ロジック
     /// </summary>
     public partial class FunyaMapObjectViewTest : Page
     {
@@ -45,7 +45,7 @@ namespace WPFTests
 
         private void Reset()
         {
-            map = MapReader.FromString(File.ReadAllText(@"Assets\mainmapobjectviewtest.json"), new MapReaderOption()
+            map = MapReader.FromString(File.ReadAllText(@"Assets\funyamapobjectviewtest.json"), new MapReaderOption()
             {
                 Input = input,
             });
@@ -101,7 +101,7 @@ namespace WPFTests
             canvas.Children.Clear();
             mapView = new MapView(map, new MapObjectViewFactory()
             {
-                MainMapObjectResourceSelector = a => resource,
+                FunyaMapObjectResourceSelector = a => resource,
             })
             {
                 Canvas = canvas,

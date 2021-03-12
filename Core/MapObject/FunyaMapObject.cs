@@ -69,7 +69,7 @@ namespace MifuminSoft.funyak.MapObject
                         updateSelfMainProcess = me => { };
                         break;
                     default:
-                        throw new Exception("MainMapObjectのStateがおかしいぞ。");
+                        throw new Exception("FunyaMapObjectのStateがおかしいぞ。");
                 }
                 state = value;
             }
@@ -933,7 +933,7 @@ namespace MifuminSoft.funyak.MapObject
                 case FunyaMapObjectState.Die:
                     break;
                 default:
-                    throw new Exception("MainMapObjectのStateがおかしいぞ。");
+                    throw new Exception("FunyaMapObjectのStateがおかしいぞ。");
             }
         }
 

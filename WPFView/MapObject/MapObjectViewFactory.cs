@@ -6,7 +6,7 @@ namespace MifuminSoft.funyak.View.MapObject
 {
     public class MapObjectViewFactory
     {
-        public Func<int, Sprite> MainMapObjectResourceSelector { get; set; }
+        public Func<int, Sprite> FunyaMapObjectResourceSelector { get; set; }
 
         public IMapObjectView Create(MapObjectBase mapObject)
         {
@@ -14,11 +14,11 @@ namespace MifuminSoft.funyak.View.MapObject
             {
                 return new LineMapObjectView(lineMapObject);
             }
-            if (mapObject is FunyaMapObject mainMapObject)
+            if (mapObject is FunyaMapObject funyaMapObject)
             {
-                return new FunyaMapObjectView(mainMapObject)
+                return new FunyaMapObjectView(funyaMapObject)
                 {
-                    ImageResource = MainMapObjectResourceSelector?.Invoke(mainMapObject.Appearance),
+                    ImageResource = FunyaMapObjectResourceSelector?.Invoke(funyaMapObject.Appearance),
                 };
             }
             if (mapObject is TileGridMapObject tileGridMapObject)

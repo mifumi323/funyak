@@ -173,7 +173,7 @@ namespace WPFTests
                     var map = executingTestProcess.TestObject.Map;
                     mapView = new MapView(map, new MapObjectViewFactory()
                     {
-                        MainMapObjectResourceSelector = a => resource,
+                        FunyaMapObjectResourceSelector = a => resource,
                     })
                     {
                         Canvas = canvas,
