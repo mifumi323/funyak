@@ -9,7 +9,7 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void InitializeTest()
         {
-            var mainMapObject = new MainMapObject(0, 0);
+            var mainMapObject = new FunyaMapObject(0, 0);
             Assert.AreEqual(0, mainMapObject.X);
             Assert.AreEqual(0, mainMapObject.Y);
             Assert.AreEqual(-14, mainMapObject.Left);
@@ -21,7 +21,7 @@ namespace MifuminSoft.funyak.Core.Tests
         [TestMethod]
         public void PositionTest()
         {
-            var mainMapObject = new MainMapObject(0, 0)
+            var mainMapObject = new FunyaMapObject(0, 0)
             {
                 X = 100,
                 Y = 100

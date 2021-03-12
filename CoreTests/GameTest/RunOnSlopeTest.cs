@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
     [TestClass]
     public class RunOnSlopeTest : GameTestBase
     {
-        readonly MainMapObject[] mapObject = new MainMapObject[4];
+        readonly FunyaMapObject[] mapObject = new FunyaMapObject[4];
         readonly MainMapObjectState[] state = new MainMapObjectState[4];
         readonly int[] stable = new int[4];
 
@@ -29,7 +29,7 @@ namespace MifuminSoft.funyak.Core.Tests.GameTest
             var stableAll = true;
             for (int i = 0; i < 4; i++)
             {
-                mapObject[i] = Map.FindMapObject(i.ToString()) as MainMapObject;
+                mapObject[i] = Map.FindMapObject(i.ToString()) as FunyaMapObject;
                 Assert.IsNotNull(mapObject[i], i.ToString() + "が見つかりません。");
                 if (mapObject[i].State == state[i])
                 {
