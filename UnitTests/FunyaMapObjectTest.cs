@@ -3,7 +3,7 @@ using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.UnitTests
 {
-    public class MainMapObjectTest
+    public class FunyaMapObjectTest
     {
         [Test]
         public void InitializeTest()
