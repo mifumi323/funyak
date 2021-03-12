@@ -11,7 +11,7 @@ namespace WPFTests
     /// </summary>
     public partial class SpriteEditorTest : Page
     {
-        string ImageFileName = @"Assets\main.png";
+        string ImageFileName = @"Assets\funya.png";
         public SpriteEditorTest() => InitializeComponent();
 
         private void Page_Loaded(object sender, RoutedEventArgs e) => chipSelector.Source = SpriteReader.Read(ImageFileName);

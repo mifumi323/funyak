@@ -31,7 +31,7 @@ namespace WPFTests
         {
             InitializeComponent();
 
-            resource = SpriteReader.Read(@"Assets\main.png");
+            resource = SpriteReader.Read(@"Assets\funya.png");
             input = new KeyInput();
 
             textBox.Text = File.ReadAllText(@"Assets\mapiotest.json");

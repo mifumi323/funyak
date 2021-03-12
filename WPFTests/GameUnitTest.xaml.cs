@@ -140,7 +140,7 @@ namespace WPFTests
         {
             InitializeComponent();
 
-            resource = SpriteReader.Read(@"Assets\main.png");
+            resource = SpriteReader.Read(@"Assets\funya.png");
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

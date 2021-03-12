@@ -29,7 +29,7 @@ namespace WPFTests
         readonly ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map;
         MapView mapView;
-        FunyaMapObject main;
+        FunyaMapObject funya;
         readonly IInput input;
         readonly Sprite resource;
 
@@ -37,7 +37,7 @@ namespace WPFTests
         {
             InitializeComponent();
 
-            resource = SpriteReader.Read(@"Assets\main.png");
+            resource = SpriteReader.Read(@"Assets\funya.png");
             input = new KeyInput();
 
             Reset();
@@ -49,7 +49,7 @@ namespace WPFTests
             {
                 Input = input,
             });
-            main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as FunyaMapObject;
+            funya = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as FunyaMapObject;
 
             // ちょっとタイルグリッドのテストをねじ込もう
             int tcx = 10, tcy = 7;
@@ -105,7 +105,7 @@ namespace WPFTests
             })
             {
                 Canvas = canvas,
-                FocusTo = main,
+                FocusTo = funya,
             };
         }
 
@@ -160,12 +160,12 @@ namespace WPFTests
                 message.AppendLine("風：" + sliderWind.Value);
                 message.AppendLine("描画FPS：" + drawFpsCounter.Fps);
                 message.AppendLine("処理FPS：" + gameFpsCounter.Fps);
-                message.AppendLine("X：" + main.X);
-                message.AppendLine("Y：" + main.Y);
-                message.AppendLine("速度X：" + main.VelocityX);
-                message.AppendLine("速度Y：" + main.VelocityY);
-                message.AppendLine("角度：" + main.Angle);
-                message.AppendLine("角速度：" + main.AngularVelocity);
+                message.AppendLine("X：" + funya.X);
+                message.AppendLine("Y：" + funya.Y);
+                message.AppendLine("速度X：" + funya.VelocityX);
+                message.AppendLine("速度Y：" + funya.VelocityY);
+                message.AppendLine("角度：" + funya.Angle);
+                message.AppendLine("角速度：" + funya.AngularVelocity);
                 message.AppendLine("表示オブジェクト：");
                 foreach (var child in canvas.Children)
                 {
