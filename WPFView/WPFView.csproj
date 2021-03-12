@@ -59,7 +59,7 @@
     <Compile Include="Input\KeyInput.cs" />
     <Compile Include="MapObject\IMapObjectView.cs" />
     <Compile Include="MapObject\LineMapObjectView.cs" />
-    <Compile Include="MapObject\MainMapObjectView.cs" />
+    <Compile Include="MapObject\FunyaMapObjectView.cs" />
     <Compile Include="MapObject\MapObjectViewFactory.cs" />
     <Compile Include="MapObject\RegionMapObjectView.cs" />
     <Compile Include="MapObject\TileGridMapObjectView.cs" />

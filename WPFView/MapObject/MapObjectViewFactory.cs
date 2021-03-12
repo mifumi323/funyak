@@ -16,7 +16,7 @@ namespace MifuminSoft.funyak.View.MapObject
             }
             if (mapObject is FunyaMapObject mainMapObject)
             {
-                return new MainMapObjectView(mainMapObject)
+                return new FunyaMapObjectView(mainMapObject)
                 {
                     ImageResource = MainMapObjectResourceSelector?.Invoke(mainMapObject.Appearance),
                 };
