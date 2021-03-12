@@ -22,7 +22,7 @@ namespace WPFTests
     /// <summary>
     /// MainMapObjectViewTest.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainMapObjectViewTest : Page
+    public partial class FunyaMapObjectViewTest : Page
     {
         readonly FpsCounter drawFpsCounter = new FpsCounter();
         readonly FpsCounter gameFpsCounter = new FpsCounter();
@@ -33,7 +33,7 @@ namespace WPFTests
         readonly IInput input;
         readonly Sprite resource;
 
-        public MainMapObjectViewTest()
+        public FunyaMapObjectViewTest()
         {
             InitializeComponent();
 

@@ -31,7 +31,7 @@ namespace WPFTests
                 },
                 new {
                     Name = "MainMapObject",
-                    Type = typeof(MainMapObjectViewTest),
+                    Type = typeof(FunyaMapObjectViewTest),
                 },
                 new {
                     Name = "画像チップ表示",
