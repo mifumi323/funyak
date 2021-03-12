@@ -41,19 +41,19 @@ namespace MifuminSoft.funyak.View.MapObject
             AddToCanvas();
             var imageKey = MapObject.State switch
             {
-                MainMapObjectState.Stand => "Stand", // TODO: まばたきと睡眠と笑顔にも対応させよう
-                MainMapObjectState.Run => "Run",
-                MainMapObjectState.Walk => "Sit",
-                MainMapObjectState.Charge => "Sit",
-                MainMapObjectState.Jump => "Jump",
-                MainMapObjectState.Fall => "Fall",
-                MainMapObjectState.Float => "Fall",
-                MainMapObjectState.BreatheIn => "BreatheIn1", // TODO: 段階で絵を変えよう
-                MainMapObjectState.BreatheOut => "BreatheOut",
-                MainMapObjectState.Tired => "Tired",
-                MainMapObjectState.Frozen => "Freeze",
-                MainMapObjectState.Damaged => "Die",
-                MainMapObjectState.Die => "Die",
+                FunyaMapObjectState.Stand => "Stand", // TODO: まばたきと睡眠と笑顔にも対応させよう
+                FunyaMapObjectState.Run => "Run",
+                FunyaMapObjectState.Walk => "Sit",
+                FunyaMapObjectState.Charge => "Sit",
+                FunyaMapObjectState.Jump => "Jump",
+                FunyaMapObjectState.Fall => "Fall",
+                FunyaMapObjectState.Float => "Fall",
+                FunyaMapObjectState.BreatheIn => "BreatheIn1", // TODO: 段階で絵を変えよう
+                FunyaMapObjectState.BreatheOut => "BreatheOut",
+                FunyaMapObjectState.Tired => "Tired",
+                FunyaMapObjectState.Frozen => "Freeze",
+                FunyaMapObjectState.Damaged => "Die",
+                FunyaMapObjectState.Die => "Die",
                 _ => throw new Exception("MainMapObjectのStateがおかしいぞ。"),
             };
             imageKey +=

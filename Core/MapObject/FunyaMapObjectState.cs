@@ -3,7 +3,7 @@
     /// <summary>
     /// 主人公のマップオブジェクトの状態
     /// </summary>
-    public enum MainMapObjectState
+    public enum FunyaMapObjectState
     {
         Stand,
         Run,

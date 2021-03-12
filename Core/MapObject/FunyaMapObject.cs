@@ -18,7 +18,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// 状態
         /// </summary>
-        public MainMapObjectState State
+        public FunyaMapObjectState State
         {
             get => state;
             set
@@ -27,43 +27,43 @@ namespace MifuminSoft.funyak.MapObject
                 StateCounter = 0;
                 switch (value)
                 {
-                    case MainMapObjectState.Stand:
+                    case FunyaMapObjectState.Stand:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessStanding;
                         break;
-                    case MainMapObjectState.Float:
+                    case FunyaMapObjectState.Float:
                         detectGravity = DetectGravityFloating;
                         updateSelfPreprocess = PreprocessFloating;
                         updateSelfMainProcess = MainProcessFloating;
                         break;
-                    case MainMapObjectState.Fall:
+                    case FunyaMapObjectState.Fall:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessFalling;
                         break;
-                    case MainMapObjectState.Run:
+                    case FunyaMapObjectState.Run:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessRunning;
                         break;
-                    case MainMapObjectState.Walk:
+                    case FunyaMapObjectState.Walk:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessWalking;
                         break;
-                    case MainMapObjectState.Charge:
+                    case FunyaMapObjectState.Charge:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessCharging;
                         ChargeTime = 0;
                         break;
-                    case MainMapObjectState.Jump:
+                    case FunyaMapObjectState.Jump:
                         detectGravity = DetectGravityNormal;
                         updateSelfPreprocess = PreprocessNotFloating;
                         updateSelfMainProcess = MainProcessJumping;
                         break;
-                    case MainMapObjectState.Die:
+                    case FunyaMapObjectState.Die:
                         detectGravity = b => { };
                         updateSelfPreprocess = () => { };
                         updateSelfMainProcess = me => { };
@@ -75,7 +75,7 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        private MainMapObjectState state;
+        private FunyaMapObjectState state;
         private Action<bool> detectGravity = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
         private Action updateSelfPreprocess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
         private Action<IMapEnvironment> updateSelfMainProcess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
@@ -170,8 +170,8 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetTop(double y) => State switch
         {
-            MainMapObjectState.Walk => y,
-            MainMapObjectState.Charge => y,
+            FunyaMapObjectState.Walk => y,
+            FunyaMapObjectState.Charge => y,
             _ => y - Size / 2,
         };
 
@@ -187,8 +187,8 @@ namespace MifuminSoft.funyak.MapObject
 
         public double GetCenterY(double y) => State switch
         {
-            MainMapObjectState.Walk => y + Size / 4,
-            MainMapObjectState.Charge => y + Size / 4,
+            FunyaMapObjectState.Walk => y + Size / 4,
+            FunyaMapObjectState.Charge => y + Size / 4,
             _ => y,
         };
 
@@ -336,7 +336,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y">Y座標</param>
         public FunyaMapObject(double x, double y)
         {
-            State = MainMapObjectState.Float;
+            State = FunyaMapObjectState.Float;
 
             Input = NullInput.Instance;
             X = x;
@@ -374,7 +374,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (!inGravity)
             {
-                State = MainMapObjectState.Float;
+                State = FunyaMapObjectState.Float;
                 Direction = Direction.Front;
             }
         }
@@ -383,7 +383,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (inGravity)
             {
-                State = MainMapObjectState.Fall;
+                State = FunyaMapObjectState.Fall;
                 if (Input.IsPressed(Keys.Left))
                 {
                     Direction = Direction.Left;
@@ -452,19 +452,19 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
             {
-                State = MainMapObjectState.Run;
+                State = FunyaMapObjectState.Run;
                 MainProcessRunning(env);
                 return;
             }
             else if (Input.IsPushed(Keys.Jump))
             {
-                State = MainMapObjectState.Charge;
+                State = FunyaMapObjectState.Charge;
                 MainProcessCharging(env);
                 return;
             }
             else if (Input.IsPushed(Keys.Down))
             {
-                State = MainMapObjectState.Walk;
+                State = FunyaMapObjectState.Walk;
                 MainProcessWalking(env);
                 return;
             }
@@ -480,12 +480,12 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Jump))
             {
-                State = MainMapObjectState.Charge;
+                State = FunyaMapObjectState.Charge;
                 MainProcessCharging(env);
             }
             else if (Input.IsPressed(Keys.Down))
             {
-                State = MainMapObjectState.Walk;
+                State = FunyaMapObjectState.Walk;
                 MainProcessWalking(env);
             }
             else if (Input.IsPressed(Keys.Left))
@@ -500,7 +500,7 @@ namespace MifuminSoft.funyak.MapObject
             }
             else
             {
-                State = MainMapObjectState.Stand;
+                State = FunyaMapObjectState.Stand;
                 MainProcessStanding(env);
             }
         }
@@ -509,12 +509,12 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPushed(Keys.Jump))
             {
-                State = MainMapObjectState.Charge;
+                State = FunyaMapObjectState.Charge;
                 MainProcessCharging(env);
             }
             else if (!Input.IsPressed(Keys.Down))
             {
-                State = MainMapObjectState.Stand;
+                State = FunyaMapObjectState.Stand;
                 MainProcessStanding(env);
             }
             else if (Input.IsPressed(Keys.Left))
@@ -538,7 +538,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (!Input.IsPressed(Keys.Jump))
             {
-                State = MainMapObjectState.Jump;
+                State = FunyaMapObjectState.Jump;
                 var v = 0.0;
                 foreach (var c in JumpCharge)
                 {
@@ -551,7 +551,7 @@ namespace MifuminSoft.funyak.MapObject
             }
             else if (Input.IsPushed(Keys.Down) && !Input.IsPushed(Keys.Jump))
             {
-                State = MainMapObjectState.Walk;
+                State = FunyaMapObjectState.Walk;
                 MainProcessWalking(env);
                 return;
             }
@@ -562,7 +562,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             if (Input.IsPressed(Keys.Down))
             {
-                State = MainMapObjectState.Fall;
+                State = FunyaMapObjectState.Fall;
                 MainProcessFalling(env);
             }
             else
@@ -570,7 +570,7 @@ namespace MifuminSoft.funyak.MapObject
                 var accelY = env.Gravity * GravityAccel;
                 if (VelocityY >= -accelY)
                 {
-                    State = MainMapObjectState.Fall;
+                    State = FunyaMapObjectState.Fall;
                     MainProcessFalling(env);
                     return;
                 }
@@ -878,7 +878,7 @@ namespace MifuminSoft.funyak.MapObject
 
             if (Right < 0 || args.MapWidth < Left || Bottom < 0 || args.MapHeight < Top)
             {
-                State = MainMapObjectState.Die;
+                State = FunyaMapObjectState.Die;
             }
 
             RealizeCollision(c2rTouchedBottom);
@@ -893,44 +893,44 @@ namespace MifuminSoft.funyak.MapObject
         {
             switch (State)
             {
-                case MainMapObjectState.Stand:
-                case MainMapObjectState.Run:
-                case MainMapObjectState.Walk:
-                case MainMapObjectState.Charge:
+                case FunyaMapObjectState.Stand:
+                case FunyaMapObjectState.Run:
+                case FunyaMapObjectState.Walk:
+                case FunyaMapObjectState.Charge:
                     if (!landed)
                     {
-                        State = MainMapObjectState.Fall;
+                        State = FunyaMapObjectState.Fall;
                     }
                     break;
-                case MainMapObjectState.Jump:
-                case MainMapObjectState.Fall:
+                case FunyaMapObjectState.Jump:
+                case FunyaMapObjectState.Fall:
                     if (landed)
                     {
                         if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
                         {
-                            State = MainMapObjectState.Run;
+                            State = FunyaMapObjectState.Run;
                         }
                         else if (Input.IsPressed(Keys.Jump))
                         {
-                            State = MainMapObjectState.Charge;
+                            State = FunyaMapObjectState.Charge;
                         }
                         else if (Input.IsPressed(Keys.Down))
                         {
-                            State = MainMapObjectState.Walk;
+                            State = FunyaMapObjectState.Walk;
                         }
                         else
                         {
-                            State = MainMapObjectState.Stand;
+                            State = FunyaMapObjectState.Stand;
                         }
                     }
                     break;
-                case MainMapObjectState.Float:
-                case MainMapObjectState.BreatheIn:
-                case MainMapObjectState.BreatheOut:
-                case MainMapObjectState.Tired:
-                case MainMapObjectState.Frozen:
-                case MainMapObjectState.Damaged:
-                case MainMapObjectState.Die:
+                case FunyaMapObjectState.Float:
+                case FunyaMapObjectState.BreatheIn:
+                case FunyaMapObjectState.BreatheOut:
+                case FunyaMapObjectState.Tired:
+                case FunyaMapObjectState.Frozen:
+                case FunyaMapObjectState.Damaged:
+                case FunyaMapObjectState.Die:
                     break;
                 default:
                     throw new Exception("MainMapObjectのStateがおかしいぞ。");
