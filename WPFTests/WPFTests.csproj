@@ -93,8 +93,8 @@
     <Compile Include="LineMapObjectViewTest.xaml.cs">
       <DependentUpon>LineMapObjectViewTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainMapObjectViewTest.xaml.cs">
-      <DependentUpon>MainMapObjectViewTest.xaml</DependentUpon>
+    <Compile Include="FunyaMapObjectViewTest.xaml.cs">
+      <DependentUpon>FunyaMapObjectViewTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="MapIOTest.xaml.cs">
       <DependentUpon>MapIOTest.xaml</DependentUpon>
@@ -128,7 +128,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainMapObjectViewTest.xaml">
+    <Page Include="FunyaMapObjectViewTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
