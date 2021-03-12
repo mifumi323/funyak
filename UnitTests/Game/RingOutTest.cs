@@ -16,7 +16,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
 
         public override bool IsSuccess()
         {
-            return new string[] { "A", "B", "C", "D" }.All(id => (Map.FindMapObject(id) as MainMapObject).State == MainMapObjectState.Die);
+            return new string[] { "A", "B", "C", "D" }.All(id => (Map.FindMapObject(id) as FunyaMapObject).State == MainMapObjectState.Die);
         }
 
         [Test]

@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.View.MapObject
 {
     class MainMapObjectView : IMapObjectView
     {
-        public MainMapObject MapObject { get; protected set; }
+        public FunyaMapObject MapObject { get; protected set; }
         public Sprite ImageResource { get; set; }
 
         private Canvas canvas = null;
@@ -29,7 +29,7 @@ namespace MifuminSoft.funyak.View.MapObject
             }
         }
 
-        public MainMapObjectView(MainMapObject mapObject) => MapObject = mapObject;
+        public MainMapObjectView(FunyaMapObject mapObject) => MapObject = mapObject;
 
         public void Update(MapObjectViewUpdateArgs args)
         {

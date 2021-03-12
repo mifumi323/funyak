@@ -29,7 +29,7 @@ namespace WPFTests
         readonly ElapsedFrameCounter frameCounter = new ElapsedFrameCounter();
         Map map;
         MapView mapView;
-        MainMapObject main;
+        FunyaMapObject main;
         readonly IInput input;
         readonly Sprite resource;
 
@@ -49,7 +49,7 @@ namespace WPFTests
             {
                 Input = input,
             });
-            main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as MainMapObject;
+            main = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as FunyaMapObject;
 
             // ちょっとタイルグリッドのテストをねじ込もう
             int tcx = 10, tcy = 7;

@@ -19,7 +19,7 @@ namespace MifuminSoft.funyak.UnitTests
         public void AddMapObjectTest()
         {
             var map = new Map(320, 224);
-            var mapObject = new MainMapObject(80, 112);
+            var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
             var mapObjects = map.GetMapObjects();
 
@@ -30,7 +30,7 @@ namespace MifuminSoft.funyak.UnitTests
         public void RemoveMapObjectTest()
         {
             var map = new Map(320, 224);
-            var mapObject = new MainMapObject(80, 112);
+            var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
             map.RemoveMapObject(mapObject);
             var mapObjects = map.GetMapObjects();
@@ -42,12 +42,12 @@ namespace MifuminSoft.funyak.UnitTests
         public void FindMapObjectTest()
         {
             var map = new Map(320, 224);
-            var namedMapObject = new MainMapObject(80, 112)
+            var namedMapObject = new FunyaMapObject(80, 112)
             {
                 Name = "knownName",
             };
             map.AddMapObject(namedMapObject);
-            var unnamedMapObject = new MainMapObject(240, 112)
+            var unnamedMapObject = new FunyaMapObject(240, 112)
             {
             };
             map.AddMapObject(unnamedMapObject);
@@ -107,7 +107,7 @@ namespace MifuminSoft.funyak.UnitTests
             {
                 for (int y = 0; y < cellCountY; y++)
                 {
-                    map.AddMapObject(new MainMapObject(x * cellWidth + cellWidth / 2, y * cellHeight + cellHeight / 2));
+                    map.AddMapObject(new FunyaMapObject(x * cellWidth + cellWidth / 2, y * cellHeight + cellHeight / 2));
                 }
             }
 

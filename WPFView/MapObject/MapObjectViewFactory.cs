@@ -14,7 +14,7 @@ namespace MifuminSoft.funyak.View.MapObject
             {
                 return new LineMapObjectView(lineMapObject);
             }
-            if (mapObject is MainMapObject mainMapObject)
+            if (mapObject is FunyaMapObject mainMapObject)
             {
                 return new MainMapObjectView(mainMapObject)
                 {

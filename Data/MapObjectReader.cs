@@ -18,7 +18,7 @@ namespace MifuminSoft.funyak.Data
 
         private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
         {
-            var mainMapObject = new MainMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
+            var mainMapObject = new FunyaMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
             {
                 Input = data.i != null ? InputReader.FromDynamic(data.i, option) : option.Input,
 

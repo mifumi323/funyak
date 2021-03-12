@@ -11,7 +11,7 @@ namespace MifuminSoft.funyak.MapObject
     /// <summary>
     /// 主人公のマップオブジェクト
     /// </summary>
-    public class MainMapObject : MapObjectBase, IUpdatableMapObject, IBounds
+    public class FunyaMapObject : MapObjectBase, IUpdatableMapObject, IBounds
     {
         #region 主人公の状態
 
@@ -334,7 +334,7 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         /// <param name="x">X座標</param>
         /// <param name="y">Y座標</param>
-        public MainMapObject(double x, double y)
+        public FunyaMapObject(double x, double y)
         {
             State = MainMapObjectState.Float;
 
