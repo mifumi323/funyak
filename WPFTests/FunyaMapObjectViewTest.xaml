@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:WPFTests"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="MainMapObjectViewTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
+      Title="FunyaMapObjectViewTest" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
 
     <Grid>
         <Grid.RowDefinitions>

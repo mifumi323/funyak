@@ -188,7 +188,7 @@
     <Content Include="Assets\Geasprin.png.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\mainmapobjectviewtest.json">
+    <Content Include="Assets\funyamapobjectviewtest.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\mapiotest.json">

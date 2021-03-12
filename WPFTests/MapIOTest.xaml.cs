@@ -76,7 +76,7 @@ namespace WPFTests
                 canvas.Children.Clear();
                 mapView = new MapView(map, new MapObjectViewFactory()
                 {
-                    MainMapObjectResourceSelector = a => resource,
+                    FunyaMapObjectResourceSelector = a => resource,
                 })
                 {
                     Canvas = canvas,

@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.Data
     {
         public static MapObjectBase FromDynamic(dynamic data, MapReaderOption option) => (string)data.type switch
         {
-            "funya" => GenerateMainMapObject(data, option),
+            "funya" => GenerateFunyaMapObject(data, option),
             "line" => GenerateLineMapObject(data, option),
             "tile" => GenerateTileMapObject(data, option),
             "rect" => GenerateRectangleMapObject(data, option),
@@ -16,9 +16,9 @@ namespace MifuminSoft.funyak.Data
             _ => throw new ArgumentException($"不明なdata.type\"{data.type}\"です。")
         };
 
-        private static MapObjectBase GenerateMainMapObject(dynamic data, MapReaderOption option)
+        private static MapObjectBase GenerateFunyaMapObject(dynamic data, MapReaderOption option)
         {
-            var mainMapObject = new FunyaMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
+            var funyaMapObject = new FunyaMapObject((double)(data.x ?? 0.0), (double)(data.y ?? 0.0))
             {
                 Input = data.i != null ? InputReader.FromDynamic(data.i, option) : option.Input,
 
@@ -39,11 +39,11 @@ namespace MifuminSoft.funyak.Data
 
                 Size = data.size ?? 28.0,
             };
-            mainMapObject.PreviousX = data.px ?? mainMapObject.X;
-            mainMapObject.PreviousY = data.py ?? mainMapObject.Y;
-            mainMapObject.PreviousVelocityX = data.pvx ?? mainMapObject.VelocityX;
-            mainMapObject.PreviousVelocityY = data.pvy ?? mainMapObject.VelocityY;
-            return mainMapObject;
+            funyaMapObject.PreviousX = data.px ?? funyaMapObject.X;
+            funyaMapObject.PreviousY = data.py ?? funyaMapObject.Y;
+            funyaMapObject.PreviousVelocityX = data.pvx ?? funyaMapObject.VelocityX;
+            funyaMapObject.PreviousVelocityY = data.pvy ?? funyaMapObject.VelocityY;
+            return funyaMapObject;
         }
 
         private static MapObjectBase GenerateLineMapObject(dynamic data, MapReaderOption option)
