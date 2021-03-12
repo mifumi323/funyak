@@ -1,6 +1,6 @@
 ﻿namespace MifuminSoft.funyak.MapObject
 {
-    public class MainMapObjectCharge
+    public class FunyaMapObjectCharge
     {
         public int Time;
         public double Velocity;

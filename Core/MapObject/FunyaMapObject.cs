@@ -279,24 +279,24 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// ジャンプの溜めデータ
         /// </summary>
-        public IList<MainMapObjectCharge> JumpCharge = new List<MainMapObjectCharge>()
+        public IList<FunyaMapObjectCharge> JumpCharge = new List<FunyaMapObjectCharge>()
         {
-            new MainMapObjectCharge()
+            new FunyaMapObjectCharge()
             {
                 Time = 9,
                 Velocity = 255.0 / 60.0,
             },
-            new MainMapObjectCharge()
+            new FunyaMapObjectCharge()
             {
                 Time = 30,
                 Velocity = 205.0 / 60.0,
             },
-            new MainMapObjectCharge()
+            new FunyaMapObjectCharge()
             {
                 Time = 90,
                 Velocity = 155.0 / 60.0,
             },
-            new MainMapObjectCharge()
+            new FunyaMapObjectCharge()
             {
                 Time = 0,
                 Velocity = 60.0 / 60.0,
