@@ -23,7 +23,7 @@ namespace WPFTests
             point.X = Math.Round(canvas.ActualWidth / 2);
             point.Y = Math.Round(canvas.ActualHeight / 2);
 
-            resource = SpriteReader.Read(@"Assets\main.png");
+            resource = SpriteReader.Read(@"Assets\funya.png");
 
             listBox.ItemsSource = resource.Chip;
             listBox.SelectedItem = resource.Chip.First();

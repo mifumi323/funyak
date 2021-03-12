@@ -182,7 +182,7 @@
     <Content Include="Assets\Geasprin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\main.png.json">
+    <Content Include="Assets\funya.png.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Geasprin.png.json">
@@ -233,7 +233,7 @@
     <Content Include="Assets\Ice.bmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\main.png">
+    <Content Include="Assets\funya.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

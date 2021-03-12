@@ -34,7 +34,7 @@ namespace WPFTests
                 imageMap = miMap.ToBitmapSource();
                 imageMap.Freeze();
             }
-            using (var miMain = new MagickImage("Assets/main.png"))
+            using (var miMain = new MagickImage("Assets/funya.png"))
             {
                 imageMain = miMain.ToBitmapSource();
                 imageMain.Freeze();
