@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using MifuminSoft.funyak.MapObject;
 using NUnit.Framework;
 
@@ -9,7 +8,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public RingOutTest()
         {
-            MapFilePath = Path.Combine("TestFiles", "RingOutTest.json");
+            MapFilePath = "RingOutTest.json";
             FailOnTimeout = true;
             TimeoutFrames = 100;
         }

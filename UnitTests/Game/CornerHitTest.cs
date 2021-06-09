@@ -1,5 +1,4 @@
-﻿using System.IO;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace MifuminSoft.funyak.UnitTests.Game
 {
@@ -7,7 +6,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public CornerHitTest()
         {
-            MapFilePath = Path.Combine("TestFiles", "CornerHitTest.json");
+            MapFilePath = "CornerHitTest.json";
             FailOnTimeout = false;
             TimeoutFrames = 100;
         }

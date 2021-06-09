@@ -5,8 +5,8 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.Core.Tests;
+using MifuminSoft.funyak.UnitTests;
+using NUnit.Framework;
 
 namespace WPFTests
 {
@@ -41,10 +41,10 @@ namespace WPFTests
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var assembly = Assembly.GetAssembly(typeof(MapTest));
-            var testClasses = assembly.GetTypes().Where(t => !t.IsAbstract && t.GetCustomAttribute<TestClassAttribute>() != null);
+            var testClasses = assembly.GetTypes().Where(t => !t.IsAbstract);
             foreach (var testClass in testClasses)
             {
-                var testMethods = testClass.GetMethods().Where(m => m.GetCustomAttribute<TestMethodAttribute>() != null);
+                var testMethods = testClass.GetMethods().Where(m => m.GetCustomAttribute<TestAttribute>() != null);
                 foreach (var testMethod in testMethods)
                 {
                     TestCaseList.Add(new TestCase()
@@ -79,10 +79,25 @@ namespace WPFTests
                         testCase.TestResult = TestCase.Result.Success;
                         testCase.TestException = null;
                     }
-                    catch (AssertFailedException e)
+                    catch (AssertionException e)
                     {
                         testCase.TestResult = TestCase.Result.Failure;
                         testCase.TestException = e;
+                    }
+                    catch (TargetInvocationException tie) when (tie.InnerException is AssertionException e)
+                    {
+                        testCase.TestResult = TestCase.Result.Failure;
+                        testCase.TestException = e;
+                    }
+                    catch (SuccessException)
+                    {
+                        testCase.TestResult = TestCase.Result.Success;
+                        testCase.TestException = null;
+                    }
+                    catch (TargetInvocationException tie) when (tie.InnerException is SuccessException)
+                    {
+                        testCase.TestResult = TestCase.Result.Success;
+                        testCase.TestException = null;
                     }
                     catch (Exception e)
                     {
