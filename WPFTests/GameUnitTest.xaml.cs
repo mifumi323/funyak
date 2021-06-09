@@ -5,12 +5,12 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MifuminSoft.funyak.Core.Tests;
-using MifuminSoft.funyak.Core.Tests.GameTest;
+using MifuminSoft.funyak.UnitTests;
+using MifuminSoft.funyak.UnitTests.Game;
 using MifuminSoft.funyak.View;
 using MifuminSoft.funyak.View.MapObject;
 using MifuminSoft.funyak.View.Resource;
+using NUnit.Framework;
 
 namespace WPFTests
 {
@@ -60,10 +60,25 @@ namespace WPFTests
                     TestObject = (GameTestBase)Activator.CreateInstance(TestCase.TestClass);
                     TestObject.Initialize();
                 }
-                catch (AssertFailedException ex)
+                catch (AssertionException ex)
                 {
                     TestCase.TestResult = TestCase.Result.Failure;
                     TestCase.TestException = ex;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is AssertionException e)
+                {
+                    TestCase.TestResult = TestCase.Result.Failure;
+                    TestCase.TestException = e;
+                }
+                catch (SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
                 }
                 catch (Exception ex)
                 {
@@ -96,10 +111,25 @@ namespace WPFTests
                     }
                     Frames++;
                 }
-                catch (AssertFailedException ex)
+                catch (AssertionException ex)
                 {
                     TestCase.TestResult = TestCase.Result.Failure;
                     TestCase.TestException = ex;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is AssertionException e)
+                {
+                    TestCase.TestResult = TestCase.Result.Failure;
+                    TestCase.TestException = e;
+                }
+                catch (SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
                 }
                 catch (Exception ex)
                 {
@@ -114,10 +144,25 @@ namespace WPFTests
                 {
                     TestObject.Terminate();
                 }
-                catch (AssertFailedException ex)
+                catch (AssertionException ex)
                 {
                     TestCase.TestResult = TestCase.Result.Failure;
                     TestCase.TestException = ex;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is AssertionException e)
+                {
+                    TestCase.TestResult = TestCase.Result.Failure;
+                    TestCase.TestException = e;
+                }
+                catch (SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
+                }
+                catch (TargetInvocationException tie) when (tie.InnerException is SuccessException)
+                {
+                    TestCase.TestResult = TestCase.Result.Success;
+                    TestCase.TestException = null;
                 }
                 catch (Exception ex)
                 {
@@ -146,7 +191,7 @@ namespace WPFTests
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var assembly = Assembly.GetAssembly(typeof(MapTest));
-            var testClasses = assembly.GetTypes().Where(t => !t.IsAbstract && t.GetCustomAttribute<TestClassAttribute>() != null && t.IsSubclassOf(typeof(GameTestBase)));
+            var testClasses = assembly.GetTypes().Where(t => !t.IsAbstract && t.IsSubclassOf(typeof(GameTestBase)));
             foreach (var testClass in testClasses)
             {
                 testCaseList.Add(new TestCase()
