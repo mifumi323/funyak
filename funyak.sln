@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfTests", "WPFTests\WpfTests.csproj", "{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{26DF7145-C6C1-41B1-A8E7-8AE8303AC515} = {26DF7145-C6C1-41B1-A8E7-8AE8303AC515}
@@ -26,7 +24,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{FBB86A72-491D-4214-BDDF-8C97B060C65A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometry", "Geometry\Geometry.csproj", "{D9A838EA-CA21-40FC-8EB5-0A802DC198B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometry", "Geometry\Geometry.csproj", "{D9A838EA-CA21-40FC-8EB5-0A802DC198B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,10 +32,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56934C3A-B143-47D7-80A6-DF6C1C8AEF0F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BEAC06C0-B211-4E1A-941A-7451B1A0A8C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
