@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <RootNamespace>MifuminSoft.funyak.Data</RootNamespace>
     <AssemblyName>funyak.Data</AssemblyName>
     <LangVersion>8.0</LangVersion>
@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="YamlDotNet" Version="11.1.1" />
   </ItemGroup>
 
   <ItemGroup>
