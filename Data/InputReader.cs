@@ -1,5 +1,6 @@
 ﻿using System;
 using MifuminSoft.funyak.Input;
+using YamlDotNet.RepresentationModel;
 
 namespace MifuminSoft.funyak.Data
 {
@@ -17,5 +18,10 @@ namespace MifuminSoft.funyak.Data
             HorizontalReverse = data.hr ?? false,
             VerticalReverse = data.vr ?? false,
         };
+
+        public static IInput FromYamlNode(YamlNode inputNode, MapReaderOption option)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
