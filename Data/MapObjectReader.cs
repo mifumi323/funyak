@@ -94,7 +94,6 @@ namespace MifuminSoft.funyak.Data
             collider.RegionInfo.Wind = objectNode.GetDouble("w", double.NaN);
             collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
             regionMapObject.Collider = collider;
-            regionMapObject.Color = objectNode.GetStringOrNull("color");
             return regionMapObject;
         }
 
