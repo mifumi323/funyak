@@ -1,4 +1,6 @@
-﻿using MifuminSoft.funyak.MapEnvironment;
+﻿using System;
+using MifuminSoft.funyak.MapEnvironment;
+using YamlDotNet.RepresentationModel;
 
 namespace MifuminSoft.funyak.Data
 {
@@ -18,5 +20,10 @@ namespace MifuminSoft.funyak.Data
 
             BackgroundColor = data.c,
         };
+
+        public static AreaEnvironment? FromYamlNode(YamlNode areaNode, MapReaderOption option)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
