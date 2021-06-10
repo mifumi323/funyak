@@ -1,6 +1,7 @@
 ﻿using System;
 using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.MapObject;
+using YamlDotNet.RepresentationModel;
 
 namespace MifuminSoft.funyak.Data
 {
@@ -99,6 +100,11 @@ namespace MifuminSoft.funyak.Data
             collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
             ellipseMapObject.Collider = collider;
             return ellipseMapObject;
+        }
+
+        public static MapObjectBase? FromYamlNode(YamlNode objectNode, MapReaderOption option)
+        {
+            throw new NotImplementedException();
         }
     }
 }
