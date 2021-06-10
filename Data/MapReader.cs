@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using MifuminSoft.funyak.Input;
-using Newtonsoft.Json;
 using YamlDotNet.RepresentationModel;
 
 namespace MifuminSoft.funyak.Data
@@ -20,13 +19,6 @@ namespace MifuminSoft.funyak.Data
             yaml.Load(input);
             var yamlNode = yaml.Documents[0].RootNode;
             return FromYamlNode(yamlNode, option);
-
-            var deserialized = JsonConvert.DeserializeObject(data);
-            if (deserialized == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-            return FromDynamic(deserialized, option);
         }
 
         private static Map FromYamlNode(YamlNode yamlNode, MapReaderOption option)
@@ -62,33 +54,6 @@ namespace MifuminSoft.funyak.Data
                 foreach (var areaNode in areasNode)
                 {
                     var areaEnvironment = AreaEnvironmentReader.FromYamlNode(areaNode, option);
-                    if (areaEnvironment != null) map.AddAreaEnvironment(areaEnvironment);
-                }
-            }
-            return map;
-        }
-
-        public static Map FromDynamic(dynamic data, MapReaderOption option)
-        {
-            var map = new Map((double)(data.width ?? 100.0), (double)(data.height ?? 100.0))
-            {
-                BackgroundColor = (string)(data.color ?? "Transparent"),
-                Gravity = (double)(data.gravity ?? 1.0),
-                Wind = (double)(data.wind ?? 0.0),
-            };
-            if (data.objects != null)
-            {
-                foreach (var mapObjectData in data.objects)
-                {
-                    var mapObject = MapObjectReader.FromDynamic(mapObjectData, option);
-                    if (mapObject != null) map.AddMapObject(mapObject);
-                }
-            }
-            if (data.areas != null)
-            {
-                foreach (var areaEnvironmentData in data.areas)
-                {
-                    var areaEnvironment = AreaEnvironmentReader.FromDynamic(areaEnvironmentData, option);
                     if (areaEnvironment != null) map.AddAreaEnvironment(areaEnvironment);
                 }
             }
