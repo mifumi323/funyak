@@ -31,8 +31,7 @@ namespace MifuminSoft.funyak.Data
 
         private static Map FromYamlNode(YamlNode yamlNode, MapReaderOption option)
         {
-            var mappingNode = yamlNode as YamlMappingNode;
-            if (mappingNode is null)
+            if (!(yamlNode is YamlMappingNode mappingNode))
             {
                 throw new ArgumentException("mapのデータ構造はマッピングノードである必要があります。", nameof(yamlNode));
             }
