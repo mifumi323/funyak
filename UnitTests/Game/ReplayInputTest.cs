@@ -7,7 +7,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public ReplayInputTest()
         {
-            MapFilePath = "ReplayInputTest.json";
+            MapFilePath = "ReplayInputTest.yml";
             FailOnTimeout = true;
             TimeoutFrames = 15 * 60;
             var input = new ReplayInput()

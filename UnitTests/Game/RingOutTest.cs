@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public RingOutTest()
         {
-            MapFilePath = "RingOutTest.json";
+            MapFilePath = "RingOutTest.yml";
             FailOnTimeout = true;
             TimeoutFrames = 100;
         }
