@@ -1,0 +1,31 @@
+﻿---
+width: 300
+height: 300
+color: LightGreen
+gravity: 0
+wind: 0
+objects:
+- type: funya
+  x: 100
+  y: 150
+  vx: -5
+  vy: 0
+  n: A
+- type: funya
+  x: 150
+  y: 100
+  vx: 0
+  vy: -5
+  n: B
+- type: funya
+  x: 200
+  y: 150
+  vx: 5
+  vy: 0
+  n: C
+- type: funya
+  x: 150
+  y: 200
+  vx: 0
+  vy: 5
+  n: D

@@ -6,7 +6,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
     {
         public CornerHitTest()
         {
-            MapFilePath = "CornerHitTest.json";
+            MapFilePath = "CornerHitTest.yml";
             FailOnTimeout = false;
             TimeoutFrames = 100;
         }

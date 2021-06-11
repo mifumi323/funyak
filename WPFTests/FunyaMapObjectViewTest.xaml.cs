@@ -45,7 +45,7 @@ namespace WPFTests
 
         private void Reset()
         {
-            map = MapReader.FromString(File.ReadAllText(@"Assets\funyamapobjectviewtest.json"), new MapReaderOption()
+            map = MapReader.FromString(File.ReadAllText(@"Assets\funyamapobjectviewtest.yml"), new MapReaderOption()
             {
                 Input = input,
             });

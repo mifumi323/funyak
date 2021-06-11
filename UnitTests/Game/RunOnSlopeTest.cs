@@ -13,7 +13,7 @@ namespace MifuminSoft.funyak.UnitTests.Game
 
         public RunOnSlopeTest()
         {
-            MapFilePath = "RunOnSlopeTest.json";
+            MapFilePath = "RunOnSlopeTest.yml";
             FailOnTimeout = true;
             TimeoutFrames = 600;
             var input = new ReplayInput()

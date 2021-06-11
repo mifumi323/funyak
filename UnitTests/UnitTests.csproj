@@ -11,23 +11,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="GameTestBaseTest.json" />
-    <None Remove="ReplayInputTest.json" />
-    <None Remove="RingOutTest.json" />
-    <None Remove="RunOnSlopeTest.json" />
+    <None Remove="CornerHitTest.yml" />
+    <None Remove="GameTestBaseTest.yml" />
+    <None Remove="ReplayInputTest.yml" />
+    <None Remove="RingOutTest.yml" />
+    <None Remove="RunOnSlopeTest.yml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="GameTestBaseTest.json">
+    <Content Include="CornerHitTest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="ReplayInputTest.json">
+    <Content Include="GameTestBaseTest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="RingOutTest.json">
+    <Content Include="ReplayInputTest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="RunOnSlopeTest.json">
+    <Content Include="RingOutTest.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="RunOnSlopeTest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
