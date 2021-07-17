@@ -4,6 +4,8 @@ namespace MifuminSoft.funyak.Collision
 {
     public abstract class PlateCollider : ColliderBase
     {
+        public PlateInfo PlateInfo { get; private set; } = new PlateInfo();
+
         /// <summary>
         /// 衝突時に呼ばれるコールバックを指定します。
         /// </summary>
