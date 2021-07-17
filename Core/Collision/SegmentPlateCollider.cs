@@ -6,7 +6,6 @@ namespace MifuminSoft.funyak.Collision
     public sealed class SegmentPlateCollider : PlateCollider
     {
         public Segment2D Segment { get; private set; }
-        public PlateInfo PlateInfo { get; private set; } = new PlateInfo();
 
         public SegmentPlateCollider(MapObjectBase owner) : base(owner) { }
 
