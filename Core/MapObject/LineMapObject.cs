@@ -49,15 +49,6 @@ namespace MifuminSoft.funyak.MapObject
         }
 
         /// <summary>
-        /// 有効か否か
-        /// </summary>
-        public bool Active
-        {
-            get => collider.PlateInfo.HasFlag(PlateAttributeFlag.Active);
-            set => collider.PlateInfo.SetFlag(PlateAttributeFlag.Active, value);
-        }
-
-        /// <summary>
         /// 上の当たり判定
         /// </summary>
         public bool HitUpper
@@ -163,7 +154,7 @@ namespace MifuminSoft.funyak.MapObject
         public LineMapObject(double x1, double y1, double x2, double y2)
         {
             collider = new SegmentPlateCollider(this);
-            collider.PlateInfo.Flags = PlateAttributeFlag.Active;
+            collider.PlateInfo.Flags = PlateAttributeFlag.None;
             collider.PlateInfo.Friction = 1.0;
             collider.SetSegment(new Segment2D(x1, y1, x2, y2));
             segment = new CollidableSegment()
