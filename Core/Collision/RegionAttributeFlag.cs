@@ -7,5 +7,7 @@ namespace MifuminSoft.funyak.Collision
     {
         None = 0,
         Active = 1 << 0,
+        Gravity = 1 << 1,
+        Wind = 1 << 2,
     }
 }
