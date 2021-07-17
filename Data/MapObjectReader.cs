@@ -92,7 +92,8 @@ namespace MifuminSoft.funyak.Data
             collider.SetPosition(objectNode.GetDouble("l", 0.0), objectNode.GetDouble("t", 0.0), objectNode.GetDouble("r", 0.0), objectNode.GetDouble("b", 0.0));
             collider.RegionInfo.Gravity = objectNode.GetDouble("g", double.NaN);
             collider.RegionInfo.Wind = objectNode.GetDouble("w", double.NaN);
-            collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Gravity, !double.IsNaN(collider.RegionInfo.Gravity));
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Wind, !double.IsNaN(collider.RegionInfo.Wind));
             regionMapObject.Collider = collider;
             return regionMapObject;
         }
@@ -108,7 +109,8 @@ namespace MifuminSoft.funyak.Data
             collider.SetPosition(objectNode.GetDouble("l", 0.0), objectNode.GetDouble("t", 0.0), objectNode.GetDouble("r", 0.0), objectNode.GetDouble("b", 0.0));
             collider.RegionInfo.Gravity = objectNode.GetDouble("g", double.NaN);
             collider.RegionInfo.Wind = objectNode.GetDouble("w", double.NaN);
-            collider.RegionInfo.SetFlag(RegionAttributeFlag.Active, true);
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Gravity, !double.IsNaN(collider.RegionInfo.Gravity));
+            collider.RegionInfo.SetFlag(RegionAttributeFlag.Wind, !double.IsNaN(collider.RegionInfo.Wind));
             ellipseMapObject.Collider = collider;
             return ellipseMapObject;
         }
