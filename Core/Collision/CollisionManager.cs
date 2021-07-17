@@ -25,10 +25,16 @@ namespace MifuminSoft.funyak.Collision
             {
                 foreach (var pointCollider in pointColliders)
                 {
-                    if (regionCollider.Owner != pointCollider.Owner && regionCollider.Contains(pointCollider, out var collision))
+                    if (regionCollider.Owner != pointCollider.Owner)
                     {
-                        regionCollider.OnCollided?.Invoke(ref collision);
-                        pointCollider.OnCollided?.Invoke(ref collision);
+                        if ((regionCollider.RegionInfo.Flags & pointCollider.Reactivities) != RegionAttributeFlag.None)
+                        {
+                            if (regionCollider.Contains(pointCollider, out var collision))
+                            {
+                                regionCollider.OnCollided?.Invoke(ref collision);
+                                pointCollider.OnCollided?.Invoke(ref collision);
+                            }
+                        }
                     }
                 }
             }
@@ -38,10 +44,13 @@ namespace MifuminSoft.funyak.Collision
                 {
                     if (plateCollider.Owner != needleCollider.Owner)
                     {
-                        if (plateCollider.IsCollided(needleCollider, out var collision))
+                        if ((plateCollider.PlateInfo.Flags & needleCollider.Reactivities) != PlateAttributeFlag.None)
                         {
-                            plateCollider.OnCollided?.Invoke(ref collision);
-                            needleCollider.OnCollided?.Invoke(ref collision);
+                            if (plateCollider.IsCollided(needleCollider, out var collision))
+                            {
+                                plateCollider.OnCollided?.Invoke(ref collision);
+                                needleCollider.OnCollided?.Invoke(ref collision);
+                            }
                         }
                     }
                 }
