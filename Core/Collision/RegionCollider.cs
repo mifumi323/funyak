@@ -4,6 +4,8 @@ namespace MifuminSoft.funyak.Collision
 {
     public abstract class RegionCollider : ColliderBase
     {
+        public RegionInfo RegionInfo { get; private set; } = new RegionInfo();
+
         /// <summary>
         /// 衝突時に呼ばれるコールバックを指定します。
         /// </summary>
