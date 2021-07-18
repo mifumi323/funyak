@@ -350,14 +350,14 @@ namespace MifuminSoft.funyak.MapObject
             centerCollider = new PointCollider(this);
         }
 
-        public override void OnJoin(Map map, CollisionManager collisionManager)
+        public override void OnJoin(Map map, ColliderCollection colliderCollection)
         {
-            collisionManager.Add(centerCollider);
+            colliderCollection.Add(centerCollider);
         }
 
-        public override void OnLeave(Map map, CollisionManager collisionManager)
+        public override void OnLeave(Map map, ColliderCollection colliderCollection)
         {
-            collisionManager.Remove(centerCollider);
+            colliderCollection.Remove(centerCollider);
         }
 
         public void UpdateSelf(UpdateMapObjectArgs args)
