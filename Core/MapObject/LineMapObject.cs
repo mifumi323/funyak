@@ -172,7 +172,7 @@ namespace MifuminSoft.funyak.MapObject
 
         public CollidableSegment ToCollidableSegment() => segment;
 
-        public override void OnJoin(Map map, CollisionManager collisionManager) => collisionManager.Add(collider);
-        public override void OnLeave(Map map, CollisionManager collisionManager) => collisionManager.Remove(collider);
+        public override void OnJoin(Map map, ColliderCollection colliderCollection) => colliderCollection.Add(collider);
+        public override void OnLeave(Map map, ColliderCollection colliderCollection) => colliderCollection.Remove(collider);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace MifuminSoft.funyak.Collision
 {
-    public class CollisionManager
+    public class ColliderCollection
     {
         private readonly List<RegionCollider> regionColliders = new List<RegionCollider>();
         private readonly List<PointCollider> pointColliders = new List<PointCollider>();

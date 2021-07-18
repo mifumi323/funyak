@@ -50,7 +50,7 @@ namespace MifuminSoft.funyak
         private readonly ICollection<MapObjectBase> mapObjectCollection;
         private readonly ICollection<IUpdatableMapObject> selfUpdatableMapObjectCollection;
         private readonly IDictionary<string, MapObjectBase> namedMapObject;
-        private readonly CollisionManager collisionManager;
+        private readonly ColliderCollection colliderCollection;
 
         /// <summary>
         /// 環境が追加されたときに発生します。
@@ -88,7 +88,7 @@ namespace MifuminSoft.funyak
             namedMapObject = new Dictionary<string, MapObjectBase>();
             areaEnvironmentCollection = new List<AreaEnvironment>();
             namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
-            collisionManager = new CollisionManager();
+            colliderCollection = new ColliderCollection();
 
             realizeCollisionArgs = new RealizeCollisionArgs(this);
         }
@@ -102,7 +102,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name!] = mapObject;
-            mapObject.OnJoin(this, collisionManager);
+            mapObject.OnJoin(this, colliderCollection);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
@@ -116,7 +116,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Remove(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Remove(selfUpdatableMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject.Remove(mapObject.Name!);
-            mapObject.OnLeave(this, collisionManager);
+            mapObject.OnLeave(this, colliderCollection);
 
             MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
@@ -139,7 +139,7 @@ namespace MifuminSoft.funyak
         {
             UpdateMapObjects();
             CheckMapObjectsCollision();
-            collisionManager.Collide();
+            colliderCollection.Collide();
             RealizeMapObjectsCollision();
             FrameCount++;
         }
