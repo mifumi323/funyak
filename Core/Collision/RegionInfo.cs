@@ -6,7 +6,7 @@
         public double Gravity { get; set; }
         public double Wind { get; set; }
 
-        public bool HasFlag(RegionAttributeFlag flag) => (Flags & flag) != RegionAttributeFlag.None;
-        public void SetFlag(RegionAttributeFlag flag, bool value) => Flags = value ? (Flags | flag) : (Flags & ~flag);
+        public bool HasFlag(RegionAttributeFlag flag) => Flags.Has(flag);
+        public void SetFlag(RegionAttributeFlag flag, bool value) => Flags = Flags.SetTo(flag, value);
     }
 }
