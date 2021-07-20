@@ -314,6 +314,11 @@ namespace MifuminSoft.funyak.MapObject
         #region 当たり判定
 
         private readonly PointCollider centerCollider;
+        public RegionAttributeFlag CenterReactivities
+        {
+            get => centerCollider.Reactivities;
+            set => centerCollider.Reactivities = value;
+        }
 
         private double c2rX;
         private double c2rY;
@@ -347,7 +352,11 @@ namespace MifuminSoft.funyak.MapObject
             GroundNormalY = -1.0;
             GroundFriction = 1.0;
 
-            centerCollider = new PointCollider(this);
+            centerCollider = new PointCollider(this)
+            {
+                Reactivities = RegionAttributeFlag.Gravity | RegionAttributeFlag.Wind,
+                OnCollided = OnCenterCollided,
+            };
         }
 
         public override void OnJoin(Map map, ColliderCollection colliderCollection)
@@ -722,6 +731,9 @@ namespace MifuminSoft.funyak.MapObject
 
         public override void CheckCollision(CheckMapObjectCollisionArgs args)
         {
+            // 共通当たり判定の位置更新
+            centerCollider.SetPoint(X, Y);
+
             // 位置とか
             var x = X;
             var y = Y;
@@ -860,6 +872,10 @@ namespace MifuminSoft.funyak.MapObject
             c2rTouchedTop = touchedTop;
             c2rTouchedRight = touchedRight;
             c2rTouchedBottom = touchedBottom;
+        }
+
+        public void OnCenterCollided(ref RegionPointCollision collision)
+        {
         }
 
         public override void RealizeCollision(RealizeCollisionArgs args)
