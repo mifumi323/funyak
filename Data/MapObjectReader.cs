@@ -46,6 +46,9 @@ namespace MifuminSoft.funyak.Data
                 State = stateName is null ? FunyaMapObjectState.Float : (FunyaMapObjectState)Enum.Parse(typeof(FunyaMapObjectState), stateName),
                 StateCounter = objectNode.GetInt32("sc", 0),
 
+                CollidedGravity = objectNode.GetDouble("cg", double.NaN),
+                CollidedWind = objectNode.GetDouble("cw", double.NaN),
+
                 GroundNormalX = objectNode.GetDouble("gx", 0.0),
                 GroundNormalY = objectNode.GetDouble("gy", -1.0),
                 GroundFriction = objectNode.GetDouble("f", 1.0),
