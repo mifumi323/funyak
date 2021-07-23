@@ -83,6 +83,8 @@ namespace MifuminSoft.funyak.MapObject
         public int StateCounter { get; set; }
         public int ChargeTime { get; set; }
 
+        public double CollidedGravity { get; set; } = double.NaN;
+
         /// <summary>
         /// 方向
         /// </summary>
@@ -372,7 +374,7 @@ namespace MifuminSoft.funyak.MapObject
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
             var env = args.GetEnvironment(X, Y);
-            var gravity = env.Gravity;
+            var gravity = double.IsNaN(CollidedGravity) ? env.Gravity : CollidedGravity;
             var wind = env.Wind;
 
             detectGravity(gravity > 0);
@@ -735,6 +737,7 @@ namespace MifuminSoft.funyak.MapObject
         {
             // 共通当たり判定の位置更新
             centerCollider.SetPoint(X, Y);
+            CollidedGravity = double.NaN;
 
             // 位置とか
             var x = X;
@@ -878,6 +881,10 @@ namespace MifuminSoft.funyak.MapObject
 
         public void OnCenterCollided(ref RegionPointCollision collision)
         {
+            if (collision.RegionInfo.Flags.Has(RegionAttributeFlag.Gravity))
+            {
+                CollidedGravity = collision.RegionInfo.Gravity;
+            }
         }
 
         public override void RealizeCollision(RealizeCollisionArgs args)
