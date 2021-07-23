@@ -66,7 +66,7 @@ namespace MifuminSoft.funyak.MapObject
                     case FunyaMapObjectState.Die:
                         detectGravity = b => { };
                         updateSelfPreprocess = () => { };
-                        updateSelfMainProcess = me => { };
+                        updateSelfMainProcess = (gravity, wind) => { };
                         break;
                     default:
                         throw new Exception("FunyaMapObjectのStateがおかしいぞ。");
@@ -78,7 +78,7 @@ namespace MifuminSoft.funyak.MapObject
         private FunyaMapObjectState state;
         private Action<bool> detectGravity = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
         private Action updateSelfPreprocess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
-        private Action<IMapEnvironment> updateSelfMainProcess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
+        private Action<double, double> updateSelfMainProcess = null!; // Stateプロパティ初期化時に設定されるので実際は非null保証
 
         public int StateCounter { get; set; }
         public int ChargeTime { get; set; }
@@ -372,10 +372,12 @@ namespace MifuminSoft.funyak.MapObject
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
             var env = args.GetEnvironment(X, Y);
+            var gravity = env.Gravity;
+            var wind = env.Wind;
 
-            detectGravity(env.Gravity > 0);
+            detectGravity(gravity > 0);
             updateSelfPreprocess();
-            updateSelfMainProcess(env);
+            updateSelfMainProcess(gravity, wind);
             centerCollider.SetPoint(GetCenterX(X), GetCenterY(Y));
         }
 
@@ -457,24 +459,24 @@ namespace MifuminSoft.funyak.MapObject
             PreviousVelocityY = VelocityY;
         }
 
-        private void MainProcessStanding(IMapEnvironment env)
+        private void MainProcessStanding(double gravity, double wind)
         {
             if (Input.IsPressed(Keys.Left) || Input.IsPressed(Keys.Right))
             {
                 State = FunyaMapObjectState.Run;
-                MainProcessRunning(env);
+                MainProcessRunning(gravity, wind);
                 return;
             }
             else if (Input.IsPushed(Keys.Jump))
             {
                 State = FunyaMapObjectState.Charge;
-                MainProcessCharging(env);
+                MainProcessCharging(gravity, wind);
                 return;
             }
             else if (Input.IsPushed(Keys.Down))
             {
                 State = FunyaMapObjectState.Walk;
-                MainProcessWalking(env);
+                MainProcessWalking(gravity, wind);
                 return;
             }
             else if (Input.IsPressed(Keys.Up))
@@ -482,49 +484,49 @@ namespace MifuminSoft.funyak.MapObject
                 Direction = Direction.Front;
             }
 
-            UpdatePositionOnGround(0.0, 0.5, env.Wind);
+            UpdatePositionOnGround(0.0, 0.5, wind);
         }
 
-        private void MainProcessRunning(IMapEnvironment env)
+        private void MainProcessRunning(double gravity, double wind)
         {
             if (Input.IsPressed(Keys.Jump))
             {
                 State = FunyaMapObjectState.Charge;
-                MainProcessCharging(env);
+                MainProcessCharging(gravity, wind);
             }
             else if (Input.IsPressed(Keys.Down))
             {
                 State = FunyaMapObjectState.Walk;
-                MainProcessWalking(env);
+                MainProcessWalking(gravity, wind);
             }
             else if (Input.IsPressed(Keys.Left))
             {
                 Direction = Direction.Left;
-                UpdatePositionOnGround(-RunSpeed, 1.0, env.Wind);
+                UpdatePositionOnGround(-RunSpeed, 1.0, wind);
             }
             else if (Input.IsPressed(Keys.Right))
             {
                 Direction = Direction.Right;
-                UpdatePositionOnGround(RunSpeed, 1.0, env.Wind);
+                UpdatePositionOnGround(RunSpeed, 1.0, wind);
             }
             else
             {
                 State = FunyaMapObjectState.Stand;
-                MainProcessStanding(env);
+                MainProcessStanding(gravity, wind);
             }
         }
 
-        private void MainProcessWalking(IMapEnvironment env)
+        private void MainProcessWalking(double gravity, double wind)
         {
             if (Input.IsPushed(Keys.Jump))
             {
                 State = FunyaMapObjectState.Charge;
-                MainProcessCharging(env);
+                MainProcessCharging(gravity, wind);
             }
             else if (!Input.IsPressed(Keys.Down))
             {
                 State = FunyaMapObjectState.Stand;
-                MainProcessStanding(env);
+                MainProcessStanding(gravity, wind);
             }
             else if (Input.IsPressed(Keys.Left))
             {
@@ -543,7 +545,7 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        private void MainProcessCharging(IMapEnvironment env)
+        private void MainProcessCharging(double gravity, double wind)
         {
             if (!Input.IsPressed(Keys.Jump))
             {
@@ -555,32 +557,32 @@ namespace MifuminSoft.funyak.MapObject
                     if (ChargeTime < c.Time) break;
                 }
                 VelocityY = -v;
-                MainProcessJumping(env);
+                MainProcessJumping(gravity, wind);
                 return;
             }
             else if (Input.IsPushed(Keys.Down) && !Input.IsPushed(Keys.Jump))
             {
                 State = FunyaMapObjectState.Walk;
-                MainProcessWalking(env);
+                MainProcessWalking(gravity, wind);
                 return;
             }
             ChargeTime++;
         }
 
-        private void MainProcessJumping(IMapEnvironment env)
+        private void MainProcessJumping(double gravity, double wind)
         {
             if (Input.IsPressed(Keys.Down))
             {
                 State = FunyaMapObjectState.Fall;
-                MainProcessFalling(env);
+                MainProcessFalling(gravity, wind);
             }
             else
             {
-                var accelY = env.Gravity * GravityAccel;
+                var accelY = gravity * GravityAccel;
                 if (VelocityY >= -accelY)
                 {
                     State = FunyaMapObjectState.Fall;
-                    MainProcessFalling(env);
+                    MainProcessFalling(gravity, wind);
                     return;
                 }
                 VelocityY += accelY;
@@ -588,7 +590,7 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        private void MainProcessFalling(IMapEnvironment env)
+        private void MainProcessFalling(double gravity, double wind)
         {
             double accelX = (Input.IsPressed(Keys.Left) ? -1.0 : Input.IsPressed(Keys.Right) ? 1.0 : 0.0) * FloatingAccel;
             double accelY = 0;
@@ -600,14 +602,14 @@ namespace MifuminSoft.funyak.MapObject
             {
                 Direction = Direction.Right;
             }
-            UpdatePositionFalling(env.Gravity, env.Wind, accelX, accelY, VelocityY < 0 ^ Input.IsPressed(Keys.Down));
+            UpdatePositionFalling(gravity, wind, accelX, accelY, VelocityY < 0 ^ Input.IsPressed(Keys.Down));
         }
 
-        private void MainProcessFloating(IMapEnvironment env)
+        private void MainProcessFloating(double gravity, double wind)
         {
             double accelX = Input.X * FloatingAccel;
             double accelY = Input.Y * FloatingAccel;
-            UpdatePositionFloating(env.Wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
+            UpdatePositionFloating(wind, accelX, accelY, Input.IsPressed(Keys.Jump) ? 2 : 1);
         }
 
         private void UpdatePositionOnGround(double targetVelocity, double accelScale, double wind)
