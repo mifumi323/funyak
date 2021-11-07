@@ -17,6 +17,7 @@
     <None Remove="ReplayInputTest.yml" />
     <None Remove="RingOutTest.yml" />
     <None Remove="RunOnSlopeTest.yml" />
+    <None Remove="SandwichedFunyaTest.yml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +37,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="RunOnSlopeTest.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SandwichedFunyaTest.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
