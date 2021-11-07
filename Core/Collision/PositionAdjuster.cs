@@ -44,7 +44,7 @@ namespace MifuminSoft.funyak.Collision
             }
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             x = 0.0;
             y = 0.0;
@@ -89,6 +89,18 @@ namespace MifuminSoft.funyak.Collision
     {
         public PositionAdjusterHigh() => y = double.PositiveInfinity;
 
+        public override void Reset()
+        {
+            x = 0.0;
+            y = double.PositiveInfinity;
+            vx = 0.0;
+            vy = 0.0;
+            nx = 0.0;
+            ny = 0.0;
+            f = 0.0;
+            count = 0;
+        }
+
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (y < this.y)
@@ -120,6 +132,18 @@ namespace MifuminSoft.funyak.Collision
     public class PositionAdjusterLow : PositionAdjusterBase
     {
         public PositionAdjusterLow() => y = double.NegativeInfinity;
+        
+        public override void Reset()
+        {
+            x = 0.0;
+            y = double.NegativeInfinity;
+            vx = 0.0;
+            vy = 0.0;
+            nx = 0.0;
+            ny = 0.0;
+            f = 0.0;
+            count = 0;
+        }
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
@@ -153,6 +177,18 @@ namespace MifuminSoft.funyak.Collision
     {
         public PositionAdjusterLeft() => x = double.PositiveInfinity;
 
+        public override void Reset()
+        {
+            x = double.PositiveInfinity;
+            y = 0.0;
+            vx = 0.0;
+            vy = 0.0;
+            nx = 0.0;
+            ny = 0.0;
+            f = 0.0;
+            count = 0;
+        }
+
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
             if (x < this.x)
@@ -184,6 +220,18 @@ namespace MifuminSoft.funyak.Collision
     public class PositionAdjusterRight : PositionAdjusterBase
     {
         public PositionAdjusterRight() => x = double.NegativeInfinity;
+
+        public override void Reset()
+        {
+            x = double.NegativeInfinity;
+            y = 0.0;
+            vx = 0.0;
+            vy = 0.0;
+            nx = 0.0;
+            ny = 0.0;
+            f = 0.0;
+            count = 0;
+        }
 
         public override void Add(double x, double y, double vx, double vy, double nx, double ny, double f)
         {
