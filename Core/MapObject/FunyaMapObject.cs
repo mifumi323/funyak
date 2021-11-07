@@ -994,13 +994,7 @@ namespace MifuminSoft.funyak.MapObject
                     var lineStartToCharaEnd = charaSegment.End - lineSegment.Start;
                     var newPoint = lineSegment.Start + lineVector * (lineVector.Dot(lineStartToCharaEnd) / lineVector.LengthSq) - charaVector;
                     var newVelocity = velocity - lineNormal * velocity.Dot(lineNormal);
-                    if (Math.Abs(newPoint.X - x) >= PositionAdjustLowerLimit ||
-                        Math.Abs(newPoint.Y - y) >= PositionAdjustLowerLimit ||
-                        Math.Abs(newVelocity.X - velocity.X) >= PositionAdjustLowerLimit ||
-                        Math.Abs(newVelocity.Y - velocity.Y) >= PositionAdjustLowerLimit)
-                    {
-                        adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, lineNormal.X, lineNormal.Y, friction);
-                    }
+                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, lineNormal.X, lineNormal.Y, friction);
 
                     return true;
                 }
