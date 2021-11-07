@@ -10,6 +10,7 @@ namespace MifuminSoft.funyak.Collision
         void Add(double x, double y, double vx, double vy, double nx, double ny, double f);
         void Add(IPositionAdjuster positionAdjuster);
         void Reset();
+        bool Far(double x, double y, double d, double vx, double vy, double vd);
         bool HasValue { get; }
         double X { get; }
         double Y { get; }
@@ -54,6 +55,11 @@ namespace MifuminSoft.funyak.Collision
             ny = 0.0;
             f = 0.0;
             count = 0;
+        }
+
+        public virtual bool Far(double x, double y, double d, double vx, double vy, double vd)
+        {
+            return HasValue && (Math.Abs(X - x) >= d || Math.Abs(Y - y) >= d || Math.Abs(VelocityX - vx) >= vd || Math.Abs(VelocityY - vy) >= vd);
         }
 
         public bool HasValue => count > 0;
@@ -132,7 +138,7 @@ namespace MifuminSoft.funyak.Collision
     public class PositionAdjusterLow : PositionAdjusterBase
     {
         public PositionAdjusterLow() => y = double.NegativeInfinity;
-        
+
         public override void Reset()
         {
             x = 0.0;
