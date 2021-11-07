@@ -336,6 +336,8 @@ namespace MifuminSoft.funyak.MapObject
         private bool c2rTouchedBottom;
 
         private IPositionAdjuster adjuster = new PositionAdjusterAverage();
+        private IPositionAdjuster adjusterX = new PositionAdjusterAverage();
+        private IPositionAdjuster adjusterY = new PositionAdjusterAverage();
         private IPositionAdjuster adjusterHigh = new PositionAdjusterHigh();
         private IPositionAdjuster adjusterLow = new PositionAdjusterLow();
         private IPositionAdjuster adjusterLeft = new PositionAdjusterLeft();
@@ -781,6 +783,8 @@ namespace MifuminSoft.funyak.MapObject
 
             // 位置調整オブジェクト
             adjuster.Reset();
+            adjusterX.Reset();
+            adjusterY.Reset();
             adjusterHigh.Reset();
             adjusterLow.Reset();
             adjusterLeft.Reset();
@@ -856,10 +860,18 @@ namespace MifuminSoft.funyak.MapObject
                 }
             }
 
-            adjuster.Add(adjusterHigh);
-            adjuster.Add(adjusterLow);
-            adjuster.Add(adjusterLeft);
-            adjuster.Add(adjusterRight);
+            adjusterY.Add(adjusterHigh);
+            adjusterY.Add(adjusterLow);
+            if (adjusterY.Far(x, y, PositionAdjustLowerLimit, vx, vy, PositionAdjustLowerLimit))
+            {
+                adjuster.Add(adjusterY);
+            }
+            adjusterX.Add(adjusterLeft);
+            adjusterX.Add(adjusterRight);
+            if (adjusterX.Far(x, y, PositionAdjustLowerLimit, vx, vy, PositionAdjustLowerLimit))
+            {
+                adjuster.Add(adjusterX);
+            }
             if (adjuster.HasValue)
             {
                 x = adjuster.X;
