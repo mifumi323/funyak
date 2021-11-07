@@ -9,6 +9,7 @@ namespace MifuminSoft.funyak.Collision
     {
         void Add(double x, double y, double vx, double vy, double nx, double ny, double f);
         void Add(IPositionAdjuster positionAdjuster);
+        void Reset();
         bool HasValue { get; }
         double X { get; }
         double Y { get; }
@@ -41,6 +42,18 @@ namespace MifuminSoft.funyak.Collision
             {
                 Add(positionAdjuster.X, positionAdjuster.Y, positionAdjuster.VelocityX, positionAdjuster.VelocityY, positionAdjuster.NormalX, positionAdjuster.NormalY, positionAdjuster.Friction);
             }
+        }
+
+        public void Reset()
+        {
+            x = 0.0;
+            y = 0.0;
+            vx = 0.0;
+            vy = 0.0;
+            nx = 0.0;
+            ny = 0.0;
+            f = 0.0;
+            count = 0;
         }
 
         public bool HasValue => count > 0;
