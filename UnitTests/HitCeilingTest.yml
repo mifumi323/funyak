@@ -1,0 +1,50 @@
+﻿---
+width: 200
+height: 200
+color: LightGreen
+gravity: 1
+wind: 0
+objects:
+- type: funya
+  x: 100
+  y: 136
+  n: main
+- type: line
+  x1: 0
+  y1: 150
+  x2: 200
+  y2: 150
+  color: Black
+  hit: true
+  n: floor
+- type: line
+  x1: 0
+  y1: 100
+  x2: 200
+  y2: 100
+  color: Black
+  hit: true
+  n: ceiling
+- type: line
+  x1: 90
+  y1: 40
+  x2: 110
+  y2: 60
+  color: Gray
+  hit: true
+- type: line
+  x1: 90
+  y1: 60
+  x2: 110
+  y2: 40
+  color: Gray
+  hit: true
+areas:
+- l: 0
+  r: 200
+  t: 0
+  b: 100
+  g: 0
+  w: 0
+  c: "#80800000"
+  n: X
