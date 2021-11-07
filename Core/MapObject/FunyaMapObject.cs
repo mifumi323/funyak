@@ -335,6 +335,12 @@ namespace MifuminSoft.funyak.MapObject
         private bool c2rTouchedRight;
         private bool c2rTouchedBottom;
 
+        private IPositionAdjuster adjuster = new PositionAdjusterAverage();
+        private IPositionAdjuster adjusterHigh = new PositionAdjusterHigh();
+        private IPositionAdjuster adjusterLow = new PositionAdjusterLow();
+        private IPositionAdjuster adjusterLeft = new PositionAdjusterLeft();
+        private IPositionAdjuster adjusterRight = new PositionAdjusterRight();
+
         #endregion
 
         /// <summary>
@@ -774,11 +780,11 @@ namespace MifuminSoft.funyak.MapObject
             var velocity = new Vector2D(vx, vy);
 
             // 位置調整オブジェクト
-            var adjuster = new PositionAdjusterAverage();
-            var adjusterHigh = new PositionAdjusterHigh();
-            var adjusterLow = new PositionAdjusterLow();
-            var adjusterLeft = new PositionAdjusterLeft();
-            var adjusterRight = new PositionAdjusterRight();
+            adjuster.Reset();
+            adjusterHigh.Reset();
+            adjusterLow.Reset();
+            adjusterLeft.Reset();
+            adjusterRight.Reset();
 
             // 判定対象の種類ごとに振り分ける
             var collidableSegments = new List<CollidableSegment>();
