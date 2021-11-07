@@ -1,0 +1,27 @@
+﻿---
+width: 200
+height: 200
+color: LightGreen
+gravity: 1
+wind: 0
+objects:
+- type: funya
+  x: 104
+  y: 50
+  n: main
+- type: line
+  x1: 90
+  y1: 100
+  x2: 90
+  y2: 200
+  color: Black
+  hit: true
+  n: left
+- type: line
+  x1: 110
+  y1: 100
+  x2: 110
+  y2: 200
+  color: Black
+  hit: true
+  n: right
