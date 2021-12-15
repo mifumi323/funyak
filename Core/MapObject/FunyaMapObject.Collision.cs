@@ -125,8 +125,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, x, y, velocity, lineFriction, adjusterHigh);
-                        if (collided) touchedBottom = true;
+                        CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, x, y, velocity, lineFriction, adjusterHigh);
                     }
                 }
 
@@ -136,8 +135,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, x, y, velocity, lineFriction, adjusterLow);
-                        if (collided) touchedTop = true;
+                        CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, x, y, velocity, lineFriction, adjusterLow);
                     }
                 }
 
@@ -147,8 +145,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, x, y, velocity, lineFriction, adjusterLeft);
-                        if (collided) touchedRight = true;
+                        CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, x, y, velocity, lineFriction, adjusterLeft);
                     }
                 }
 
@@ -158,11 +155,15 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                        var collided = CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, x, y, velocity, lineFriction, adjusterRight);
-                        if (collided) touchedLeft = true;
+                        CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, x, y, velocity, lineFriction, adjusterRight);
                     }
                 }
             }
+
+            touchedBottom = adjusterHigh.HasValue;
+            touchedTop = adjusterLow.HasValue;
+            touchedRight = adjusterLeft.HasValue;
+            touchedLeft = adjusterRight.HasValue;
 
             adjusterY.Add(adjusterHigh);
             adjusterY.Add(adjusterLow);
