@@ -69,10 +69,6 @@ namespace MifuminSoft.funyak.MapObject
 
             // 暫定結果とか
             var friction = GroundFriction;
-            var touchedLeft = false;
-            var touchedTop = false;
-            var touchedRight = false;
-            var touchedBottom = false;
 
             // 当たり判定用図形とか
             var topSegment = new Segment2D(centerX, centerY - vy, centerX, top);
@@ -160,10 +156,10 @@ namespace MifuminSoft.funyak.MapObject
                 }
             }
 
-            touchedBottom = adjusterHigh.HasValue;
-            touchedTop = adjusterLow.HasValue;
-            touchedRight = adjusterLeft.HasValue;
-            touchedLeft = adjusterRight.HasValue;
+            var touchedBottom = adjusterHigh.HasValue;
+            var touchedTop = adjusterLow.HasValue;
+            var touchedRight = adjusterLeft.HasValue;
+            var touchedLeft = adjusterRight.HasValue;
 
             adjusterY.Add(adjusterHigh);
             adjusterY.Add(adjusterLow);
