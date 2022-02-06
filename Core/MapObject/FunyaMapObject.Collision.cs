@@ -67,9 +67,6 @@ namespace MifuminSoft.funyak.MapObject
             var left = GetLeft(x);
             var right = GetRight(x);
 
-            // 暫定結果とか
-            var friction = GroundFriction;
-
             // 当たり判定用図形とか
             var topSegment = new Segment2D(centerX, centerY - vy, centerX, top);
             var bottomSegment = new Segment2D(centerX, centerY - vy, centerX, bottom);
@@ -121,7 +118,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, x, y, velocity, lineFriction, adjusterHigh);
+                        CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, lineFriction, adjusterHigh);
                     }
                 }
 
@@ -131,7 +128,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.Y != 0)
                     {
                         var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, x, y, velocity, lineFriction, adjusterLow);
+                        CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, lineFriction, adjusterLow);
                     }
                 }
 
@@ -141,7 +138,7 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, x, y, velocity, lineFriction, adjusterLeft);
+                        CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, lineFriction, adjusterLeft);
                     }
                 }
 
@@ -151,15 +148,10 @@ namespace MifuminSoft.funyak.MapObject
                     if (lineNormal.X != 0)
                     {
                         var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, x, y, velocity, lineFriction, adjusterRight);
+                        CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, lineFriction, adjusterRight);
                     }
                 }
             }
-
-            var touchedBottom = adjusterHigh.HasValue;
-            var touchedTop = adjusterLow.HasValue;
-            var touchedRight = adjusterLeft.HasValue;
-            var touchedLeft = adjusterRight.HasValue;
 
             adjusterY.Add(adjusterHigh);
             adjusterY.Add(adjusterLow);
@@ -173,27 +165,20 @@ namespace MifuminSoft.funyak.MapObject
             {
                 adjuster.Add(adjusterX);
             }
-            if (adjuster.HasValue)
-            {
-                x = adjuster.X;
-                y = adjuster.Y;
-                vx = adjuster.VelocityX;
-                vy = adjuster.VelocityY;
-            }
-            if (adjusterHigh.HasValue)
-            {
-                nx = adjusterHigh.NormalX;
-                ny = adjusterHigh.NormalY;
-                friction = adjusterHigh.Friction;
-            }
 
-            c2rX = x;
-            c2rY = y;
-            c2rVelocityX = vx;
-            c2rVelocityY = vy;
-            c2rGroundNormalX = nx;
-            c2rGroundNormalY = ny;
-            c2rGroundFriction = friction;
+            var touchedAny = adjuster.HasValue;
+            var touchedBottom = adjusterHigh.HasValue;
+            var touchedTop = adjusterLow.HasValue;
+            var touchedRight = adjusterLeft.HasValue;
+            var touchedLeft = adjusterRight.HasValue;
+
+            c2rX = touchedAny ? adjuster.X : x;
+            c2rY = touchedAny ? adjuster.Y : y;
+            c2rVelocityX = touchedAny ? adjuster.VelocityX : vx;
+            c2rVelocityY = touchedAny ? adjuster.VelocityY : vy;
+            c2rGroundNormalX = touchedBottom ? adjusterHigh.NormalX : nx;
+            c2rGroundNormalY = touchedBottom ? adjusterHigh.NormalY : ny;
+            c2rGroundFriction = touchedBottom ? adjusterHigh.Friction : GroundFriction;
             c2rTouchedLeft = touchedLeft;
             c2rTouchedTop = touchedTop;
             c2rTouchedRight = touchedRight;
@@ -298,7 +283,7 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="velocity">当たり判定対象の線分に対する、キャラクターの相対速度</param>
         /// <param name="adjuster">位置調整オブジェクト</param>
         /// <returns>当たっていたらtrue</returns>
-        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, double x, double y, Vector2D velocity, double friction, IPositionAdjuster adjuster)
+        private bool CheckCollisionSegment(Vector2D lineNormal, Segment2D charaSegment, Segment2D lineSegment, Vector2D charaVector, Vector2D lineVector, Vector2D velocity, double friction, IPositionAdjuster adjuster)
         {
             if (velocity.Dot(lineNormal) <= Segment2D.DELTA)
             {
