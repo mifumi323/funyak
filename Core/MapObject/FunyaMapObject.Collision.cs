@@ -16,25 +16,13 @@ namespace MifuminSoft.funyak.MapObject
             set => centerCollider.Reactivities = value;
         }
 
-        private double c2rX;
-        private double c2rY;
-        private double c2rVelocityX;
-        private double c2rVelocityY;
-        private double c2rGroundNormalX;
-        private double c2rGroundNormalY;
-        private double c2rGroundFriction;
-        private bool c2rTouchedLeft;
-        private bool c2rTouchedTop;
-        private bool c2rTouchedRight;
-        private bool c2rTouchedBottom;
-
-        private IPositionAdjuster adjuster = new PositionAdjusterAverage();
-        private IPositionAdjuster adjusterX = new PositionAdjusterAverage();
-        private IPositionAdjuster adjusterY = new PositionAdjusterAverage();
-        private IPositionAdjuster adjusterHigh = new PositionAdjusterHigh();
-        private IPositionAdjuster adjusterLow = new PositionAdjusterLow();
-        private IPositionAdjuster adjusterLeft = new PositionAdjusterLeft();
-        private IPositionAdjuster adjusterRight = new PositionAdjusterRight();
+        private readonly IPositionAdjuster adjuster = new PositionAdjusterAverage();
+        private readonly IPositionAdjuster adjusterX = new PositionAdjusterAverage();
+        private readonly IPositionAdjuster adjusterY = new PositionAdjusterAverage();
+        private readonly IPositionAdjuster adjusterHigh = new PositionAdjusterHigh();
+        private readonly IPositionAdjuster adjusterLow = new PositionAdjusterLow();
+        private readonly IPositionAdjuster adjusterLeft = new PositionAdjusterLeft();
+        private readonly IPositionAdjuster adjusterRight = new PositionAdjusterRight();
 
         public override void OnJoin(Map map, ColliderCollection colliderCollection)
         {
@@ -58,8 +46,6 @@ namespace MifuminSoft.funyak.MapObject
             var y = Y;
             var vx = VelocityX;
             var vy = VelocityY;
-            var nx = GroundNormalX;
-            var ny = GroundNormalY;
             var centerX = GetCenterX(x);
             var centerY = GetCenterY(y);
             var top = GetTop(y);
@@ -165,24 +151,6 @@ namespace MifuminSoft.funyak.MapObject
             {
                 adjuster.Add(adjusterX);
             }
-
-            var touchedAny = adjuster.HasValue;
-            var touchedBottom = adjusterHigh.HasValue;
-            var touchedTop = adjusterLow.HasValue;
-            var touchedRight = adjusterLeft.HasValue;
-            var touchedLeft = adjusterRight.HasValue;
-
-            c2rX = touchedAny ? adjuster.X : x;
-            c2rY = touchedAny ? adjuster.Y : y;
-            c2rVelocityX = touchedAny ? adjuster.VelocityX : vx;
-            c2rVelocityY = touchedAny ? adjuster.VelocityY : vy;
-            c2rGroundNormalX = touchedBottom ? adjusterHigh.NormalX : nx;
-            c2rGroundNormalY = touchedBottom ? adjusterHigh.NormalY : ny;
-            c2rGroundFriction = touchedBottom ? adjusterHigh.Friction : GroundFriction;
-            c2rTouchedLeft = touchedLeft;
-            c2rTouchedTop = touchedTop;
-            c2rTouchedRight = touchedRight;
-            c2rTouchedBottom = touchedBottom;
         }
 
         public void OnCenterCollided(ref RegionPointCollision collision)
@@ -199,24 +167,38 @@ namespace MifuminSoft.funyak.MapObject
 
         public override void RealizeCollision(RealizeCollisionArgs args)
         {
-            if (Math.Abs(X - c2rX) >= PositionAdjustLowerLimit) X = c2rX;
-            if (Math.Abs(Y - c2rY) >= PositionAdjustLowerLimit) Y = c2rY;
-            VelocityX = c2rVelocityX;
-            VelocityY = c2rVelocityY;
-            GroundNormalX = c2rGroundNormalX;
-            GroundNormalY = c2rGroundNormalY;
-            GroundFriction = c2rGroundFriction;
-            TouchedLeft = c2rTouchedLeft;
-            TouchedTop = c2rTouchedTop;
-            TouchedRight = c2rTouchedRight;
-            TouchedBottom = c2rTouchedBottom;
+            var touchedAny = adjuster.HasValue;
+            var touchedBottom = adjusterHigh.HasValue;
+            var touchedTop = adjusterLow.HasValue;
+            var touchedRight = adjusterLeft.HasValue;
+            var touchedLeft = adjusterRight.HasValue;
+
+            var x = touchedAny ? adjuster.X : X;
+            var y = touchedAny ? adjuster.Y : Y;
+            var vx = touchedAny ? adjuster.VelocityX : VelocityX;
+            var vy = touchedAny ? adjuster.VelocityY : VelocityY;
+            var nx = touchedBottom ? adjusterHigh.NormalX : GroundNormalX;
+            var ny = touchedBottom ? adjusterHigh.NormalY : GroundNormalY;
+            var friction = touchedBottom ? adjusterHigh.Friction : GroundFriction;
+
+            if (Math.Abs(X - x) >= PositionAdjustLowerLimit) X = x;
+            if (Math.Abs(Y - y) >= PositionAdjustLowerLimit) Y = y;
+            VelocityX = vx;
+            VelocityY = vy;
+            GroundNormalX = nx;
+            GroundNormalY = ny;
+            GroundFriction = friction;
+            TouchedLeft = touchedLeft;
+            TouchedTop = touchedTop;
+            TouchedRight = touchedRight;
+            TouchedBottom = touchedBottom;
 
             if (Right < 0 || args.MapWidth < Left || Bottom < 0 || args.MapHeight < Top)
             {
                 State = FunyaMapObjectState.Die;
             }
 
-            RealizeCollision(c2rTouchedBottom);
+            RealizeCollision(touchedBottom);
 
             StateCounter++;
         }
