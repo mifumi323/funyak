@@ -16,6 +16,11 @@ namespace MifuminSoft.funyak.MapObject
             set => centerCollider.Reactivities = value;
         }
 
+        private readonly NeedleCollider topCollider;
+        private readonly NeedleCollider bottomCollider;
+        private readonly NeedleCollider leftCollider;
+        private readonly NeedleCollider rightCollider;
+
         private readonly IPositionAdjuster adjuster = new PositionAdjusterAverage();
         private readonly IPositionAdjuster adjusterX = new PositionAdjusterAverage();
         private readonly IPositionAdjuster adjusterY = new PositionAdjusterAverage();
@@ -36,11 +41,6 @@ namespace MifuminSoft.funyak.MapObject
 
         public override void CheckCollision(CheckMapObjectCollisionArgs args)
         {
-            // 共通当たり判定の位置更新
-            centerCollider.SetPoint(X, Y);
-            CollidedGravity = double.NaN;
-            CollidedWind = double.NaN;
-
             // 位置とか
             var x = X;
             var y = Y;
@@ -52,6 +52,19 @@ namespace MifuminSoft.funyak.MapObject
             var bottom = GetBottom(y);
             var left = GetLeft(x);
             var right = GetRight(x);
+
+            // 中心の共通当たり判定
+            centerCollider.SetPoint(x, y);
+            CollidedGravity = double.NaN;
+            CollidedWind = double.NaN;
+
+            // 上下の共通当たり判定は中心点をずらす
+            topCollider.Set(new Vector2D(centerX, centerY - vy), new Vector2D(0, top - (centerY - vy)));
+            bottomCollider.Set(new Vector2D(centerX, centerY - vy), new Vector2D(0, bottom - (centerY - vy)));
+
+            // 左右の共通当たり判定は素直に中心から出す
+            leftCollider.Set(new Vector2D(centerX, centerY), new Vector2D(left - centerX, 0));
+            rightCollider.Set(new Vector2D(centerX, centerY), new Vector2D(right - centerX, 0));
 
             // 当たり判定用図形とか
             var topSegment = new Segment2D(centerX, centerY - vy, centerX, top);
@@ -153,7 +166,7 @@ namespace MifuminSoft.funyak.MapObject
             }
         }
 
-        public void OnCenterCollided(ref RegionPointCollision collision)
+        private void OnCenterCollided(ref RegionPointCollision collision)
         {
             if (collision.RegionInfo.Flags.Has(RegionAttributeFlag.Gravity))
             {
@@ -163,6 +176,26 @@ namespace MifuminSoft.funyak.MapObject
             {
                 CollidedWind = collision.RegionInfo.Wind;
             }
+        }
+
+        private void OnTopCollided(ref PlateNeedleCollision collision)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnBottomCollided(ref PlateNeedleCollision collision)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnLeftCollided(ref PlateNeedleCollision collision)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void OnRightCollided(ref PlateNeedleCollision collision)
+        {
+            throw new NotImplementedException();
         }
 
         public override void RealizeCollision(RealizeCollisionArgs args)

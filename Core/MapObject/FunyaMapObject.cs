@@ -334,6 +334,26 @@ namespace MifuminSoft.funyak.MapObject
                 Reactivities = RegionAttributeFlag.Gravity | RegionAttributeFlag.Wind,
                 OnCollided = OnCenterCollided,
             };
+            topCollider = new NeedleCollider(this)
+            {
+                Reactivities = PlateAttributeFlag.HitBelow,
+                OnCollided = OnTopCollided,
+            };
+            bottomCollider = new NeedleCollider(this)
+            {
+                Reactivities = PlateAttributeFlag.HitUpper,
+                OnCollided = OnBottomCollided,
+            };
+            leftCollider = new NeedleCollider(this)
+            {
+                Reactivities = PlateAttributeFlag.HitRight,
+                OnCollided = OnLeftCollided,
+            };
+            rightCollider = new NeedleCollider(this)
+            {
+                Reactivities = PlateAttributeFlag.HitLeft,
+                OnCollided = OnRightCollided,
+            };
         }
 
         public void UpdateSelf(UpdateMapObjectArgs args)
