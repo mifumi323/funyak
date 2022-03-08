@@ -32,11 +32,19 @@ namespace MifuminSoft.funyak.MapObject
         public override void OnJoin(Map map, ColliderCollection colliderCollection)
         {
             colliderCollection.Add(centerCollider);
+            colliderCollection.Add(topCollider);
+            colliderCollection.Add(bottomCollider);
+            colliderCollection.Add(leftCollider);
+            colliderCollection.Add(rightCollider);
         }
 
         public override void OnLeave(Map map, ColliderCollection colliderCollection)
         {
             colliderCollection.Remove(centerCollider);
+            colliderCollection.Remove(topCollider);
+            colliderCollection.Remove(bottomCollider);
+            colliderCollection.Remove(leftCollider);
+            colliderCollection.Remove(rightCollider);
         }
 
         public override void CheckCollision(CheckMapObjectCollisionArgs args)
