@@ -98,11 +98,6 @@ namespace MifuminSoft.funyak.MapObject
             var collidableSegments = new List<CollidableSegment>();
             foreach (var mapObject in args.GetMapObjects(this))
             {
-                if (mapObject is LineMapObject lineMapObject)
-                {
-                    collidableSegments.Add(lineMapObject.ToCollidableSegment());
-                }
-
                 if (mapObject is TileGridMapObject tileMapObject)
                 {
                     tileMapObject.AddCollidableSegmentsToList(collidableSegments, left, top, right, bottom);
@@ -159,19 +154,6 @@ namespace MifuminSoft.funyak.MapObject
                     }
                 }
             }
-
-            adjusterY.Add(adjusterHigh);
-            adjusterY.Add(adjusterLow);
-            if (adjusterY.Far(x, y, PositionAdjustLowerLimit, vx, vy, PositionAdjustLowerLimit))
-            {
-                adjuster.Add(adjusterY);
-            }
-            adjusterX.Add(adjusterLeft);
-            adjusterX.Add(adjusterRight);
-            if (adjusterX.Far(x, y, PositionAdjustLowerLimit, vx, vy, PositionAdjustLowerLimit))
-            {
-                adjuster.Add(adjusterX);
-            }
         }
 
         private void OnCenterCollided(ref RegionPointCollision collision)
@@ -188,26 +170,64 @@ namespace MifuminSoft.funyak.MapObject
 
         private void OnTopCollided(ref PlateNeedleCollision collision)
         {
-            throw new NotImplementedException();
+            OnNeedleCollided(collision, adjusterLow);
         }
 
         private void OnBottomCollided(ref PlateNeedleCollision collision)
         {
-            throw new NotImplementedException();
+            OnNeedleCollided(collision, adjusterHigh);
         }
 
         private void OnLeftCollided(ref PlateNeedleCollision collision)
         {
-            throw new NotImplementedException();
+            OnNeedleCollided(collision, adjusterRight);
         }
 
         private void OnRightCollided(ref PlateNeedleCollision collision)
         {
-            throw new NotImplementedException();
+            OnNeedleCollided(collision, adjusterLeft);
+        }
+
+        private void OnNeedleCollided(PlateNeedleCollision collision, IPositionAdjuster adjuster)
+        {
+            var needleSegment = collision.Needle.Needle;
+            var plateSegment = collision.PlateSegment;
+            var plateVector = plateSegment.End - plateSegment.Start;
+            var plateNormal = new Vector2D(plateVector.Y, -plateVector.X);
+            plateNormal.Norm();
+            var dot = plateNormal.Dot(needleSegment.End - needleSegment.Start);
+
+            if (dot != 0)
+            {
+                var n = dot < 0 ? plateNormal : -plateNormal; // 法線は向かい合う向きに
+
+                var velocity = new Vector2D(VelocityX, VelocityY);
+                if (velocity.Dot(n) <= Segment2D.DELTA)
+                {
+                    var plateStartToNeedleEnd = needleSegment.End - plateSegment.Start;
+                    var needleEndToCharaPoint = needleSegment.End - new Vector2D(X, Y);
+                    var newPoint = plateSegment.Start + plateVector * (plateVector.Dot(plateStartToNeedleEnd) / plateVector.LengthSq) - needleEndToCharaPoint;
+                    var newVelocity = velocity - n * velocity.Dot(n);
+                    adjuster.Add(newPoint.X, newPoint.Y, newVelocity.X, newVelocity.Y, n.X, n.Y, collision.PlateInfo.Friction);
+                }
+            }
         }
 
         public override void RealizeCollision(RealizeCollisionArgs args)
         {
+            adjusterY.Add(adjusterHigh);
+            adjusterY.Add(adjusterLow);
+            if (adjusterY.Far(X, Y, PositionAdjustLowerLimit, VelocityX, VelocityY, PositionAdjustLowerLimit))
+            {
+                adjuster.Add(adjusterY);
+            }
+            adjusterX.Add(adjusterLeft);
+            adjusterX.Add(adjusterRight);
+            if (adjusterX.Far(X, Y, PositionAdjustLowerLimit, VelocityX, VelocityY, PositionAdjustLowerLimit))
+            {
+                adjuster.Add(adjusterX);
+            }
+
             var touchedAny = adjuster.HasValue;
             var touchedBottom = adjusterHigh.HasValue;
             var touchedTop = adjusterLow.HasValue;
