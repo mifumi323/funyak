@@ -53,6 +53,10 @@ namespace WPFTests
                     Name = "グラフィック",
                     Type = typeof(RectangleTest),
                 },
+                new {
+                    Name = "タイルの当たり判定",
+                    Type = typeof(TileGridCollisionTest),
+                },
             };
         }
 

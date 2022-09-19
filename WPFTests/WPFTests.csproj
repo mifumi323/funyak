@@ -123,6 +123,9 @@
     <Compile Include="SpriteEditorTest.xaml.cs">
       <DependentUpon>SpriteEditorTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TileGridCollisionTest.xaml.cs">
+      <DependentUpon>TileGridCollisionTest.xaml</DependentUpon>
+    </Compile>
     <Page Include="GameUnitTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -175,6 +178,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TileGridCollisionTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\UnitTests\**\*.cs" Exclude="..\UnitTests\obj\**\*.cs">
@@ -184,6 +191,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\UnitTests\*Test.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Walls.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -223,6 +233,9 @@
     <Content Include="Assets\Ice.bmp.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Assets\Walls.png.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
