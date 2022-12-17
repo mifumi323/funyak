@@ -35,9 +35,7 @@ namespace WPFTests
         private readonly MapView mapView;
         private readonly TileGridMapObject tileGridMapObject;
         private readonly TileChip[] tiles;
-        private readonly LineMapObject batten1;
-        private readonly LineMapObject batten2;
-        private Point target;
+        private readonly LineMapObject lineTarget;
         private readonly IInput input;
 
         public TileGridCollisionTest()
@@ -69,16 +67,13 @@ namespace WPFTests
                 }
             }
             map.AddMapObject(tileGridMapObject);
-            batten1 = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
-            map.AddMapObject(batten1);
-            batten2 = new LineMapObject(-10, 10, 10, -10) { Color = "Red" };
-            map.AddMapObject(batten2);
+            lineTarget = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
+            map.AddMapObject(lineTarget);
             mapView = new MapView(map)
             {
                 Canvas = canvas,
-                FocusTo = batten2,
+                FocusTo = lineTarget,
             };
-            target = new Point(100, 100);
             input = new KeyInput();
         }
 
@@ -120,16 +115,16 @@ namespace WPFTests
         {
             counter.Step();
             input.Update();
-            target.X += input.X;
-            target.Y += input.Y;
-            batten1.X1 = target.X - 10;
-            batten1.Y1 = target.Y - 10;
-            batten1.X2 = target.X + 10;
-            batten1.Y2 = target.Y + 10;
-            batten2.X1 = target.X - 10;
-            batten2.Y1 = target.Y + 10;
-            batten2.X2 = target.X + 10;
-            batten2.Y2 = target.Y - 10;
+            if (input.IsPressed(Keys.Jump))
+            {
+                lineTarget.X1 += input.X;
+                lineTarget.Y1 += input.Y;
+            }
+            else
+            {
+                lineTarget.X2 += input.X;
+                lineTarget.Y2 += input.Y;
+            }
             mapView.Update(slider.Value);
             var children = new StringBuilder();
             foreach (var child in canvas.Children)
