@@ -8,7 +8,7 @@ namespace MifuminSoft.funyak.View.MapObject
 {
     public class LineMapObjectView : IMapObjectView
     {
-        public LineMapObject MapObject { get; protected set; }
+        public SegmentMapObject MapObject { get; protected set; }
 
         private Canvas canvas = null;
         private Line line = null;
@@ -29,7 +29,7 @@ namespace MifuminSoft.funyak.View.MapObject
             }
         }
 
-        public LineMapObjectView(LineMapObject mapObject) => MapObject = mapObject;
+        public LineMapObjectView(SegmentMapObject mapObject) => MapObject = mapObject;
 
         public void Update(MapObjectViewUpdateArgs args)
         {
