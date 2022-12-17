@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
 using MifuminSoft.funyak;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Input;
 using MifuminSoft.funyak.MapObject;
 using MifuminSoft.funyak.View;
@@ -36,7 +37,11 @@ namespace WPFTests
         private readonly TileGridMapObject tileGridMapObject;
         private readonly TileChip[] tiles;
         private readonly LineMapObject lineTarget;
+        private readonly NeedleCollider needleCollider;
         private readonly IInput input;
+
+        private bool hit = false;
+        private PlateNeedleCollision collision = default;
 
         public TileGridCollisionTest()
         {
@@ -68,6 +73,15 @@ namespace WPFTests
             }
             map.AddMapObject(tileGridMapObject);
             lineTarget = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
+            needleCollider = new NeedleCollider(lineTarget)
+            {
+                Reactivities = PlateAttributeFlag.HitUpper | PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight,
+                OnCollided = (ref PlateNeedleCollision collision) =>
+                {
+                    hit = true;
+                    this.collision = collision;
+                },
+            };
             map.AddMapObject(lineTarget);
             mapView = new MapView(map)
             {
@@ -125,8 +139,13 @@ namespace WPFTests
                 lineTarget.X2 += input.X;
                 lineTarget.Y2 += input.Y;
             }
+            hit = false;
             mapView.Update(slider.Value);
             var children = new StringBuilder();
+            if (hit)
+            {
+                children.AppendLine(collision.CrossPoint.ToString());
+            }
             foreach (var child in canvas.Children)
             {
                 children.AppendLine(child.ToString());
