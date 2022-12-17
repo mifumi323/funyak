@@ -36,8 +36,7 @@ namespace WPFTests
         private readonly MapView mapView;
         private readonly TileGridMapObject tileGridMapObject;
         private readonly TileChip[] tiles;
-        private readonly LineMapObject lineTarget;
-        private readonly NeedleCollider needleCollider;
+        private readonly NeedleMapObject needleTarget;
         private readonly IInput input;
 
         private bool hit = false;
@@ -72,9 +71,13 @@ namespace WPFTests
                 }
             }
             map.AddMapObject(tileGridMapObject);
-            lineTarget = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
-            needleCollider = new NeedleCollider(lineTarget)
+            needleTarget = new NeedleMapObject()
             {
+                X1 = -10,
+                Y1 = -10,
+                X2 = 10,
+                Y2 = 10,
+                Color = "Red",
                 Reactivities = PlateAttributeFlag.HitUpper | PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight,
                 OnCollided = (ref PlateNeedleCollision collision) =>
                 {
@@ -82,11 +85,11 @@ namespace WPFTests
                     this.collision = collision;
                 },
             };
-            map.AddMapObject(lineTarget);
+            map.AddMapObject(needleTarget);
             mapView = new MapView(map)
             {
                 Canvas = canvas,
-                FocusTo = lineTarget,
+                FocusTo = needleTarget,
             };
             input = new KeyInput();
         }
@@ -131,15 +134,16 @@ namespace WPFTests
             input.Update();
             if (input.IsPressed(Keys.Jump))
             {
-                lineTarget.X1 += input.X;
-                lineTarget.Y1 += input.Y;
+                needleTarget.X1 += input.X;
+                needleTarget.Y1 += input.Y;
             }
             else
             {
-                lineTarget.X2 += input.X;
-                lineTarget.Y2 += input.Y;
+                needleTarget.X2 += input.X;
+                needleTarget.Y2 += input.Y;
             }
             hit = false;
+            map.Update();
             mapView.Update(slider.Value);
             var children = new StringBuilder();
             if (hit)
