@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
@@ -54,6 +55,8 @@ namespace MifuminSoft.funyak.MapObject
 
         private readonly TileChip[,] tiles;
 
+        private TileGridPlateCollider plateCollider;
+
         public TileGridMapObject(double x, double y, int tileCountX, int tileCountY)
         {
             X = x;
@@ -61,6 +64,7 @@ namespace MifuminSoft.funyak.MapObject
             TileCountX = tileCountX;
             TileCountY = tileCountY;
             tiles = new TileChip[tileCountX, tileCountY];
+            plateCollider = new TileGridPlateCollider(this);
         }
 
         public TileChip this[int x, int y]
@@ -133,6 +137,16 @@ namespace MifuminSoft.funyak.MapObject
                 }
             }
 
+        }
+
+        public override void OnJoin(Map map, ColliderCollection colliderCollection)
+        {
+            colliderCollection.Add(plateCollider);
+        }
+
+        public override void OnLeave(Map map, ColliderCollection colliderCollection)
+        {
+            colliderCollection.Remove(plateCollider);
         }
     }
 }

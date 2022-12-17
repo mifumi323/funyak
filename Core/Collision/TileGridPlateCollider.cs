@@ -6,7 +6,11 @@ namespace MifuminSoft.funyak.Collision
     public sealed class TileGridPlateCollider : PlateCollider
     {
         private readonly TileGridMapObject tileGridMapObject;
-        public TileGridPlateCollider(TileGridMapObject owner) : base(owner) { tileGridMapObject = owner; }
+        public TileGridPlateCollider(TileGridMapObject owner) : base(owner)
+        {
+            tileGridMapObject = owner;
+            PlateInfo.Flags = (PlateAttributeFlag)ulong.MaxValue;
+        }
 
         public override bool IsCollided(NeedleCollider needleCollider, out PlateNeedleCollision collision)
         {
