@@ -10,9 +10,9 @@ namespace MifuminSoft.funyak.View.MapObject
 
         public IMapObjectView Create(MapObjectBase mapObject)
         {
-            if (mapObject is LineMapObject lineMapObject)
+            if (mapObject is SegmentMapObject segmentMapObject)
             {
-                return new LineMapObjectView(lineMapObject);
+                return new LineMapObjectView(segmentMapObject);
             }
             if (mapObject is FunyaMapObject funyaMapObject)
             {
