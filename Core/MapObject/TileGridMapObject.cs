@@ -55,7 +55,7 @@ namespace MifuminSoft.funyak.MapObject
 
         private readonly TileChip[,] tiles;
 
-        private TileGridPlateCollider plateCollider;
+        private readonly TileGridPlateCollider plateCollider;
 
         public TileGridMapObject(double x, double y, int tileCountX, int tileCountY)
         {
@@ -147,6 +147,12 @@ namespace MifuminSoft.funyak.MapObject
         public override void OnLeave(Map map, ColliderCollection colliderCollection)
         {
             colliderCollection.Remove(plateCollider);
+        }
+
+        public override void CheckCollision(CheckMapObjectCollisionArgs args)
+        {
+            base.CheckCollision(args);
+            plateCollider.UpdatePosition();
         }
     }
 }

@@ -61,5 +61,14 @@ namespace MifuminSoft.funyak.Collision
             }
             UpdatePosition(left, top, right, bottom);
         }
+
+        /// <summary>
+        /// boundsを包含する位置に更新します。
+        /// </summary>
+        /// <param name="segment"></param>
+        protected void UpdatePosition(IBounds bounds)
+        {
+            UpdatePosition(bounds.Left, bounds.Top, bounds.Right, bounds.Bottom);
+        }
     }
 }

@@ -42,19 +42,17 @@ namespace MifuminSoft.funyak.Collision
             {
                 foreach (var needleCollider in needleColliders)
                 {
-                    if (plateCollider.Owner != needleCollider.Owner)
+                    if (plateCollider.Owner != needleCollider.Owner
+                        && (plateCollider.PlateInfo.Flags & needleCollider.Reactivities) != PlateAttributeFlag.None
+                        && needleCollider.IntersectBounds(plateCollider)
+                        && plateCollider.IsCollided(needleCollider, out var collision))
                     {
-                        if ((plateCollider.PlateInfo.Flags & needleCollider.Reactivities) != PlateAttributeFlag.None)
-                        {
-                            if (plateCollider.IsCollided(needleCollider, out var collision))
-                            {
-                                plateCollider.OnCollided?.Invoke(ref collision);
-                                needleCollider.OnCollided?.Invoke(ref collision);
-                            }
-                        }
+                        plateCollider.OnCollided?.Invoke(ref collision);
+                        needleCollider.OnCollided?.Invoke(ref collision);
                     }
                 }
             }
         }
     }
 }
+

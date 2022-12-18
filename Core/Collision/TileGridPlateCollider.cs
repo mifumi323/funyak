@@ -10,7 +10,10 @@ namespace MifuminSoft.funyak.Collision
         {
             tileGridMapObject = owner;
             PlateInfo.Flags = (PlateAttributeFlag)ulong.MaxValue;
+            UpdatePosition();
         }
+
+        public void UpdatePosition() => UpdatePosition(tileGridMapObject);
 
         public override bool IsCollided(NeedleCollider needleCollider, out PlateNeedleCollision collision)
         {
