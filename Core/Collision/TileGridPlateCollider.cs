@@ -40,7 +40,16 @@ namespace MifuminSoft.funyak.Collision
                 else
                 {
                     // 上向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
+                    for (var tiy = startTIY - 1; tiy >= endTIX; tiy--)
+                    {
+                        var tile = tileGridMapObject[startTIX, tiy];
+                        if (tile.HitBelow)
+                        {
+                            // TODO: ここで接触地点を計算し、collision に設定して true を返す(#52)
+                        }
+                    }
+                    collision = default;
+                    return false;
                 }
             }
             else if (startTIX < endTIX)

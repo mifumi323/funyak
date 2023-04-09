@@ -30,13 +30,14 @@ namespace MifuminSoft.funyak.UnitTests.Collision
             var cc = new ColliderCollection();
             tileGridMapObject.OnJoin(null!, cc);
             var collided = false;
+            PlateNeedleCollision? collision = null;
             var needleCollider = new NeedleCollider(null)
             {
                 Reactivities = PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight | PlateAttributeFlag.HitUpper,
                 StartPoint = new Vector2D(48.0, 48.0),
-                OnCollided = (ref PlateNeedleCollision _) =>
+                OnCollided = (ref PlateNeedleCollision pnc) =>
                 {
-                    collided = true;
+                    collision = pnc;
                 },
             };
             cc.Add(needleCollider);
