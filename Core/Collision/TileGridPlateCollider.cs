@@ -61,8 +61,8 @@ namespace MifuminSoft.funyak.Collision
                 }
             }
 
-            // http://marupeke296.com/COL_3D_No23_intcoord.html を参考に作ろう
-            throw new NotImplementedException(); // TODO: 実装( #52 )
+            // 斜めは真面目に計算する
+            return IsCollidedDiagonal(needleCollider, out collision);
         }
 
         private bool IsCollidedAxisAlignedBelow(NeedleCollider needleCollider, out PlateNeedleCollision collision, Vector2D startPoint, int tix, int startTIY, int endTIY)
@@ -143,6 +143,12 @@ namespace MifuminSoft.funyak.Collision
             }
             collision = default;
             return false;
+        }
+
+        private bool IsCollidedDiagonal(NeedleCollider needleCollider, out PlateNeedleCollision collision)
+        {
+            // http://marupeke296.com/COL_3D_No23_intcoord.html を参考に作ろう
+            throw new NotImplementedException(); // TODO: 実装( #52 )
         }
 
         public override void Shift(double dx, double dy)
