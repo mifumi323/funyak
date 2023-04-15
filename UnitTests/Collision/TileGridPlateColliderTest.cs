@@ -1,4 +1,5 @@
-﻿using MifuminSoft.funyak.Collision;
+﻿using System.Collections.Generic;
+using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapObject;
 using NUnit.Framework;
@@ -7,125 +8,110 @@ namespace MifuminSoft.funyak.UnitTests.Collision
 {
     public sealed class TileGridPlateColliderTest
     {
-        [Test]
-        public void IsCollidedNearTest()
+        private class TestCase
         {
-            var tileGridMapObject = new TileGridMapObject(0, 0, 3, 3);
-            var tileChip = new TileChip()
+            public TileGridMapObject MapObject { get; private set; }
+            public string Name { get; private set; }
+            public double StartX { get; private set; }
+            public double StartY { get; private set; }
+            public double DirectionX { get; private set; }
+            public double DirectionY { get; private set; }
+            public bool ExpectedIsCollided { get; private set; }
+            public double ExpectedCollidedX { get; private set; }
+            public double ExpectedCollidedY { get; private set; }
+
+            public TestCase(string name, TileGridMapObject mapObject, double startX, double startY, double directionX, double directionY, bool expectedIsCollided, double expectedCollidedX, double expectedCollidedY)
             {
-                HitBelow = true,
-                HitLeft = true,
-                HitRight = true,
-                HitUpper = true,
-            };
-            tileGridMapObject[0, 0] = tileChip;
-            tileGridMapObject[1, 0] = tileChip;
-            tileGridMapObject[2, 0] = tileChip;
-            tileGridMapObject[0, 1] = tileChip;
-            tileGridMapObject[1, 1] = null;
-            tileGridMapObject[2, 1] = tileChip;
-            tileGridMapObject[0, 2] = tileChip;
-            tileGridMapObject[1, 2] = tileChip;
-            tileGridMapObject[2, 2] = tileChip;
-            var cc = new ColliderCollection();
-            tileGridMapObject.OnJoin(null!, cc);
-            var collided = false;
-            var needleCollider = new NeedleCollider(null)
-            {
-                Reactivities = PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight | PlateAttributeFlag.HitUpper,
-                StartPoint = new Vector2D(48.0, 48.0),
-                OnCollided = (ref PlateNeedleCollision _) =>
-                {
-                    collided = true;
-                },
-            };
-            cc.Add(needleCollider);
-            var testCases = new[]
-            {
-                // 真ん中
-                ( X : 10.0, Y:10.0, Expects : false ),
-                // 上下左右
-                ( X : 0.0, Y:-32.0, Expects : true ),
-                ( X : 0.0, Y:32.0, Expects : true ),
-                ( X : -32.0, Y:0.0, Expects : true ),
-                ( X : 32.0, Y:0.0, Expects : true ),
-                // 斜め
-                ( X : -24.0, Y:-32.0, Expects : true ),
-                ( X : 24.0, Y:-32.0, Expects : true ),
-                ( X : -24.0, Y:80.0, Expects : true ),
-                ( X : 24.0, Y:80.0, Expects : true ),
-                ( X : -32.0, Y:-24.0, Expects : true ),
-                ( X : -32.0, Y:24.0, Expects : true ),
-                ( X : 32.0, Y:-24.0, Expects : true ),
-                ( X : 32.0, Y:24.0, Expects : true ),
-            };
-            foreach (var (X, Y, Expects) in testCases)
-            {
-                needleCollider.DirectedLength = new Vector2D(X, Y);
-                collided = false;
-                cc.Collide();
-                Assert.AreEqual(Expects, collided, $"({X}, {Y})で失敗");
+                Name = name;
+                MapObject = mapObject;
+                StartX = startX;
+                StartY = startY;
+                DirectionX = directionX;
+                DirectionY = directionY;
+                ExpectedIsCollided = expectedIsCollided;
+                ExpectedCollidedX = expectedCollidedX;
+                ExpectedCollidedY = expectedCollidedY;
             }
         }
 
         [Test]
-        public void IsCollidedFarTest()
+        public void IsCollidedTest()
         {
-            var tileGridMapObject = new TileGridMapObject(0, 0, 3, 3);
-            var tileChip = new TileChip()
+            var chip = new TileChip()
             {
                 HitBelow = true,
                 HitLeft = true,
                 HitRight = true,
                 HitUpper = true,
             };
-            tileGridMapObject[0, 0] = tileChip;
-            tileGridMapObject[1, 0] = null;
-            tileGridMapObject[2, 0] = tileChip;
-            tileGridMapObject[0, 1] = null;
-            tileGridMapObject[1, 1] = null;
-            tileGridMapObject[2, 1] = null;
-            tileGridMapObject[0, 2] = tileChip;
-            tileGridMapObject[1, 2] = null;
-            tileGridMapObject[2, 2] = tileChip;
-            var cc = new ColliderCollection();
-            tileGridMapObject.OnJoin(null!, cc);
-            var collided = false;
-            var needleCollider = new NeedleCollider(null)
-            {
-                Reactivities = PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight | PlateAttributeFlag.HitUpper,
-                StartPoint = new Vector2D(48.0, 48.0),
-                OnCollided = (ref PlateNeedleCollision _) =>
-                {
-                    collided = true;
-                },
-            };
-            cc.Add(needleCollider);
+            var moNear = new TileGridMapObject(10, 20, 3, 3, new[]{
+                chip, chip, chip,
+                chip, null, chip,
+                chip, chip, chip,
+            });
+            var moFar = new TileGridMapObject(10, 20, 3, 3, new[]{
+                chip, null, chip,
+                null, null, null,
+                chip, null, chip,
+            });
             var testCases = new[]
             {
-                // 真ん中
-                ( X : 10.0, Y:10.0, Expects : false ),
-                // 上下左右
-                ( X : 0.0, Y:-32.0, Expects : false ),
-                ( X : 0.0, Y:32.0, Expects : false ),
-                ( X : -32.0, Y:0.0, Expects : false ),
-                ( X : 32.0, Y:0.0, Expects : false ),
-                // 斜め
-                ( X : -24.0, Y:-32.0, Expects : true ),
-                ( X : 24.0, Y:-32.0, Expects : true ),
-                ( X : -24.0, Y:80.0, Expects : true ),
-                ( X : 24.0, Y:80.0, Expects : true ),
-                ( X : -32.0, Y:-24.0, Expects : true ),
-                ( X : -32.0, Y:24.0, Expects : true ),
-                ( X : 32.0, Y:-24.0, Expects : true ),
-                ( X : 32.0, Y:24.0, Expects : true ),
+                // 真ん中(当たらない)
+                new TestCase("近・真中", moNear, 58, 68,  10,  10, false,  0,  0),
+                new TestCase("遠・真中", moFar,  58, 68,  10,  10, false,  0,  0),
+
+                // シンプルな上下左右
+                new TestCase("近・真上", moNear, 58, 68,   0, -32, true,  58, 52),
+                new TestCase("近・真下", moNear, 58, 68,   0,  32, true,  58, 84),
+                new TestCase("近・真左", moNear, 58, 68, -32,   0, true,  42, 68),
+                new TestCase("近・真右", moNear, 58, 68,  32,   0, true,  74, 68),
+                new TestCase("遠・真上", moFar,  58, 68,   0, -32, false,  0,  0),
+                new TestCase("遠・真下", moFar,  58, 68,   0,  32, false,  0,  0),
+                new TestCase("遠・真左", moFar,  58, 68, -32,   0, false,  0,  0),
+                new TestCase("遠・真右", moFar,  58, 68,  32,   0, false,  0,  0),
+
+                new TestCase("近・斜め", moNear, 58, 68, -24, -32, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68,  24, -32, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68, -24,  80, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68,  24,  80, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68, -32, -24, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68, -32,  24, true,   0,  0),
+                new TestCase("近・斜め", moNear, 58, 68,  32, -24, true,   0,  0),
+                new TestCase("近・斜め", moFar,  58, 68,  32,  24, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68, -24, -32, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68,  24, -32, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68, -24,  80, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68,  24,  80, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68, -32, -24, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68, -32,  24, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68,  32, -24, true,   0,  0),
+                new TestCase("遠・斜め", moFar,  58, 68,  32,  24, true,   0,  0),
             };
-            foreach (var (X, Y, Expects) in testCases)
+            foreach (var testCase in testCases)
             {
-                needleCollider.DirectedLength = new Vector2D(X, Y);
-                collided = false;
+                var cc = new ColliderCollection();
+                testCase.MapObject.OnJoin(null!, cc);
+                var collided = false;
+                PlateNeedleCollision collision = default;
+                var needleCollider = new NeedleCollider(null)
+                {
+                    Reactivities = PlateAttributeFlag.HitBelow | PlateAttributeFlag.HitLeft | PlateAttributeFlag.HitRight | PlateAttributeFlag.HitUpper,
+                    StartPoint = new Vector2D(testCase.StartX, testCase.StartY),
+                    OnCollided = (ref PlateNeedleCollision c) =>
+                    {
+                        collided = true;
+                        collision = c;
+                    },
+                };
+                cc.Add(needleCollider);
+                needleCollider.DirectedLength = new Vector2D(testCase.DirectionX, testCase.DirectionY);
                 cc.Collide();
-                Assert.AreEqual(Expects, collided, $"({X}, {Y})で失敗");
+                Assert.AreEqual(testCase.ExpectedIsCollided, collided, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})で接触不一致");
+                if (collided)
+                {
+                    Assert.AreEqual(testCase.ExpectedCollidedX, collision.CrossPoint.X, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でX座標不一致");
+                    Assert.AreEqual(testCase.ExpectedCollidedY, collision.CrossPoint.Y, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でY座標不一致");
+                }
             }
         }
     }
