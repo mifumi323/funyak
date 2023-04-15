@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
@@ -23,71 +24,125 @@ namespace MifuminSoft.funyak.Collision
             var endPoint = needleCollider.EndPoint;
             var endTIX = tileGridMapObject.ToTileIndexX(endPoint.X);
             var endTIY = tileGridMapObject.ToTileIndexY(endPoint.Y);
-            if (startTIX == endTIX)
+
+            // 頻出の単純なパターン
+            if (startTIX == endTIX && startTIY == endTIY)
             {
-                // 上下向き
-                if (startTIY == endTIY)
+                // 境界跨がず
+                collision = default;
+                return false;
+            }
+            if (startPoint.X == endPoint.X)
+            {
+                // まっすぐ上下
+                if (startTIY < endTIY)
                 {
-                    // 境界跨がず
-                    collision = default;
-                    return false;
-                }
-                else if (startTIY < endTIY)
-                {
-                    // 下向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
+                    // まっすぐ下
+                    return IsCollidedAxisAlignedBelow(needleCollider, out collision, startPoint, startTIX, startTIY, endTIY);
                 }
                 else
                 {
-                    // 上向き
-                    for (var tiy = startTIY - 1; tiy >= endTIX; tiy--)
-                    {
-                        var tile = tileGridMapObject[startTIX, tiy];
-                        if (tile.HitBelow)
-                        {
-                            // TODO: ここで接触地点を計算し、collision に設定して true を返す(#52)
-                        }
-                    }
-                    collision = default;
-                    return false;
+                    // まっすぐ上
+                    return IsCollidedAxisAlignedUpper(needleCollider, out collision, startPoint, startTIX, startTIY, endTIY);
                 }
             }
-            else if (startTIX < endTIX)
+            if (startPoint.Y == endPoint.Y)
             {
-                // 右向き
-                if (startTIY == endTIY)
+                // まっすぐ左右
+                if (startTIX < endTIX)
                 {
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
-                }
-                else if (startTIY < endTIY)
-                {
-                    // 右下向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
+                    // まっすぐ右
+                    return IsCollidedAxisAlignedRight(needleCollider, out collision, startPoint, startTIY, startTIX, endTIX);
                 }
                 else
                 {
-                    // 右上向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
+                    // まっすぐ左
+                    return IsCollidedAxisAlignedLeft(needleCollider, out collision, startPoint, startTIY, startTIX, endTIX);
                 }
             }
-            else
+
+            // http://marupeke296.com/COL_3D_No23_intcoord.html を参考に作ろう
+            throw new NotImplementedException(); // TODO: 実装( #52 )
+        }
+
+        private bool IsCollidedAxisAlignedBelow(NeedleCollider needleCollider, out PlateNeedleCollision collision, Vector2D startPoint, int tix, int startTIY, int endTIY)
+        {
+            var start = Math.Max(startTIY + 1, 0);
+            var end = Math.Min(endTIY, tileGridMapObject.TileCountY - 1);
+            for (var tiy = start; tiy <= end; tiy++)
             {
-                // 左向き
-                if (startTIY == endTIY)
+                var tile = tileGridMapObject[tix, tiy];
+                if (tile.HitUpper)
                 {
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
-                }
-                else if (startTIY < endTIY)
-                {
-                    // 左下向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
-                }
-                else
-                {
-                    // 左上向き
-                    throw new NotImplementedException(); // TODO: 実装( #52 )
+                    var y = tileGridMapObject.FromTileY(startTIY);
+                    var segment = new Segment2D(tileGridMapObject.FromTileX(tix), y, tileGridMapObject.FromTileX(tix + 1), y);
+                    var crossPoint = new Vector2D(startPoint.X, y);
+                    collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
+                    return true;
                 }
             }
+            collision = default;
+            return false;
+        }
+
+        private bool IsCollidedAxisAlignedUpper(NeedleCollider needleCollider, out PlateNeedleCollision collision, Vector2D startPoint, int tix, int startTIY, int endTIY)
+        {
+            var start = Math.Min(startTIY - 1, tileGridMapObject.TileCountY - 1);
+            var end = Math.Max(endTIY, 0);
+            for (var tiy = start; tiy >= end; tiy--)
+            {
+                var tile = tileGridMapObject[tix, tiy];
+                if (tile.HitBelow)
+                {
+                    var y = tileGridMapObject.FromTileY(startTIY + 1);
+                    var segment = new Segment2D(tileGridMapObject.FromTileX(tix), y, tileGridMapObject.FromTileX(tix + 1), y);
+                    var crossPoint = new Vector2D(startPoint.X, y);
+                    collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
+                    return true;
+                }
+            }
+            collision = default;
+            return false;
+        }
+
+        private bool IsCollidedAxisAlignedRight(NeedleCollider needleCollider, out PlateNeedleCollision collision, Vector2D startPoint, int tiy, int startTIX, int endTIX)
+        {
+            var start = Math.Max(startTIX + 1, 0);
+            var end = Math.Min(endTIX, tileGridMapObject.TileCountX - 1);
+            for (var tix = start; tix <= end; tix++)
+            {
+                var tile = tileGridMapObject[tix, tiy];
+                if (tile.HitLeft)
+                {
+                    var x = tileGridMapObject.FromTileX(startTIX);
+                    var segment = new Segment2D(x, tileGridMapObject.FromTileY(tiy), x, tileGridMapObject.FromTileY(tiy + 1));
+                    var crossPoint = new Vector2D(x, startPoint.Y);
+                    collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
+                    return true;
+                }
+            }
+            collision = default;
+            return false;
+        }
+
+        private bool IsCollidedAxisAlignedLeft(NeedleCollider needleCollider, out PlateNeedleCollision collision, Vector2D startPoint, int tiy, int startTIX, int endTIX)
+        {
+            var start = Math.Min(startTIX - 1, tileGridMapObject.TileCountX - 1);
+            var end = Math.Max(endTIX, 0);
+            for (var tix = start; tix >= end; tix--)
+            {
+                var tile = tileGridMapObject[tix, tiy];
+                if (tile.HitRight)
+                {
+                    var x = tileGridMapObject.FromTileX(startTIX + 1);
+                    var segment = new Segment2D(x, tileGridMapObject.FromTileY(tiy), x, tileGridMapObject.FromTileY(tiy + 1));
+                    var crossPoint = new Vector2D(x, startPoint.Y);
+                    collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
+                    return true;
+                }
+            }
+            collision = default;
+            return false;
         }
 
         public override void Shift(double dx, double dy)
