@@ -72,9 +72,9 @@ namespace MifuminSoft.funyak.Collision
             for (var tiy = start; tiy <= end; tiy++)
             {
                 var tile = tileGridMapObject[tix, tiy];
-                if (tile.HitUpper)
+                if (tile != null && tile.HitUpper)
                 {
-                    var y = tileGridMapObject.FromTileY(startTIY);
+                    var y = tileGridMapObject.FromTileY(tiy);
                     var segment = new Segment2D(tileGridMapObject.FromTileX(tix), y, tileGridMapObject.FromTileX(tix + 1), y);
                     var crossPoint = new Vector2D(startPoint.X, y);
                     collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
@@ -92,9 +92,9 @@ namespace MifuminSoft.funyak.Collision
             for (var tiy = start; tiy >= end; tiy--)
             {
                 var tile = tileGridMapObject[tix, tiy];
-                if (tile.HitBelow)
+                if (tile != null && tile.HitBelow)
                 {
-                    var y = tileGridMapObject.FromTileY(startTIY + 1);
+                    var y = tileGridMapObject.FromTileY(tiy + 1);
                     var segment = new Segment2D(tileGridMapObject.FromTileX(tix), y, tileGridMapObject.FromTileX(tix + 1), y);
                     var crossPoint = new Vector2D(startPoint.X, y);
                     collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
@@ -112,9 +112,9 @@ namespace MifuminSoft.funyak.Collision
             for (var tix = start; tix <= end; tix++)
             {
                 var tile = tileGridMapObject[tix, tiy];
-                if (tile.HitLeft)
+                if (tile != null && tile.HitLeft)
                 {
-                    var x = tileGridMapObject.FromTileX(startTIX);
+                    var x = tileGridMapObject.FromTileX(tix);
                     var segment = new Segment2D(x, tileGridMapObject.FromTileY(tiy), x, tileGridMapObject.FromTileY(tiy + 1));
                     var crossPoint = new Vector2D(x, startPoint.Y);
                     collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
@@ -132,9 +132,9 @@ namespace MifuminSoft.funyak.Collision
             for (var tix = start; tix >= end; tix--)
             {
                 var tile = tileGridMapObject[tix, tiy];
-                if (tile.HitRight)
+                if (tile != null && tile.HitRight)
                 {
-                    var x = tileGridMapObject.FromTileX(startTIX + 1);
+                    var x = tileGridMapObject.FromTileX(tix + 1);
                     var segment = new Segment2D(x, tileGridMapObject.FromTileY(tiy), x, tileGridMapObject.FromTileY(tiy + 1));
                     var crossPoint = new Vector2D(x, startPoint.Y);
                     collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, segment);
