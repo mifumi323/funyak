@@ -84,13 +84,17 @@ namespace MifuminSoft.funyak.MapObject
 
         private readonly TileGridPlateCollider plateCollider;
 
-        public TileGridMapObject(double x, double y, int tileCountX, int tileCountY)
+        public TileGridMapObject(double x, double y, int tileCountX, int tileCountY, IEnumerable<TileChip>? sequence = null)
         {
             X = x;
             Y = y;
             TileCountX = tileCountX;
             TileCountY = tileCountY;
             tiles = new TileChip[tileCountX, tileCountY];
+            if (sequence != null)
+            {
+                Fill(sequence);
+            }
             plateCollider = new TileGridPlateCollider(this);
         }
 
@@ -190,6 +194,31 @@ namespace MifuminSoft.funyak.MapObject
         {
             base.CheckCollision(args);
             plateCollider.UpdatePosition();
+        }
+
+        /// <summary>
+        /// チップを左上から充填します。
+        /// 全タイル充填するか、シーケンスが終了した時点で重点を終了します。
+        /// </summary>
+        /// <param name="sequence">チップのシーケンス</param>
+        public void Fill(IEnumerable<TileChip> sequence)
+        {
+            var x = 0;
+            var y = 0;
+            foreach (var chip in sequence)
+            {
+                tiles[x, y] = chip;
+                x++;
+                if (x == TileCountX)
+                {
+                    x = 0;
+                    y++;
+                    if (y == TileCountY)
+                    {
+                        break;
+                    }
+                }
+            }
         }
     }
 }
