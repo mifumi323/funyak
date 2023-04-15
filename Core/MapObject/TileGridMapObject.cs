@@ -80,7 +80,7 @@ namespace MifuminSoft.funyak.MapObject
         /// </summary>
         public int TileCountY { get; private set; }
 
-        private readonly TileChip[,] tiles;
+        private readonly TileChip?[,] tiles;
 
         private readonly TileGridPlateCollider plateCollider;
 
@@ -98,7 +98,7 @@ namespace MifuminSoft.funyak.MapObject
             plateCollider = new TileGridPlateCollider(this);
         }
 
-        public TileChip this[int x, int y]
+        public TileChip? this[int x, int y]
         {
             get => tiles[x, y];
             set => tiles[x, y] = value;
