@@ -114,6 +114,16 @@ namespace MifuminSoft.funyak.MapObject
         /// <returns>Y方向のタイル番号</returns>
         public int ToTileIndexY(double y) => (int)Math.Floor((y - Top) / TileHeight);
 
+        /// <summary>タイル座標からマップ座標に変換</summary>
+        /// <param name="x">タイル座標</param>
+        /// <returns>マップ座標</returns>
+        public double FromTileX(double x) => Left + TileWidth * x;
+
+        /// <summary>タイル座標からマップ座標に変換</summary>
+        /// <param name="y">タイル座標</param>
+        /// <returns>マップ座標</returns>
+        public double FromTileY(double y) => Top + TileHeight * y;
+
         public void AddCollidableSegmentsToList(IList<CollidableSegment> list, double left, double top, double right, double bottom)
         {
             var startX = Math.Max(ToTileIndexX(left), 0);
