@@ -112,6 +112,7 @@ namespace MifuminSoft.funyak.UnitTests.Collision
                 {
                     Assert.AreEqual(testCase.ExpectedCollidedX, collision.CrossPoint.X, 0.1, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でX座標不一致");
                     Assert.AreEqual(testCase.ExpectedCollidedY, collision.CrossPoint.Y, 0.1, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でY座標不一致");
+                    Assert.AreEqual(0.0, collision.PlateSegment.DistanceTo(collision.CrossPoint), 0.1, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})で接地面不一致");
                 }
             }
         }
