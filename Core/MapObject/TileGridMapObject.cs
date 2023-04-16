@@ -118,6 +118,26 @@ namespace MifuminSoft.funyak.MapObject
         /// <returns>Y方向のタイル番号</returns>
         public int ToTileIndexY(double y) => (int)Math.Floor((y - Top) / TileHeight);
 
+        /// <summary>マップ座標からタイル座標に変換</summary>
+        /// <param name="x">マップ座標でのX座標</param>
+        /// <returns>タイル座標</returns>
+        public double ToTileX(double x) => (x - Left) / TileWidth;
+
+        /// <summary>マップ座標からタイル座標に変換</summary>
+        /// <param name="y">マップ座標でのY座標</param>
+        /// <returns>タイル座標</returns>
+        public double ToTileY(double y) => (y - Top) / TileHeight;
+
+        /// <summary>位置をマップ座標からタイル座標に変換(始点を考慮)</summary>
+        /// <param name="v">マップ座標でのベクトル</param>
+        /// <returns>タイル座標</returns>
+        public Vector2D ToTilePosition(Vector2D v) => new Vector2D(ToTileX(v.X), ToTileY(v.Y));
+
+        /// <summary>ベクトルをマップ座標からタイル座標に変換(始点無し)</summary>
+        /// <param name="v">マップ座標でのベクトル</param>
+        /// <returns>タイル座標</returns>
+        public Vector2D ToTileVector(Vector2D v) => new Vector2D(v.X / TileWidth, v.Y / TileHeight);
+
         /// <summary>タイル座標からマップ座標に変換</summary>
         /// <param name="x">タイル座標</param>
         /// <returns>マップ座標</returns>
@@ -127,6 +147,11 @@ namespace MifuminSoft.funyak.MapObject
         /// <param name="y">タイル座標</param>
         /// <returns>マップ座標</returns>
         public double FromTileY(double y) => Top + TileHeight * y;
+
+        /// <summary>タイル座標からマップ座標に変換</summary>
+        /// <param name="v">タイル座標でのベクトル</param>
+        /// <returns>マップ座標</returns>
+        public Vector2D FromTileVector(Vector2D v) => new Vector2D(FromTileX(v.X), FromTileY(v.Y));
 
         public void AddCollidableSegmentsToList(IList<CollidableSegment> list, double left, double top, double right, double bottom)
         {
@@ -219,6 +244,22 @@ namespace MifuminSoft.funyak.MapObject
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// タイルを取得します。
+        /// 範囲外の場合、null を返します。
+        /// </summary>
+        /// <param name="x">タイル番号X</param>
+        /// <param name="y">タイル番号Y</param>
+        /// <returns></returns>
+        public TileChip? GetTileOrNull(int x, int y)
+        {
+            if (x < 0 || TileCountX <= x || y < 0 || TileCountY <= y)
+            {
+                return null;
+            }
+            return tiles[x, y];
         }
     }
 }

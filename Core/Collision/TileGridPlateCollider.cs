@@ -147,8 +147,121 @@ namespace MifuminSoft.funyak.Collision
 
         private bool IsCollidedDiagonal(NeedleCollider needleCollider, out PlateNeedleCollision collision)
         {
-            // http://marupeke296.com/COL_3D_No23_intcoord.html を参考に作ろう
-            throw new NotImplementedException(); // TODO: 実装( #52 )
+            // 参考：http://marupeke296.com/COL_3D_No23_intcoord.html
+            // 参考記事に合わせるため、計算中はタイルが整数区画になるようにタイル座標系を使う
+
+            // レイの始点(タイル座標)
+            var sp = tileGridMapObject.ToTilePosition(needleCollider.StartPoint);
+
+            // 初期インデックス
+            var initX = (int)sp.X;
+            var initY = (int)sp.Y;
+
+            // レイベクトル算出
+            var v = tileGridMapObject.ToTileVector(needleCollider.DirectedLength);
+
+            // 調整したレイの始点
+            var s = sp;
+
+            // レイの方向ベクトルVの成分の符号をプラス化
+            int signX = 1, signY = 1;
+            int adjX = 0, adjY = 0;
+            PlateAttributeFlag vFlag = PlateAttributeFlag.HitUpper, hFlag = PlateAttributeFlag.HitLeft;
+
+            if (v.X < 0.0)
+            {
+                s.X *= -1.0;
+                v.X *= -1;
+                signX = -1;
+                adjX = 1;
+                hFlag = PlateAttributeFlag.HitRight;
+            }
+            if (v.Y < 0.0)
+            {
+                s.Y *= -1.0;
+                v.Y *= -1;
+                signY = -1;
+                adjY = 1;
+                vFlag = PlateAttributeFlag.HitBelow;
+            }
+
+            // 始点を含む領域が初期領域
+            var cx = signX * (initX + adjX);
+            var cy = signY * (initY + adjY);
+
+            // レイが飛んでない場合はこのメソッドに来ない
+            //if (v.X == 0.0 && v.Y == 0.0)
+            //    return true; // レイが飛んでいないので終了
+
+            // 衝突探索
+            while (true)
+            {
+                // レイが斜めの場合に来るので、XもYも非0保証
+                //var ax = v.X != 0.0 ? (cx + 1 - s.X) / v.X : double.MaxValue;
+                //var ay = v.Y != 0.0 ? (cy + 1 - s.Y) / v.Y : double.MaxValue;
+                var ax = (cx + 1 - s.X) / v.X;
+                var ay = (cy + 1 - s.Y) / v.Y;
+
+                if (ax > 1.0 && ay > 1.0)
+                    break; // レイを越えたのでおしまい
+
+                if (ax < ay)
+                {
+                    cx += 1; // X-Side
+                }
+                else if (ay < ax)
+                {
+                    cy += 1; // Y-Side
+                }
+                else
+                {
+                    cx += 1;
+                    cy += 1; // 角
+                }
+
+                // 見つけた区画
+                var newX = signX * (cx + adjX);
+                var newY = signY * (cy + adjY);
+
+                if (ax == ay)
+                {
+                    // 角の場合の特殊対応
+                    // TODO: 複数衝突している場合は合成する(#52)
+                    throw new NotImplementedException();
+                }
+                else
+                {
+                    var tile = tileGridMapObject.GetTileOrNull(newX, newY);
+                    if (tile != null)
+                    {
+                        if (ax < ay)
+                        {
+                            // X-Side
+                            if ((tile.PlateInfo.Flags & hFlag) == hFlag) // REVIEW: needle側の当たり判定も見る必要があると思う
+                            {
+                                var crossPoint = new Vector2D(); // TODO: 位置を算出(#52)
+                                var plateSegment = new Segment2D(); // TODO: 位置を算出(#52)
+                                collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, plateSegment);
+                                return true;
+                            }
+                        }
+                        else
+                        {
+                            // Y-Side
+                            if ((tile.PlateInfo.Flags & vFlag) == vFlag) // REVIEW: needle側の当たり判定も見る必要があると思う
+                            {
+                                var crossPoint = new Vector2D(); // TODO: 位置を算出(#52)
+                                var plateSegment = new Segment2D(); // TODO: 位置を算出(#52)
+                                collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, plateSegment);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            collision = default;
+            return false;
         }
 
         public override void Shift(double dx, double dy)
