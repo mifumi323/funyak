@@ -57,35 +57,36 @@ namespace MifuminSoft.funyak.UnitTests.Collision
             var testCases = new[]
             {
                 // 真ん中(当たらない)
-                new TestCase("近・真中", moNear, 58, 68,  10,  10, false,  0,  0),
-                new TestCase("遠・真中", moFar,  58, 68,  10,  10, false,  0,  0),
+                new TestCase("近・真中", moNear, 58, 68,  10,  10, false,  0.0,  0.0),
+                new TestCase("遠・真中", moFar,  58, 68,  10,  10, false,  0.0,  0.0),
 
                 // シンプルな上下左右
-                new TestCase("近・真上", moNear, 58, 68,   0, -32, true,  58, 52),
-                new TestCase("近・真下", moNear, 58, 68,   0,  32, true,  58, 84),
-                new TestCase("近・真左", moNear, 58, 68, -32,   0, true,  42, 68),
-                new TestCase("近・真右", moNear, 58, 68,  32,   0, true,  74, 68),
-                new TestCase("遠・真上", moFar,  58, 68,   0, -32, false,  0,  0),
-                new TestCase("遠・真下", moFar,  58, 68,   0,  32, false,  0,  0),
-                new TestCase("遠・真左", moFar,  58, 68, -32,   0, false,  0,  0),
-                new TestCase("遠・真右", moFar,  58, 68,  32,   0, false,  0,  0),
+                new TestCase("近・真上", moNear, 58, 68,   0, -32, true,  58.0, 52.0),
+                new TestCase("近・真下", moNear, 58, 68,   0,  32, true,  58.0, 84.0),
+                new TestCase("近・真左", moNear, 58, 68, -32,   0, true,  42.0, 68.0),
+                new TestCase("近・真右", moNear, 58, 68,  32,   0, true,  74.0, 68.0),
+                new TestCase("遠・真上", moFar,  58, 68,   0, -32, false,  0.0,  0.0),
+                new TestCase("遠・真下", moFar,  58, 68,   0,  32, false,  0.0,  0.0),
+                new TestCase("遠・真左", moFar,  58, 68, -32,   0, false,  0.0,  0.0),
+                new TestCase("遠・真右", moFar,  58, 68,  32,   0, false,  0.0,  0.0),
 
-                new TestCase("近・斜め", moNear, 58, 68, -24, -32, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68,  24, -32, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68, -24,  32, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68,  24,  32, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68, -32, -24, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68, -32,  24, true,   0,  0),
-                new TestCase("近・斜め", moNear, 58, 68,  32, -24, true,   0,  0),
-                new TestCase("近・斜め", moFar,  58, 68,  32,  24, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68, -24, -32, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68,  24, -32, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68, -24,  32, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68,  24,  32, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68, -32, -24, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68, -32,  24, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68,  32, -24, true,   0,  0),
-                new TestCase("遠・斜め", moFar,  58, 68,  32,  24, true,   0,  0),
+                // 角に当たらない斜め
+                new TestCase("近・斜め", moNear, 58, 68, -24, -32, true,  46.0, 52.0),
+                new TestCase("近・斜め", moNear, 58, 68,  24, -32, true,  70.0, 52.0),
+                new TestCase("近・斜め", moNear, 58, 68, -24,  32, true,  46.0, 84.0),
+                new TestCase("近・斜め", moNear, 58, 68,  24,  32, true,  70.0, 84.0),
+                new TestCase("近・斜め", moNear, 58, 68, -32, -24, true,  42.0, 56.0),
+                new TestCase("近・斜め", moNear, 58, 68, -32,  24, true,  42.0, 80.0),
+                new TestCase("近・斜め", moNear, 58, 68,  32, -24, true,  74.0, 56.0),
+                new TestCase("近・斜め", moNear, 58, 68,  32,  24, true,  74.0, 80.0),
+                new TestCase("遠・斜め", moFar,  58, 68, -24, -32, true,  42.0, 46.7),
+                new TestCase("遠・斜め", moFar,  58, 68,  24, -32, true,  74.0, 46.7),
+                new TestCase("遠・斜め", moFar,  58, 68, -24,  32, true,  42.0, 89.3),
+                new TestCase("遠・斜め", moFar,  58, 68,  24,  32, true,  74.0, 89.3),
+                new TestCase("遠・斜め", moFar,  58, 68, -32, -24, true,  36.7, 52.0),
+                new TestCase("遠・斜め", moFar,  58, 68, -32,  24, true,  36.7, 84.0),
+                new TestCase("遠・斜め", moFar,  58, 68,  32, -24, true,  79.3, 52.0),
+                new TestCase("遠・斜め", moFar,  58, 68,  32,  24, true,  79.3, 84.0),
             };
             foreach (var testCase in testCases)
             {
@@ -109,8 +110,8 @@ namespace MifuminSoft.funyak.UnitTests.Collision
                 Assert.AreEqual(testCase.ExpectedIsCollided, collided, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})で接触不一致");
                 if (collided)
                 {
-                    Assert.AreEqual(testCase.ExpectedCollidedX, collision.CrossPoint.X, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でX座標不一致");
-                    Assert.AreEqual(testCase.ExpectedCollidedY, collision.CrossPoint.Y, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でY座標不一致");
+                    Assert.AreEqual(testCase.ExpectedCollidedX, collision.CrossPoint.X, 0.1, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でX座標不一致");
+                    Assert.AreEqual(testCase.ExpectedCollidedY, collision.CrossPoint.Y, 0.1, $"{testCase.Name}({testCase.DirectionX}, {testCase.DirectionY})でY座標不一致");
                 }
             }
         }
