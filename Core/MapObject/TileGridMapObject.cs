@@ -261,5 +261,22 @@ namespace MifuminSoft.funyak.MapObject
             }
             return tiles[x, y];
         }
+
+        /// <summary>タイルの境界線を取得します。</summary>
+        /// <param name="x">タイル番号X</param>
+        /// <param name="y">タイル番号Y</param>
+        /// <param name="flag">上下左右のいずれか一つを表す属性</param>
+        /// <returns>境界線</returns>
+        public Segment2D GetBoundSegment(int x, int y, PlateAttributeFlag flag)
+        {
+            return flag switch
+            {
+                PlateAttributeFlag.HitUpper => new Segment2D(FromTileX(x), FromTileY(y), FromTileX(x + 1), FromTileY(y)),
+                PlateAttributeFlag.HitBelow => new Segment2D(FromTileX(x), FromTileY(y + 1), FromTileX(x + 1), FromTileY(y + 1)),
+                PlateAttributeFlag.HitLeft => new Segment2D(FromTileX(x), FromTileY(y), FromTileX(x), FromTileY(y + 1)),
+                PlateAttributeFlag.HitRight => new Segment2D(FromTileX(x + 1), FromTileY(y), FromTileX(x + 1), FromTileY(y + 1)),
+                _ => throw new ArgumentException($"{nameof(flag)} は、上下左右のどれか一つである必要があります。", nameof(flag)),
+            };
+        }
     }
 }

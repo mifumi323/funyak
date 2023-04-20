@@ -240,7 +240,7 @@ namespace MifuminSoft.funyak.Collision
                             if ((tile.PlateInfo.Flags & hFlag) == hFlag) // REVIEW: needle側の当たり判定も見る必要があると思う
                             {
                                 var crossPoint = needleCollider.StartPoint + needleCollider.DirectedLength * ax;
-                                var plateSegment = new Segment2D(); // TODO: 位置を算出(#52)
+                                var plateSegment = tileGridMapObject.GetBoundSegment(newX, newY, hFlag);
                                 collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, plateSegment);
                                 return true;
                             }
@@ -251,7 +251,7 @@ namespace MifuminSoft.funyak.Collision
                             if ((tile.PlateInfo.Flags & vFlag) == vFlag) // REVIEW: needle側の当たり判定も見る必要があると思う
                             {
                                 var crossPoint = needleCollider.StartPoint + needleCollider.DirectedLength * ay;
-                                var plateSegment = new Segment2D(); // TODO: 位置を算出(#52)
+                                var plateSegment = tileGridMapObject.GetBoundSegment(newX, newY, vFlag);
                                 collision = new PlateNeedleCollision(this, needleCollider, crossPoint, tile.PlateInfo, plateSegment);
                                 return true;
                             }
