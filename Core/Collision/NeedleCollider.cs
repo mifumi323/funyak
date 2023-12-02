@@ -1,4 +1,5 @@
-﻿using MifuminSoft.funyak.Geometry;
+﻿using System;
+using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.Collision
@@ -116,5 +117,22 @@ namespace MifuminSoft.funyak.Collision
         public void SetSegment(Segment2D segment) => Set(segment.Start, segment.End - segment.Start);
 
         public override void Shift(double dx, double dy) => StartPoint = new Vector2D(startPoint.X + dx, startPoint.Y + dy);
+
+        public bool IntersectBounds(IBounds another)
+        {
+            // 自身のBounding Boxはマージン分だけ膨らませる
+            var bl = Math.Min(StartPoint.X - StartMargin, EndPoint.X - EndMargin);
+            var bt = Math.Min(StartPoint.Y - StartMargin, EndPoint.Y - EndMargin);
+            var br = Math.Max(StartPoint.X + StartMargin, EndPoint.X + EndMargin);
+            var bb = Math.Max(StartPoint.Y + StartMargin, EndPoint.Y + EndMargin);
+
+            // 交差矩形が矛盾なく算出できれば交差している
+            var il = Math.Max(bl, another.Left);
+            var it = Math.Max(bt, another.Top);
+            var ir = Math.Min(br, another.Right);
+            var ib = Math.Min(bb, another.Bottom);
+
+            return il <= ir && it <= ib;
+        }
     }
 }

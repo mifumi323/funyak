@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.Geometry
+﻿using System;
+
+namespace MifuminSoft.funyak.Geometry
 {
     /// <summary>
     /// 2次元の始点と終点を持つ線分を表します。
@@ -89,6 +91,43 @@
                 crossPoint = new Vector2D(double.NaN, double.NaN);
                 return false;
             }
+        }
+
+        /// <summary>
+        /// 位置ベクトル v との距離の二乗を計算します。
+        /// 参考：https://tgws.plus/ul/ul31.html#2-4
+        /// </summary>
+        /// <param name="v">位置ベクトル</param>
+        /// <returns>距離</returns>
+        public double DistanceSqTo(Vector2D v)
+        {
+            var p1q1 = v - Start;
+            var p1p2 = End - Start;
+            var p1q1_p1p2 = p1q1.Dot(p1p2);
+            var p1p2_p1p2 = p1p2.Dot(p1p2);
+            if (p1q1_p1p2 <= 0)
+            {
+                return p1q1.Dot(p1q1);
+            }
+            else if (p1q1_p1p2 >= p1p2_p1p2)
+            {
+                var p2q1 = v - End;
+                return p2q1.Dot(p2q1);
+            }
+            else
+            {
+                return p1q1.Dot(p1q1) - p1q1_p1p2 * p1q1_p1p2 / p1p2_p1p2;
+            }
+        }
+
+        /// <summary>
+        /// 位置ベクトル v との距離を計算します。
+        /// </summary>
+        /// <param name="v">位置ベクトル</param>
+        /// <returns>距離</returns>
+        public double DistanceTo(Vector2D v)
+        {
+            return Math.Sqrt(DistanceSqTo(v));
         }
     }
 }

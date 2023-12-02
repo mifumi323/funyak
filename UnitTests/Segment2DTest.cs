@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using MifuminSoft.funyak.Geometry;
+using System;
 
 namespace MifuminSoft.funyak.UnitTests
 {
@@ -54,6 +55,24 @@ namespace MifuminSoft.funyak.UnitTests
                 var result = s1.TryGetCrossPoint(s2, out _);
                 Assert.IsFalse(result, "平行なパターンで失敗");
             }
+        }
+
+        [Test]
+        public void DistanceToTest()
+        {
+            var s = new Segment2D(10, 10, 20, 10);
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(5.0, 10.0)), 0.1); // 外側左
+            Assert.AreEqual(5.0 * Math.Sqrt(2.0), s.DistanceTo(new Vector2D(5.0, 15.0)), 0.1); // 外側左上
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(10.0, 15.0)), 0.1); // 境界左上
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(15.0, 15.0)), 0.1); // 内側上
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(20.0, 15.0)), 0.1); // 境界右上
+            Assert.AreEqual(5.0 * Math.Sqrt(2.0), s.DistanceTo(new Vector2D(25.0, 15.0)), 0.1); // 外側右上
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(25.0, 10.0)), 0.1); // 外側右
+            Assert.AreEqual(5.0 * Math.Sqrt(2.0), s.DistanceTo(new Vector2D(25.0, 5.0)), 0.1); // 外側右下
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(20.0, 5.0)), 0.1); // 境界右下
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(15.0, 5.0)), 0.1); // 内側下
+            Assert.AreEqual(5.0, s.DistanceTo(new Vector2D(10.0, 5.0)), 0.1); // 境界左下
+            Assert.AreEqual(5.0 * Math.Sqrt(2.0), s.DistanceTo(new Vector2D(5.0, 5.0)), 0.1); // 外側左下
         }
     }
 }
