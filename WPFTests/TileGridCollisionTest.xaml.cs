@@ -37,6 +37,8 @@ namespace WPFTests
         private readonly TileGridMapObject tileGridMapObject;
         private readonly TileChip[] tiles;
         private readonly NeedleMapObject needleTarget;
+        private readonly LineMapObject batten1;
+        private readonly LineMapObject batten2;
         private readonly IInput input;
 
         private bool hit = false;
@@ -86,6 +88,10 @@ namespace WPFTests
                 },
             };
             map.AddMapObject(needleTarget);
+            batten1 = new LineMapObject(-10, -10, 10, 10) { Color = "Red" };
+            map.AddMapObject(batten1);
+            batten2 = new LineMapObject(-10, 10, 10, -10) { Color = "Red" };
+            map.AddMapObject(batten2);
             mapView = new MapView(map)
             {
                 Canvas = canvas,
@@ -149,6 +155,25 @@ namespace WPFTests
             if (hit)
             {
                 children.AppendLine(collision.CrossPoint.ToString());
+                batten1.X1 = collision.CrossPoint.X - 10;
+                batten1.Y1 = collision.CrossPoint.Y - 10;
+                batten1.X2 = collision.CrossPoint.X + 10;
+                batten1.Y2 = collision.CrossPoint.Y + 10;
+                batten2.X1 = collision.CrossPoint.X - 10;
+                batten2.Y1 = collision.CrossPoint.Y + 10;
+                batten2.X2 = collision.CrossPoint.X + 10;
+                batten2.Y2 = collision.CrossPoint.Y - 10;
+            }
+            else
+            {
+                batten1.X1 = -10;
+                batten1.Y1 = -10;
+                batten1.X2 = -10;
+                batten1.Y2 = -10;
+                batten2.X1 = -10;
+                batten2.Y1 = -10;
+                batten2.X2 = -10;
+                batten2.Y2 = -10;
             }
             foreach (var child in canvas.Children)
             {
