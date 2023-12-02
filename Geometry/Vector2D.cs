@@ -68,5 +68,7 @@ namespace MifuminSoft.funyak.Geometry
         }
 
         #endregion
+
+        public override string ToString() => $"{X},{Y}";
     }
 }
