@@ -154,8 +154,8 @@ namespace MifuminSoft.funyak.Collision
             var sp = tileGridMapObject.ToTilePosition(needleCollider.StartPoint);
 
             // 初期インデックス
-            var initX = (int)sp.X;
-            var initY = (int)sp.Y;
+            var initX = sp.X < 0.0 ? (int)sp.X - 1 : (int)sp.X;
+            var initY = sp.Y < 0.0 ? (int)sp.Y - 1 : (int)sp.Y;
 
             // レイベクトル算出
             var v = tileGridMapObject.ToTileVector(needleCollider.DirectedLength);
