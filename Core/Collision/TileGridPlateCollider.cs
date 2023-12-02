@@ -226,7 +226,7 @@ namespace MifuminSoft.funyak.Collision
                 if (ax == ay)
                 {
                     // 角の場合の特殊対応
-                    // TODO: 複数衝突している場合は合成する(#52)
+                    // TODO: 複数衝突している場合は合成する(#71)
                     throw new NotImplementedException();
                 }
                 else
