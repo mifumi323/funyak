@@ -358,9 +358,8 @@ namespace MifuminSoft.funyak.MapObject
 
         public void UpdateSelf(UpdateMapObjectArgs args)
         {
-            var env = args.GetEnvironment(X, Y);
-            var gravity = double.IsNaN(CollidedGravity) ? env.Gravity : CollidedGravity;
-            var wind = double.IsNaN(CollidedWind) ? env.Wind : CollidedWind;
+            var gravity = double.IsNaN(CollidedGravity) ? args.MapGravity : CollidedGravity;
+            var wind = double.IsNaN(CollidedWind) ? 0.0 : CollidedWind;
 
             detectGravity(gravity > 0);
             updateSelfPreprocess();

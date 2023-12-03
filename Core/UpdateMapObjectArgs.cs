@@ -30,6 +30,12 @@ namespace MifuminSoft.funyak
         public double GetGravity(double x, double y) => map.GetGravity(x, y);
 
         /// <summary>
+        /// マップの重力を取得します。
+        /// </summary>
+        /// <returns>重力(0.0が無重力、1.0が通常)</returns>
+        public double MapGravity => map.Gravity;
+
+        /// <summary>
         /// 風速を取得します。
         /// </summary>
         /// <param name="x">X座標</param>
