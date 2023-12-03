@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>funyak.Core</AssemblyName>
     <RootNamespace>MifuminSoft.funyak</RootNamespace>
     <LangVersion>8.0</LangVersion>
