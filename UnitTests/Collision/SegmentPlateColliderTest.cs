@@ -25,18 +25,6 @@ namespace MifuminSoft.funyak.UnitTests.Collision
         }
 
         [Test]
-        public void ShiftTest()
-        {
-            var collider = new SegmentPlateCollider(null);
-            collider.SetSegment(new Segment2D(100.0, 200.0, 300.0, 400.0));
-            collider.Shift(10.0, 20.0);
-            Assert.AreEqual(110.0, collider.Left, 0.0001, "SegmentPlateCollider.Leftが不正");
-            Assert.AreEqual(220.0, collider.Top, 0.0001, "SegmentPlateCollider.Topが不正");
-            Assert.AreEqual(310.0, collider.Right, 0.0001, "SegmentPlateCollider.Rightが不正");
-            Assert.AreEqual(420.0, collider.Bottom, 0.0001, "SegmentPlateCollider.Bottomが不正");
-        }
-
-        [Test]
         public void IsCollidedTest()
         {
             // 交差しているパターン

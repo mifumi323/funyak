@@ -17,7 +17,5 @@ namespace MifuminSoft.funyak.Collision
             collision = isCollided ? new PlateNeedleCollision(this, needleCollider, crossPoint, PlateInfo, Segment) : default;
             return isCollided;
         }
-
-        public override void Shift(double dx, double dy) => SetSegment(new Segment2D(Segment.Start + new Vector2D(dx, dy), Segment.End + new Vector2D(dx, dy)));
     }
 }

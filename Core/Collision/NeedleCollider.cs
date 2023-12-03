@@ -116,8 +116,6 @@ namespace MifuminSoft.funyak.Collision
 
         public void SetSegment(Segment2D segment) => Set(segment.Start, segment.End - segment.Start);
 
-        public override void Shift(double dx, double dy) => StartPoint = new Vector2D(startPoint.X + dx, startPoint.Y + dy);
-
         public bool IntersectBounds(IBounds another)
         {
             // 自身のBounding Boxはマージン分だけ膨らませる

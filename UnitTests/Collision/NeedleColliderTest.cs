@@ -19,7 +19,7 @@ namespace MifuminSoft.funyak.UnitTests.Collision
             Assert.AreEqual(600.0, collider.Bottom, 0.0001, "NeedleCollider.Bottomが不正");
 
             // 移動
-            collider.Shift(300.0, 300.0);
+            collider.StartPoint += new Vector2D(300.0, 300.0);
             Assert.AreEqual(400.0, collider.Left, 0.0001, "移動したNeedleCollider.Leftが不正");
             Assert.AreEqual(500.0, collider.Top, 0.0001, "移動したNeedleCollider.Topが不正");
             Assert.AreEqual(700.0, collider.Right, 0.0001, "移動したNeedleCollider.Rightが不正");
