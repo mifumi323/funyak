@@ -201,22 +201,6 @@ namespace MifuminSoft.funyak
         }
 
         /// <summary>
-        /// 重力を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>重力(0.0が無重力、1.0が通常)</returns>
-        public double GetGravity(double x, double y) => GetEnvironment(x, y, me => !double.IsNaN(me.Gravity)).Gravity;
-
-        /// <summary>
-        /// 風速を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>風速(0.0：無風、正の数：右向きの風、負の数：左向きの風)</returns>
-        public double GetWind(double x, double y) => GetEnvironment(x, y, me => !double.IsNaN(me.Wind)).Wind;
-
-        /// <summary>
         /// 指定した位置の環境情報を取得します。
         /// </summary>
         /// <param name="x">X座標</param>
