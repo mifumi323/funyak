@@ -17,13 +17,6 @@ namespace MifuminSoft.funyak.Collision
 
         public ColliderBase(MapObjectBase owner) => Owner = owner;
 
-        /// <summary>
-        /// 平行移動します。
-        /// </summary>
-        /// <param name="dx">X座標の差分</param>
-        /// <param name="dy">Y座標の差分</param>
-        public abstract void Shift(double dx, double dy);
-
         protected void UpdatePosition(double left, double top, double right, double bottom)
         {
             Left = left;

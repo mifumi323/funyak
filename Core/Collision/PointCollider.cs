@@ -17,7 +17,5 @@ namespace MifuminSoft.funyak.Collision
         public PointCollider(MapObjectBase owner) : base(owner) { }
 
         public void SetPoint(double x, double y) => UpdatePosition(x, y, x, y);
-
-        public override void Shift(double dx, double dy) => SetPoint(X + dx, Y + dy);
     }
 }

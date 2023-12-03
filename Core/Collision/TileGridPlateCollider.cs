@@ -263,11 +263,5 @@ namespace MifuminSoft.funyak.Collision
             collision = default;
             return false;
         }
-
-        public override void Shift(double dx, double dy)
-        {
-            // REVIEW: そもそもShiftメソッド自体必要か？( #59 )
-            throw new NotImplementedException();
-        }
     }
 }

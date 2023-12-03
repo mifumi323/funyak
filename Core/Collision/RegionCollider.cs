@@ -23,5 +23,12 @@ namespace MifuminSoft.funyak.Collision
         public abstract bool Contains(double x, double y, out RegionInfo regionInfo);
 
         protected bool ContainsInAABB(double x, double y) => Left <= x && x <= Right && Top <= y && y <= Bottom;
+
+        /// <summary>
+        /// 平行移動します。
+        /// </summary>
+        /// <param name="dx">X座標の差分</param>
+        /// <param name="dy">Y座標の差分</param>
+        public abstract void Shift(double dx, double dy);
     }
 }
