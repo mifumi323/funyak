@@ -13,7 +13,10 @@ namespace MifuminSoft.funyak.Collision
         public double Right { get; private set; }
         public double Bottom { get; private set; }
 
-        public MapObjectBase Owner { get; private set; }
+        /// <summary>
+        /// 親オブジェクト(同一親同士の衝突図形は衝突しない)
+        /// </summary>
+        public object Owner { get; private set; }
 
         public ColliderBase(MapObjectBase owner) => Owner = owner;
 
