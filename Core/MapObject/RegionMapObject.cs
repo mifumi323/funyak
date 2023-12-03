@@ -17,7 +17,7 @@ namespace MifuminSoft.funyak.MapObject
             get => (Collider.Top + Collider.Bottom) * 0.5;
             set => Collider.Shift(0.0, value - Y);
         }
-        public override void OnJoin(Map map, ColliderCollection colliderCollection) => colliderCollection.Add(Collider);
-        public override void OnLeave(Map map, ColliderCollection colliderCollection) => colliderCollection.Remove(Collider);
+        public override void OnJoin(ColliderCollection colliderCollection) => colliderCollection.Add(Collider);
+        public override void OnLeave(ColliderCollection colliderCollection) => colliderCollection.Remove(Collider);
     }
 }

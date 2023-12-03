@@ -205,12 +205,12 @@ namespace MifuminSoft.funyak.MapObject
 
         }
 
-        public override void OnJoin(Map map, ColliderCollection colliderCollection)
+        public override void OnJoin(ColliderCollection colliderCollection)
         {
             colliderCollection.Add(plateCollider);
         }
 
-        public override void OnLeave(Map map, ColliderCollection colliderCollection)
+        public override void OnLeave(ColliderCollection colliderCollection)
         {
             colliderCollection.Remove(plateCollider);
         }
