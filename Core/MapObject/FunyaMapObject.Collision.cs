@@ -29,7 +29,7 @@ namespace MifuminSoft.funyak.MapObject
         private readonly IPositionAdjuster adjusterLeft = new PositionAdjusterLeft();
         private readonly IPositionAdjuster adjusterRight = new PositionAdjusterRight();
 
-        public override void OnJoin(Map map, ColliderCollection colliderCollection)
+        public override void OnJoin(ColliderCollection colliderCollection)
         {
             colliderCollection.Add(centerCollider);
             colliderCollection.Add(topCollider);
@@ -38,7 +38,7 @@ namespace MifuminSoft.funyak.MapObject
             colliderCollection.Add(rightCollider);
         }
 
-        public override void OnLeave(Map map, ColliderCollection colliderCollection)
+        public override void OnLeave(ColliderCollection colliderCollection)
         {
             colliderCollection.Remove(centerCollider);
             colliderCollection.Remove(topCollider);

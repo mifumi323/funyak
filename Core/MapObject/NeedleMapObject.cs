@@ -24,8 +24,8 @@ namespace MifuminSoft.funyak.MapObject
             collider = new NeedleCollider(this);
         }
 
-        public override void OnJoin(Map map, ColliderCollection colliderCollection) => colliderCollection.Add(collider);
-        public override void OnLeave(Map map, ColliderCollection colliderCollection) => colliderCollection.Remove(collider);
+        public override void OnJoin(ColliderCollection colliderCollection) => colliderCollection.Add(collider);
+        public override void OnLeave(ColliderCollection colliderCollection) => colliderCollection.Remove(collider);
 
         public override void CheckCollision(CheckMapObjectCollisionArgs args)
         {

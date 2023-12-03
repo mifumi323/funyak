@@ -91,7 +91,7 @@ namespace MifuminSoft.funyak.UnitTests.Collision
             foreach (var testCase in testCases)
             {
                 var cc = new ColliderCollection();
-                testCase.MapObject.OnJoin(null!, cc);
+                testCase.MapObject.OnJoin(cc);
                 var collided = false;
                 PlateNeedleCollision collision = default;
                 var needleCollider = new NeedleCollider(null)

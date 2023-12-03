@@ -102,7 +102,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Add(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Add(selfUpdatableMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject[mapObject.Name!] = mapObject;
-            mapObject.OnJoin(this, colliderCollection);
+            mapObject.OnJoin(colliderCollection);
 
             MapObjectAdded?.Invoke(this, new MapObjectEventArgs(mapObject));
         }
@@ -116,7 +116,7 @@ namespace MifuminSoft.funyak
             mapObjectCollection.Remove(mapObject);
             if (mapObject is IUpdatableMapObject selfUpdatableMapObject) selfUpdatableMapObjectCollection.Remove(selfUpdatableMapObject);
             if (!string.IsNullOrEmpty(mapObject.Name)) namedMapObject.Remove(mapObject.Name!);
-            mapObject.OnLeave(this, colliderCollection);
+            mapObject.OnLeave(colliderCollection);
 
             MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
         }

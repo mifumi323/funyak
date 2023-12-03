@@ -38,15 +38,13 @@ namespace MifuminSoft.funyak.MapObject
         /// <summary>
         /// マップに登録されるとき呼び出されます。
         /// </summary>
-        /// <param name="map"></param>
         /// <param name="collisionManager"></param>
-        public virtual void OnJoin(Map map, ColliderCollection colliderCollection) { }
+        public virtual void OnJoin(ColliderCollection colliderCollection) { }
 
         /// <summary>
         /// マップから登録解除されるときに呼び出されます。
         /// </summary>
-        /// <param name="map"></param>
         /// <param name="collisionManager"></param>
-        public virtual void OnLeave(Map map, ColliderCollection colliderCollection) { }
+        public virtual void OnLeave(ColliderCollection colliderCollection) { }
     }
 }
