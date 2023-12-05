@@ -49,7 +49,7 @@ namespace WPFTests
             {
                 Input = input,
             });
-            funya = (map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()) as FunyaMapObject;
+            funya = (map.FindMapObject("main") ?? map.EnumerateAllMapObjects().FirstOrDefault()) as FunyaMapObject;
 
             // ちょっとタイルグリッドのテストをねじ込もう
             int tcx = 10, tcy = 7;

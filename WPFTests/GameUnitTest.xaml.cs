@@ -222,7 +222,7 @@ namespace WPFTests
                     })
                     {
                         Canvas = canvas,
-                        FocusTo = map.FindMapObject("main") ?? map.GetMapObjects().FirstOrDefault()
+                        FocusTo = map.FindMapObject("main") ?? map.EnumerateAllMapObjects().FirstOrDefault()
                     };
                     lblResult.Content = null;
                     lbTestCase.Items.Refresh();

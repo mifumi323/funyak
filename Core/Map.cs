@@ -177,15 +177,22 @@ namespace MifuminSoft.funyak
         /// 登録されているマップオブジェクトを取得します。
         /// </summary>
         /// <param name="bounds">
-        /// マップオブジェクトの存在範囲
-        /// この範囲に少なくとも一部が含まれるマップオブジェクトが返される
-        /// nullの場合は全マップオブジェクトが返される
+        /// マップオブジェクトの存在範囲。
+        /// この範囲に少なくとも一部が含まれるマップオブジェクトが返される。
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<MapObjectBase> GetMapObjects(IBounds? bounds = null)
+        public IEnumerable<MapObjectBase> GetMapObjects(IBounds bounds)
         {
-            if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
+            return mapObjectCollection;
+        }
+
+        /// <summary>
+        /// 登録されているマップオブジェクトを取得します。
+        /// </summary>
+        /// <returns>マップオブジェクトの集合</returns>
+        public IEnumerable<MapObjectBase> EnumerateAllMapObjects()
+        {
             return mapObjectCollection;
         }
 
@@ -193,11 +200,10 @@ namespace MifuminSoft.funyak
         /// 名前でマップオブジェクトを検索します。
         /// </summary>
         /// <param name="name">マップオブジェクトの名前</param>
-        /// <returns></returns>
-        public MapObjectBase FindMapObject(string name)
+        /// <returns>マップオブジェクト。なければ null。</returns>
+        public MapObjectBase? FindMapObject(string name)
         {
-            namedMapObject.TryGetValue(name, out MapObjectBase mapObject);
-            return mapObject;
+            return namedMapObject.TryGetValue(name, out MapObjectBase mapObject) ? mapObject : null;
         }
 
         /// <summary>

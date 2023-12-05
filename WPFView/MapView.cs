@@ -56,7 +56,7 @@ namespace MifuminSoft.funyak.View
             MapObjectViewCollection = new List<IMapObjectView>();
             MapObjectViewCollentionDirty = false;
             MapObjectViewFactory = mapObjectViewFactory ?? new MapObjectViewFactory();
-            foreach (var mapObject in Map.GetMapObjects())
+            foreach (var mapObject in Map.EnumerateAllMapObjects())
             {
                 AddMapObject(mapObject);
             }
