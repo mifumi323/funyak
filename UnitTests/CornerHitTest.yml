@@ -100,8 +100,8 @@ objects:
   y2: 140
   color: Gray
   hit: true
-areas:
-- l: 100
+- type: rect
+  l: 100
   r: 200
   t: 100
   b: 200
