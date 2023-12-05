@@ -1,4 +1,6 @@
-﻿namespace MifuminSoft.funyak.MapEnvironment
+﻿using MifuminSoft.funyak.Geometry;
+
+namespace MifuminSoft.funyak.MapEnvironment
 {
     /// <summary>
     /// マップ中の局所的な環境を表します。

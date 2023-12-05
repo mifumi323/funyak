@@ -1,4 +1,4 @@
-﻿namespace MifuminSoft.funyak
+﻿namespace MifuminSoft.funyak.Geometry
 {
     /// <summary>
     /// 範囲を表します。

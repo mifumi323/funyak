@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MifuminSoft.funyak.Collision;
+using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 

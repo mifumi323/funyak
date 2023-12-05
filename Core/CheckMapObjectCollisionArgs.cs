@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak

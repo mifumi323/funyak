@@ -1,4 +1,5 @@
 ﻿using System;
+using MifuminSoft.funyak.Geometry;
 
 namespace MifuminSoft.funyak.MapObject
 {
