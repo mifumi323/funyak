@@ -44,7 +44,7 @@ namespace MifuminSoft.funyak.Geometry
 
         #region 他者との演算
 
-        public readonly bool In(IBounds bounds) => bounds.Left <= X && X < bounds.Right && bounds.Top <= Y && bounds.Bottom < Y;
+        public readonly bool In(IBounds bounds) => bounds.Left <= X && X < bounds.Right && bounds.Top <= Y && Y < bounds.Bottom;
 
         #endregion
 
