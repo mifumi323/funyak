@@ -208,39 +208,9 @@ namespace MifuminSoft.funyak
         }
 
         /// <summary>
-        /// 指定した位置の環境情報を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>環境</returns>
-        public IMapEnvironment GetEnvironment(double x, double y)
-            => (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom) ?? this;
-
-        /// <summary>
-        /// 指定した位置の環境情報を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <param name="predicate">追加の条件</param>
-        /// <returns>環境</returns>
-        public IMapEnvironment GetEnvironment(double x, double y, Func<AreaEnvironment, bool> predicate)
-            => (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom && predicate(me)) ?? this;
-
-        /// <summary>
         /// 全ての局所的環境を取得します。
         /// </summary>
         /// <returns>環境</returns>
         public IEnumerable<AreaEnvironment> GetAllAreaEnvironment() => areaEnvironmentCollection;
-
-        /// <summary>
-        /// 名前で局所的環境を検索します。
-        /// </summary>
-        /// <param name="name">局所的環境の名前</param>
-        /// <returns></returns>
-        public AreaEnvironment FindAreaEnvironment(string name)
-        {
-            namedAreaEnvironment.TryGetValue(name, out AreaEnvironment area);
-            return area;
-        }
     }
 }
