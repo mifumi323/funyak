@@ -36,30 +36,32 @@ namespace MifuminSoft.funyak.Geometry
 
         #region 自分との演算
 
-        public double Dot(Vector2D v) => X * v.X + Y * v.Y;
+        public readonly double Dot(Vector2D v) => X * v.X + Y * v.Y;
 
-        public double Cross(Vector2D v) => X * v.Y - Y * v.X;
+        public readonly double Cross(Vector2D v) => X * v.Y - Y * v.X;
 
         #endregion
 
         #region 他者との演算
 
-        public bool In(IBounds bounds) => bounds.Left <= X && X < bounds.Right && bounds.Top <= Y && bounds.Bottom < Y;
+        public readonly bool In(IBounds bounds) => bounds.Left <= X && X < bounds.Right && bounds.Top <= Y && bounds.Bottom < Y;
 
         #endregion
 
         #region 情報取得
 
-        public double Length => Math.Sqrt(LengthSq);
+        public readonly double Length => Math.Sqrt(LengthSq);
 
-        public double LengthSq => X * X + Y * Y;
+        public readonly double LengthSq => X * X + Y * Y;
 
-        public Vector2D GetNorm()
+        public readonly Vector2D GetNorm()
         {
             // なぜか逆数を取ったほうが速い
             var rLength = 1.0 / Length;
             return new Vector2D(X * rLength, Y * rLength);
         }
+
+        public override readonly string ToString() => $"{X},{Y}";
 
         #endregion
 
@@ -74,7 +76,5 @@ namespace MifuminSoft.funyak.Geometry
         }
 
         #endregion
-
-        public override string ToString() => $"{X},{Y}";
     }
 }
