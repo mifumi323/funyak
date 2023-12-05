@@ -21,7 +21,7 @@ namespace MifuminSoft.funyak.UnitTests
             var map = new Map(320, 224);
             var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
-            var mapObjects = map.GetMapObjects();
+            var mapObjects = map.EnumerateAllMapObjects();
 
             Assert.AreEqual(1, mapObjects.Count());
         }
@@ -33,7 +33,7 @@ namespace MifuminSoft.funyak.UnitTests
             var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
             map.RemoveMapObject(mapObject);
-            var mapObjects = map.GetMapObjects();
+            var mapObjects = map.EnumerateAllMapObjects();
 
             Assert.AreEqual(0, mapObjects.Count());
         }
