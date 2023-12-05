@@ -19,9 +19,8 @@ namespace MifuminSoft.funyak
         /// <param name="bounds">
         /// マップオブジェクトの存在範囲
         /// この範囲に少なくとも一部が含まれるマップオブジェクトが返される
-        /// nullの場合は全マップオブジェクトが返される
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<MapObjectBase> GetMapObjects(IBounds? bounds = null) => map.GetMapObjects(bounds);
+        public IEnumerable<MapObjectBase> GetMapObjects(IBounds bounds) => map.GetMapObjects(bounds);
     }
 }
