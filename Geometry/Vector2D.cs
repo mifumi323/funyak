@@ -42,6 +42,12 @@ namespace MifuminSoft.funyak.Geometry
 
         #endregion
 
+        #region 他者との演算
+
+        public bool In(IBounds bounds) => bounds.Left <= X && X < bounds.Right && bounds.Top <= Y && bounds.Bottom < Y;
+
+        #endregion
+
         #region 情報取得
 
         public double Length => Math.Sqrt(LengthSq);
