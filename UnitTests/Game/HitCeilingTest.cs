@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.Input;
+using MifuminSoft.funyak.MapObject;
 using NUnit.Framework;
 
 namespace MifuminSoft.funyak.UnitTests.Game
@@ -26,10 +25,10 @@ namespace MifuminSoft.funyak.UnitTests.Game
         public override bool IsSuccess()
         {
             var main = Map.FindMapObject("main");
-            var x = Map.FindAreaEnvironment("X");
+            var x = Map.FindMapObject("X") as RegionMapObject;
             Assert.IsNotNull(main, "mainが見つかりません。");
             Assert.IsNotNull(x, "Xが見つかりません。");
-            Assert.IsFalse(Map.GetEnvironment(main.X, main.Y) == x, "すり抜けた！");
+            Assert.IsFalse(new Vector2D(main.X, main.Y).In(x.Collider), "すり抜けた！");
             return false;
         }
 

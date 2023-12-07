@@ -39,8 +39,8 @@ objects:
   y2: 40
   color: Gray
   hit: true
-areas:
-- l: 0
+- type: rect
+  l: 0
   r: 200
   t: 0
   b: 100

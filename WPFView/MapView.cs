@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using MifuminSoft.funyak.MapObject;
-using MifuminSoft.funyak.View.AreaEnvironment;
 using MifuminSoft.funyak.View.MapObject;
 
 namespace MifuminSoft.funyak.View
@@ -16,9 +15,6 @@ namespace MifuminSoft.funyak.View
         protected List<IMapObjectView> MapObjectViewCollection { get; private set; }
         protected bool MapObjectViewCollentionDirty { get; private set; }
         protected MapObjectViewFactory MapObjectViewFactory { get; private set; }
-        protected List<IAreaEnvironmentView> AreaEnvironmentViewCollection { get; private set; }
-        protected bool AreaEnvironmentViewCollentionDirty { get; private set; }
-        protected AreaEnvironmentViewFactory AreaEnvironmentViewFactory { get; private set; }
         private Canvas canvas = null;
         public Canvas Canvas
         {
@@ -29,10 +25,6 @@ namespace MifuminSoft.funyak.View
                 foreach (var mapObjectView in MapObjectViewCollection)
                 {
                     mapObjectView.Canvas = canvas;
-                }
-                foreach (var areaEnvironmentView in AreaEnvironmentViewCollection)
-                {
-                    areaEnvironmentView.Canvas = canvas;
                 }
             }
         }
@@ -49,30 +41,20 @@ namespace MifuminSoft.funyak.View
         /// </summary>
         public Point FocusOffset { get; set; }
 
-        public MapView(Map map, MapObjectViewFactory mapObjectViewFactory = null, AreaEnvironmentViewFactory areaEnvironmentViewFactory = null)
+        public MapView(Map map, MapObjectViewFactory mapObjectViewFactory = null)
         {
             Map = map;
             Map.MapObjectAdded += Map_MapObjectAdded;
             MapObjectViewCollection = new List<IMapObjectView>();
             MapObjectViewCollentionDirty = false;
             MapObjectViewFactory = mapObjectViewFactory ?? new MapObjectViewFactory();
-            foreach (var mapObject in Map.GetMapObjects())
+            foreach (var mapObject in Map.EnumerateAllMapObjects())
             {
                 AddMapObject(mapObject);
-            }
-            Map.AreaEnvironmentAdded += Map_AreaEnvironmentAdded;
-            AreaEnvironmentViewCollection = new List<IAreaEnvironmentView>();
-            AreaEnvironmentViewCollentionDirty = false;
-            AreaEnvironmentViewFactory = areaEnvironmentViewFactory ?? new AreaEnvironmentViewFactory();
-            foreach (var areaEnvorinment in Map.GetAllAreaEnvironment())
-            {
-                AddAreaEnvironment(areaEnvorinment);
             }
         }
 
         private void Map_MapObjectAdded(object sender, MapObjectEventArgs e) => AddMapObject(e.MapObject);
-
-        private void Map_AreaEnvironmentAdded(object sender, MapEnvironment.AreaEnvironmentEventArgs e) => throw new NotImplementedException();
 
         private void AddMapObject(MapObjectBase mapObject)
         {
@@ -84,18 +66,6 @@ namespace MifuminSoft.funyak.View
         {
             MapObjectViewCollection.Add(mapObjectView);
             MapObjectViewCollentionDirty = true;
-        }
-
-        private void AddAreaEnvironment(MapEnvironment.AreaEnvironment areaEnvorinment)
-        {
-            var areaEnvorinmentView = AreaEnvironmentViewFactory.Create(areaEnvorinment);
-            if (areaEnvorinmentView != null) AddAreaEnvironmentView(areaEnvorinmentView);
-        }
-
-        private void AddAreaEnvironmentView(IAreaEnvironmentView areaEnvironment)
-        {
-            AreaEnvironmentViewCollection.Add(areaEnvironment);
-            AreaEnvironmentViewCollentionDirty = true;
         }
 
         public void Update(double scale)
@@ -151,13 +121,6 @@ namespace MifuminSoft.funyak.View
             foreach (var mapObjectView in MapObjectViewCollection)
             {
                 mapObjectView.Update(args);
-            }
-
-            // 局所的環境の状態を更新
-            var areaArgs = new AreaEnvironmentViewUpdateArgs(offset, scale, area);
-            foreach (var areaEnvironmentView in AreaEnvironmentViewCollection)
-            {
-                areaEnvironmentView.Update(areaArgs);
             }
         }
 

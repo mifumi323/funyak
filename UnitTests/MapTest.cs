@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.UnitTests
@@ -21,7 +20,7 @@ namespace MifuminSoft.funyak.UnitTests
             var map = new Map(320, 224);
             var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
-            var mapObjects = map.GetMapObjects();
+            var mapObjects = map.EnumerateAllMapObjects();
 
             Assert.AreEqual(1, mapObjects.Count());
         }
@@ -33,7 +32,7 @@ namespace MifuminSoft.funyak.UnitTests
             var mapObject = new FunyaMapObject(80, 112);
             map.AddMapObject(mapObject);
             map.RemoveMapObject(mapObject);
-            var mapObjects = map.GetMapObjects();
+            var mapObjects = map.EnumerateAllMapObjects();
 
             Assert.AreEqual(0, mapObjects.Count());
         }
@@ -53,25 +52,7 @@ namespace MifuminSoft.funyak.UnitTests
             map.AddMapObject(unnamedMapObject);
 
             Assert.AreEqual(namedMapObject, map.FindMapObject("knownName"), "既知の名前によるマップオブジェクトの検索に失敗");
-            Assert.AreEqual(null, map.FindAreaEnvironment("unknownName"), "未知の名前によるマップオブジェクトの検索に失敗");
-        }
-
-        [Test]
-        public void FindAreaEnvironmentTest()
-        {
-            var map = new Map(320, 224);
-            var namedArea = new AreaEnvironment()
-            {
-                Name = "knownName",
-            };
-            map.AddAreaEnvironment(namedArea);
-            var unnamedArea = new AreaEnvironment()
-            {
-            };
-            map.AddAreaEnvironment(unnamedArea);
-
-            Assert.AreEqual(namedArea, map.FindAreaEnvironment("knownName"), "既知の名前による局所的環境の検索に失敗");
-            Assert.AreEqual(null, map.FindAreaEnvironment("unknownName"), "未知の名前による局所的環境の検索に失敗");
+            Assert.AreEqual(null, map.FindMapObject("unknownName"), "未知の名前によるマップオブジェクトの検索に失敗");
         }
 
         [Test]

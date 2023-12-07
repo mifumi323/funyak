@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MifuminSoft.funyak.Collision;
-using MifuminSoft.funyak.MapEnvironment;
+using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak
@@ -10,7 +10,7 @@ namespace MifuminSoft.funyak
     /// <summary>
     /// ゲームのマップ
     /// </summary>
-    public class Map : IMapEnvironment
+    public class Map
     {
         /// <summary>
         /// マップの幅(マップ空間内のピクセル単位)
@@ -53,14 +53,6 @@ namespace MifuminSoft.funyak
         private readonly ColliderCollection colliderCollection;
 
         /// <summary>
-        /// 環境が追加されたときに発生します。
-        /// </summary>
-        public event EventHandler<AreaEnvironmentEventArgs>? AreaEnvironmentAdded;
-
-        private readonly ICollection<AreaEnvironment> areaEnvironmentCollection;
-        private readonly IDictionary<string, AreaEnvironment> namedAreaEnvironment;
-
-        /// <summary>
         /// 経過フレーム数を取得します。
         /// </summary>
         public int FrameCount { get; set; }
@@ -86,8 +78,6 @@ namespace MifuminSoft.funyak
             mapObjectCollection = new List<MapObjectBase>();
             selfUpdatableMapObjectCollection = new List<IUpdatableMapObject>();
             namedMapObject = new Dictionary<string, MapObjectBase>();
-            areaEnvironmentCollection = new List<AreaEnvironment>();
-            namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
             colliderCollection = new ColliderCollection();
 
             realizeCollisionArgs = new RealizeCollisionArgs(this);
@@ -119,17 +109,6 @@ namespace MifuminSoft.funyak
             mapObject.OnLeave(colliderCollection);
 
             MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
-        }
-
-        /// <summary>
-        /// 環境を追加します。
-        /// </summary>
-        /// <param name="mapObject">追加するマップオブジェクト</param>
-        public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
-        {
-            areaEnvironmentCollection.Add(areaEnvironment);
-            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name!] = areaEnvironment;
-            AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
         /// <summary>
@@ -177,15 +156,22 @@ namespace MifuminSoft.funyak
         /// 登録されているマップオブジェクトを取得します。
         /// </summary>
         /// <param name="bounds">
-        /// マップオブジェクトの存在範囲
-        /// この範囲に少なくとも一部が含まれるマップオブジェクトが返される
-        /// nullの場合は全マップオブジェクトが返される
+        /// マップオブジェクトの存在範囲。
+        /// この範囲に少なくとも一部が含まれるマップオブジェクトが返される。
         /// </param>
         /// <returns>マップオブジェクトの集合</returns>
-        public IEnumerable<MapObjectBase> GetMapObjects(IBounds? bounds = null)
+        public IEnumerable<MapObjectBase> GetMapObjects(IBounds bounds)
         {
-            if (bounds == null) return mapObjectCollection;
             // TODO: 範囲内のマップオブジェクトだけ返す
+            return mapObjectCollection;
+        }
+
+        /// <summary>
+        /// 登録されているマップオブジェクトを取得します。
+        /// </summary>
+        /// <returns>マップオブジェクトの集合</returns>
+        public IEnumerable<MapObjectBase> EnumerateAllMapObjects()
+        {
             return mapObjectCollection;
         }
 
@@ -193,63 +179,10 @@ namespace MifuminSoft.funyak
         /// 名前でマップオブジェクトを検索します。
         /// </summary>
         /// <param name="name">マップオブジェクトの名前</param>
-        /// <returns></returns>
-        public MapObjectBase FindMapObject(string name)
+        /// <returns>マップオブジェクト。なければ null。</returns>
+        public MapObjectBase? FindMapObject(string name)
         {
-            namedMapObject.TryGetValue(name, out MapObjectBase mapObject);
-            return mapObject;
-        }
-
-        /// <summary>
-        /// 重力を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>重力(0.0が無重力、1.0が通常)</returns>
-        public double GetGravity(double x, double y) => GetEnvironment(x, y, me => !double.IsNaN(me.Gravity)).Gravity;
-
-        /// <summary>
-        /// 風速を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>風速(0.0：無風、正の数：右向きの風、負の数：左向きの風)</returns>
-        public double GetWind(double x, double y) => GetEnvironment(x, y, me => !double.IsNaN(me.Wind)).Wind;
-
-        /// <summary>
-        /// 指定した位置の環境情報を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <returns>環境</returns>
-        public IMapEnvironment GetEnvironment(double x, double y)
-            => (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom) ?? this;
-
-        /// <summary>
-        /// 指定した位置の環境情報を取得します。
-        /// </summary>
-        /// <param name="x">X座標</param>
-        /// <param name="y">Y座標</param>
-        /// <param name="predicate">追加の条件</param>
-        /// <returns>環境</returns>
-        public IMapEnvironment GetEnvironment(double x, double y, Func<AreaEnvironment, bool> predicate)
-            => (IMapEnvironment)areaEnvironmentCollection.LastOrDefault(me => me.Left <= x && x < me.Right && me.Top <= y && y < me.Bottom && predicate(me)) ?? this;
-
-        /// <summary>
-        /// 全ての局所的環境を取得します。
-        /// </summary>
-        /// <returns>環境</returns>
-        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment() => areaEnvironmentCollection;
-
-        /// <summary>
-        /// 名前で局所的環境を検索します。
-        /// </summary>
-        /// <param name="name">局所的環境の名前</param>
-        /// <returns></returns>
-        public AreaEnvironment FindAreaEnvironment(string name)
-        {
-            namedAreaEnvironment.TryGetValue(name, out AreaEnvironment area);
-            return area;
+            return namedMapObject.TryGetValue(name, out MapObjectBase mapObject) ? mapObject : null;
         }
     }
 }

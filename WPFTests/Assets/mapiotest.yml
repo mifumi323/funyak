@@ -212,43 +212,48 @@ objects:
   x2: 1000
   y2: 900
   color: Gray
-areas:
-- l: 400
+- type: rect
+  l: 400
   r: 500
   t: 700
   b: 900
   g: 0
   w: 0
   c: "#80800080"
-- l: 600
+- type: rect
+  l: 600
   r: 700
   t: 600
   b: 800
   g: 0
   w: 0
   c: "#80008080"
-- l: 800
+- type: rect
+  l: 800
   r: 900
   t: 500
   b: 700
   g: 0
   w: 0
   c: "#80808000"
-- l: 600
+- type: rect
+  l: 600
   r: 700
   t: 300
   b: 500
   g: 0
   w: 0
   c: "#80800000"
-- l: 400
+- type: rect
+  l: 400
   r: 500
   t: 100
   b: 300
   g: 0
   w: 0
   c: "#80008000"
-- l: 200
+- type: rect
+  l: 200
   r: 300
   t: 0
   b: 100

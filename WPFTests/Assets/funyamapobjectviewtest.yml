@@ -282,8 +282,8 @@ objects:
   y2: 6100
   color: Black
   hit: true
-areas:
-- l: 0
+- type: rect
+  l: 0
   r: 4800
   t: 0
   b: 10000

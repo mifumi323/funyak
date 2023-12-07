@@ -67,8 +67,8 @@ objects:
   y2: 290
   color: Black
   hit: true
-areas:
-- l: 250
+- type: rect
+  l: 250
   r: 290
   t: 250
   b: 290
