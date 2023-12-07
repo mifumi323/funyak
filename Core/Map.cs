@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
-using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak
@@ -11,7 +10,7 @@ namespace MifuminSoft.funyak
     /// <summary>
     /// ゲームのマップ
     /// </summary>
-    public class Map : IMapEnvironment
+    public class Map
     {
         /// <summary>
         /// マップの幅(マップ空間内のピクセル単位)
@@ -54,14 +53,6 @@ namespace MifuminSoft.funyak
         private readonly ColliderCollection colliderCollection;
 
         /// <summary>
-        /// 環境が追加されたときに発生します。
-        /// </summary>
-        public event EventHandler<AreaEnvironmentEventArgs>? AreaEnvironmentAdded;
-
-        private readonly ICollection<AreaEnvironment> areaEnvironmentCollection;
-        private readonly IDictionary<string, AreaEnvironment> namedAreaEnvironment;
-
-        /// <summary>
         /// 経過フレーム数を取得します。
         /// </summary>
         public int FrameCount { get; set; }
@@ -87,8 +78,6 @@ namespace MifuminSoft.funyak
             mapObjectCollection = new List<MapObjectBase>();
             selfUpdatableMapObjectCollection = new List<IUpdatableMapObject>();
             namedMapObject = new Dictionary<string, MapObjectBase>();
-            areaEnvironmentCollection = new List<AreaEnvironment>();
-            namedAreaEnvironment = new Dictionary<string, AreaEnvironment>();
             colliderCollection = new ColliderCollection();
 
             realizeCollisionArgs = new RealizeCollisionArgs(this);
@@ -120,17 +109,6 @@ namespace MifuminSoft.funyak
             mapObject.OnLeave(colliderCollection);
 
             MapObjectRemoved?.Invoke(this, new MapObjectEventArgs(mapObject));
-        }
-
-        /// <summary>
-        /// 環境を追加します。
-        /// </summary>
-        /// <param name="mapObject">追加するマップオブジェクト</param>
-        public void AddAreaEnvironment(AreaEnvironment areaEnvironment)
-        {
-            areaEnvironmentCollection.Add(areaEnvironment);
-            if (!string.IsNullOrEmpty(areaEnvironment.Name)) namedAreaEnvironment[areaEnvironment.Name!] = areaEnvironment;
-            AreaEnvironmentAdded?.Invoke(this, new AreaEnvironmentEventArgs(areaEnvironment));
         }
 
         /// <summary>
@@ -206,11 +184,5 @@ namespace MifuminSoft.funyak
         {
             return namedMapObject.TryGetValue(name, out MapObjectBase mapObject) ? mapObject : null;
         }
-
-        /// <summary>
-        /// 全ての局所的環境を取得します。
-        /// </summary>
-        /// <returns>環境</returns>
-        public IEnumerable<AreaEnvironment> GetAllAreaEnvironment() => areaEnvironmentCollection;
     }
 }

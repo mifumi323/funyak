@@ -45,18 +45,6 @@ namespace MifuminSoft.funyak.Data
                     if (mapObject != null) map.AddMapObject(mapObject);
                 }
             }
-            if (mappingNode.Children.ContainsKey("areas"))
-            {
-                if (!(mappingNode.Children["areas"] is YamlSequenceNode areasNode))
-                {
-                    throw new ArgumentException("areasのデータ構造はシーケンスノードである必要があります。", nameof(yamlNode));
-                }
-                foreach (var areaNode in areasNode)
-                {
-                    var areaEnvironment = AreaEnvironmentReader.FromYamlNode(areaNode, option);
-                    if (areaEnvironment != null) map.AddAreaEnvironment(areaEnvironment);
-                }
-            }
             return map;
         }
     }

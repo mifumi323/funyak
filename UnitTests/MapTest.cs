@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using NUnit.Framework;
-using MifuminSoft.funyak.MapEnvironment;
 using MifuminSoft.funyak.MapObject;
 
 namespace MifuminSoft.funyak.UnitTests

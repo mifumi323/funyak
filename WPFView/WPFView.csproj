@@ -61,10 +61,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AreaEnvironment\AreaEnvironmentView.cs" />
-    <Compile Include="AreaEnvironment\AreaEnvironmentViewFactory.cs" />
-    <Compile Include="AreaEnvironment\AreaEnvironmentViewUpdateArgs.cs" />
-    <Compile Include="AreaEnvironment\IAreaEnvironmentView.cs" />
     <Compile Include="Input\KeyInput.cs" />
     <Compile Include="MapObject\IMapObjectView.cs" />
     <Compile Include="MapObject\LineMapObjectView.cs" />
