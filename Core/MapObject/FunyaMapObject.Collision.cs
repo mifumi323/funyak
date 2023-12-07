@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using MifuminSoft.funyak.Collision;
 using MifuminSoft.funyak.Geometry;
 using MifuminSoft.funyak.Input;
@@ -52,7 +51,6 @@ namespace MifuminSoft.funyak.MapObject
             // 位置とか
             var x = X;
             var y = Y;
-            var vx = VelocityX;
             var vy = VelocityY;
             var centerX = GetCenterX(x);
             var centerY = GetCenterY(y);
@@ -74,17 +72,6 @@ namespace MifuminSoft.funyak.MapObject
             leftCollider.Set(new Vector2D(centerX, centerY), new Vector2D(left - centerX, 0));
             rightCollider.Set(new Vector2D(centerX, centerY), new Vector2D(right - centerX, 0));
 
-            // 当たり判定用図形とか
-            var topSegment = new Segment2D(centerX, centerY - vy, centerX, top);
-            var bottomSegment = new Segment2D(centerX, centerY - vy, centerX, bottom);
-            var leftSegment = new Segment2D(centerX, centerY, left, centerY);
-            var rightSegment = new Segment2D(centerX, centerY, right, centerY);
-            var topVector = new Vector2D(centerX - x, top - y);
-            var bottomVector = new Vector2D(centerX - x, bottom - y);
-            var leftVector = new Vector2D(left - x, centerY - y);
-            var rightVector = new Vector2D(right - x, centerY - y);
-            var velocity = new Vector2D(vx, vy);
-
             // 位置調整オブジェクト
             adjuster.Reset();
             adjusterX.Reset();
@@ -93,67 +80,6 @@ namespace MifuminSoft.funyak.MapObject
             adjusterLow.Reset();
             adjusterLeft.Reset();
             adjusterRight.Reset();
-
-            // 判定対象の種類ごとに振り分ける
-            var collidableSegments = new List<CollidableSegment>();
-            foreach (var mapObject in args.GetMapObjects(this))
-            {
-                if (mapObject is TileGridMapObject tileMapObject)
-                {
-                    tileMapObject.AddCollidableSegmentsToList(collidableSegments, left, top, right, bottom);
-                }
-            }
-
-            // 線との当たり判定
-            foreach (var collidableSegment in collidableSegments)
-            {
-                var lineSegment = collidableSegment.Segment;
-                var lineVector = lineSegment.End - lineSegment.Start;
-                var lineNormal = new Vector2D(lineVector.Y, -lineVector.X);
-                var lineFriction = collidableSegment.Friction;
-                lineNormal.Norm();
-                var lineNormalNegative = -lineNormal;
-
-                // 主人公の下側と線の上側
-                if (collidableSegment.HitUpper)
-                {
-                    if (lineNormal.Y != 0)
-                    {
-                        var n = lineNormal.Y < 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, bottomSegment, lineSegment, bottomVector, lineVector, velocity, lineFriction, adjusterHigh);
-                    }
-                }
-
-                // 主人公の上側と線の下側
-                if (collidableSegment.HitBelow)
-                {
-                    if (lineNormal.Y != 0)
-                    {
-                        var n = lineNormal.Y > 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, topSegment, lineSegment, topVector, lineVector, velocity, lineFriction, adjusterLow);
-                    }
-                }
-
-                // 主人公の右側と線の左側
-                if (collidableSegment.HitLeft)
-                {
-                    if (lineNormal.X != 0)
-                    {
-                        var n = lineNormal.X < 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, rightSegment, lineSegment, rightVector, lineVector, velocity, lineFriction, adjusterLeft);
-                    }
-                }
-
-                // 主人公の左側と線の右側
-                if (collidableSegment.HitRight)
-                {
-                    if (lineNormal.X != 0)
-                    {
-                        var n = lineNormal.X > 0 ? lineNormal : lineNormalNegative;
-                        CheckCollisionSegment(n, leftSegment, lineSegment, leftVector, lineVector, velocity, lineFriction, adjusterRight);
-                    }
-                }
-            }
         }
 
         private void OnCenterCollided(ref RegionPointCollision collision)
