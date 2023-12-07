@@ -9,7 +9,6 @@ namespace MifuminSoft.funyak.MapObject
     public class LineMapObject : SegmentMapObject
     {
         private readonly SegmentPlateCollider collider;
-        private CollidableSegment segment;
 
         /// <summary>
         /// 上の当たり判定
@@ -20,7 +19,6 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 collider.PlateInfo.SetFlag(PlateAttributeFlag.HitUpper, value);
-                segment.HitUpper = value;
             }
         }
 
@@ -33,7 +31,6 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 collider.PlateInfo.SetFlag(PlateAttributeFlag.HitBelow, value);
-                segment.HitBelow = value;
             }
         }
 
@@ -46,7 +43,6 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 collider.PlateInfo.SetFlag(PlateAttributeFlag.HitLeft, value);
-                segment.HitLeft = value;
             }
         }
 
@@ -59,7 +55,6 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 collider.PlateInfo.SetFlag(PlateAttributeFlag.HitRight, value);
-                segment.HitRight = value;
             }
         }
 
@@ -72,7 +67,6 @@ namespace MifuminSoft.funyak.MapObject
             set
             {
                 collider.PlateInfo.Friction = value;
-                segment.Friction = value;
             }
         }
 
@@ -93,20 +87,7 @@ namespace MifuminSoft.funyak.MapObject
             collider.PlateInfo.Flags = PlateAttributeFlag.None;
             collider.PlateInfo.Friction = 1.0;
             collider.SetSegment(new Segment2D(x1, y1, x2, y2));
-            segment = new CollidableSegment()
-            {
-                Segment = new Segment2D(x1, y1, x2, y2),
-                HitUpper = false,
-                HitBelow = false,
-                HitLeft = false,
-                HitRight = false,
-                Friction = 1.0,
-            };
         }
-
-        public Segment2D ToSegment2D() => segment.Segment;
-
-        public CollidableSegment ToCollidableSegment() => segment;
 
         public override void OnJoin(ColliderCollection colliderCollection) => colliderCollection.Add(collider);
         public override void OnLeave(ColliderCollection colliderCollection) => colliderCollection.Remove(collider);
@@ -114,7 +95,6 @@ namespace MifuminSoft.funyak.MapObject
         public override void CheckCollision(CheckMapObjectCollisionArgs args)
         {
             base.CheckCollision(args);
-            segment.Segment = new Segment2D(X1, Y1, X2, Y2);
         }
     }
 }
