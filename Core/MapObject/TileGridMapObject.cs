@@ -153,58 +153,6 @@ namespace MifuminSoft.funyak.MapObject
         /// <returns>マップ座標</returns>
         public Vector2D FromTileVector(Vector2D v) => new Vector2D(FromTileX(v.X), FromTileY(v.Y));
 
-        public void AddCollidableSegmentsToList(IList<CollidableSegment> list, double left, double top, double right, double bottom)
-        {
-            var startX = Math.Max(ToTileIndexX(left), 0);
-            var endX = Math.Min(ToTileIndexX(right), TileCountX - 1);
-            var startY = Math.Max(ToTileIndexY(top), 0);
-            var endY = Math.Min(ToTileIndexY(bottom), TileCountY - 1);
-            for (int x = startX; x <= endX; x++)
-            {
-                for (int y = startY; y <= endY; y++)
-                {
-                    var chip = tiles[x, y];
-                    if (chip != null)
-                    {
-                        if (chip.HitUpper)
-                        {
-                            list.Add(new CollidableSegment()
-                            {
-                                Segment = new Segment2D(Left + x * TileWidth, Top + y * TileHeight, Left + (x + 1) * TileWidth, Top + y * TileHeight),
-                                HitUpper = true,
-                                Friction = chip.Friction,
-                            });
-                        }
-                        if (chip.HitBelow)
-                        {
-                            list.Add(new CollidableSegment()
-                            {
-                                Segment = new Segment2D(Left + x * TileWidth, Top + (y + 1) * TileHeight, Left + (x + 1) * TileWidth, Top + (y + 1) * TileHeight),
-                                HitBelow = true,
-                            });
-                        }
-                        if (chip.HitLeft)
-                        {
-                            list.Add(new CollidableSegment()
-                            {
-                                Segment = new Segment2D(Left + x * TileWidth, Top + y * TileHeight, Left + x * TileWidth, Top + (y + 1) * TileHeight),
-                                HitLeft = true,
-                            });
-                        }
-                        if (chip.HitRight)
-                        {
-                            list.Add(new CollidableSegment()
-                            {
-                                Segment = new Segment2D(Left + (x + 1) * TileWidth, Top + y * TileHeight, Left + (x + 1) * TileWidth, Top + (y + 1) * TileHeight),
-                                HitRight = true,
-                            });
-                        }
-                    }
-                }
-            }
-
-        }
-
         public override void OnJoin(ColliderCollection colliderCollection)
         {
             colliderCollection.Add(plateCollider);
