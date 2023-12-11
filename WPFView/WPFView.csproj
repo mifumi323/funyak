@@ -67,6 +67,7 @@
     <Compile Include="MapObject\FunyaMapObjectView.cs" />
     <Compile Include="MapObject\MapObjectViewFactory.cs" />
     <Compile Include="MapObject\RegionMapObjectView.cs" />
+    <Compile Include="MapObject\TileChipResource.cs" />
     <Compile Include="MapObject\TileGridMapObjectView.cs" />
     <Compile Include="MapView.cs" />
     <Compile Include="MapObject\MapObjectViewUpdateArgs.cs" />
