@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/mifumi323/funyak.svg?branch=master)](https://travis-ci.com/mifumi323/funyak)
+[![.NET Build and Test](https://github.com/mifumi323/funyak/actions/workflows/dotnet.yml/badge.svg)](https://github.com/mifumi323/funyak/actions/workflows/dotnet.yml)
 
 # funyak
 そう、なんらかのプロジェクトなんだ。
