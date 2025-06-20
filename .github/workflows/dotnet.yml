@@ -56,8 +56,35 @@ jobs:
 
     # Note: .NET Framework 4.8 is included in the Windows runner image
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
 
-    - name: Build all projects
-      run: dotnet build --configuration Release --no-restore
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      
+    - name: Restore and Build
+      shell: pwsh
+      run: |
+        # Clean packages directory
+        if (Test-Path packages) {
+            Remove-Item -Path packages -Recurse -Force
+        }
+        New-Item -ItemType Directory -Path packages
+
+        # Restore NuGet packages (packages.config)
+        nuget locals all -clear
+        nuget restore WPFView\packages.config -SolutionDirectory "$PWD" -MSBuildPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin"
+        nuget restore funyak.sln -MSBuildPath "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\MSBuild\Current\Bin"
+
+        # Verify package restoration
+        if (-not (Test-Path "packages\Magick.NET-Q8-AnyCPU.13.4.0\build\netstandard20\Magick.NET-Q8-AnyCPU.targets")) {
+            throw "Magick.NET package not restored properly"
+        }
+
+        # Build .NET Core projects
+        dotnet build Core\Core.csproj --configuration Release
+        dotnet build Geometry\Geometry.csproj --configuration Release
+        dotnet build Data\Data.csproj --configuration Release
+
+        # Build WPF project
+        msbuild WPFView\WPFView.csproj /p:Configuration=Release /p:Platform="AnyCPU" /p:RestorePackagesConfig=true /m
