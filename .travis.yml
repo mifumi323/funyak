@@ -1,3 +1,5 @@
+# NOTE: This Travis CI configuration is being replaced by GitHub Actions.
+# See .github/workflows/dotnet.yml for the new CI configuration.
 language: csharp
 dotnet: 8.0.100
 mono: none
