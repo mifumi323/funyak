@@ -29,7 +29,7 @@ jobs:
         dotnet restore ./UnitTests/UnitTests.csproj
     
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build UnitTests --no-restore
     
     - name: Test
       run: dotnet test UnitTests --no-restore --verbosity normal
