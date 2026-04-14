@@ -6,7 +6,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ImageMagick;
 
 namespace MifuminSoft.funyak.View.Resource
 {
@@ -17,9 +16,7 @@ namespace MifuminSoft.funyak.View.Resource
 
         public BitmapSprite(Stream bitmapStream)
         {
-            using var mi = new MagickImage(bitmapStream);
-            bitmapSource = mi.ToBitmapSource();
-            bitmapSource.Freeze();
+            bitmapSource = BitmapFrame.Create(bitmapStream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
         }
 
         public override Brush GetBrush(string key, int frame)

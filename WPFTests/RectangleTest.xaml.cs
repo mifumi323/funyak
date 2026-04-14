@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ImageMagick;
 using Microsoft.Win32;
 using MifuminSoft.funyak.View.Timing;
 
@@ -29,16 +28,8 @@ namespace WPFTests
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            using (var miMap = new MagickImage("Assets/Ice.bmp"))
-            {
-                imageMap = miMap.ToBitmapSource();
-                imageMap.Freeze();
-            }
-            using (var miMain = new MagickImage("Assets/funya.png"))
-            {
-                imageMain = miMain.ToBitmapSource();
-                imageMain.Freeze();
-            }
+            imageMap = new BitmapImage(new Uri("Assets/Ice.bmp", UriKind.Relative));
+            imageMain = new BitmapImage(new Uri("Assets/funya.png", UriKind.Relative));
             var random = new Random();
             for (int x = 0; x < vw; x++)
             {
