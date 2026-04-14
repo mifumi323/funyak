@@ -38,10 +38,6 @@ namespace WPFTests
                     Type = typeof(ImageResourceTest),
                 },
                 new {
-                    Name = "画像情報",
-                    Type = typeof(ImageMagickTest),
-                },
-                new {
                     Name = "LineMapObject",
                     Type = typeof(LineMapObjectViewTest),
                 },
